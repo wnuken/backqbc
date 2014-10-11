@@ -1,0 +1,17 @@
+#SOs
+Thumbs.db
+._*
+
+#IDEs
+nbproject
+.idea
+
+#Magento
+/.htaccess
+/build/
+/vendor/
+build.properties
+buildtime-conf.xml
+runtime-conf.xml
+shema.xml
+schema-completo.xml
