@@ -18,6 +18,10 @@ class Views {
 		include './views/changeid.php';
 	}
 
+	static public function vfallidas(){
+		include './views/vfallidas.php';
+	}
+
 	static public function ventasxml(){
 		include './views/ventasxml.php';
 	}
@@ -27,6 +31,10 @@ class Views {
 		$result = $General->sendxmlsell($_REQUEST);
 		//printf ("<pre>%s</pre>", $result);
 		print '<pre>'; print_r($result); print '</pre>';
+	}
+
+	static public function aliados(){
+		include './views/aliados.php';
 	}
 	
 
