@@ -6,7 +6,7 @@
 
 class General {
 	var $exception = 'Caught exception: ';
-	var $webService = QBC_SOAP_SERVER;
+	var $webService = QBC_SOAP_SERVER; // QBC_SOAP_SERVER_PRO - QBC_SOAP_SERVER
 	var $options = array(
 			'cache_wsdl'=> WSDL_CACHE_NONE
 			);
@@ -617,24 +617,11 @@ class General {
 
 	public function SendPago(&$params){
 
-	$options = array(
-    // 'soap_version'=> SOAP_1_2,
-    // 'exceptions'=> true,
-    // 'trace'=> 1,
-    // 'encoding'=> 'utf-8',
-    	'cache_wsdl'=> WSDL_CACHE_NONE
-    );
-
-	// QBC_SOAP_SERVER_PRO - QBC_SOAP_SERVER
 	try {
-		$client = new SoapClient(QBC_SOAP_SERVER_PRO, $options);
+		$client = new SoapClient($this->webService, $this->options);
 	} catch (Exception $e) {
 		$wsResult = $this->exception .  $e->getMessage() . "\n";
-		// return $wsResult;
 	}
-	
-
-	//return json_encode($params);
 	
 	$PagoAliadoDTO = array();
 
