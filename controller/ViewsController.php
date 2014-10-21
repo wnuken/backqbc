@@ -36,6 +36,10 @@ class Views {
 	static public function aliados(){
 		include './views/aliados.php';
 	}
+    
+    static public function enviarpago(){
+		include './views/sendpay.php';
+	}
 	
 
 	

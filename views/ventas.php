@@ -1,4 +1,3 @@
-
 <ul id='ventasmenu' class="nav nav-tabs nav-stacked main-menu">
 	<li class="nav-header hidden-tablet">Ventas</li>
 	<li><a class="ajax-link" href="./ventas-cambio-id">
