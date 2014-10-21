@@ -164,9 +164,7 @@ class General {
 				}
 
 		// Nombre medio
-
-
-
+        
 		//$NumeroPedido = 'value';
 
 		/* 
@@ -362,7 +360,7 @@ class General {
 		try{           
 			$QbcSciSellChangePetition = new QbcSciSellChangePetition();
 		}catch (Exception $e){
-			$error = 'Caught exception: '.  $e->getMessage(). "\n";
+			$error = $this->exception .  $e->getMessage(). "\n";
 			return $error;
 		}
 
@@ -372,7 +370,7 @@ class General {
 			$ChangePetitionCount = QbcSciSellChangePetitionQuery::create()->filterByPeticionOld($params['old'])->count();
 			//return $ChangePetitionCount;
 		}catch (Exception $e){
-			$error = 'Caught exception: '.  $e->getMessage(). "\n";
+			$error = $this->exception .  $e->getMessage(). "\n";
 			return $error;
 		}
 
