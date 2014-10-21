@@ -14,11 +14,11 @@ class Views {
 		include './views/ventas.php';
 	}
 
-	static public function changeid(){
+	static public function ventasCambioId(){
 		include './views/changeid.php';
 	}
 
-	static public function vfallidas(){
+	static public function fallidas(){
 		include './views/vfallidas.php';
 	}
 
