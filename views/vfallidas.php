@@ -1,6 +1,6 @@
 <?php
 // Include 
-require_once '../classes.php';
+///require_once '../classes.php';
 ?>
 <h2>Reenviar peticion fallida</h2>
 <form id="change_id" name="change_id" method='POST'>

@@ -1,13 +1,13 @@
 
 <ul id='ventasmenu' class="nav nav-tabs nav-stacked main-menu">
 	<li class="nav-header hidden-tablet">Ventas</li>
-	<li><a class="ajax-link" href="./cambio-id">
+	<li><a class="ajax-link" href="./ventas-cambio-id">
 		<i class="icon-refresh"></i><span class="hidden-tablet"> Cambiar Ids Ventas</span>
 	</a></li>
-	<li><a class="ajax-link" id="getsalesxml" data-path="vfallidas" href="javascript:void(0);">
+	<li><a class="ajax-link" href="./ventas-fallidas">
 		<i class="icon-random"></i><span class="hidden-tablet"> Reenviar Peticiones de ventas fallidas</span>
 	</a></li>
-	<li><a class="ajax-link" id="getsalesxml" data-path="vfallidas" href="javascript:void(0);">
+	<li><a class="ajax-link" href="./ventas-revertir">
 		<i class="icon-repeat"></i><span class="hidden-tablet"> Revertir Id ventas</span>
 	</a></li>
 	<li><a class="ajax-link" href="./ventas-xml">

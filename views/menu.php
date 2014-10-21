@@ -13,7 +13,7 @@
 			<li><a class="ajax-link" id="getsalesxml" data-path="salesxml" href="javascript:void(0);">
 				<i class="icon-edit"></i><span class="hidden-tablet"> Generar XML</span>
 			</a></li>
-			<li><a class="ajax-link" data-path="aliados" href="javascript:void(0);">
+			<li><a class="ajax-link" data-path="aliados" href="./aliados">
 				<i class="icon-list-alt"></i><span class="hidden-tablet"> Pago Aliado</span>
 			</a></li>
 			<li><a class="ajax-link" href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
