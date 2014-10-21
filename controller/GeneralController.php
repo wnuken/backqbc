@@ -451,8 +451,6 @@ class General {
 
 		$MerchantId = $GroupdealsQuery->getMerchantId();
 
-		// return $MerchantId;
-
 		try{           
 			$GroupdealsMerchantsQuery = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($MerchantId);
 			if(empty($GroupdealsQuery)){
@@ -467,15 +465,13 @@ class General {
 		$paramsSend = array(
 			'groupdeals_id' => $GroupdealsId,
 			'id_aliado' => $GroupdealsMerchantsQuery->getNitNumber(),
-			'PorcentajeComision' => $params['params']['paliado'],
+			'PorcentajeComision' => $GroupdealsQuery->getEtGain(),
 			'PorcentajeIVAComision' => $params['params']['pcam'],
 			'product_id' => $GroupdealsQuery->getProductId(),
 			'title_short' => utf8_encode($GroupdealsQuery->getTitleShort()),
 			'title_midium' => utf8_encode($GroupdealsQuery->getTitleMidium()),
 			'sendSCMP' => $params['params']['send']
 			);
-
-		//return $paramsSend;
 
 		try{           
 			$SalesFlatOrderItemQuery = SalesFlatOrderItemQuery::create()->findByProductId($paramsSend['product_id']);
@@ -544,8 +540,6 @@ class General {
 			$paramsSend['SellsDocPosition'][] =  $SellDoc->getDocPosition();
 			$paramsSend['SellsDocDate'][] =  $SellDoc->getDocDate();
 		}
-
-		//return json_encode($paramsSend);
 
 		$jsonSellsDocumentId = json_encode($SellsDocumentId);
 
