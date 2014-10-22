@@ -16,7 +16,7 @@ require_once './classes.php';
 
 $urlpost = explode('/', $_SERVER['REQUEST_URI']);
 
-$toPost = array('sendxmlsell', 'validations', 'funtt', 'encode');
+$toPost = array('sendxmlsell', 'sendpay', 'funtt', 'encode');
 
 if(in_array($urlpost[2] , $toPost) && isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"])){
 	getRoute()->run();
@@ -69,18 +69,23 @@ require_once './views/head.php';
 		</div>
 
 		<script type="text/javascript">
-		/*var $mainMenu = $('ul#mainmenu');
-		$('a', $mainMenu).on('click', function(){
-			var view = $(this).attr('data-path');
-			console.log(view)
-			if(view != "undefined"){
-				$().getAtmMenu({'params':'one','view': view});
-			}
-			
-
-		});*/
+            
+		var $form = $('form#sendpay');
+	$('input#summit', $form).on('click', function(e){
+		e.preventDefault();
+		var params = {
+			'idcampaign': $('input#idcampaign').val(),
+			'paliado': $('input#paliado').val(),
+			'pcam': $('input#pcam').val(),
+			'send' : $('input#send').val()
+		};
+		//console.log(params);
+		$().getFuntions({'params':params, 'class':'sendpay'});
+	});
 
 		</script>
+    
+        
 
 	</body>
 <?php } ?>

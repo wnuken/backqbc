@@ -40,6 +40,17 @@ class Views {
     static public function enviarpago(){
 		include './views/sendpay.php';
 	}
+    
+    static public function sendpay(){
+		$General = new General();
+		$result = $General->PagoAliado($_REQUEST);
+        
+	   //print '<textarea style="width:100%;height:300px;">' . (htmlentities($result['XML'])) . '</textarea>';
+        printf ("<pre>%s</pre>", htmlentities($result['XML']));
+        $result['XML'] = '';
+        print '<pre>'; print_r($result); print '</pre>';
+        
+	}
 	
 
 	

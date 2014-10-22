@@ -21,7 +21,7 @@ $params['urlWsdl'] =  QBC_SOAP_SERVER;
 ?>
 
 <h2>Envia pago aliado de las peticiones redimidas pendientes.</h2>
-<form id="pago_aliado" name="pago_aliado" method='POST'>
+<form id="sendpay" name="sendpay">
 	<input placeholder="Escribir id Campaña" class="text" id="idcampaign" type='text' value=''>
 	<input placeholder="Porcentaje Campaña" class="pcam" id="pcam" type='text' value='16'>
 	<input placeholder="Enviar" class="send" id="send" type='text' value='0'>
@@ -29,16 +29,3 @@ $params['urlWsdl'] =  QBC_SOAP_SERVER;
 </form>
 <div id="response"></div>
 
-<script type="text/javascript">
-	$('input#summit').on('click', function(e){
-		e.preventDefault();
-		var params = {
-			'idcampaign': $('input#idcampaign').val(),
-			'paliado': $('input#paliado').val(),
-			'pcam': $('input#pcam').val(),
-			'send' : $('input#send').val()
-		};
-		//console.log(params);
-		$().getProcess({'params':params, 'class':'PagoAliado'});
-	});
-</script>

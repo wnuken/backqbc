@@ -435,8 +435,11 @@ class General {
 	}
 
 	public function PagoAliado(&$params){
-
+        $SellsPetitionId = array();
+        $SellsDocumentId = array();
 		$GroupdealsId = trim($params['params']['idcampaign']);
+        
+        //return $params;
 
 		try{
 			$GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
@@ -504,7 +507,7 @@ class General {
 			$IncrementIds[] = $Order->getIncrementId();
 		}
 
-		$jsonOrder = json_encode($Orders);
+		//$jsonOrder = json_encode($Orders);
 
 		try{           
 			$QbcSciSellQuery = QbcSciSellQuery::create()->findByOrderId($IncrementIds);
@@ -517,6 +520,7 @@ class General {
 			return $error;
 		}
 		
+        
 		foreach ($QbcSciSellQuery as $key => $Sell) {
 			if($Sell->getProcessed() == 0)
 				$SellsPetitionId[] = $Sell->getPetitionId();
@@ -533,6 +537,7 @@ class General {
 			return $error;
 		}
 		
+        
 		foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
 			$SellsDocumentId[] = $SellDoc->getDocumentId();
 			$paramsSend['SellsDocumentId'][] =  $SellDoc->getDocumentId();
@@ -546,68 +551,10 @@ class General {
 		$result = $this->SendPago($paramsSend);
 
 		return $result;
-
-	/*
-
-		try{           
-			$SalesFlatOrderQuery = SalesFlatOrderQuery::create()
-				->useSalesFlatOrderItemQuery()
-    				->findByProductId($ProductId) 
-  				->endUse()
-				->find();
-			if(empty($SalesFlatOrderQuery)){
-				$result = '<h3>No existe la campaña: </3>' . $idOder;
-				return $result;
-			}
-		}catch (Exception $e){
-			$error = 'Caught exception:'.  $e->getMessage(). "\n";
-			return $error;
-		}
-		
-		foreach ($SalesFlatOrderQuery as $key => $Order) {
-			$ProducId_a[] = $Order->getOrderId();
-		}
-
-		return $ProducId_a;
-		
-	*/
-		
-		
-
-/*
-		try {
-			$client = new SoapClient($params['urlWsdl'], $params['options']);
-		} catch (Exception $e) {
-			$wsResult = 'Caught exception:' .  $e->getMessage() . "\n";
-			return $wsResult;
-		}
-
-
-		$xml = simplexml_load_string($params['xml']);
-		$json = json_encode($xml);
-		$array = json_decode($json,TRUE);
-
-    // var_dump($array['Campana']);
-
-		$peticionDTO['peticionDTO'] = $array;
-
-		try
-		{
-  //	$webService = $client-> PagosAliado($peticionDTO);
-  //  $wsResult = $webService->PagosAliadoResult;
-			$wsResult = QBC_SOAP_SERVER;
-
-		}
-		catch (Exception $e)
-		{
-			$wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
-		} */
-
-		
-
 	}
 
 	public function SendPago(&$params){
+        $wsResult = array();
 
 	try {
 		$client = new SoapClient($this->webService, $this->options);
@@ -726,11 +673,11 @@ private function array2XML($data, $rootNodeName = 'PagoAliadoDTO', $xml=NULL){
 			}
 
 		}
-
+        $xml->preserveWhiteSpace  = true;
 		$genxml = $xml->asXML();
 		$genxml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $genxml));
 		//$genxml = htmlentities($genxml);
-		return html_entity_decode($genxml);
+		$genxml = html_entity_decode($genxml);
 		return $genxml;
 	}
 
