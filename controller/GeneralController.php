@@ -673,7 +673,6 @@ private function array2XML($data, $rootNodeName = 'PagoAliadoDTO', $xml=NULL){
 			}
 
 		}
-        $xml->preserveWhiteSpace  = true;
 		$genxml = $xml->asXML();
 		$genxml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $genxml));
 		//$genxml = htmlentities($genxml);

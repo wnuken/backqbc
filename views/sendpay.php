@@ -1,31 +1,44 @@
-<?php
-// Include 
-// require_once '../classes.php';
-/*
-$params['tipo'] = "REGO";
-$params['xml'] = file_get_contents(dirname(__FILE__) . '/pago.xml');
-$params['urlWsdl'] =  QBC_SOAP_SERVER;
- $params['options'] = array(
-    // 'soap_version'=> SOAP_1_2,
-    // 'exceptions'=> true,
-    // 'trace'=> 1,
-    // 'encoding'=> 'utf-8',
-    'cache_wsdl'=> WSDL_CACHE_NONE
-    );
-
-
-*/
-
-// $resultVenta = PagoAliado($params);
-
-?>
-
-<h2>Envia pago aliado de las peticiones redimidas pendientes.</h2>
-<form id="sendpay" name="sendpay">
-	<input placeholder="Escribir id Campaña" class="text" id="idcampaign" type='text' value=''>
-	<input placeholder="Porcentaje Campaña" class="pcam" id="pcam" type='text' value='16'>
-	<input placeholder="Enviar" class="send" id="send" type='text' value='0'>
-	<input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
-</form>
+    <div class="div-content">
+        <form class="form-horizontal" id="sendpay">
+            <fieldset>
+            <div class="control-group">
+                <label for="campaing_id" class="control-label">ID Campaña</label>
+                <div class="controls">
+                  <input type="text" placeholder="Escribir id Campaña" id="campaing_id" class="input-xlarge">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="campaing_tax" class="control-label">Porcentaje Campaña</label>
+                <div class="controls">
+                    <input type="text" placeholder="Porcentaje Campaña" id="campaing_tax" class="input-xlarge">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="sci_send" class="control-label">Enviar al Mediador</label>
+                <div class="controls">
+                  <select id="sci_send">
+				      <option value="0">No</option>
+                      <option value="1">Si</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" id="summit" type="submit">Procesar</button>
+			</div>
+            </fieldset>
+          </form>
+    </div>
 <div id="response"></div>
 
+<script type="text/javascript">
+    var $form = $('form#sendpay');
+	$('button#summit', $form).on('click', function(e){
+		e.preventDefault();
+		var params = {
+			'idcampaign': $('input#campaing_id', $form).val(),
+			'pcam': $('input#campaing_tax', $form).val(),
+			'send' : $('select#sci_send', $form).val()
+		};
+		$().getFuntions({'params':params, 'class':'sendpay'});
+	});
+</script>

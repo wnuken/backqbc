@@ -1,33 +1,64 @@
-<div class="span2 main-menu-span">
-	<div class="well nav-collapse sidebar-nav">
-		<ul id='mainmenu' class="nav nav-tabs nav-stacked main-menu">
-			<li class="nav-header hidden-tablet">Sistema</li>
-			<li><a class="ajax-link" href="./"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-			<li><!--a class="ajax-link" id="change" data-path="ventas" href="javascript:void(0);">
-					<i class="icon-eye-open"></i><span class="hidden-tablet"> Ventas</span>
-			</a-->
-			<a class="ajax-link" id="change" href="./ventas">
-					<i class="icon-eye-open"></i><span class="hidden-tablet"> Ventas</span>
-			</a>
-			</li>
-			<li><a class="ajax-link" id="getsalesxml" data-path="salesxml" href="javascript:void(0);">
-				<i class="icon-edit"></i><span class="hidden-tablet"> Generar XML</span>
-			</a></li>
-			<li><a class="ajax-link" data-path="aliados" href="./aliados">
-				<i class="icon-list-alt"></i><span class="hidden-tablet"> Pago Aliado</span>
-			</a></li>
-			<li><a class="ajax-link" href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
-			<li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
-			<li class="nav-header hidden-tablet">Secciones</li>
-			<li><a class="ajax-link" href="./table"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
-			<li><a class="ajax-link" href="./calendar"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
-			<li><a class="ajax-link" href="./grid"><i class="icon-th"></i><span class="hidden-tablet"> Grid</span></a></li>
-			<li><a class="ajax-link" href="./file-manager"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
-			<li><a href="./tour"><i class="icon-globe"></i><span class="hidden-tablet"> Tour</span></a></li>
-			<li><a class="./ajax" href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
-			<li><a href="./error"><i class="icon-ban-circle"></i><span class="hidden-tablet"> Error Page</span></a></li>
-			<li><a href="./login"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
-		</ul>
-		<!--label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label-->
-	</div><!--/.well -->
-</div><!--/span-->
+<?php 
+$user = 'Usuario';
+
+if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
+    $user = $_SESSION["k_username"];
+?>
+<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Back QBC</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Dashboard</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li>
+                        <li><a href="./ventas-fallidas"><i class="glyphicon glyphicon-retweet"></i> Reenviar ventas fallidas</a></li>
+                        <li><a href="./ventas-xml"><i class="glyphicon glyphicon-retweet"></i> Edición XML</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Otras opciones</li>
+                        <li><a href="./ventas-revertir"><i class="glyphicon glyphicon-retweet"></i> Revertir Ventas Fallidas</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> Ventas con descuento</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-retweet"></i> Pago Aliado <span class="caret"></span>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-retweet"></i> Enviar petición</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Elimiar petición</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Marcar ventas/devoluciones</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> Separated link</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> One more separated link</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">Generar XML</a></li>
+                <li><a href="#contact">Contactos</a></li>
+                <li class="dropdown" style="float:rigth;">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php print $user; ?> <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Acciones</a></li>
+                        <li><a href="#">Configuración</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./?destroy=destroy">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>

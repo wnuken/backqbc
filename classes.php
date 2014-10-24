@@ -1,6 +1,17 @@
 <?php
 
-//header('Content-Type: text/html; charset=UTF-8');
+if(!isset($_SESSION["k_username"])){
+	session_start();
+}
+
+(isset($_REQUEST["username"]))? $user = $_REQUEST["username"]: $user = "";
+(isset($_REQUEST["password"]))? $password = $_REQUEST["password"]: $password = "";
+(isset($_REQUEST["destroy"]))? $destroy = $_REQUEST["destroy"]: $destroy = "";
+
+if($destroy == 'destroy'){
+	$_SESSION["k_username"] = "";
+	session_destroy();
+}
 
 // Include 
 require_once dirname(__FILE__) . '/vendor/propel/runtime/lib/Propel.php';
@@ -25,5 +36,4 @@ set_include_path(dirname(__FILE__) . "/build/classes" . PATH_SEPARATOR . get_inc
  Epi::init('route');
  getRoute()->load('config.ini');
 
-// getRoute()->get('/change', 'changeid');
 ?>
