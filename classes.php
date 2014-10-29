@@ -24,7 +24,7 @@ include_once dirname(__FILE__) . '/controller/GeneralController.php';
 
 include_once dirname(__FILE__) . '/controller/statics.php';
 
-include_once dirname(__FILE__) . '/predis/autoload.php';
+//include_once dirname(__FILE__) . '/predis/autoload.php';
 
 // Initialize Propel with the runtime configuration
 Propel::init(dirname(__FILE__) . "/build/conf/atmadmin-conf.php");
