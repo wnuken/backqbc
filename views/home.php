@@ -1,6 +1,6 @@
 
 <?php
-
+/*
 $mysqli = new mysqli("localhost", "magento", "m4g3nt0CEET", "qa.qbc.com");
 if ($mysqli->connect_errno) {
     echo "Fallo al contenctar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -35,7 +35,8 @@ print '</pre>';*/
             </div>
             <div class="panel-body">
 <?php 
-print $mysqli->host_info . '<br />';
+//print $mysqli->host_info . '<br />';
+print 'MySQL Server';
 ?>
             </div>
         </div>    
