@@ -1,67 +1,64 @@
-<div class="row-fluid sortable">		
-	<div class="box span12">
-		<div class="box-header well" data-original-title>
-			<h2><i class="icon-user"></i> Valores a mostrar</h2>
-			<div class="box-icon">
-				<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
-				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-			</div>
-		</div>
-		<div class="box-content">
-			<table class="table table-striped table-bordered bootstrap-datatable datatable">
-				<thead>
-					<tr>
-						<th>Diminio</th>
-						<th>Modulo</th>
-						<th>ID site</th>
-						<th>Estado</th>
-						<th>Funciones</th>
-					</tr>
-				</thead>   
-				<tbody>
-					
-					<tr>
-						<td>Valor</td>
-						<td class="center">valor 1</td>
-						<td class="center">valor 2</td>
-						<td class="center">
-							<span class="label label-success">Active</span>
-						</td>
-						<td class="center">
-							<a class="btn btn-success" href="#">
-								<i class="icon-zoom-in icon-white"></i>  
-								Ver                                            
-							</a>
-							<a class="btn btn-info" href="#">
-								<i class="icon-edit icon-white"></i>  
-								Editar                                            
-							</a>
-							<a class="btn btn-danger" href="#">
-								<i class="icon-trash icon-white"></i> 
-								Eliminar
-							</a>
-						</td>
-					</tr>
 
-				</tbody>
-				
-			</table>            
-		</div>
-	</div><!--/span-->
+<?php
 
-</div><!--/row-->
+$mysqli = new mysqli("localhost", "magento", "m4g3nt0CEET", "qa.qbc.com");
+if ($mysqli->connect_errno) {
+    echo "Fallo al contenctar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
 
-<div class="modal hide fade" id="myModal">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Settings</h3>
-	</div>
-	<div class="modal-body">
-		<p>Here settings can be configured...</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
-		<a href="#" class="btn btn-primary">Save changes</a>
-	</div>
+
+/*$client = new Predis\Client([
+    'scheme' => 'tcp',
+    'host'   => '127.0.0.1',
+    'port'   => 6379,
+]);
+$client->set('foo', 'bar');
+$value = $client->get('foo');
+
+/*
+$pipeline = $client->pipeline();
+  $pipeline->flushall();
+$responses = $pipeline->execute();
+*/
+/*$responses = $client->flushall();
+print '<pre>';
+print_r($responses);
+print '</pre>';*/
+
+?>
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Servidor Base de datos</h3>
+            </div>
+            <div class="panel-body">
+<?php 
+print $mysqli->host_info . '<br />';
+?>
+            </div>
+        </div>    
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Generar ID Petición</h3>
+            </div>
+            <div class="panel-body">
+<?php 
+$actualTime = strtotime('now');
+$md5 = md5($actualTime);
+print $actualTime . '<br />';
+print substr($md5, 0 ,24);
+?>
+            </div>
+        </div>    
+    </div>
 </div>
+
+
+
+

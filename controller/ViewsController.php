@@ -45,10 +45,10 @@ class Views {
 		$General = new General();
 		$result = $General->PagoAliado($_REQUEST);
         
+        include './views/resultpay.php';
+        
 	   //print '<textarea style="width:100%;height:300px;">' . (htmlentities($result['XML'])) . '</textarea>';
-        printf ("<pre>%s</pre>", htmlentities($result['XML']));
-        $result['XML'] = '';
-        print '<pre>'; print_r($result); print '</pre>';
+        
         
 	}
 	

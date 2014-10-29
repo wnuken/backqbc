@@ -42,7 +42,8 @@ $.fn.getProcess = function(params){
 		async: true,
 		success: function(response) {
 			$('div#response').html(response);
-			$('div#loader').css({'display':'none'});
+			$('div#progress').css({'display':'none'});
+            $('button#summit').button('reset');
 		},
 		error: function() {
 			//console.log('da error');
@@ -66,7 +67,8 @@ $.fn.getFuntions = function(params){
 		async: true,
 		success: function(response) {
 			$('div#response').html(response);
-			$('div#loader').css({'display':'none'});
+			$('div#progress').css({'display':'none'});
+            $('button#summit').button('reset');
 		},
 		error: function() {
 			//console.log('da error');

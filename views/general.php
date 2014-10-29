@@ -4,10 +4,8 @@
     <body role="document">
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
-                
                 <?php require_once('./views/menu.php'); ?>
-                
-                <div class="container theme-showcase" id="content" role="main">
+                <div class="container-fluid" id="content" role="main">
                     <?php getRoute()->run(); ?>
                 </div>
             </div>

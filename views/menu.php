@@ -17,7 +17,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./">Dashboard</a></li>
+                <li class="active"><a href="./"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
                         <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span>
