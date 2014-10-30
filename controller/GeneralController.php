@@ -603,7 +603,6 @@ class General {
                     $paramsSend['DevolutionsDocumentId'][] =  $DevolutionDoc->getDocumentId();
                     $paramsSend['DevolutionsDocValue'][] =  $DevolutionDoc->getDocValue();
                     $paramsSend['DevolutionsDocPosition'][] =  $DevolutionDoc->getDocPosition();
-                    // date("Y-m-d", strtotime($DevolutionDoc->getDocDate());
                     $paramsSend['DevolutionsDocDate'][] =  date("Y-m-d", strtotime($DevolutionDoc->getDocDate()));
                 }
             }
@@ -620,7 +619,6 @@ class General {
                     $paramsSend['DevolutionsNoDocumentId'][] =  $DevolutionNoDoc->getDocumentId();
                     $paramsSend['DevolutionsNoDocValue'][] =  $DevolutionNoDoc->getDocValue();
                     $paramsSend['DevolutionsNoDocPosition'][] =  $DevolutionNoDoc->getDocPosition();
-                    //$paramsSend['DevolutionsNoDocDate'][] =  str_replace("/","-",$DevolutionNoDoc->getDocDate());
                     $paramsSend['DevolutionsNoDocDate'][] =  date("Y-m-d", strtotime($DevolutionNoDoc->getDocDate()));
                 }
             }
@@ -719,7 +717,7 @@ class General {
         }
 
         $totDevNo = 0;
-        if(isset($params['DevolutionsNoDocumentId'])){
+        /*if(isset($params['DevolutionsNoDocumentId'])){
             $tolDevNo = count($params['DevolutionsNoDocumentId']);
             for ($i=0; $i < $tolDevNo; $i++) { 
                 if(!isset($PagoAliadoDTO['Devoluciones'][0]) && $i == 0){$j=0;}else{$j++;}
@@ -735,7 +733,7 @@ class General {
             $ComIvaDevNo = round($ComDevNo * $PagoAliadoDTO['PorcentajeIVAComision']);
             $totDevNo = $totDevNo - ($ComDevNo + $ComIvaDevNo);
 
-        }
+        }*/ // Se invalida mientras se realizan ajustes
 
 
 
