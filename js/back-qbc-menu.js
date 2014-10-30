@@ -66,8 +66,13 @@ $.fn.getFuntions = function(params){
 		data: params,
 		async: true,
 		success: function(response) {
+            $('div#progress_bar').css({'width':'95%'});
+            $('div#progress_bar').attr({'aria-valuenow': 95});
+            $('div#progress').fadeOut( "slow");
+            $('div#response').fadeIn(3000, function() {
+                $('div#response').html(response);
+            });
 			$('div#response').html(response);
-			$('div#progress').css({'display':'none'});
             $('button#summit').button('reset');
 		},
 		error: function() {

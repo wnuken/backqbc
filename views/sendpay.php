@@ -37,13 +37,18 @@
         </div>
     </div>
 </div>
-<div class="row">  
+<div class="row"> 
+    <div class="col-md-4">
     <div class="progress" id="progress" style="display:none;">
         <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
             <span class="sr-only">Complete...</span>
         </div>
     </div>
-    <div id="response"></div>
+        </div>
+    </div>
+<div class="row">
+    <div id="response" style="display:none;"></div>
+    
 </div>
 
 <script type="text/javascript">
@@ -63,6 +68,7 @@
         };
         $('div#progress').css({'display':'block'});
         $('div#response').html('');
+        $('div#response').css({'display':'none'});
         $().getFuntions({'params':params, 'class':'sendpay'});
 
         myVar = setInterval(progresbar, 100);
@@ -91,7 +97,7 @@
         var porcent = invar + 1;
         $bar.attr('aria-valuenow', porcent);
         $bar.css({'width':porcent + '%'});
-        if(porcent == 100){
+        if(invar == 100){
             $bar.attr('aria-valuenow', '0');
             $bar.css({'width':'0%'});
             clearInterval(myVar);
