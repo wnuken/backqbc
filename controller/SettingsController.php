@@ -8,7 +8,7 @@ class Settings {
 	public function & encryptTwofish(&$param){
 
 		$param['text'] = '19790603/Ab';
-		$param['key'] = '171d02c12592f4967ef5a4dd1522e69b';
+		$param['key'] = SERVER_KEY;
 
 		$td = mcrypt_module_open('twofish', '', 'ecb', '');
 
@@ -30,7 +30,7 @@ class Settings {
     public function & decryptTwofish(&$param){
 
 		$param['encrypted_data'] = '%$&%FGF#$W#DFERWER$$GG%#$TGR%$$$';
-		$param['key'] = '171d02c12592f4967ef5a4dd1522e69b';
+		$param['key'] = SERVER_KEY;
 
 		$td = mcrypt_module_open('twofish', '', 'ecb', '');
 
