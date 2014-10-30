@@ -725,7 +725,7 @@ class General {
                 $PagoAliadoDTO['Devoluciones'][$j]['Posicion'] = $params['DevolutionsNoDocPosition'][$i];
                 $PagoAliadoDTO['Devoluciones'][$j]['Valor'] = $params['DevolutionsNoDocValue'][$i];
                 $PagoAliadoDTO['Devoluciones'][$j]['Fecha'] = $params['DevolutionsNoDocDate'][$i] . 'T00:00:00';
-                $totDevNo = $totDevNo + $params['DevolutionsDocValue'][$i];
+                $totDevNo = $totDevNo + $params['DevolutionsNoDocValue'][$i];
             }
 
             $ComDevNo = round($totDevNo * $PagoAliadoDTO['PorcentajeComision']);
