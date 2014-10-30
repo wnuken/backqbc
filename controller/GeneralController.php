@@ -6,7 +6,7 @@
 
 class General {
 	var $exception = 'Caught exception: ';
-	var $webService = QBC_SOAP_SERVER; // QBC_SOAP_SERVER_PRO - QBC_SOAP_SERVER
+	var $webService = QBC_SOAP_SERVER;
 	var $options = array(
 			'cache_wsdl'=> WSDL_CACHE_NONE
 			);

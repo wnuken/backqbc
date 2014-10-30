@@ -10,6 +10,7 @@ nbproject
 /.htaccess
 /build/
 /vendor/
+/controller/statics.php
 build.properties
 buildtime-conf.xml
 runtime-conf.xml
