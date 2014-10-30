@@ -603,7 +603,7 @@ class General {
                     $paramsSend['DevolutionsDocumentId'][] =  $DevolutionDoc->getDocumentId();
                     $paramsSend['DevolutionsDocValue'][] =  $DevolutionDoc->getDocValue();
                     $paramsSend['DevolutionsDocPosition'][] =  $DevolutionDoc->getDocPosition();
-                    $paramsSend['DevolutionsDocDate'][] =  $DevolutionDoc->getDocDate();
+                    $paramsSend['DevolutionsDocDate'][] =  str_replace("/","-",$DevolutionDoc->getDocDate());
                 }
             }
         }catch (Exception $e){
@@ -619,7 +619,7 @@ class General {
                     $paramsSend['DevolutionsNoDocumentId'][] =  $DevolutionNoDoc->getDocumentId();
                     $paramsSend['DevolutionsNoDocValue'][] =  $DevolutionNoDoc->getDocValue();
                     $paramsSend['DevolutionsNoDocPosition'][] =  $DevolutionNoDoc->getDocPosition();
-                    $paramsSend['DevolutionsNoDocDate'][] =  $DevolutionNoDoc->getDocDate();
+                    $paramsSend['DevolutionsNoDocDate'][] =  str_replace("/","-",$DevolutionNoDoc->getDocDate());
                 }
             }
         }catch (Exception $e){
