@@ -720,7 +720,8 @@ class General {
         if(isset($params['DevolutionsNoDocumentId'])){
             $tolDevNo = count($params['DevolutionsNoDocumentId']);
             for ($i=0; $i < $tolDevNo; $i++) { 
-                ($j == 0 && $i == 0)?$j=0:j++;
+                if(!isset($PagoAliadoDTO['Devoluciones'][0]) && $i == 0){$j=0;}else{$j++;}
+                //$j++;
                 $PagoAliadoDTO['Devoluciones'][$j]['Numero'] = $params['DevolutionsNoDocumentId'][$i];
                 $PagoAliadoDTO['Devoluciones'][$j]['Posicion'] = $params['DevolutionsNoDocPosition'][$i];
                 $PagoAliadoDTO['Devoluciones'][$j]['Valor'] = $params['DevolutionsNoDocValue'][$i];
