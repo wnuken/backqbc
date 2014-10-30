@@ -736,10 +736,10 @@ class General {
 
 
 
-        $totVen = $totVen - ($totDev + $totDevNo);
+        $totVen = $totVen - $totDev;
         $PagoAliadoDTO['ValorComision'] = round($totVen * $PagoAliadoDTO['PorcentajeComision']);
         $PagoAliadoDTO['ValorIVAComision'] = round($PagoAliadoDTO['ValorComision'] * $PagoAliadoDTO['PorcentajeIVAComision']);
-        $PagoAliadoDTO['ValorCxPAliado'] = $totVen - ($PagoAliadoDTO['ValorComision'] + $PagoAliadoDTO['ValorIVAComision']);
+        $PagoAliadoDTO['ValorCxPAliado'] = $totVen - ($PagoAliadoDTO['ValorComision'] + $PagoAliadoDTO['ValorIVAComision'] + $totDevNo);
 
         // natsort ( $PagoAliadoDTO );
         $xmlResult = $this->array2XML($PagoAliadoDTO);
