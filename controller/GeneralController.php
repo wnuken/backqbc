@@ -476,6 +476,7 @@ class General {
             'sendSCMP' => $params['params']['send']
         );
 
+        /*
         try{           
             $SalesFlatOrderItemQuery = SalesFlatOrderItemQuery::create()->findByProductId($paramsSend['product_id']);
             if(empty($SalesFlatOrderItemQuery)){
@@ -504,15 +505,36 @@ class General {
         }
 
         foreach ($SalesFlatOrderQuery as $key => $Order) {
-            $IncrementIds[] = $Order->getIncrementId();
+           // $IncrementIds[] = $Order->getIncrementId();
+        }
+        */
+
+        try{           
+            $CouponHistoryQuery = CouponHistoryQuery::create()->findByCampaignId($GroupdealsId);
+            if(empty($CouponHistoryQuery)){
+                $result = '<h3>No hay redenciones : </3>' . json_encode($GroupdealsId);
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception . $e->getMessage(). "\n";
+            return $error;
         }
 
-        //$jsonOrder = json_encode($Orders);
+        foreach ($CouponHistoryQuery as $key => $History) {
+            $IncrementIds[] = $History->getOrderId();
+            $couponH[$History->getOrderId()][$History->getUnit()] = true;
+        }
+
+
+        // return $couponH;
+
+
+        //Sells Docs
 
         try{           
             $QbcSciSellQuery = QbcSciSellQuery::create()->findByOrderId($IncrementIds);
             if(empty($QbcSciSellQuery)){
-                $result = '<h3>No hay pedidos : </3>' . json_encode($IncrementIds);
+                $result = '<h3>No hay ventas : </3>' . json_encode($IncrementIds);
                 return $result;
             }
         }catch (Exception $e){
@@ -522,16 +544,17 @@ class General {
 
 
         foreach ($QbcSciSellQuery as $key => $Sell) {
-            if($Sell->getProcessed() == 0)
+            if($Sell->getProcessed() == 0 && isset($couponH[$Sell->getOrderId()][$Sell->getUnit()])){
                 $SellsPetitionId[] = $Sell->getPetitionId();
                 $SellOrderId = $Sell->getOrderId();
                 $SellItemId = $Sell->getItemId();
+            }
         }
 
         try{           
             $QbcSciSellDocQuery = QbcSciSellDocQuery::create()->findByPetitionId($SellsPetitionId);
             if(empty($QbcSciSellDocQuery)){
-                $result = '<h3>No hay pedidos : </3>' . json_encode($IncrementIds);
+                $result = '<h3>No hay docs de ventas : </3>' . json_encode($SellsPetitionId);
                 return $result;
             }
         }catch (Exception $e){
@@ -544,9 +567,69 @@ class General {
             $SellsDocumentId[] = $SellDoc->getDocumentId();
             $paramsSend['SellsDocumentId'][] =  $SellDoc->getDocumentId();
             $paramsSend['SellsDocValue'][] =  $SellDoc->getDocValue();
-            $paramsSend['SellsDocPosition'][] =  $SellDoc->getDocPosition();
+            $paramsSend['SellsDocPosition'][] =  "00000" . $SellDoc->getDocPosition();
             $paramsSend['SellsDocDate'][] =  $SellDoc->getDocDate();
+        }        
+
+        // Devolutions Docs
+
+        try{           
+            $QbcSciDevolutionQuery = QbcSciDevolutionQuery::create()->findByCampaignId($GroupdealsId);
+            if(empty($QbcSciDevolutionQuery)){
+                $result = '<h3>No hay devoluciones : </3>' . json_encode($GroupdealsId);
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception . $e->getMessage(). "\n";
+            return $error;
         }
+
+        foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
+            $orderDev = explode('-', $Devolution->getCoupon());
+            if($Devolution->getProcessed() == 0 && isset($couponH[$orderDev[0]][$Devolution->getUnit()])){
+                $DevolutionPetitionId[] = $Devolution->getPetitionId();
+            }else if($Devolution->getProcessed() == 0){
+                $DevolutionNoRedemedPetitionId[] = $Devolution->getPetitionId(); // Para incluir las devoluciones no redimidas
+            }
+
+        }
+
+        // CouponHistoryQuery
+        try{           
+            $QbcSciDevolutionDocQuery = QbcSciDevolutionDocQuery::create()->findByPetitionId($DevolutionPetitionId);
+            if(!empty($QbcSciDevolutionDocQuery)){
+                foreach ($QbcSciDevolutionDocQuery as $key => $DevolutionDoc) {
+                    $DevolutionsDocumentId[] = $DevolutionDoc->getDocumentId();
+                    $paramsSend['DevolutionsDocumentId'][] =  $DevolutionDoc->getDocumentId();
+                    $paramsSend['DevolutionsDocValue'][] =  $DevolutionDoc->getDocValue();
+                    $paramsSend['DevolutionsDocPosition'][] =  $DevolutionDoc->getDocPosition();
+                    $paramsSend['DevolutionsDocDate'][] =  $DevolutionDoc->getDocDate();
+                }
+            }
+        }catch (Exception $e){
+            $error = $this->exception . $e->getMessage(). "\n";
+            return $error;
+        }
+
+        try{           
+            $QbcSciDevolutionNoRedemedDocQuery = QbcSciDevolutionDocQuery::create()->findByPetitionId($DevolutionNoRedemedPetitionId);
+            if(!empty($QbcSciDevolutionNoRedemedDocQuery)){
+                foreach ($QbcSciDevolutionNoRedemedDocQuery as $key => $DevolutionNoDoc) {
+                    $DevolutionsNoDocumentId[] = $DevolutionNoDoc->getDocumentId();
+                    $paramsSend['DevolutionsNoDocumentId'][] =  $DevolutionNoDoc->getDocumentId();
+                    $paramsSend['DevolutionsNoDocValue'][] =  $DevolutionNoDoc->getDocValue();
+                    $paramsSend['DevolutionsNoDocPosition'][] =  $DevolutionNoDoc->getDocPosition();
+                    $paramsSend['DevolutionsNoDocDate'][] =  $DevolutionNoDoc->getDocDate();
+                }
+            }
+        }catch (Exception $e){
+            $error = $this->exception . $e->getMessage(). "\n";
+            return $error;
+        }
+
+
+
+
 
         $jsonSellsDocumentId = json_encode($SellsDocumentId);
 
@@ -559,13 +642,13 @@ class General {
                     $Sell->save();
                 }
             }
-            
+
             $QbcSciPayment = new QbcSciPayment();
             $QbcSciPayment->setPetitionId($result['PagoAliadoDTO']['Contexto']['PeticionId']);
             $QbcSciPayment->setOrderId($SellOrderId);
             $QbcSciPayment->setItemId($SellItemId);
             $QbcSciPayment->save();
-            
+
         }
 
 
@@ -620,18 +703,40 @@ class General {
         }
 
         $totDev = 0;
+        $j = 0;
         if(isset($params['DevolutionsDocumentId'])){
             $tolDev = count($params['DevolutionsDocumentId']);
             for ($i=0; $i < $tolDev; $i++) { 
-                $PagoAliadoDTO['Devoluciones'][$i]['Numero'] = $params['SellsDocumentId'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Posicion'] = $params['SellsDocPosition'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Valor'] = $params['SellsDocValue'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Fecha'] = $params['SellsDocDate'][$i] . 'T00:00:00';
-                $totDev = $totDev + $params['SellsDocValue'][$i];
+                $PagoAliadoDTO['Devoluciones'][$i]['Numero'] = $params['DevolutionsDocumentId'][$i];
+                $PagoAliadoDTO['Devoluciones'][$i]['Posicion'] = $params['DevolutionsDocPosition'][$i];
+                $PagoAliadoDTO['Devoluciones'][$i]['Valor'] = $params['DevolutionsDocValue'][$i];
+                $PagoAliadoDTO['Devoluciones'][$i]['Fecha'] = $params['DevolutionsDocDate'][$i] . 'T00:00:00';
+                $totDev = $totDev + $params['DevolutionsDocValue'][$i];
+                $j = $i;
             }
         }
 
-        // $PagoAliadoDTO['totVen'] = $totVen;
+        $totDevNo = 0;
+        if(isset($params['DevolutionsNoDocumentId'])){
+            $tolDevNo = count($params['DevolutionsNoDocumentId']);
+            for ($i=0; $i < $tolDevNo; $i++) { 
+                $j++;
+                $PagoAliadoDTO['Devoluciones'][$j]['Numero'] = $params['DevolutionsNoDocumentId'][$i];
+                $PagoAliadoDTO['Devoluciones'][$j]['Posicion'] = $params['DevolutionsNoDocPosition'][$i];
+                $PagoAliadoDTO['Devoluciones'][$j]['Valor'] = $params['DevolutionsNoDocValue'][$i];
+                $PagoAliadoDTO['Devoluciones'][$j]['Fecha'] = $params['DevolutionsNoDocDate'][$i] . 'T00:00:00';
+                $totDevNo = $totDevNo + $params['DevolutionsDocValue'][$i];
+            }
+
+            $ComDevNo = round($totDevNo * $PagoAliadoDTO['PorcentajeComision']);
+            $ComIvaDevNo = round($ComDevNo * $PagoAliadoDTO['PorcentajeIVAComision']);
+            $totDevNo = $totDevNo - ($ComDevNo + $ComIvaDevNo);
+
+        }
+
+
+
+        $totVen = $totVen - ($totDev + $totDevNo);
         $PagoAliadoDTO['ValorComision'] = round($totVen * $PagoAliadoDTO['PorcentajeComision']);
         $PagoAliadoDTO['ValorIVAComision'] = round($PagoAliadoDTO['ValorComision'] * $PagoAliadoDTO['PorcentajeIVAComision']);
         $PagoAliadoDTO['ValorCxPAliado'] = $totVen - ($PagoAliadoDTO['ValorComision'] + $PagoAliadoDTO['ValorIVAComision']);

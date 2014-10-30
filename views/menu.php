@@ -55,7 +55,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <li><a href="#">Acciones</a></li>
                         <li><a href="#">Configuración</a></li>
                         <li class="divider"></li>
-                        <li><a href="./?destroy=destroy">Log Out</a></li>
+                        <li><a href="./destroy">Log Out</a></li>
                     </ul>
                 </li>
             </ul>

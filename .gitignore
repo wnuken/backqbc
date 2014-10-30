@@ -8,7 +8,7 @@ nbproject
 
 #Backqbc
 /.htaccess
-/build/
+/build/conf/atmadmin-conf.php
 /vendor/
 /controller/statics.php
 build.properties

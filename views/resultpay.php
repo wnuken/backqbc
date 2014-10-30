@@ -1,5 +1,5 @@
 <?php
-if(is_array($result)):
+if(is_array($result)){
 ?>
 <div class="col-md-6">
 
@@ -8,8 +8,9 @@ if(is_array($result)):
             <h3 class="panel-title">XML</h3>
         </div>
         <div class="panel-body">
-            <?php 
-                print htmlentities($result['XML']);
+            <?php
+                if(isset($result['XML']))
+                    print htmlentities($result['XML']);
             ?>
         </div>
     </div>    
@@ -30,5 +31,7 @@ if(is_array($result)):
 </div>
 
 <?php
-endif;
+}else{
+    var_dump($result);
+}
 ?>

@@ -44,12 +44,11 @@ class Views {
     static public function sendpay(){
 		$General = new General();
 		$result = $General->PagoAliado($_REQUEST);
-        
-        include './views/resultpay.php';
-        
-	   //print '<textarea style="width:100%;height:300px;">' . (htmlentities($result['XML'])) . '</textarea>';
-        
-        
+         include './views/resultpay.php';
+ 	}
+    
+    static public function destroy(){
+		include './views/destroy.php';
 	}
 	
 

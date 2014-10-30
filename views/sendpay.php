@@ -15,7 +15,7 @@
                             <label for="exampleInputEmail1">Porcentaje Campaña</label>
                             <input type="text" class="form-control" id="campaing_tax" placeholder="Porcentaje Campaña" value="16">
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Enviar al Mediador</label>
                         </div>
                         <div class="btn-group">
@@ -36,19 +36,34 @@
             </div>
         </div>
     </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Modificar XML manualmente</h3>
+            </div>
+            <div class="panel-body">
+                <textarea style="width:100%;height:186px;" placeholder="Agrege XML"></textarea>
+                <div class="btn-group pull-right">
+                    <button class="btn btn-danger" id="summit-xml" type="submit">Procesar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <div class="row"> 
     <div class="col-md-4">
-    <div class="progress" id="progress" style="display:none;">
-        <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-            <span class="sr-only">Complete...</span>
+        <div class="progress" id="progress" style="display:none;">
+            <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                <span class="sr-only">Complete...</span>
+            </div>
         </div>
     </div>
-        </div>
-    </div>
+</div>
 <div class="row">
     <div id="response" style="display:none;"></div>
-    
+
 </div>
 
 <script type="text/javascript">

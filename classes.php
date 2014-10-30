@@ -6,12 +6,12 @@ if(!isset($_SESSION["k_username"])){
 
 (isset($_REQUEST["username"]))? $user = $_REQUEST["username"]: $user = "";
 (isset($_REQUEST["password"]))? $password = $_REQUEST["password"]: $password = "";
-(isset($_REQUEST["destroy"]))? $destroy = $_REQUEST["destroy"]: $destroy = "";
-
+//(isset($_REQUEST["destroy"]))? $destroy = $_REQUEST["destroy"]: $destroy = "";
+/*
 if($destroy == 'destroy'){
 	$_SESSION["k_username"] = "";
 	session_destroy();
-}
+}*/
 
 // Include 
 require_once dirname(__FILE__) . '/vendor/propel/runtime/lib/Propel.php';

@@ -595,6 +595,35 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
+    
+    <table name="coupon_history" phpName="CouponHistory" idMethod="native">
+    <column name="history_id" phpName="HistoryId" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="campaign_name" phpName="CampaignName" type="VARCHAR" size="255" required="true"/>
+    <column name="coupon_code" phpName="CouponCode" type="VARCHAR" size="255" required="true"/>
+    <column name="redemption_date" phpName="RedemptionDate" type="TIMESTAMP" required="false"/>
+    <column name="value" phpName="Value" type="DECIMAL" size="12" scale="4" required="true"/>
+    <column name="merchant_id" phpName="MerchantId" type="INTEGER" required="true"/>
+    <column name="campaign_id" phpName="CampaignId" type="VARCHAR" size="20" required="false"/>
+    <column name="order_id" phpName="OrderId" type="VARCHAR" size="20" required="false"/>
+    <column name="item_id" phpName="ItemId" type="VARCHAR" size="20" required="false"/>
+    <column name="processed" phpName="Processed" type="INTEGER" size="1" required="false" defaultValue="0"/>
+    <column name="unit" phpName="Unit" type="INTEGER" size="10" required="false"/>
+    <unique name="UNQ_CODE">
+      <unique-column name="coupon_code"/>
+    </unique>
+    <index name="qbc_coupon_history_order_index">
+      <index-column name="order_id"/>
+    </index>
+    <index name="qbc_coupon_history_campaign_id_index">
+      <index-column name="campaign_id"/>
+    </index>
+    <index name="qbc_coupon_history_code_index">
+      <index-column name="coupon_code"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
 
  <table name="merchant_bank_info" phpName="MerchantBankInfo" idMethod="native">
     <column name="info_id" phpName="InfoId" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
@@ -977,6 +1006,7 @@
     <column name="item_id" phpName="ItemId" type="VARCHAR" size="20" required="false"/>
     <column name="extra_data" phpName="ExtraData" type="LONGVARCHAR" required="false"/>
     <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="unit" phpName="Unit" type="INTEGER" size="10" required="false"/>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
