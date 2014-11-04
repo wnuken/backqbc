@@ -434,12 +434,16 @@ class General {
         // return $result;
     }
 
-    public function PagoAliado(&$params){
+    // ********* GENERAR PAGO ALIADO DB **********
+
+    public function & PagoAliado(&$params){ 
         $SellsPetitionId = array();
         $SellsDocumentId = array();
+        $DevolutionPetitionId = array();
+        $DevolutionNoRedemedPetitionId = array();
+        $SellOrderId = "";
+        $SellItemId = "";
         $GroupdealsId = trim($params['params']['idcampaign']);
-
-        //return $params;
 
         try{
             $GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
@@ -465,49 +469,29 @@ class General {
             return $error;
         }
 
-        $paramsSend = array(
-            'groupdeals_id' => $GroupdealsId,
-            'id_aliado' => $GroupdealsMerchantsQuery->getNitNumber(),
-            'PorcentajeComision' => $GroupdealsQuery->getEtGain(),
-            'PorcentajeIVAComision' => $params['params']['pcam'],
-            'product_id' => $GroupdealsQuery->getProductId(),
-            'title_short' => utf8_encode($GroupdealsQuery->getTitleShort()),
-            'title_midium' => utf8_encode($GroupdealsQuery->getTitleMidium()),
+        $TaxStatus = 'false';
+        if($params['params']['pcam'] == 0)
+            $TaxStatus = 'true';
+
+        $PagoAliadoDTO = array(
+            'Campana' => array(
+                'CampanaId' => $GroupdealsId,
+                'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
+                'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
+            'Contexto' => array(
+                'Aplicacion' => 'QBC',
+                'PeticionId' => substr(md5(strtotime('now')), 0, 24),
+                'Usuario' => 'INGQBC'),
+            'Exento' => $TaxStatus,
+            'Fecha' => date("Y-m-d\TH:i:s"),
+            'Moneda' => 'COP',
+            'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
+            'Periodo' => date('Y')-1 . date('-m-d') . ' ' . date('Y-m-d'),
+            'PorcentajeComision' =>  ($GroupdealsQuery->getEtGain() / 100),
+            'PorcentajeIVAComision' => ($params['params']['pcam'] / 100),
             'sendSCMP' => $params['params']['send']
-        );
+            );
 
-        /*
-        try{           
-            $SalesFlatOrderItemQuery = SalesFlatOrderItemQuery::create()->findByProductId($paramsSend['product_id']);
-            if(empty($SalesFlatOrderItemQuery)){
-                $result = '<h3>No hay productos para la campaña: </3>' . $GroupdealsId . ' - ' . $paramsSend['product_id'];
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
-
-        foreach ($SalesFlatOrderItemQuery as $key => $Item) {
-            if($Item->getQtyRedeemed() > 0)
-                $ItemsOrder[] = $Item->getOrderId();
-        }
-
-        try{           
-            $SalesFlatOrderQuery = SalesFlatOrderQuery::create()->findByEntityId($ItemsOrder);
-            if(empty($SalesFlatOrderQuery)){
-                $result = '<h3>No hay item para los productos: </3>' . json_encode($ItemsOrder);
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
-
-        foreach ($SalesFlatOrderQuery as $key => $Order) {
-           // $IncrementIds[] = $Order->getIncrementId();
-        }
-        */
 
         try{           
             $CouponHistoryQuery = CouponHistoryQuery::create()->findByCampaignId($GroupdealsId);
@@ -524,10 +508,6 @@ class General {
             $IncrementIds[] = $History->getOrderId();
             $couponH[$History->getOrderId()][$History->getUnit()] = true;
         }
-
-
-        // return $couponH;
-
 
         //Sells Docs
 
@@ -594,7 +574,6 @@ class General {
 
         }
 
-        // CouponHistoryQuery
         try{           
             $QbcSciDevolutionDocQuery = QbcSciDevolutionDocQuery::create()->findByPetitionId($DevolutionPetitionId);
             if(!empty($QbcSciDevolutionDocQuery)){
@@ -627,13 +606,9 @@ class General {
             return $error;
         }
 
-
-
-
-
         $jsonSellsDocumentId = json_encode($SellsDocumentId);
 
-        $result = $this->SendPago($paramsSend);
+        $result = $this->SendPago($PagoAliadoDTO, $paramsSend);
 
         if(is_object($result['wsResult']) && $result['wsResult']->Estado == 'aprobado'){
             foreach ($QbcSciSellQuery as $key => $Sell) {
@@ -645,17 +620,30 @@ class General {
 
             $QbcSciPayment = new QbcSciPayment();
             $QbcSciPayment->setPetitionId($result['PagoAliadoDTO']['Contexto']['PeticionId']);
-            $QbcSciPayment->setOrderId($SellOrderId);
+            $QbcSciPayment->setOrderId($SellOrderId); // revisar
             $QbcSciPayment->setItemId($SellItemId);
             $QbcSciPayment->save();
 
         }
 
-
         return $result;
     }
 
-    public function SendPago(&$params){
+    public function PagoAlidoXML($params){
+
+        //$xml_file = file_get_contents('../views/pago.xml');
+        $xml = simplexml_load_string($params['params']['file']);
+        $json = json_encode($xml);
+        $PagoAliadoDTO = json_decode($json,TRUE);
+        $PagoAliadoDTO['sendSCMP'] = $params['params']['send'];
+
+        $result = $this->SendPago($PagoAliadoDTO);
+        
+        return $result;
+
+    }
+
+    private function SendPago(&$PagoAliadoDTO, &$params = NULL){
         $wsResult = array();
 
         try {
@@ -664,91 +652,69 @@ class General {
             $wsResult = $this->exception .  $e->getMessage() . "\n";
         }
 
-        $PagoAliadoDTO = array();
 
-        /*$xml_file = file_get_contents('../views/pago.xml');
-    $xml = simplexml_load_string($xml_file);
-    $json = json_encode($xml);
-    $PagoAliadoDTO = json_decode($json,TRUE);
-*/
+        if($params !== NULL){
+              $totVen = 0;
 
-        $PagoAliadoDTO['Campana']['CampanaId'] = $params['groupdeals_id'];
-        $PagoAliadoDTO['Campana']['Detalle'] = $params['title_midium'];
-        $PagoAliadoDTO['Campana']['Nombre']  = $params['title_short'];
-        $PagoAliadoDTO['Contexto']['Aplicacion'] = 'QBC';
-        $PagoAliadoDTO['Contexto']['PeticionId'] = substr(md5(strtotime('now')), 0, 24);
-        $PagoAliadoDTO['Contexto']['Usuario'] = 'INGQBC';
-        $PagoAliadoDTO['Exento'] = 'false';
-        $PagoAliadoDTO['Fecha'] = date("Y-m-d\TH:i:s"); // date("Y-m-d\TH:i:s"); date(DATE_ATOM)
-        //$PagoAliadoDTO['Fecha'] = htmlentities(date("d-m-Y")); // date("Y-m-d\TH:i:s"); date(DATE_ATOM)
-        $PagoAliadoDTO['Moneda'] = 'COP';
-        $PagoAliadoDTO['NitAliado'] = $params['id_aliado'];
-        $PagoAliadoDTO['Periodo'] = date('Y')-1 . date('-m-d') . ' ' . date('Y-m-d');
-        $PagoAliadoDTO['PorcentajeComision'] = $params['PorcentajeComision'] / 100;
-        $PagoAliadoDTO['PorcentajeIVAComision'] = $params['PorcentajeIVAComision'] / 100;
-
-
-
-        $totVen = 0;
-
-        if(isset($params['SellsDocumentId'])){
-            $tolSell = count($params['SellsDocumentId']);
-            for ($i=0; $i < $tolSell; $i++) { 
-                $PagoAliadoDTO['Ventas'][$i]['Numero'] = $params['SellsDocumentId'][$i];
-                $PagoAliadoDTO['Ventas'][$i]['Posicion'] = $params['SellsDocPosition'][$i];
-                $PagoAliadoDTO['Ventas'][$i]['Valor'] = $params['SellsDocValue'][$i];
-                $PagoAliadoDTO['Ventas'][$i]['Fecha'] = $params['SellsDocDate'][$i] . 'T00:00:00';
-                $totVen = $totVen + $params['SellsDocValue'][$i];
+            if(isset($params['SellsDocumentId'])){
+                $tolSell = count($params['SellsDocumentId']);
+                for ($i=0; $i < $tolSell; $i++) { 
+                    $PagoAliadoDTO['Ventas'][$i]['Numero'] = $params['SellsDocumentId'][$i];
+                    $PagoAliadoDTO['Ventas'][$i]['Posicion'] = $params['SellsDocPosition'][$i];
+                    $PagoAliadoDTO['Ventas'][$i]['Valor'] = $params['SellsDocValue'][$i];
+                    $PagoAliadoDTO['Ventas'][$i]['Fecha'] = $params['SellsDocDate'][$i] . 'T00:00:00';
+                    $totVen = $totVen + $params['SellsDocValue'][$i];
+                }
             }
+
+            $totDev = 0;
+            $j = 0;
+            if(isset($params['DevolutionsDocumentId'])){
+                $tolDev = count($params['DevolutionsDocumentId']);
+                for ($i=0; $i < $tolDev; $i++) { 
+                    $PagoAliadoDTO['Devoluciones'][$i]['Numero'] = $params['DevolutionsDocumentId'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$i]['Posicion'] = $params['DevolutionsDocPosition'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$i]['Valor'] = $params['DevolutionsDocValue'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$i]['Fecha'] = $params['DevolutionsDocDate'][$i] . 'T00:00:00';
+                    $totDev = $totDev + $params['DevolutionsDocValue'][$i];
+                    $j = $i;
+                }
+            }
+
+            $totDevNo = 0;
+            /*if(isset($params['DevolutionsNoDocumentId'])){
+                $tolDevNo = count($params['DevolutionsNoDocumentId']);
+                for ($i=0; $i < $tolDevNo; $i++) { 
+                    if(!isset($PagoAliadoDTO['Devoluciones'][0]) && $i == 0){$j=0;}else{$j++;}
+                    //$j++;
+                    $PagoAliadoDTO['Devoluciones'][$j]['Numero'] = $params['DevolutionsNoDocumentId'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$j]['Posicion'] = $params['DevolutionsNoDocPosition'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$j]['Valor'] = $params['DevolutionsNoDocValue'][$i];
+                    $PagoAliadoDTO['Devoluciones'][$j]['Fecha'] = $params['DevolutionsNoDocDate'][$i] . 'T00:00:00';
+                    $totDevNo = $totDevNo + $params['DevolutionsNoDocValue'][$i];
+                }
+
+                $ComDevNo = round($totDevNo * $PagoAliadoDTO['PorcentajeComision']);
+                $ComIvaDevNo = round($ComDevNo * $PagoAliadoDTO['PorcentajeIVAComision']);
+                $totDevNo = $totDevNo - ($ComDevNo + $ComIvaDevNo);
+
+            }*/ // Se invalida mientras se realizan ajustes
+
+
+
+            $totVen = $totVen - $totDev;
+            $PagoAliadoDTO['ValorComision'] = round($totVen * $PagoAliadoDTO['PorcentajeComision']);
+            $PagoAliadoDTO['ValorIVAComision'] = round($PagoAliadoDTO['ValorComision'] * $PagoAliadoDTO['PorcentajeIVAComision']);
+            $PagoAliadoDTO['ValorCxPAliado'] = $totVen - ($PagoAliadoDTO['ValorComision'] + $PagoAliadoDTO['ValorIVAComision'] + $totDevNo);
         }
-
-        $totDev = 0;
-        $j = 0;
-        if(isset($params['DevolutionsDocumentId'])){
-            $tolDev = count($params['DevolutionsDocumentId']);
-            for ($i=0; $i < $tolDev; $i++) { 
-                $PagoAliadoDTO['Devoluciones'][$i]['Numero'] = $params['DevolutionsDocumentId'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Posicion'] = $params['DevolutionsDocPosition'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Valor'] = $params['DevolutionsDocValue'][$i];
-                $PagoAliadoDTO['Devoluciones'][$i]['Fecha'] = $params['DevolutionsDocDate'][$i] . 'T00:00:00';
-                $totDev = $totDev + $params['DevolutionsDocValue'][$i];
-                $j = $i;
-            }
-        }
-
-        $totDevNo = 0;
-        /*if(isset($params['DevolutionsNoDocumentId'])){
-            $tolDevNo = count($params['DevolutionsNoDocumentId']);
-            for ($i=0; $i < $tolDevNo; $i++) { 
-                if(!isset($PagoAliadoDTO['Devoluciones'][0]) && $i == 0){$j=0;}else{$j++;}
-                //$j++;
-                $PagoAliadoDTO['Devoluciones'][$j]['Numero'] = $params['DevolutionsNoDocumentId'][$i];
-                $PagoAliadoDTO['Devoluciones'][$j]['Posicion'] = $params['DevolutionsNoDocPosition'][$i];
-                $PagoAliadoDTO['Devoluciones'][$j]['Valor'] = $params['DevolutionsNoDocValue'][$i];
-                $PagoAliadoDTO['Devoluciones'][$j]['Fecha'] = $params['DevolutionsNoDocDate'][$i] . 'T00:00:00';
-                $totDevNo = $totDevNo + $params['DevolutionsNoDocValue'][$i];
-            }
-
-            $ComDevNo = round($totDevNo * $PagoAliadoDTO['PorcentajeComision']);
-            $ComIvaDevNo = round($ComDevNo * $PagoAliadoDTO['PorcentajeIVAComision']);
-            $totDevNo = $totDevNo - ($ComDevNo + $ComIvaDevNo);
-
-        }*/ // Se invalida mientras se realizan ajustes
-
-
-
-        $totVen = $totVen - $totDev;
-        $PagoAliadoDTO['ValorComision'] = round($totVen * $PagoAliadoDTO['PorcentajeComision']);
-        $PagoAliadoDTO['ValorIVAComision'] = round($PagoAliadoDTO['ValorComision'] * $PagoAliadoDTO['PorcentajeIVAComision']);
-        $PagoAliadoDTO['ValorCxPAliado'] = $totVen - ($PagoAliadoDTO['ValorComision'] + $PagoAliadoDTO['ValorIVAComision'] + $totDevNo);
-
         // natsort ( $PagoAliadoDTO );
         $xmlResult = $this->array2XML($PagoAliadoDTO);
 
-        if($params['sendSCMP'] == 0){
+        if($PagoAliadoDTO['sendSCMP'] == 0){
             $resultado =  array('wsResult' => $wsResult, 'PagoAliadoDTO' => $PagoAliadoDTO, 'XML' => $xmlResult);
             return $resultado;
-        }elseif($params['sendSCMP'] == 1){
+        }elseif($PagoAliadoDTO['sendSCMP'] == 1){
+            unset($PagoAliadoDTO['sendSCMP']);
             $peticionDTO['peticionDTO'] = $PagoAliadoDTO;
 
             try

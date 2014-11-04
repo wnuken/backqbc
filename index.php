@@ -7,7 +7,7 @@ if(trim($user) == 'admin' && md5(trim($password)) == '171d02c12592f4967ef5a4dd15
 }
 if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"])){
     $urlpost = explode('/', $_SERVER['REQUEST_URI']);
-    $toPost = array('sendxmlsell', 'sendpay', 'funtt', 'encode');
+    $toPost = array('sendxmlsell', 'sendpay', 'sendpayxml', 'funtt', 'encode');
     
     if(in_array($urlpost[2] , $toPost)){
         getRoute()->run();

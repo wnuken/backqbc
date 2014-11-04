@@ -47,6 +47,12 @@ class Views {
          include './views/resultpay.php';
  	}
     
+    static public function sendpayxml(){
+		$General = new General();
+		$result = $General->PagoAlidoXML($_REQUEST);
+         include './views/resultpay.php';
+ 	}
+    
     static public function destroy(){
 		include './views/destroy.php';
 	}

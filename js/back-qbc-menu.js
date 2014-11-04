@@ -57,7 +57,7 @@ $.fn.getProcess = function(params){
 
 
 $.fn.getFuntions = function(params){
-	var that = this;
+	var $that = $(this);
 	$('div#loader').css({'display':'block'});
 	$.ajax({
 		type: "POST",
@@ -73,7 +73,7 @@ $.fn.getFuntions = function(params){
                 $('div#response').html(response);
             });
 			$('div#response').html(response);
-            $('button#summit').button('reset');
+            $('button#summit', $that).button('reset');
 		},
 		error: function() {
 			//console.log('da error');
