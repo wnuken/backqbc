@@ -15,15 +15,4 @@
     
     <!-- Internal -->
     <link rel="stylesheet" href="css/back-qbc.css">
-
-    <!-- scripts -->
-    <!-- jQuery -->
-    <script src="js/jquery-min-2.1.1.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- CodeMirror -->
-    <script src="js/codemirror.js"></script>
-    <script src="js/codemirror-xml.js"></script>
-    <!-- Internal -->
-    <script src="js/back-qbc-menu.js"></script>
 </head>

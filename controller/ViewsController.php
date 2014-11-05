@@ -56,6 +56,16 @@ class Views {
     static public function destroy(){
 		include './views/destroy.php';
 	}
+    
+    static public function cierreoferta(){
+		include './views/cierreoferta.php';
+	}
+    
+    static public function closuresend(){
+        $General = new General();
+		$result = $General->ClosureOffer($_REQUEST);        
+		include './views/resultcierre.php';
+	}
 	
 
 	

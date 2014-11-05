@@ -1493,5 +1493,28 @@ CREATE TABLE groupdeals
         REFERENCES treasury_types (id)
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- qbc_sci_closure
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS qbc_sci_closure;
+
+CREATE TABLE qbc_sci_closure
+(
+    Id INTEGER(20) NOT NULL AUTO_INCREMENT,
+    NitAliado VARCHAR(50),
+    CampanaId VARCHAR(50),
+    Venta VARCHAR(50),
+    FechaV DATE,
+    ValorV DECIMAL(10,3),
+    Devolucion VARCHAR(50),
+    FechaD DATE,
+    ValorD DECIMAL(10,3),
+    PagoAliado VARCHAR(100),
+    PorcentajeComision DECIMAL(18,3),
+    PorcentajeIVAComision DECIMAL(18,3),
+    PRIMARY KEY (Id)
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

@@ -12,9 +12,5 @@
 
         </div>
     </body>
-    <script>
-        $('div#prueba').on('click', function(){
-            console.log('oo');
-        });
-    </script>
+   <?php require_once('./views/foot.php'); ?>
 </html>

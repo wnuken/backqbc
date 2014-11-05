@@ -46,6 +46,20 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> One more separated link</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-retweet"></i> Cierre Oferta <span class="caret"></span>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-retweet"></i> Cierre Multiple</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Elimiar petición</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Marcar ventas/devoluciones</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> Separated link</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> One more separated link</a></li>
+                    </ul>
+                </li>
                 <li><a href="#about">Generar XML</a></li>
                 <li><a href="#contact">Contactos</a></li>
                 <li class="dropdown" style="float:rigth;">

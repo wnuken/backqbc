@@ -146,9 +146,6 @@ class General {
         $Cuotas = '';
         $NumeroTarjeta = '';
 
-        //var_dump($pagosOnline->getEstadoPol());
-
-
         if((!is_null($pagosOnline) && $pagosOnline->getEstadoPol() == 4) || (!is_null($vendorName) && is_null($pagosOnline))){
 
             if(!is_null($pagosOnline) && $pagosOnline->getEstadoPol() == 4){
@@ -162,10 +159,6 @@ class General {
                 $NombreMedioPago = 'Efectivo';
                 $Banco = '';
             }
-
-            // Nombre medio
-
-            //$NumeroPedido = 'value';
 
             /* 
 		* gen: InfoPedido
@@ -368,7 +361,6 @@ class General {
 
         try{           
             $ChangePetitionCount = QbcSciSellChangePetitionQuery::create()->filterByPeticionOld($params['old'])->count();
-            //return $ChangePetitionCount;
         }catch (Exception $e){
             $error = $this->exception .  $e->getMessage(). "\n";
             return $error;
@@ -395,7 +387,6 @@ class General {
 
                 if($QbcSciSellDoc->isDeleted() === true){
                     $QbcSciSellDocDelete = new QbcSciSellDocDelete();
-                    //$QbcSciSellDocDelete->setId($QbcSciSellDoc->getId());
                     $QbcSciSellDocDelete->setPetitionId($QbcSciSellDoc->getPetitionId());
                     $QbcSciSellDocDelete->setState($QbcSciSellDoc->getState());
                     $QbcSciSellDocDelete->setDetail($QbcSciSellDoc->getDetail());
@@ -422,16 +413,9 @@ class General {
         $comando = 'php ../controller/sell_resend_scmp.php ' . 
             $SalesFlatOrderQuery->getEntityId() .
             ' ' . $params['params'];
-
-        //return $comando;
-        //try{
+    
         $result = system($comando);
-        //}
-        //catch(Exception $e){
-        //return "Caught exception: ". $e->getMessage();
-        //}
 
-        // return $result;
     }
 
     // ********* GENERAR PAGO ALIADO DB **********
@@ -490,7 +474,7 @@ class General {
             'PorcentajeComision' =>  ($GroupdealsQuery->getEtGain() / 100),
             'PorcentajeIVAComision' => ($params['params']['pcam'] / 100),
             'sendSCMP' => $params['params']['send']
-            );
+        );
 
 
         try{           
@@ -630,17 +614,12 @@ class General {
     }
 
     public function PagoAlidoXML($params){
-
-        //$xml_file = file_get_contents('../views/pago.xml');
         $xml = simplexml_load_string($params['params']['file']);
         $json = json_encode($xml);
         $PagoAliadoDTO = json_decode($json,TRUE);
         $PagoAliadoDTO['sendSCMP'] = $params['params']['send'];
-
         $result = $this->SendPago($PagoAliadoDTO);
-        
         return $result;
-
     }
 
     private function SendPago(&$PagoAliadoDTO, &$params = NULL){
@@ -654,7 +633,7 @@ class General {
 
 
         if($params !== NULL){
-              $totVen = 0;
+            $totVen = 0;
 
             if(isset($params['SellsDocumentId'])){
                 $tolSell = count($params['SellsDocumentId']);
@@ -700,8 +679,6 @@ class General {
 
             }*/ // Se invalida mientras se realizan ajustes
 
-
-
             $totVen = $totVen - $totDev;
             $PagoAliadoDTO['ValorComision'] = round($totVen * $PagoAliadoDTO['PorcentajeComision']);
             $PagoAliadoDTO['ValorIVAComision'] = round($PagoAliadoDTO['ValorComision'] * $PagoAliadoDTO['PorcentajeIVAComision']);
@@ -721,21 +698,16 @@ class General {
             {
                 $webService = $client-> PagosAliado($peticionDTO);
                 $wsResult = $webService->PagosAliadoResult;
-
             }
             catch (Exception $e)
             {
                 $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
             } 
 
-
             $resultado =  array('wsResult' => $wsResult, 'PagoAliadoDTO' => $PagoAliadoDTO, 'XML' => $xmlResult);
 
             return $resultado;
-
         }
-
-
     }
 
 
@@ -747,11 +719,11 @@ class General {
 
         foreach($data as $key => $value){
             if (is_numeric($key)){
-                if($rootNodeName == 'PagoAliadoDTO'){
+               // if($rootNodeName == 'PagoAliadoDTO'){
                     $key = "DocumentoContableDTO";
-                }else{
-                    $key = "nodeId_". (string) $key;
-                }
+              //  }else{
+              //      $key = "nodeId_". (string) $key;
+              //  }
             }
 
             if (is_array($value)){
@@ -885,6 +857,132 @@ class General {
         } 
 
         return $result;
+    }
+
+    public function & ClosureOffer(&$params){
+
+        $GroupdealsId = $params['params']['idcampaign'];
+        
+        try{
+            $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->findByCampanaid($GroupdealsId);
+            if(empty($BaseQbcSciClosureQuery)){
+                $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception .  $e->getMessage(). "\n";
+            return $error;
+        }
+        
+        
+        try{
+            $GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
+            if(empty($GroupdealsQuery)){
+                $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception .  $e->getMessage(). "\n";
+            return $error;
+        }
+
+        $MerchantId = $GroupdealsQuery->getMerchantId();
+
+        try{           
+            $GroupdealsMerchantsQuery = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($MerchantId);
+            if(empty($GroupdealsQuery)){
+                $result = '<h3>No existe la el Aliado: </3>' . $MerchantId;
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception .  $e->getMessage(). "\n";
+            return $error;
+        }
+
+        
+
+        foreach($BaseQbcSciClosureQuery as $key => $Closure){
+
+            if($key == 0){
+                $CierreAliadoDTO = array(
+                    'Campana' => array(
+                        'CampanaId' => $Closure->getCampanaid(),
+                        'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
+                        'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
+                    'Contexto' => array(
+                        'Aplicacion' => 'QBC',
+                        'PeticionId' => substr(md5(strtotime('now')), 0, 24),
+                        'Usuario' => 'INGQBC'),
+                    'Fecha' => date("Y-m-d\TH:i:s"),
+                    'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
+                    'NombreAliado' => utf8_encode($GroupdealsMerchantsQuery->getLegalName()),
+                    'Valor' => '0',
+                    'sendSCMP' => $params['params']['send']
+
+                );
+            }
+
+            $valorV = explode('.', $Closure->getValorv());
+            $CierreAliadoDTO['Ventas'][$key]['Numero'] = $Closure->getVenta();
+            $CierreAliadoDTO['Ventas'][$key]['Posicion'] = '000001';
+            $CierreAliadoDTO['Ventas'][$key]['Valor'] = $valorV[0];
+            $CierreAliadoDTO['Ventas'][$key]['Fecha'] =  date("Y-m-d", strtotime($Closure->getFechav())) . 'T00:00:00';
+
+            $valorD = explode('.', $Closure->getValord());
+            $CierreAliadoDTO['Devoluciones'][$key]['Numero'] = $Closure->getDevolucion();
+            $CierreAliadoDTO['Devoluciones'][$key]['Posicion'] = '000001';
+            $CierreAliadoDTO['Devoluciones'][$key]['Valor'] = $valorD[0];
+            $CierreAliadoDTO['Devoluciones'][$key]['Fecha'] = date('Y-m-d', strtotime($Closure->getFechad())) . 'T00:00:00';
+
+        }
+
+
+        $result = $this->SendClosure($CierreAliadoDTO);
+
+        return $result;
+
+    }
+
+
+    private function SendClosure(&$CierreAliadoDTO, &$params = NULL){
+        $wsResult = array();
+
+        try {
+            $client = new SoapClient($this->webService, $this->options);
+        } catch (Exception $e) {
+            $wsResult = $this->exception .  $e->getMessage() . "\n";
+        }
+
+
+
+        $xmlResult = $this->array2XML($CierreAliadoDTO, 'CierreOfertaDTO');
+
+        if($CierreAliadoDTO['sendSCMP'] == 0){
+            $resultado =  array('wsResult' => $wsResult, 'CierreAliadoDTO' => $CierreAliadoDTO, 'XML' => $xmlResult);
+            return $resultado;
+        }elseif($CierreAliadoDTO['sendSCMP'] == 1){
+            unset($CierreAliadoDTO['sendSCMP']);
+            $peticionDTO['peticionDTO'] = $CierreAliadoDTO;
+
+            try
+            {
+                $webService = $client->CierreOfertas($peticionDTO);
+                $wsResult = $webService->CierreOfertasResult;
+
+            }
+            catch (Exception $e)
+            {
+                $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
+            } 
+
+
+            $resultado =  array('wsResult' => $wsResult, 'CierreAliadoDTO' => $CierreAliadoDTO, 'XML' => $xmlResult);
+
+            return $resultado;
+
+        }
+
+
     }
 
 

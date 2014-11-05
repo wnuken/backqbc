@@ -5,7 +5,7 @@
                 <h3 class="panel-title">Envar / Consultar Pago</h3>
             </div>
             <div class="panel-body">
-                <form id="sendpay">
+                <form id="sendclose">
                     <fieldset>
                         <div class="form-group">
                             <label for="exampleInputEmail1">ID Campaña</label>
@@ -30,38 +30,6 @@
                         </div>
                         <div class="btn-group pull-right">
                             <button class="btn btn-default" id="summit" type="submit">Procesar</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Modificar XML manualmente</h3>
-            </div>
-            <div class="panel-body">
-                <form id="sendpayxml">
-                    <fieldset>
-                        <div class="form-group">
-                            <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="xml-pay"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Enviar al Mediador</label>
-                        </div>
-                        <div class="btn-group" id="sendxml">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
-                                <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No Enviar </span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" id='sendchange'>
-                                <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
-                                <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
-                                <input type="hidden" id="sci_send" value="0">
-                            </ul>
-                        </div>
-                        <div class="btn-group pull-right">
-                            <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
                         </div>
                     </fieldset>
                 </form>
