@@ -80,13 +80,3 @@ echo "</table>";
         set s.petition_id = cp.peticion_old;</p>
     </div>
     </div></div>
-
-<script type="text/javascript">
-    $('input#summit').on('click', function(e){
-        e.preventDefault();
-        var params = $('textarea#text').val();
-        console.log(params);
-        $().getProcess({'params':params, 'class':'changeid'});
-    });
-
-</script>

@@ -24,49 +24,52 @@ abstract class BaseQbcSciClosurePeer
     const TM_CLASS = 'QbcSciClosureTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 12;
+    const NUM_COLUMNS = 13;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 12;
+    const NUM_HYDRATE_COLUMNS = 13;
 
     /** the column name for the Id field */
     const ID = 'qbc_sci_closure.Id';
 
-    /** the column name for the NitAliado field */
-    const NITALIADO = 'qbc_sci_closure.NitAliado';
+    /** the column name for the nit_aliado field */
+    const NIT_ALIADO = 'qbc_sci_closure.nit_aliado';
 
-    /** the column name for the CampanaId field */
-    const CAMPANAID = 'qbc_sci_closure.CampanaId';
+    /** the column name for the campaign_id field */
+    const CAMPAIGN_ID = 'qbc_sci_closure.campaign_id';
 
-    /** the column name for the Venta field */
-    const VENTA = 'qbc_sci_closure.Venta';
+    /** the column name for the sell_doc field */
+    const SELL_DOC = 'qbc_sci_closure.sell_doc';
 
-    /** the column name for the FechaV field */
-    const FECHAV = 'qbc_sci_closure.FechaV';
+    /** the column name for the sell_date field */
+    const SELL_DATE = 'qbc_sci_closure.sell_date';
 
-    /** the column name for the ValorV field */
-    const VALORV = 'qbc_sci_closure.ValorV';
+    /** the column name for the sell_value field */
+    const SELL_VALUE = 'qbc_sci_closure.sell_value';
 
-    /** the column name for the Devolucion field */
-    const DEVOLUCION = 'qbc_sci_closure.Devolucion';
+    /** the column name for the dev_doc field */
+    const DEV_DOC = 'qbc_sci_closure.dev_doc';
 
-    /** the column name for the FechaD field */
-    const FECHAD = 'qbc_sci_closure.FechaD';
+    /** the column name for the dev_date field */
+    const DEV_DATE = 'qbc_sci_closure.dev_date';
 
-    /** the column name for the ValorD field */
-    const VALORD = 'qbc_sci_closure.ValorD';
+    /** the column name for the dev_value field */
+    const DEV_VALUE = 'qbc_sci_closure.dev_value';
 
-    /** the column name for the PagoAliado field */
-    const PAGOALIADO = 'qbc_sci_closure.PagoAliado';
+    /** the column name for the pay_id field */
+    const PAY_ID = 'qbc_sci_closure.pay_id';
 
-    /** the column name for the PorcentajeComision field */
-    const PORCENTAJECOMISION = 'qbc_sci_closure.PorcentajeComision';
+    /** the column name for the porcentaje_comision field */
+    const PORCENTAJE_COMISION = 'qbc_sci_closure.porcentaje_comision';
 
-    /** the column name for the PorcentajeIVAComision field */
-    const PORCENTAJEIVACOMISION = 'qbc_sci_closure.PorcentajeIVAComision';
+    /** the column name for the porcentaje_iva field */
+    const PORCENTAJE_IVA = 'qbc_sci_closure.porcentaje_iva';
+
+    /** the column name for the status field */
+    const STATUS = 'qbc_sci_closure.status';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -87,12 +90,12 @@ abstract class BaseQbcSciClosurePeer
      * e.g. QbcSciClosurePeer::$fieldNames[QbcSciClosurePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'Nitaliado', 'Campanaid', 'Venta', 'Fechav', 'Valorv', 'Devolucion', 'Fechad', 'Valord', 'Pagoaliado', 'Porcentajecomision', 'Porcentajeivacomision', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'nitaliado', 'campanaid', 'venta', 'fechav', 'valorv', 'devolucion', 'fechad', 'valord', 'pagoaliado', 'porcentajecomision', 'porcentajeivacomision', ),
-        BasePeer::TYPE_COLNAME => array (QbcSciClosurePeer::ID, QbcSciClosurePeer::NITALIADO, QbcSciClosurePeer::CAMPANAID, QbcSciClosurePeer::VENTA, QbcSciClosurePeer::FECHAV, QbcSciClosurePeer::VALORV, QbcSciClosurePeer::DEVOLUCION, QbcSciClosurePeer::FECHAD, QbcSciClosurePeer::VALORD, QbcSciClosurePeer::PAGOALIADO, QbcSciClosurePeer::PORCENTAJECOMISION, QbcSciClosurePeer::PORCENTAJEIVACOMISION, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'NITALIADO', 'CAMPANAID', 'VENTA', 'FECHAV', 'VALORV', 'DEVOLUCION', 'FECHAD', 'VALORD', 'PAGOALIADO', 'PORCENTAJECOMISION', 'PORCENTAJEIVACOMISION', ),
-        BasePeer::TYPE_FIELDNAME => array ('Id', 'NitAliado', 'CampanaId', 'Venta', 'FechaV', 'ValorV', 'Devolucion', 'FechaD', 'ValorD', 'PagoAliado', 'PorcentajeComision', 'PorcentajeIVAComision', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'NitAliado', 'CampaignId', 'SellDoc', 'SellDate', 'SellValue', 'DevDoc', 'DevDate', 'DevValue', 'PayId', 'PorcentajeComision', 'PorcentajeIva', 'Status', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'nitAliado', 'campaignId', 'sellDoc', 'sellDate', 'sellValue', 'devDoc', 'devDate', 'devValue', 'payId', 'porcentajeComision', 'porcentajeIva', 'status', ),
+        BasePeer::TYPE_COLNAME => array (QbcSciClosurePeer::ID, QbcSciClosurePeer::NIT_ALIADO, QbcSciClosurePeer::CAMPAIGN_ID, QbcSciClosurePeer::SELL_DOC, QbcSciClosurePeer::SELL_DATE, QbcSciClosurePeer::SELL_VALUE, QbcSciClosurePeer::DEV_DOC, QbcSciClosurePeer::DEV_DATE, QbcSciClosurePeer::DEV_VALUE, QbcSciClosurePeer::PAY_ID, QbcSciClosurePeer::PORCENTAJE_COMISION, QbcSciClosurePeer::PORCENTAJE_IVA, QbcSciClosurePeer::STATUS, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'NIT_ALIADO', 'CAMPAIGN_ID', 'SELL_DOC', 'SELL_DATE', 'SELL_VALUE', 'DEV_DOC', 'DEV_DATE', 'DEV_VALUE', 'PAY_ID', 'PORCENTAJE_COMISION', 'PORCENTAJE_IVA', 'STATUS', ),
+        BasePeer::TYPE_FIELDNAME => array ('Id', 'nit_aliado', 'campaign_id', 'sell_doc', 'sell_date', 'sell_value', 'dev_doc', 'dev_date', 'dev_value', 'pay_id', 'porcentaje_comision', 'porcentaje_iva', 'status', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -102,12 +105,12 @@ abstract class BaseQbcSciClosurePeer
      * e.g. QbcSciClosurePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Nitaliado' => 1, 'Campanaid' => 2, 'Venta' => 3, 'Fechav' => 4, 'Valorv' => 5, 'Devolucion' => 6, 'Fechad' => 7, 'Valord' => 8, 'Pagoaliado' => 9, 'Porcentajecomision' => 10, 'Porcentajeivacomision' => 11, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'nitaliado' => 1, 'campanaid' => 2, 'venta' => 3, 'fechav' => 4, 'valorv' => 5, 'devolucion' => 6, 'fechad' => 7, 'valord' => 8, 'pagoaliado' => 9, 'porcentajecomision' => 10, 'porcentajeivacomision' => 11, ),
-        BasePeer::TYPE_COLNAME => array (QbcSciClosurePeer::ID => 0, QbcSciClosurePeer::NITALIADO => 1, QbcSciClosurePeer::CAMPANAID => 2, QbcSciClosurePeer::VENTA => 3, QbcSciClosurePeer::FECHAV => 4, QbcSciClosurePeer::VALORV => 5, QbcSciClosurePeer::DEVOLUCION => 6, QbcSciClosurePeer::FECHAD => 7, QbcSciClosurePeer::VALORD => 8, QbcSciClosurePeer::PAGOALIADO => 9, QbcSciClosurePeer::PORCENTAJECOMISION => 10, QbcSciClosurePeer::PORCENTAJEIVACOMISION => 11, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'NITALIADO' => 1, 'CAMPANAID' => 2, 'VENTA' => 3, 'FECHAV' => 4, 'VALORV' => 5, 'DEVOLUCION' => 6, 'FECHAD' => 7, 'VALORD' => 8, 'PAGOALIADO' => 9, 'PORCENTAJECOMISION' => 10, 'PORCENTAJEIVACOMISION' => 11, ),
-        BasePeer::TYPE_FIELDNAME => array ('Id' => 0, 'NitAliado' => 1, 'CampanaId' => 2, 'Venta' => 3, 'FechaV' => 4, 'ValorV' => 5, 'Devolucion' => 6, 'FechaD' => 7, 'ValorD' => 8, 'PagoAliado' => 9, 'PorcentajeComision' => 10, 'PorcentajeIVAComision' => 11, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'NitAliado' => 1, 'CampaignId' => 2, 'SellDoc' => 3, 'SellDate' => 4, 'SellValue' => 5, 'DevDoc' => 6, 'DevDate' => 7, 'DevValue' => 8, 'PayId' => 9, 'PorcentajeComision' => 10, 'PorcentajeIva' => 11, 'Status' => 12, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'nitAliado' => 1, 'campaignId' => 2, 'sellDoc' => 3, 'sellDate' => 4, 'sellValue' => 5, 'devDoc' => 6, 'devDate' => 7, 'devValue' => 8, 'payId' => 9, 'porcentajeComision' => 10, 'porcentajeIva' => 11, 'status' => 12, ),
+        BasePeer::TYPE_COLNAME => array (QbcSciClosurePeer::ID => 0, QbcSciClosurePeer::NIT_ALIADO => 1, QbcSciClosurePeer::CAMPAIGN_ID => 2, QbcSciClosurePeer::SELL_DOC => 3, QbcSciClosurePeer::SELL_DATE => 4, QbcSciClosurePeer::SELL_VALUE => 5, QbcSciClosurePeer::DEV_DOC => 6, QbcSciClosurePeer::DEV_DATE => 7, QbcSciClosurePeer::DEV_VALUE => 8, QbcSciClosurePeer::PAY_ID => 9, QbcSciClosurePeer::PORCENTAJE_COMISION => 10, QbcSciClosurePeer::PORCENTAJE_IVA => 11, QbcSciClosurePeer::STATUS => 12, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'NIT_ALIADO' => 1, 'CAMPAIGN_ID' => 2, 'SELL_DOC' => 3, 'SELL_DATE' => 4, 'SELL_VALUE' => 5, 'DEV_DOC' => 6, 'DEV_DATE' => 7, 'DEV_VALUE' => 8, 'PAY_ID' => 9, 'PORCENTAJE_COMISION' => 10, 'PORCENTAJE_IVA' => 11, 'STATUS' => 12, ),
+        BasePeer::TYPE_FIELDNAME => array ('Id' => 0, 'nit_aliado' => 1, 'campaign_id' => 2, 'sell_doc' => 3, 'sell_date' => 4, 'sell_value' => 5, 'dev_doc' => 6, 'dev_date' => 7, 'dev_value' => 8, 'pay_id' => 9, 'porcentaje_comision' => 10, 'porcentaje_iva' => 11, 'status' => 12, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
     );
 
     /**
@@ -182,30 +185,32 @@ abstract class BaseQbcSciClosurePeer
     {
         if (null === $alias) {
             $criteria->addSelectColumn(QbcSciClosurePeer::ID);
-            $criteria->addSelectColumn(QbcSciClosurePeer::NITALIADO);
-            $criteria->addSelectColumn(QbcSciClosurePeer::CAMPANAID);
-            $criteria->addSelectColumn(QbcSciClosurePeer::VENTA);
-            $criteria->addSelectColumn(QbcSciClosurePeer::FECHAV);
-            $criteria->addSelectColumn(QbcSciClosurePeer::VALORV);
-            $criteria->addSelectColumn(QbcSciClosurePeer::DEVOLUCION);
-            $criteria->addSelectColumn(QbcSciClosurePeer::FECHAD);
-            $criteria->addSelectColumn(QbcSciClosurePeer::VALORD);
-            $criteria->addSelectColumn(QbcSciClosurePeer::PAGOALIADO);
-            $criteria->addSelectColumn(QbcSciClosurePeer::PORCENTAJECOMISION);
-            $criteria->addSelectColumn(QbcSciClosurePeer::PORCENTAJEIVACOMISION);
+            $criteria->addSelectColumn(QbcSciClosurePeer::NIT_ALIADO);
+            $criteria->addSelectColumn(QbcSciClosurePeer::CAMPAIGN_ID);
+            $criteria->addSelectColumn(QbcSciClosurePeer::SELL_DOC);
+            $criteria->addSelectColumn(QbcSciClosurePeer::SELL_DATE);
+            $criteria->addSelectColumn(QbcSciClosurePeer::SELL_VALUE);
+            $criteria->addSelectColumn(QbcSciClosurePeer::DEV_DOC);
+            $criteria->addSelectColumn(QbcSciClosurePeer::DEV_DATE);
+            $criteria->addSelectColumn(QbcSciClosurePeer::DEV_VALUE);
+            $criteria->addSelectColumn(QbcSciClosurePeer::PAY_ID);
+            $criteria->addSelectColumn(QbcSciClosurePeer::PORCENTAJE_COMISION);
+            $criteria->addSelectColumn(QbcSciClosurePeer::PORCENTAJE_IVA);
+            $criteria->addSelectColumn(QbcSciClosurePeer::STATUS);
         } else {
             $criteria->addSelectColumn($alias . '.Id');
-            $criteria->addSelectColumn($alias . '.NitAliado');
-            $criteria->addSelectColumn($alias . '.CampanaId');
-            $criteria->addSelectColumn($alias . '.Venta');
-            $criteria->addSelectColumn($alias . '.FechaV');
-            $criteria->addSelectColumn($alias . '.ValorV');
-            $criteria->addSelectColumn($alias . '.Devolucion');
-            $criteria->addSelectColumn($alias . '.FechaD');
-            $criteria->addSelectColumn($alias . '.ValorD');
-            $criteria->addSelectColumn($alias . '.PagoAliado');
-            $criteria->addSelectColumn($alias . '.PorcentajeComision');
-            $criteria->addSelectColumn($alias . '.PorcentajeIVAComision');
+            $criteria->addSelectColumn($alias . '.nit_aliado');
+            $criteria->addSelectColumn($alias . '.campaign_id');
+            $criteria->addSelectColumn($alias . '.sell_doc');
+            $criteria->addSelectColumn($alias . '.sell_date');
+            $criteria->addSelectColumn($alias . '.sell_value');
+            $criteria->addSelectColumn($alias . '.dev_doc');
+            $criteria->addSelectColumn($alias . '.dev_date');
+            $criteria->addSelectColumn($alias . '.dev_value');
+            $criteria->addSelectColumn($alias . '.pay_id');
+            $criteria->addSelectColumn($alias . '.porcentaje_comision');
+            $criteria->addSelectColumn($alias . '.porcentaje_iva');
+            $criteria->addSelectColumn($alias . '.status');
         }
     }
 

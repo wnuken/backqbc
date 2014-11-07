@@ -16,7 +16,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
             <a href="#" class="navbar-brand">Back QBC</a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" id="menunav">
                 <li class="active"><a href="./"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
@@ -34,30 +34,22 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-retweet"></i> Pago Aliado <span class="caret"></span>
+                        <i class="glyphicon glyphicon-briefcase"></i> Pago Aliado <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-retweet"></i> Enviar petición</a></li>
-                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Elimiar petición</a></li>
-                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Marcar ventas/devoluciones</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> Separated link</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> One more separated link</a></li>
+                        <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-briefcase"></i> Enviar petición</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-trash"></i> Elimiar petición</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-retweet"></i> Cierre Oferta <span class="caret"></span>
+                        <i class="glyphicon glyphicon-folder-close"></i> Cierre Oferta <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-retweet"></i> Cierre Multiple</a></li>
-                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Elimiar petición</a></li>
-                        <li><a href="./deletepay"><i class="glyphicon glyphicon-retweet"></i> Marcar ventas/devoluciones</a></li>
+                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-folder-close"></i> Enviar Cierre </a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> Separated link</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-retweet"></i> One more separated link</a></li>
+                        <li class="dropdown-header">Procesos alternos</li>
+                        <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
                     </ul>
                 </li>
                 <li><a href="#about">Generar XML</a></li>

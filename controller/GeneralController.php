@@ -413,7 +413,7 @@ class General {
         $comando = 'php ../controller/sell_resend_scmp.php ' . 
             $SalesFlatOrderQuery->getEntityId() .
             ' ' . $params['params'];
-    
+
         $result = system($comando);
 
     }
@@ -719,11 +719,11 @@ class General {
 
         foreach($data as $key => $value){
             if (is_numeric($key)){
-               // if($rootNodeName == 'PagoAliadoDTO'){
-                    $key = "DocumentoContableDTO";
-              //  }else{
-              //      $key = "nodeId_". (string) $key;
-              //  }
+                // if($rootNodeName == 'PagoAliadoDTO'){
+                $key = "DocumentoContableDTO";
+                //  }else{
+                //      $key = "nodeId_". (string) $key;
+                //  }
             }
 
             if (is_array($value)){
@@ -859,85 +859,100 @@ class General {
         return $result;
     }
 
-    public function & ClosureOffer(&$params){
+    public function & ConpensationOffer(&$params){
 
-        $GroupdealsId = $params['params']['idcampaign'];
-        
-        try{
-            $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->findByCampanaid($GroupdealsId);
-            if(empty($BaseQbcSciClosureQuery)){
-                $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
-        
-        
-        try{
-            $GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
-            if(empty($GroupdealsQuery)){
-                $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+        $GroupdealsIds = array();
 
-        $MerchantId = $GroupdealsQuery->getMerchantId();
+        parse_str($params['params']['idcampaign'], $GroupdealsIds);
 
-        try{           
-            $GroupdealsMerchantsQuery = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($MerchantId);
-            if(empty($GroupdealsQuery)){
-                $result = '<h3>No existe la el Aliado: </3>' . $MerchantId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+        $sendSCMP = $params['params']['send'];
 
-        
+        foreach($GroupdealsIds as $GroupdealsId){
 
-        foreach($BaseQbcSciClosureQuery as $key => $Closure){
-
-            if($key == 0){
-                $CierreAliadoDTO = array(
-                    'Campana' => array(
-                        'CampanaId' => $Closure->getCampanaid(),
-                        'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
-                        'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
-                    'Contexto' => array(
-                        'Aplicacion' => 'QBC',
-                        'PeticionId' => substr(md5(strtotime('now')), 0, 24),
-                        'Usuario' => 'INGQBC'),
-                    'Fecha' => date("Y-m-d\TH:i:s"),
-                    'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
-                    'NombreAliado' => utf8_encode($GroupdealsMerchantsQuery->getLegalName()),
-                    'Valor' => '0',
-                    'sendSCMP' => $params['params']['send']
-
-                );
+            try{
+                $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->findByCampaignId($GroupdealsId);
+                if(empty($BaseQbcSciClosureQuery)){
+                    // $result = '<h3>El id no es valido: </3>' . $GroupdealsId;
+                    // return $result;
+                    break;
+                }
+            }catch (Exception $e){
+                $error = $this->exception .  $e->getMessage(). "\n";
+                return $error;
             }
 
-            $valorV = explode('.', $Closure->getValorv());
-            $CierreAliadoDTO['Ventas'][$key]['Numero'] = $Closure->getVenta();
-            $CierreAliadoDTO['Ventas'][$key]['Posicion'] = '000001';
-            $CierreAliadoDTO['Ventas'][$key]['Valor'] = $valorV[0];
-            $CierreAliadoDTO['Ventas'][$key]['Fecha'] =  date("Y-m-d", strtotime($Closure->getFechav())) . 'T00:00:00';
 
-            $valorD = explode('.', $Closure->getValord());
-            $CierreAliadoDTO['Devoluciones'][$key]['Numero'] = $Closure->getDevolucion();
-            $CierreAliadoDTO['Devoluciones'][$key]['Posicion'] = '000001';
-            $CierreAliadoDTO['Devoluciones'][$key]['Valor'] = $valorD[0];
-            $CierreAliadoDTO['Devoluciones'][$key]['Fecha'] = date('Y-m-d', strtotime($Closure->getFechad())) . 'T00:00:00';
+            try{
+                $GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
+                if(empty($GroupdealsQuery)){
+                    // $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
+                    //return $result;
+                    break;
+                }
+            }catch (Exception $e){
+                $error = $this->exception .  $e->getMessage(). "\n";
+                return $error;
+            }
+
+            $MerchantId = $GroupdealsQuery->getMerchantId();
+
+            try{           
+                $GroupdealsMerchantsQuery = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($MerchantId);
+                if(empty($GroupdealsQuery)){
+                    $result = '<h3>No existe la el Aliado: </3>' . $MerchantId;
+                    return $result;
+                }
+            }catch (Exception $e){
+                $error = $this->exception .  $e->getMessage(). "\n";
+                return $error;
+            }
+
+
+
+            foreach($BaseQbcSciClosureQuery as $key => $Closure){
+
+                if($key == 0){
+                    $CierreAliadoDTO = array(
+                        'Campana' => array(
+                            'CampanaId' => $Closure->getCampaignId(),
+                            'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
+                            'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
+                        'Contexto' => array(
+                            'Aplicacion' => 'QBC',
+                            'PeticionId' => substr(md5(strtotime('now')), 0, 24),
+                            'Usuario' => 'INGQBC'),
+                        'Fecha' => date("Y-m-d\TH:i:s"),
+                        'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
+                        'NombreAliado' => utf8_encode($GroupdealsMerchantsQuery->getLegalName()),
+                        'Valor' => '0',
+                        'sendSCMP' => $sendSCMP
+
+                    );
+                }
+
+                $sellValue = explode('.', $Closure->getSellValue());
+                $CierreAliadoDTO['Ventas'][$key]['Numero'] = $Closure->getSellDoc();
+                $CierreAliadoDTO['Ventas'][$key]['Posicion'] = '000001';
+                $CierreAliadoDTO['Ventas'][$key]['Valor'] = $sellValue[0];
+                $CierreAliadoDTO['Ventas'][$key]['Fecha'] =  date("Y-m-d", strtotime($Closure->getSellDate())) . 'T00:00:00';
+
+                $devValue = explode('.', $Closure->getDevValue());
+                $CierreAliadoDTO['Devoluciones'][$key]['Numero'] = $Closure->getDevDoc();
+                $CierreAliadoDTO['Devoluciones'][$key]['Posicion'] = '000001';
+                $CierreAliadoDTO['Devoluciones'][$key]['Valor'] = $devValue[0];
+                $CierreAliadoDTO['Devoluciones'][$key]['Fecha'] = date('Y-m-d', strtotime($Closure->getDevDate())) . 'T00:00:00';
+
+                if($sendSCMP == 1){
+                    $Closure->setStatus(1);
+                    $Closure->save();
+                }
+
+            }
+
+
+            $result[] = $this->SendClosure($CierreAliadoDTO);
 
         }
-
-
-        $result = $this->SendClosure($CierreAliadoDTO);
 
         return $result;
 
@@ -973,16 +988,53 @@ class General {
             catch (Exception $e)
             {
                 $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
-            } 
+            }
 
 
-            $resultado =  array('wsResult' => $wsResult, 'CierreAliadoDTO' => $CierreAliadoDTO, 'XML' => $xmlResult);
+            $result =  array('wsResult' => $wsResult, 'CierreAliadoDTO' => $CierreAliadoDTO, 'XML' => $xmlResult);
 
-            return $resultado;
+            if(is_object($result['wsResult']) && $result['wsResult']->Estado == 'aprobado'){
+
+                $QbcSciOfferClosure = new QbcSciOfferClosure();
+                $QbcSciOfferClosure->setPetitionId($result['CierreAliadoDTO']['Contexto']['PeticionId']);
+                $QbcSciOfferClosure->setMerchantId($result['CierreAliadoDTO']['NitAliado']);
+                $QbcSciOfferClosure->setCampaignId($result['CierreAliadoDTO']['Campana']['CampanaId']);
+                $QbcSciOfferClosure->setSalesDocuments(json_encode($result['CierreAliadoDTO']['Ventas'])); // revisar
+                $QbcSciOfferClosure->setDevolutionDocuments(json_encode($result['CierreAliadoDTO']['Devoluciones']));
+                $QbcSciOfferClosure->save();
+
+            }
+
+            return $result;
 
         }
 
 
+    }
+
+    public function & ClosureOffer(&$params){
+        return $params;
+    }
+
+    public function & ListClosure(&$params){
+        try{
+            $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->find();
+            if(empty($BaseQbcSciClosureQuery)){
+                $result = '<h3>No existen la campañas: </3>' . $GroupdealsId;
+                return $result;
+            }
+        }catch (Exception $e){
+            $error = $this->exception .  $e->getMessage(). "\n";
+            return $error;
+        }
+
+        foreach($BaseQbcSciClosureQuery as $key => $Closure){
+            if($Closure->getStatus() == 0)
+                $ids[] = $Closure->getCampaignId();
+        }
+
+        $result = array_unique($ids);
+        return $result;
     }
 
 

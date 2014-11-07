@@ -7,30 +7,32 @@
  *
  *
  * @method QbcSciClosureQuery orderById($order = Criteria::ASC) Order by the Id column
- * @method QbcSciClosureQuery orderByNitaliado($order = Criteria::ASC) Order by the NitAliado column
- * @method QbcSciClosureQuery orderByCampanaid($order = Criteria::ASC) Order by the CampanaId column
- * @method QbcSciClosureQuery orderByVenta($order = Criteria::ASC) Order by the Venta column
- * @method QbcSciClosureQuery orderByFechav($order = Criteria::ASC) Order by the FechaV column
- * @method QbcSciClosureQuery orderByValorv($order = Criteria::ASC) Order by the ValorV column
- * @method QbcSciClosureQuery orderByDevolucion($order = Criteria::ASC) Order by the Devolucion column
- * @method QbcSciClosureQuery orderByFechad($order = Criteria::ASC) Order by the FechaD column
- * @method QbcSciClosureQuery orderByValord($order = Criteria::ASC) Order by the ValorD column
- * @method QbcSciClosureQuery orderByPagoaliado($order = Criteria::ASC) Order by the PagoAliado column
- * @method QbcSciClosureQuery orderByPorcentajecomision($order = Criteria::ASC) Order by the PorcentajeComision column
- * @method QbcSciClosureQuery orderByPorcentajeivacomision($order = Criteria::ASC) Order by the PorcentajeIVAComision column
+ * @method QbcSciClosureQuery orderByNitAliado($order = Criteria::ASC) Order by the nit_aliado column
+ * @method QbcSciClosureQuery orderByCampaignId($order = Criteria::ASC) Order by the campaign_id column
+ * @method QbcSciClosureQuery orderBySellDoc($order = Criteria::ASC) Order by the sell_doc column
+ * @method QbcSciClosureQuery orderBySellDate($order = Criteria::ASC) Order by the sell_date column
+ * @method QbcSciClosureQuery orderBySellValue($order = Criteria::ASC) Order by the sell_value column
+ * @method QbcSciClosureQuery orderByDevDoc($order = Criteria::ASC) Order by the dev_doc column
+ * @method QbcSciClosureQuery orderByDevDate($order = Criteria::ASC) Order by the dev_date column
+ * @method QbcSciClosureQuery orderByDevValue($order = Criteria::ASC) Order by the dev_value column
+ * @method QbcSciClosureQuery orderByPayId($order = Criteria::ASC) Order by the pay_id column
+ * @method QbcSciClosureQuery orderByPorcentajeComision($order = Criteria::ASC) Order by the porcentaje_comision column
+ * @method QbcSciClosureQuery orderByPorcentajeIva($order = Criteria::ASC) Order by the porcentaje_iva column
+ * @method QbcSciClosureQuery orderByStatus($order = Criteria::ASC) Order by the status column
  *
  * @method QbcSciClosureQuery groupById() Group by the Id column
- * @method QbcSciClosureQuery groupByNitaliado() Group by the NitAliado column
- * @method QbcSciClosureQuery groupByCampanaid() Group by the CampanaId column
- * @method QbcSciClosureQuery groupByVenta() Group by the Venta column
- * @method QbcSciClosureQuery groupByFechav() Group by the FechaV column
- * @method QbcSciClosureQuery groupByValorv() Group by the ValorV column
- * @method QbcSciClosureQuery groupByDevolucion() Group by the Devolucion column
- * @method QbcSciClosureQuery groupByFechad() Group by the FechaD column
- * @method QbcSciClosureQuery groupByValord() Group by the ValorD column
- * @method QbcSciClosureQuery groupByPagoaliado() Group by the PagoAliado column
- * @method QbcSciClosureQuery groupByPorcentajecomision() Group by the PorcentajeComision column
- * @method QbcSciClosureQuery groupByPorcentajeivacomision() Group by the PorcentajeIVAComision column
+ * @method QbcSciClosureQuery groupByNitAliado() Group by the nit_aliado column
+ * @method QbcSciClosureQuery groupByCampaignId() Group by the campaign_id column
+ * @method QbcSciClosureQuery groupBySellDoc() Group by the sell_doc column
+ * @method QbcSciClosureQuery groupBySellDate() Group by the sell_date column
+ * @method QbcSciClosureQuery groupBySellValue() Group by the sell_value column
+ * @method QbcSciClosureQuery groupByDevDoc() Group by the dev_doc column
+ * @method QbcSciClosureQuery groupByDevDate() Group by the dev_date column
+ * @method QbcSciClosureQuery groupByDevValue() Group by the dev_value column
+ * @method QbcSciClosureQuery groupByPayId() Group by the pay_id column
+ * @method QbcSciClosureQuery groupByPorcentajeComision() Group by the porcentaje_comision column
+ * @method QbcSciClosureQuery groupByPorcentajeIva() Group by the porcentaje_iva column
+ * @method QbcSciClosureQuery groupByStatus() Group by the status column
  *
  * @method QbcSciClosureQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method QbcSciClosureQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -39,30 +41,32 @@
  * @method QbcSciClosure findOne(PropelPDO $con = null) Return the first QbcSciClosure matching the query
  * @method QbcSciClosure findOneOrCreate(PropelPDO $con = null) Return the first QbcSciClosure matching the query, or a new QbcSciClosure object populated from the query conditions when no match is found
  *
- * @method QbcSciClosure findOneByNitaliado(string $NitAliado) Return the first QbcSciClosure filtered by the NitAliado column
- * @method QbcSciClosure findOneByCampanaid(string $CampanaId) Return the first QbcSciClosure filtered by the CampanaId column
- * @method QbcSciClosure findOneByVenta(string $Venta) Return the first QbcSciClosure filtered by the Venta column
- * @method QbcSciClosure findOneByFechav(string $FechaV) Return the first QbcSciClosure filtered by the FechaV column
- * @method QbcSciClosure findOneByValorv(string $ValorV) Return the first QbcSciClosure filtered by the ValorV column
- * @method QbcSciClosure findOneByDevolucion(string $Devolucion) Return the first QbcSciClosure filtered by the Devolucion column
- * @method QbcSciClosure findOneByFechad(string $FechaD) Return the first QbcSciClosure filtered by the FechaD column
- * @method QbcSciClosure findOneByValord(string $ValorD) Return the first QbcSciClosure filtered by the ValorD column
- * @method QbcSciClosure findOneByPagoaliado(string $PagoAliado) Return the first QbcSciClosure filtered by the PagoAliado column
- * @method QbcSciClosure findOneByPorcentajecomision(string $PorcentajeComision) Return the first QbcSciClosure filtered by the PorcentajeComision column
- * @method QbcSciClosure findOneByPorcentajeivacomision(string $PorcentajeIVAComision) Return the first QbcSciClosure filtered by the PorcentajeIVAComision column
+ * @method QbcSciClosure findOneByNitAliado(string $nit_aliado) Return the first QbcSciClosure filtered by the nit_aliado column
+ * @method QbcSciClosure findOneByCampaignId(string $campaign_id) Return the first QbcSciClosure filtered by the campaign_id column
+ * @method QbcSciClosure findOneBySellDoc(string $sell_doc) Return the first QbcSciClosure filtered by the sell_doc column
+ * @method QbcSciClosure findOneBySellDate(string $sell_date) Return the first QbcSciClosure filtered by the sell_date column
+ * @method QbcSciClosure findOneBySellValue(string $sell_value) Return the first QbcSciClosure filtered by the sell_value column
+ * @method QbcSciClosure findOneByDevDoc(string $dev_doc) Return the first QbcSciClosure filtered by the dev_doc column
+ * @method QbcSciClosure findOneByDevDate(string $dev_date) Return the first QbcSciClosure filtered by the dev_date column
+ * @method QbcSciClosure findOneByDevValue(string $dev_value) Return the first QbcSciClosure filtered by the dev_value column
+ * @method QbcSciClosure findOneByPayId(string $pay_id) Return the first QbcSciClosure filtered by the pay_id column
+ * @method QbcSciClosure findOneByPorcentajeComision(string $porcentaje_comision) Return the first QbcSciClosure filtered by the porcentaje_comision column
+ * @method QbcSciClosure findOneByPorcentajeIva(string $porcentaje_iva) Return the first QbcSciClosure filtered by the porcentaje_iva column
+ * @method QbcSciClosure findOneByStatus(int $status) Return the first QbcSciClosure filtered by the status column
  *
  * @method array findById(int $Id) Return QbcSciClosure objects filtered by the Id column
- * @method array findByNitaliado(string $NitAliado) Return QbcSciClosure objects filtered by the NitAliado column
- * @method array findByCampanaid(string $CampanaId) Return QbcSciClosure objects filtered by the CampanaId column
- * @method array findByVenta(string $Venta) Return QbcSciClosure objects filtered by the Venta column
- * @method array findByFechav(string $FechaV) Return QbcSciClosure objects filtered by the FechaV column
- * @method array findByValorv(string $ValorV) Return QbcSciClosure objects filtered by the ValorV column
- * @method array findByDevolucion(string $Devolucion) Return QbcSciClosure objects filtered by the Devolucion column
- * @method array findByFechad(string $FechaD) Return QbcSciClosure objects filtered by the FechaD column
- * @method array findByValord(string $ValorD) Return QbcSciClosure objects filtered by the ValorD column
- * @method array findByPagoaliado(string $PagoAliado) Return QbcSciClosure objects filtered by the PagoAliado column
- * @method array findByPorcentajecomision(string $PorcentajeComision) Return QbcSciClosure objects filtered by the PorcentajeComision column
- * @method array findByPorcentajeivacomision(string $PorcentajeIVAComision) Return QbcSciClosure objects filtered by the PorcentajeIVAComision column
+ * @method array findByNitAliado(string $nit_aliado) Return QbcSciClosure objects filtered by the nit_aliado column
+ * @method array findByCampaignId(string $campaign_id) Return QbcSciClosure objects filtered by the campaign_id column
+ * @method array findBySellDoc(string $sell_doc) Return QbcSciClosure objects filtered by the sell_doc column
+ * @method array findBySellDate(string $sell_date) Return QbcSciClosure objects filtered by the sell_date column
+ * @method array findBySellValue(string $sell_value) Return QbcSciClosure objects filtered by the sell_value column
+ * @method array findByDevDoc(string $dev_doc) Return QbcSciClosure objects filtered by the dev_doc column
+ * @method array findByDevDate(string $dev_date) Return QbcSciClosure objects filtered by the dev_date column
+ * @method array findByDevValue(string $dev_value) Return QbcSciClosure objects filtered by the dev_value column
+ * @method array findByPayId(string $pay_id) Return QbcSciClosure objects filtered by the pay_id column
+ * @method array findByPorcentajeComision(string $porcentaje_comision) Return QbcSciClosure objects filtered by the porcentaje_comision column
+ * @method array findByPorcentajeIva(string $porcentaje_iva) Return QbcSciClosure objects filtered by the porcentaje_iva column
+ * @method array findByStatus(int $status) Return QbcSciClosure objects filtered by the status column
  *
  * @package    propel.generator.atmadmin.om
  */
@@ -170,7 +174,7 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT Id, NitAliado, CampanaId, Venta, FechaV, ValorV, Devolucion, FechaD, ValorD, PagoAliado, PorcentajeComision, PorcentajeIVAComision FROM qbc_sci_closure WHERE Id = :p0';
+        $sql = 'SELECT Id, nit_aliado, campaign_id, sell_doc, sell_date, sell_value, dev_doc, dev_date, dev_value, pay_id, porcentaje_comision, porcentaje_iva, status FROM qbc_sci_closure WHERE Id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -302,103 +306,103 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the NitAliado column
+     * Filter the query on the nit_aliado column
      *
      * Example usage:
      * <code>
-     * $query->filterByNitaliado('fooValue');   // WHERE NitAliado = 'fooValue'
-     * $query->filterByNitaliado('%fooValue%'); // WHERE NitAliado LIKE '%fooValue%'
+     * $query->filterByNitAliado('fooValue');   // WHERE nit_aliado = 'fooValue'
+     * $query->filterByNitAliado('%fooValue%'); // WHERE nit_aliado LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $nitaliado The value to use as filter.
+     * @param     string $nitAliado The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByNitaliado($nitaliado = null, $comparison = null)
+    public function filterByNitAliado($nitAliado = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($nitaliado)) {
+            if (is_array($nitAliado)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $nitaliado)) {
-                $nitaliado = str_replace('*', '%', $nitaliado);
+            } elseif (preg_match('/[\%\*]/', $nitAliado)) {
+                $nitAliado = str_replace('*', '%', $nitAliado);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::NITALIADO, $nitaliado, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::NIT_ALIADO, $nitAliado, $comparison);
     }
 
     /**
-     * Filter the query on the CampanaId column
+     * Filter the query on the campaign_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByCampanaid('fooValue');   // WHERE CampanaId = 'fooValue'
-     * $query->filterByCampanaid('%fooValue%'); // WHERE CampanaId LIKE '%fooValue%'
+     * $query->filterByCampaignId('fooValue');   // WHERE campaign_id = 'fooValue'
+     * $query->filterByCampaignId('%fooValue%'); // WHERE campaign_id LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $campanaid The value to use as filter.
+     * @param     string $campaignId The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByCampanaid($campanaid = null, $comparison = null)
+    public function filterByCampaignId($campaignId = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($campanaid)) {
+            if (is_array($campaignId)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $campanaid)) {
-                $campanaid = str_replace('*', '%', $campanaid);
+            } elseif (preg_match('/[\%\*]/', $campaignId)) {
+                $campaignId = str_replace('*', '%', $campaignId);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::CAMPANAID, $campanaid, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::CAMPAIGN_ID, $campaignId, $comparison);
     }
 
     /**
-     * Filter the query on the Venta column
+     * Filter the query on the sell_doc column
      *
      * Example usage:
      * <code>
-     * $query->filterByVenta('fooValue');   // WHERE Venta = 'fooValue'
-     * $query->filterByVenta('%fooValue%'); // WHERE Venta LIKE '%fooValue%'
+     * $query->filterBySellDoc('fooValue');   // WHERE sell_doc = 'fooValue'
+     * $query->filterBySellDoc('%fooValue%'); // WHERE sell_doc LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $venta The value to use as filter.
+     * @param     string $sellDoc The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByVenta($venta = null, $comparison = null)
+    public function filterBySellDoc($sellDoc = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($venta)) {
+            if (is_array($sellDoc)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $venta)) {
-                $venta = str_replace('*', '%', $venta);
+            } elseif (preg_match('/[\%\*]/', $sellDoc)) {
+                $sellDoc = str_replace('*', '%', $sellDoc);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::VENTA, $venta, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::SELL_DOC, $sellDoc, $comparison);
     }
 
     /**
-     * Filter the query on the FechaV column
+     * Filter the query on the sell_date column
      *
      * Example usage:
      * <code>
-     * $query->filterByFechav('2011-03-14'); // WHERE FechaV = '2011-03-14'
-     * $query->filterByFechav('now'); // WHERE FechaV = '2011-03-14'
-     * $query->filterByFechav(array('max' => 'yesterday')); // WHERE FechaV < '2011-03-13'
+     * $query->filterBySellDate('2011-03-14'); // WHERE sell_date = '2011-03-14'
+     * $query->filterBySellDate('now'); // WHERE sell_date = '2011-03-14'
+     * $query->filterBySellDate(array('max' => 'yesterday')); // WHERE sell_date < '2011-03-13'
      * </code>
      *
-     * @param     mixed $fechav The value to use as filter.
+     * @param     mixed $sellDate The value to use as filter.
      *              Values can be integers (unix timestamps), DateTime objects, or strings.
      *              Empty strings are treated as NULL.
      *              Use scalar values for equality.
@@ -408,16 +412,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByFechav($fechav = null, $comparison = null)
+    public function filterBySellDate($sellDate = null, $comparison = null)
     {
-        if (is_array($fechav)) {
+        if (is_array($sellDate)) {
             $useMinMax = false;
-            if (isset($fechav['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::FECHAV, $fechav['min'], Criteria::GREATER_EQUAL);
+            if (isset($sellDate['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::SELL_DATE, $sellDate['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($fechav['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::FECHAV, $fechav['max'], Criteria::LESS_EQUAL);
+            if (isset($sellDate['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::SELL_DATE, $sellDate['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -428,21 +432,21 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::FECHAV, $fechav, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::SELL_DATE, $sellDate, $comparison);
     }
 
     /**
-     * Filter the query on the ValorV column
+     * Filter the query on the sell_value column
      *
      * Example usage:
      * <code>
-     * $query->filterByValorv(1234); // WHERE ValorV = 1234
-     * $query->filterByValorv(array(12, 34)); // WHERE ValorV IN (12, 34)
-     * $query->filterByValorv(array('min' => 12)); // WHERE ValorV >= 12
-     * $query->filterByValorv(array('max' => 12)); // WHERE ValorV <= 12
+     * $query->filterBySellValue(1234); // WHERE sell_value = 1234
+     * $query->filterBySellValue(array(12, 34)); // WHERE sell_value IN (12, 34)
+     * $query->filterBySellValue(array('min' => 12)); // WHERE sell_value >= 12
+     * $query->filterBySellValue(array('max' => 12)); // WHERE sell_value <= 12
      * </code>
      *
-     * @param     mixed $valorv The value to use as filter.
+     * @param     mixed $sellValue The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -450,16 +454,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByValorv($valorv = null, $comparison = null)
+    public function filterBySellValue($sellValue = null, $comparison = null)
     {
-        if (is_array($valorv)) {
+        if (is_array($sellValue)) {
             $useMinMax = false;
-            if (isset($valorv['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::VALORV, $valorv['min'], Criteria::GREATER_EQUAL);
+            if (isset($sellValue['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::SELL_VALUE, $sellValue['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($valorv['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::VALORV, $valorv['max'], Criteria::LESS_EQUAL);
+            if (isset($sellValue['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::SELL_VALUE, $sellValue['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -470,49 +474,49 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::VALORV, $valorv, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::SELL_VALUE, $sellValue, $comparison);
     }
 
     /**
-     * Filter the query on the Devolucion column
+     * Filter the query on the dev_doc column
      *
      * Example usage:
      * <code>
-     * $query->filterByDevolucion('fooValue');   // WHERE Devolucion = 'fooValue'
-     * $query->filterByDevolucion('%fooValue%'); // WHERE Devolucion LIKE '%fooValue%'
+     * $query->filterByDevDoc('fooValue');   // WHERE dev_doc = 'fooValue'
+     * $query->filterByDevDoc('%fooValue%'); // WHERE dev_doc LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $devolucion The value to use as filter.
+     * @param     string $devDoc The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByDevolucion($devolucion = null, $comparison = null)
+    public function filterByDevDoc($devDoc = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($devolucion)) {
+            if (is_array($devDoc)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $devolucion)) {
-                $devolucion = str_replace('*', '%', $devolucion);
+            } elseif (preg_match('/[\%\*]/', $devDoc)) {
+                $devDoc = str_replace('*', '%', $devDoc);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::DEVOLUCION, $devolucion, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::DEV_DOC, $devDoc, $comparison);
     }
 
     /**
-     * Filter the query on the FechaD column
+     * Filter the query on the dev_date column
      *
      * Example usage:
      * <code>
-     * $query->filterByFechad('2011-03-14'); // WHERE FechaD = '2011-03-14'
-     * $query->filterByFechad('now'); // WHERE FechaD = '2011-03-14'
-     * $query->filterByFechad(array('max' => 'yesterday')); // WHERE FechaD < '2011-03-13'
+     * $query->filterByDevDate('2011-03-14'); // WHERE dev_date = '2011-03-14'
+     * $query->filterByDevDate('now'); // WHERE dev_date = '2011-03-14'
+     * $query->filterByDevDate(array('max' => 'yesterday')); // WHERE dev_date < '2011-03-13'
      * </code>
      *
-     * @param     mixed $fechad The value to use as filter.
+     * @param     mixed $devDate The value to use as filter.
      *              Values can be integers (unix timestamps), DateTime objects, or strings.
      *              Empty strings are treated as NULL.
      *              Use scalar values for equality.
@@ -522,16 +526,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByFechad($fechad = null, $comparison = null)
+    public function filterByDevDate($devDate = null, $comparison = null)
     {
-        if (is_array($fechad)) {
+        if (is_array($devDate)) {
             $useMinMax = false;
-            if (isset($fechad['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::FECHAD, $fechad['min'], Criteria::GREATER_EQUAL);
+            if (isset($devDate['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::DEV_DATE, $devDate['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($fechad['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::FECHAD, $fechad['max'], Criteria::LESS_EQUAL);
+            if (isset($devDate['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::DEV_DATE, $devDate['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -542,21 +546,21 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::FECHAD, $fechad, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::DEV_DATE, $devDate, $comparison);
     }
 
     /**
-     * Filter the query on the ValorD column
+     * Filter the query on the dev_value column
      *
      * Example usage:
      * <code>
-     * $query->filterByValord(1234); // WHERE ValorD = 1234
-     * $query->filterByValord(array(12, 34)); // WHERE ValorD IN (12, 34)
-     * $query->filterByValord(array('min' => 12)); // WHERE ValorD >= 12
-     * $query->filterByValord(array('max' => 12)); // WHERE ValorD <= 12
+     * $query->filterByDevValue(1234); // WHERE dev_value = 1234
+     * $query->filterByDevValue(array(12, 34)); // WHERE dev_value IN (12, 34)
+     * $query->filterByDevValue(array('min' => 12)); // WHERE dev_value >= 12
+     * $query->filterByDevValue(array('max' => 12)); // WHERE dev_value <= 12
      * </code>
      *
-     * @param     mixed $valord The value to use as filter.
+     * @param     mixed $devValue The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -564,16 +568,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByValord($valord = null, $comparison = null)
+    public function filterByDevValue($devValue = null, $comparison = null)
     {
-        if (is_array($valord)) {
+        if (is_array($devValue)) {
             $useMinMax = false;
-            if (isset($valord['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::VALORD, $valord['min'], Criteria::GREATER_EQUAL);
+            if (isset($devValue['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::DEV_VALUE, $devValue['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($valord['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::VALORD, $valord['max'], Criteria::LESS_EQUAL);
+            if (isset($devValue['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::DEV_VALUE, $devValue['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -584,50 +588,50 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::VALORD, $valord, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::DEV_VALUE, $devValue, $comparison);
     }
 
     /**
-     * Filter the query on the PagoAliado column
+     * Filter the query on the pay_id column
      *
      * Example usage:
      * <code>
-     * $query->filterByPagoaliado('fooValue');   // WHERE PagoAliado = 'fooValue'
-     * $query->filterByPagoaliado('%fooValue%'); // WHERE PagoAliado LIKE '%fooValue%'
+     * $query->filterByPayId('fooValue');   // WHERE pay_id = 'fooValue'
+     * $query->filterByPayId('%fooValue%'); // WHERE pay_id LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $pagoaliado The value to use as filter.
+     * @param     string $payId The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByPagoaliado($pagoaliado = null, $comparison = null)
+    public function filterByPayId($payId = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($pagoaliado)) {
+            if (is_array($payId)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $pagoaliado)) {
-                $pagoaliado = str_replace('*', '%', $pagoaliado);
+            } elseif (preg_match('/[\%\*]/', $payId)) {
+                $payId = str_replace('*', '%', $payId);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::PAGOALIADO, $pagoaliado, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::PAY_ID, $payId, $comparison);
     }
 
     /**
-     * Filter the query on the PorcentajeComision column
+     * Filter the query on the porcentaje_comision column
      *
      * Example usage:
      * <code>
-     * $query->filterByPorcentajecomision(1234); // WHERE PorcentajeComision = 1234
-     * $query->filterByPorcentajecomision(array(12, 34)); // WHERE PorcentajeComision IN (12, 34)
-     * $query->filterByPorcentajecomision(array('min' => 12)); // WHERE PorcentajeComision >= 12
-     * $query->filterByPorcentajecomision(array('max' => 12)); // WHERE PorcentajeComision <= 12
+     * $query->filterByPorcentajeComision(1234); // WHERE porcentaje_comision = 1234
+     * $query->filterByPorcentajeComision(array(12, 34)); // WHERE porcentaje_comision IN (12, 34)
+     * $query->filterByPorcentajeComision(array('min' => 12)); // WHERE porcentaje_comision >= 12
+     * $query->filterByPorcentajeComision(array('max' => 12)); // WHERE porcentaje_comision <= 12
      * </code>
      *
-     * @param     mixed $porcentajecomision The value to use as filter.
+     * @param     mixed $porcentajeComision The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -635,16 +639,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByPorcentajecomision($porcentajecomision = null, $comparison = null)
+    public function filterByPorcentajeComision($porcentajeComision = null, $comparison = null)
     {
-        if (is_array($porcentajecomision)) {
+        if (is_array($porcentajeComision)) {
             $useMinMax = false;
-            if (isset($porcentajecomision['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJECOMISION, $porcentajecomision['min'], Criteria::GREATER_EQUAL);
+            if (isset($porcentajeComision['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_COMISION, $porcentajeComision['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($porcentajecomision['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJECOMISION, $porcentajecomision['max'], Criteria::LESS_EQUAL);
+            if (isset($porcentajeComision['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_COMISION, $porcentajeComision['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -655,21 +659,21 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJECOMISION, $porcentajecomision, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_COMISION, $porcentajeComision, $comparison);
     }
 
     /**
-     * Filter the query on the PorcentajeIVAComision column
+     * Filter the query on the porcentaje_iva column
      *
      * Example usage:
      * <code>
-     * $query->filterByPorcentajeivacomision(1234); // WHERE PorcentajeIVAComision = 1234
-     * $query->filterByPorcentajeivacomision(array(12, 34)); // WHERE PorcentajeIVAComision IN (12, 34)
-     * $query->filterByPorcentajeivacomision(array('min' => 12)); // WHERE PorcentajeIVAComision >= 12
-     * $query->filterByPorcentajeivacomision(array('max' => 12)); // WHERE PorcentajeIVAComision <= 12
+     * $query->filterByPorcentajeIva(1234); // WHERE porcentaje_iva = 1234
+     * $query->filterByPorcentajeIva(array(12, 34)); // WHERE porcentaje_iva IN (12, 34)
+     * $query->filterByPorcentajeIva(array('min' => 12)); // WHERE porcentaje_iva >= 12
+     * $query->filterByPorcentajeIva(array('max' => 12)); // WHERE porcentaje_iva <= 12
      * </code>
      *
-     * @param     mixed $porcentajeivacomision The value to use as filter.
+     * @param     mixed $porcentajeIva The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -677,16 +681,16 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
      *
      * @return QbcSciClosureQuery The current query, for fluid interface
      */
-    public function filterByPorcentajeivacomision($porcentajeivacomision = null, $comparison = null)
+    public function filterByPorcentajeIva($porcentajeIva = null, $comparison = null)
     {
-        if (is_array($porcentajeivacomision)) {
+        if (is_array($porcentajeIva)) {
             $useMinMax = false;
-            if (isset($porcentajeivacomision['min'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJEIVACOMISION, $porcentajeivacomision['min'], Criteria::GREATER_EQUAL);
+            if (isset($porcentajeIva['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_IVA, $porcentajeIva['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($porcentajeivacomision['max'])) {
-                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJEIVACOMISION, $porcentajeivacomision['max'], Criteria::LESS_EQUAL);
+            if (isset($porcentajeIva['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_IVA, $porcentajeIva['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -697,7 +701,49 @@ abstract class BaseQbcSciClosureQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJEIVACOMISION, $porcentajeivacomision, $comparison);
+        return $this->addUsingAlias(QbcSciClosurePeer::PORCENTAJE_IVA, $porcentajeIva, $comparison);
+    }
+
+    /**
+     * Filter the query on the status column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByStatus(1234); // WHERE status = 1234
+     * $query->filterByStatus(array(12, 34)); // WHERE status IN (12, 34)
+     * $query->filterByStatus(array('min' => 12)); // WHERE status >= 12
+     * $query->filterByStatus(array('max' => 12)); // WHERE status <= 12
+     * </code>
+     *
+     * @param     mixed $status The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return QbcSciClosureQuery The current query, for fluid interface
+     */
+    public function filterByStatus($status = null, $comparison = null)
+    {
+        if (is_array($status)) {
+            $useMinMax = false;
+            if (isset($status['min'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::STATUS, $status['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($status['max'])) {
+                $this->addUsingAlias(QbcSciClosurePeer::STATUS, $status['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(QbcSciClosurePeer::STATUS, $status, $comparison);
     }
 
     /**

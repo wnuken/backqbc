@@ -1502,17 +1502,18 @@ DROP TABLE IF EXISTS qbc_sci_closure;
 CREATE TABLE qbc_sci_closure
 (
     Id INTEGER(20) NOT NULL AUTO_INCREMENT,
-    NitAliado VARCHAR(50),
-    CampanaId VARCHAR(50),
-    Venta VARCHAR(50),
-    FechaV DATE,
-    ValorV DECIMAL(10,3),
-    Devolucion VARCHAR(50),
-    FechaD DATE,
-    ValorD DECIMAL(10,3),
-    PagoAliado VARCHAR(100),
-    PorcentajeComision DECIMAL(18,3),
-    PorcentajeIVAComision DECIMAL(18,3),
+    nit_aliado VARCHAR(50),
+    campaign_id VARCHAR(50),
+    sell_doc VARCHAR(50),
+    sell_date DATE,
+    sell_value DECIMAL(10,3),
+    dev_doc VARCHAR(50),
+    dev_date DATE,
+    dev_value DECIMAL(10,3),
+    pay_id VARCHAR(100),
+    porcentaje_comision DECIMAL(18,3),
+    porcentaje_iva DECIMAL(18,3),
+    status INTEGER(10) DEFAULT 0 NOT NULL,
     PRIMARY KEY (Id)
 ) ENGINE=InnoDB;
 

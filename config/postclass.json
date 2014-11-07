@@ -1,0 +1,11 @@
+{
+    "class":[
+        "sendxmlsell",
+        "sendpay",
+        "sendpayxml",
+        "funtt",
+        "encode",
+        "closuresend",
+        "conpensationsend"
+    ]
+}

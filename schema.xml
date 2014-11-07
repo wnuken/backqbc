@@ -1364,17 +1364,18 @@
 
     <table name="qbc_sci_closure" phpName="QbcSciClosure" idMethod="native">
         <column name="Id" phpName="Id" type="INTEGER" size="20" primaryKey="true" autoIncrement="true" required="true"/>
-        <column name="NitAliado" phpName="Nitaliado" type="VARCHAR" size="50" required="false"/>
-        <column name="CampanaId" phpName="Campanaid" type="VARCHAR" size="50" required="false"/>
-        <column name="Venta" phpName="Venta" type="VARCHAR" size="50" required="false"/>
-        <column name="FechaV" phpName="Fechav" type="DATE" required="false"/>
-        <column name="ValorV" phpName="Valorv" type="DECIMAL" size="10" scale="3" required="false"/>
-        <column name="Devolucion" phpName="Devolucion" type="VARCHAR" size="50" required="false"/>
-        <column name="FechaD" phpName="Fechad" type="DATE" required="false"/>
-        <column name="ValorD" phpName="Valord" type="DECIMAL" size="10" scale="3" required="false"/>
-        <column name="PagoAliado" phpName="Pagoaliado" type="VARCHAR" size="100" required="false"/>
-        <column name="PorcentajeComision" phpName="Porcentajecomision" type="DECIMAL" size="18" scale="3" required="false"/>
-        <column name="PorcentajeIVAComision" phpName="Porcentajeivacomision" type="DECIMAL" size="18" scale="3" required="false"/>
+        <column name="nit_aliado" phpName="NitAliado" type="VARCHAR" size="50" required="false"/>
+        <column name="campaign_id" phpName="CampaignId" type="VARCHAR" size="50" required="false"/>
+        <column name="sell_doc" phpName="SellDoc" type="VARCHAR" size="50" required="false"/>
+        <column name="sell_date" phpName="SellDate" type="DATE" required="false"/>
+        <column name="sell_value" phpName="SellValue" type="DECIMAL" size="10" scale="3" required="false"/>
+        <column name="dev_doc" phpName="DevDoc" type="VARCHAR" size="50" required="false"/>
+        <column name="dev_date" phpName="DevDate" type="DATE" required="false"/>
+        <column name="dev_value" phpName="DevValue" type="DECIMAL" size="10" scale="3" required="false"/>
+        <column name="pay_id" phpName="PayId" type="VARCHAR" size="100" required="false"/>
+        <column name="porcentaje_comision" phpName="PorcentajeComision" type="DECIMAL" size="18" scale="3" required="false"/>
+        <column name="porcentaje_iva" phpName="PorcentajeIva" type="DECIMAL" size="18" scale="3" required="false"/>
+        <column name="status" phpName="Status" type="INTEGER" size="10" required="true" defaultValue="0"/>
         <vendor type="mysql">
             <parameter name="Engine" value="InnoDB"/>
         </vendor>

@@ -39,17 +39,18 @@ class QbcSciClosureTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('Id', 'Id', 'INTEGER', true, 20, null);
-        $this->addColumn('NitAliado', 'Nitaliado', 'VARCHAR', false, 50, null);
-        $this->addColumn('CampanaId', 'Campanaid', 'VARCHAR', false, 50, null);
-        $this->addColumn('Venta', 'Venta', 'VARCHAR', false, 50, null);
-        $this->addColumn('FechaV', 'Fechav', 'DATE', false, null, null);
-        $this->addColumn('ValorV', 'Valorv', 'DECIMAL', false, 10, null);
-        $this->addColumn('Devolucion', 'Devolucion', 'VARCHAR', false, 50, null);
-        $this->addColumn('FechaD', 'Fechad', 'DATE', false, null, null);
-        $this->addColumn('ValorD', 'Valord', 'DECIMAL', false, 10, null);
-        $this->addColumn('PagoAliado', 'Pagoaliado', 'VARCHAR', false, 100, null);
-        $this->addColumn('PorcentajeComision', 'Porcentajecomision', 'DECIMAL', false, 18, null);
-        $this->addColumn('PorcentajeIVAComision', 'Porcentajeivacomision', 'DECIMAL', false, 18, null);
+        $this->addColumn('nit_aliado', 'NitAliado', 'VARCHAR', false, 50, null);
+        $this->addColumn('campaign_id', 'CampaignId', 'VARCHAR', false, 50, null);
+        $this->addColumn('sell_doc', 'SellDoc', 'VARCHAR', false, 50, null);
+        $this->addColumn('sell_date', 'SellDate', 'DATE', false, null, null);
+        $this->addColumn('sell_value', 'SellValue', 'DECIMAL', false, 10, null);
+        $this->addColumn('dev_doc', 'DevDoc', 'VARCHAR', false, 50, null);
+        $this->addColumn('dev_date', 'DevDate', 'DATE', false, null, null);
+        $this->addColumn('dev_value', 'DevValue', 'DECIMAL', false, 10, null);
+        $this->addColumn('pay_id', 'PayId', 'VARCHAR', false, 100, null);
+        $this->addColumn('porcentaje_comision', 'PorcentajeComision', 'DECIMAL', false, 18, null);
+        $this->addColumn('porcentaje_iva', 'PorcentajeIva', 'DECIMAL', false, 18, null);
+        $this->addColumn('status', 'Status', 'INTEGER', true, 10, 0);
         // validators
     } // initialize()
 

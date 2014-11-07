@@ -61,12 +61,21 @@ class Views {
 		include './views/cierreoferta.php';
 	}
     
+    static public function cierrecompensacion(){
+        $General = new General();
+		$result = $General->ListClosure($_REQUEST);
+		include './views/cierrecompensacion.php';
+	}
+    
     static public function closuresend(){
         $General = new General();
 		$result = $General->ClosureOffer($_REQUEST);        
 		include './views/resultcierre.php';
 	}
-	
-
-	
+    
+    static public function conpensationsend(){
+        $General = new General();
+		$result = $General->ConpensationOffer($_REQUEST);        
+		include './views/resultcierre.php';
+	}	
 }

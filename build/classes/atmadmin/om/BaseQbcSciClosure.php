@@ -36,70 +36,77 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     protected $id;
 
     /**
-     * The value for the nitaliado field.
+     * The value for the nit_aliado field.
      * @var        string
      */
-    protected $nitaliado;
+    protected $nit_aliado;
 
     /**
-     * The value for the campanaid field.
+     * The value for the campaign_id field.
      * @var        string
      */
-    protected $campanaid;
+    protected $campaign_id;
 
     /**
-     * The value for the venta field.
+     * The value for the sell_doc field.
      * @var        string
      */
-    protected $venta;
+    protected $sell_doc;
 
     /**
-     * The value for the fechav field.
+     * The value for the sell_date field.
      * @var        string
      */
-    protected $fechav;
+    protected $sell_date;
 
     /**
-     * The value for the valorv field.
+     * The value for the sell_value field.
      * @var        string
      */
-    protected $valorv;
+    protected $sell_value;
 
     /**
-     * The value for the devolucion field.
+     * The value for the dev_doc field.
      * @var        string
      */
-    protected $devolucion;
+    protected $dev_doc;
 
     /**
-     * The value for the fechad field.
+     * The value for the dev_date field.
      * @var        string
      */
-    protected $fechad;
+    protected $dev_date;
 
     /**
-     * The value for the valord field.
+     * The value for the dev_value field.
      * @var        string
      */
-    protected $valord;
+    protected $dev_value;
 
     /**
-     * The value for the pagoaliado field.
+     * The value for the pay_id field.
      * @var        string
      */
-    protected $pagoaliado;
+    protected $pay_id;
 
     /**
-     * The value for the porcentajecomision field.
+     * The value for the porcentaje_comision field.
      * @var        string
      */
-    protected $porcentajecomision;
+    protected $porcentaje_comision;
 
     /**
-     * The value for the porcentajeivacomision field.
+     * The value for the porcentaje_iva field.
      * @var        string
      */
-    protected $porcentajeivacomision;
+    protected $porcentaje_iva;
+
+    /**
+     * The value for the status field.
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $status;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -122,6 +129,27 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     protected $alreadyInClearAllReferencesDeep = false;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see        __construct()
+     */
+    public function applyDefaultValues()
+    {
+        $this->status = 0;
+    }
+
+    /**
+     * Initializes internal state of BaseQbcSciClosure object.
+     * @see        applyDefaults()
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->applyDefaultValues();
+    }
+
+    /**
      * Get the [id] column value.
      *
      * @return int
@@ -133,40 +161,40 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [nitaliado] column value.
+     * Get the [nit_aliado] column value.
      *
      * @return string
      */
-    public function getNitaliado()
+    public function getNitAliado()
     {
 
-        return $this->nitaliado;
+        return $this->nit_aliado;
     }
 
     /**
-     * Get the [campanaid] column value.
+     * Get the [campaign_id] column value.
      *
      * @return string
      */
-    public function getCampanaid()
+    public function getCampaignId()
     {
 
-        return $this->campanaid;
+        return $this->campaign_id;
     }
 
     /**
-     * Get the [venta] column value.
+     * Get the [sell_doc] column value.
      *
      * @return string
      */
-    public function getVenta()
+    public function getSellDoc()
     {
 
-        return $this->venta;
+        return $this->sell_doc;
     }
 
     /**
-     * Get the [optionally formatted] temporal [fechav] column value.
+     * Get the [optionally formatted] temporal [sell_date] column value.
      *
      *
      * @param string $format The date/time format string (either date()-style or strftime()-style).
@@ -174,22 +202,22 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
      * @return mixed Formatted date/time value as string or DateTime object (if format is null), null if column is null, and 0 if column value is 0000-00-00
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
-    public function getFechav($format = '%x')
+    public function getSellDate($format = '%x')
     {
-        if ($this->fechav === null) {
+        if ($this->sell_date === null) {
             return null;
         }
 
-        if ($this->fechav === '0000-00-00') {
+        if ($this->sell_date === '0000-00-00') {
             // while technically this is not a default value of null,
             // this seems to be closest in meaning.
             return null;
         }
 
         try {
-            $dt = new DateTime($this->fechav);
+            $dt = new DateTime($this->sell_date);
         } catch (Exception $x) {
-            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->fechav, true), $x);
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->sell_date, true), $x);
         }
 
         if ($format === null) {
@@ -206,29 +234,29 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [valorv] column value.
+     * Get the [sell_value] column value.
      *
      * @return string
      */
-    public function getValorv()
+    public function getSellValue()
     {
 
-        return $this->valorv;
+        return $this->sell_value;
     }
 
     /**
-     * Get the [devolucion] column value.
+     * Get the [dev_doc] column value.
      *
      * @return string
      */
-    public function getDevolucion()
+    public function getDevDoc()
     {
 
-        return $this->devolucion;
+        return $this->dev_doc;
     }
 
     /**
-     * Get the [optionally formatted] temporal [fechad] column value.
+     * Get the [optionally formatted] temporal [dev_date] column value.
      *
      *
      * @param string $format The date/time format string (either date()-style or strftime()-style).
@@ -236,22 +264,22 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
      * @return mixed Formatted date/time value as string or DateTime object (if format is null), null if column is null, and 0 if column value is 0000-00-00
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
-    public function getFechad($format = '%x')
+    public function getDevDate($format = '%x')
     {
-        if ($this->fechad === null) {
+        if ($this->dev_date === null) {
             return null;
         }
 
-        if ($this->fechad === '0000-00-00') {
+        if ($this->dev_date === '0000-00-00') {
             // while technically this is not a default value of null,
             // this seems to be closest in meaning.
             return null;
         }
 
         try {
-            $dt = new DateTime($this->fechad);
+            $dt = new DateTime($this->dev_date);
         } catch (Exception $x) {
-            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->fechad, true), $x);
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->dev_date, true), $x);
         }
 
         if ($format === null) {
@@ -268,47 +296,58 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [valord] column value.
+     * Get the [dev_value] column value.
      *
      * @return string
      */
-    public function getValord()
+    public function getDevValue()
     {
 
-        return $this->valord;
+        return $this->dev_value;
     }
 
     /**
-     * Get the [pagoaliado] column value.
+     * Get the [pay_id] column value.
      *
      * @return string
      */
-    public function getPagoaliado()
+    public function getPayId()
     {
 
-        return $this->pagoaliado;
+        return $this->pay_id;
     }
 
     /**
-     * Get the [porcentajecomision] column value.
+     * Get the [porcentaje_comision] column value.
      *
      * @return string
      */
-    public function getPorcentajecomision()
+    public function getPorcentajeComision()
     {
 
-        return $this->porcentajecomision;
+        return $this->porcentaje_comision;
     }
 
     /**
-     * Get the [porcentajeivacomision] column value.
+     * Get the [porcentaje_iva] column value.
      *
      * @return string
      */
-    public function getPorcentajeivacomision()
+    public function getPorcentajeIva()
     {
 
-        return $this->porcentajeivacomision;
+        return $this->porcentaje_iva;
+    }
+
+    /**
+     * Get the [status] column value.
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+
+        return $this->status;
     }
 
     /**
@@ -333,239 +372,260 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     } // setId()
 
     /**
-     * Set the value of [nitaliado] column.
+     * Set the value of [nit_aliado] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setNitaliado($v)
+    public function setNitAliado($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->nitaliado !== $v) {
-            $this->nitaliado = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::NITALIADO;
+        if ($this->nit_aliado !== $v) {
+            $this->nit_aliado = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::NIT_ALIADO;
         }
 
 
         return $this;
-    } // setNitaliado()
+    } // setNitAliado()
 
     /**
-     * Set the value of [campanaid] column.
+     * Set the value of [campaign_id] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setCampanaid($v)
+    public function setCampaignId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->campanaid !== $v) {
-            $this->campanaid = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::CAMPANAID;
+        if ($this->campaign_id !== $v) {
+            $this->campaign_id = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::CAMPAIGN_ID;
         }
 
 
         return $this;
-    } // setCampanaid()
+    } // setCampaignId()
 
     /**
-     * Set the value of [venta] column.
+     * Set the value of [sell_doc] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setVenta($v)
+    public function setSellDoc($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->venta !== $v) {
-            $this->venta = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::VENTA;
+        if ($this->sell_doc !== $v) {
+            $this->sell_doc = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::SELL_DOC;
         }
 
 
         return $this;
-    } // setVenta()
+    } // setSellDoc()
 
     /**
-     * Sets the value of [fechav] column to a normalized version of the date/time value specified.
+     * Sets the value of [sell_date] column to a normalized version of the date/time value specified.
      *
      * @param mixed $v string, integer (timestamp), or DateTime value.
      *               Empty strings are treated as null.
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setFechav($v)
+    public function setSellDate($v)
     {
         $dt = PropelDateTime::newInstance($v, null, 'DateTime');
-        if ($this->fechav !== null || $dt !== null) {
-            $currentDateAsString = ($this->fechav !== null && $tmpDt = new DateTime($this->fechav)) ? $tmpDt->format('Y-m-d') : null;
+        if ($this->sell_date !== null || $dt !== null) {
+            $currentDateAsString = ($this->sell_date !== null && $tmpDt = new DateTime($this->sell_date)) ? $tmpDt->format('Y-m-d') : null;
             $newDateAsString = $dt ? $dt->format('Y-m-d') : null;
             if ($currentDateAsString !== $newDateAsString) {
-                $this->fechav = $newDateAsString;
-                $this->modifiedColumns[] = QbcSciClosurePeer::FECHAV;
+                $this->sell_date = $newDateAsString;
+                $this->modifiedColumns[] = QbcSciClosurePeer::SELL_DATE;
             }
         } // if either are not null
 
 
         return $this;
-    } // setFechav()
+    } // setSellDate()
 
     /**
-     * Set the value of [valorv] column.
+     * Set the value of [sell_value] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setValorv($v)
+    public function setSellValue($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->valorv !== $v) {
-            $this->valorv = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::VALORV;
+        if ($this->sell_value !== $v) {
+            $this->sell_value = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::SELL_VALUE;
         }
 
 
         return $this;
-    } // setValorv()
+    } // setSellValue()
 
     /**
-     * Set the value of [devolucion] column.
+     * Set the value of [dev_doc] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setDevolucion($v)
+    public function setDevDoc($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->devolucion !== $v) {
-            $this->devolucion = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::DEVOLUCION;
+        if ($this->dev_doc !== $v) {
+            $this->dev_doc = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::DEV_DOC;
         }
 
 
         return $this;
-    } // setDevolucion()
+    } // setDevDoc()
 
     /**
-     * Sets the value of [fechad] column to a normalized version of the date/time value specified.
+     * Sets the value of [dev_date] column to a normalized version of the date/time value specified.
      *
      * @param mixed $v string, integer (timestamp), or DateTime value.
      *               Empty strings are treated as null.
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setFechad($v)
+    public function setDevDate($v)
     {
         $dt = PropelDateTime::newInstance($v, null, 'DateTime');
-        if ($this->fechad !== null || $dt !== null) {
-            $currentDateAsString = ($this->fechad !== null && $tmpDt = new DateTime($this->fechad)) ? $tmpDt->format('Y-m-d') : null;
+        if ($this->dev_date !== null || $dt !== null) {
+            $currentDateAsString = ($this->dev_date !== null && $tmpDt = new DateTime($this->dev_date)) ? $tmpDt->format('Y-m-d') : null;
             $newDateAsString = $dt ? $dt->format('Y-m-d') : null;
             if ($currentDateAsString !== $newDateAsString) {
-                $this->fechad = $newDateAsString;
-                $this->modifiedColumns[] = QbcSciClosurePeer::FECHAD;
+                $this->dev_date = $newDateAsString;
+                $this->modifiedColumns[] = QbcSciClosurePeer::DEV_DATE;
             }
         } // if either are not null
 
 
         return $this;
-    } // setFechad()
+    } // setDevDate()
 
     /**
-     * Set the value of [valord] column.
+     * Set the value of [dev_value] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setValord($v)
+    public function setDevValue($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->valord !== $v) {
-            $this->valord = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::VALORD;
+        if ($this->dev_value !== $v) {
+            $this->dev_value = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::DEV_VALUE;
         }
 
 
         return $this;
-    } // setValord()
+    } // setDevValue()
 
     /**
-     * Set the value of [pagoaliado] column.
+     * Set the value of [pay_id] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setPagoaliado($v)
+    public function setPayId($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->pagoaliado !== $v) {
-            $this->pagoaliado = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::PAGOALIADO;
+        if ($this->pay_id !== $v) {
+            $this->pay_id = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::PAY_ID;
         }
 
 
         return $this;
-    } // setPagoaliado()
+    } // setPayId()
 
     /**
-     * Set the value of [porcentajecomision] column.
+     * Set the value of [porcentaje_comision] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setPorcentajecomision($v)
+    public function setPorcentajeComision($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->porcentajecomision !== $v) {
-            $this->porcentajecomision = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::PORCENTAJECOMISION;
+        if ($this->porcentaje_comision !== $v) {
+            $this->porcentaje_comision = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::PORCENTAJE_COMISION;
         }
 
 
         return $this;
-    } // setPorcentajecomision()
+    } // setPorcentajeComision()
 
     /**
-     * Set the value of [porcentajeivacomision] column.
+     * Set the value of [porcentaje_iva] column.
      *
      * @param  string $v new value
      * @return QbcSciClosure The current object (for fluent API support)
      */
-    public function setPorcentajeivacomision($v)
+    public function setPorcentajeIva($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->porcentajeivacomision !== $v) {
-            $this->porcentajeivacomision = $v;
-            $this->modifiedColumns[] = QbcSciClosurePeer::PORCENTAJEIVACOMISION;
+        if ($this->porcentaje_iva !== $v) {
+            $this->porcentaje_iva = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::PORCENTAJE_IVA;
         }
 
 
         return $this;
-    } // setPorcentajeivacomision()
+    } // setPorcentajeIva()
+
+    /**
+     * Set the value of [status] column.
+     *
+     * @param  int $v new value
+     * @return QbcSciClosure The current object (for fluent API support)
+     */
+    public function setStatus($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->status !== $v) {
+            $this->status = $v;
+            $this->modifiedColumns[] = QbcSciClosurePeer::STATUS;
+        }
+
+
+        return $this;
+    } // setStatus()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -577,6 +637,10 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->status !== 0) {
+                return false;
+            }
+
         // otherwise, everything was equal, so return true
         return true;
     } // hasOnlyDefaultValues()
@@ -600,17 +664,18 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
         try {
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->nitaliado = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->campanaid = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->venta = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->fechav = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->valorv = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->devolucion = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->fechad = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
-            $this->valord = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-            $this->pagoaliado = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
-            $this->porcentajecomision = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
-            $this->porcentajeivacomision = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->nit_aliado = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->campaign_id = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->sell_doc = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->sell_date = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->sell_value = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->dev_doc = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->dev_date = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->dev_value = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->pay_id = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->porcentaje_comision = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+            $this->porcentaje_iva = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->status = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -620,7 +685,7 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 12; // 12 = QbcSciClosurePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 13; // 13 = QbcSciClosurePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating QbcSciClosure object", $e);
@@ -835,38 +900,41 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
         if ($this->isColumnModified(QbcSciClosurePeer::ID)) {
             $modifiedColumns[':p' . $index++]  = 'Id';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::NITALIADO)) {
-            $modifiedColumns[':p' . $index++]  = 'NitAliado';
+        if ($this->isColumnModified(QbcSciClosurePeer::NIT_ALIADO)) {
+            $modifiedColumns[':p' . $index++]  = 'nit_aliado';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::CAMPANAID)) {
-            $modifiedColumns[':p' . $index++]  = 'CampanaId';
+        if ($this->isColumnModified(QbcSciClosurePeer::CAMPAIGN_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'campaign_id';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::VENTA)) {
-            $modifiedColumns[':p' . $index++]  = 'Venta';
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_DOC)) {
+            $modifiedColumns[':p' . $index++]  = 'sell_doc';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::FECHAV)) {
-            $modifiedColumns[':p' . $index++]  = 'FechaV';
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_DATE)) {
+            $modifiedColumns[':p' . $index++]  = 'sell_date';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::VALORV)) {
-            $modifiedColumns[':p' . $index++]  = 'ValorV';
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_VALUE)) {
+            $modifiedColumns[':p' . $index++]  = 'sell_value';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::DEVOLUCION)) {
-            $modifiedColumns[':p' . $index++]  = 'Devolucion';
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_DOC)) {
+            $modifiedColumns[':p' . $index++]  = 'dev_doc';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::FECHAD)) {
-            $modifiedColumns[':p' . $index++]  = 'FechaD';
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_DATE)) {
+            $modifiedColumns[':p' . $index++]  = 'dev_date';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::VALORD)) {
-            $modifiedColumns[':p' . $index++]  = 'ValorD';
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_VALUE)) {
+            $modifiedColumns[':p' . $index++]  = 'dev_value';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::PAGOALIADO)) {
-            $modifiedColumns[':p' . $index++]  = 'PagoAliado';
+        if ($this->isColumnModified(QbcSciClosurePeer::PAY_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'pay_id';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJECOMISION)) {
-            $modifiedColumns[':p' . $index++]  = 'PorcentajeComision';
+        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJE_COMISION)) {
+            $modifiedColumns[':p' . $index++]  = 'porcentaje_comision';
         }
-        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJEIVACOMISION)) {
-            $modifiedColumns[':p' . $index++]  = 'PorcentajeIVAComision';
+        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJE_IVA)) {
+            $modifiedColumns[':p' . $index++]  = 'porcentaje_iva';
+        }
+        if ($this->isColumnModified(QbcSciClosurePeer::STATUS)) {
+            $modifiedColumns[':p' . $index++]  = 'status';
         }
 
         $sql = sprintf(
@@ -882,38 +950,41 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
                     case 'Id':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case 'NitAliado':
-                        $stmt->bindValue($identifier, $this->nitaliado, PDO::PARAM_STR);
+                    case 'nit_aliado':
+                        $stmt->bindValue($identifier, $this->nit_aliado, PDO::PARAM_STR);
                         break;
-                    case 'CampanaId':
-                        $stmt->bindValue($identifier, $this->campanaid, PDO::PARAM_STR);
+                    case 'campaign_id':
+                        $stmt->bindValue($identifier, $this->campaign_id, PDO::PARAM_STR);
                         break;
-                    case 'Venta':
-                        $stmt->bindValue($identifier, $this->venta, PDO::PARAM_STR);
+                    case 'sell_doc':
+                        $stmt->bindValue($identifier, $this->sell_doc, PDO::PARAM_STR);
                         break;
-                    case 'FechaV':
-                        $stmt->bindValue($identifier, $this->fechav, PDO::PARAM_STR);
+                    case 'sell_date':
+                        $stmt->bindValue($identifier, $this->sell_date, PDO::PARAM_STR);
                         break;
-                    case 'ValorV':
-                        $stmt->bindValue($identifier, $this->valorv, PDO::PARAM_STR);
+                    case 'sell_value':
+                        $stmt->bindValue($identifier, $this->sell_value, PDO::PARAM_STR);
                         break;
-                    case 'Devolucion':
-                        $stmt->bindValue($identifier, $this->devolucion, PDO::PARAM_STR);
+                    case 'dev_doc':
+                        $stmt->bindValue($identifier, $this->dev_doc, PDO::PARAM_STR);
                         break;
-                    case 'FechaD':
-                        $stmt->bindValue($identifier, $this->fechad, PDO::PARAM_STR);
+                    case 'dev_date':
+                        $stmt->bindValue($identifier, $this->dev_date, PDO::PARAM_STR);
                         break;
-                    case 'ValorD':
-                        $stmt->bindValue($identifier, $this->valord, PDO::PARAM_STR);
+                    case 'dev_value':
+                        $stmt->bindValue($identifier, $this->dev_value, PDO::PARAM_STR);
                         break;
-                    case 'PagoAliado':
-                        $stmt->bindValue($identifier, $this->pagoaliado, PDO::PARAM_STR);
+                    case 'pay_id':
+                        $stmt->bindValue($identifier, $this->pay_id, PDO::PARAM_STR);
                         break;
-                    case 'PorcentajeComision':
-                        $stmt->bindValue($identifier, $this->porcentajecomision, PDO::PARAM_STR);
+                    case 'porcentaje_comision':
+                        $stmt->bindValue($identifier, $this->porcentaje_comision, PDO::PARAM_STR);
                         break;
-                    case 'PorcentajeIVAComision':
-                        $stmt->bindValue($identifier, $this->porcentajeivacomision, PDO::PARAM_STR);
+                    case 'porcentaje_iva':
+                        $stmt->bindValue($identifier, $this->porcentaje_iva, PDO::PARAM_STR);
+                        break;
+                    case 'status':
+                        $stmt->bindValue($identifier, $this->status, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -1053,37 +1124,40 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
                 return $this->getId();
                 break;
             case 1:
-                return $this->getNitaliado();
+                return $this->getNitAliado();
                 break;
             case 2:
-                return $this->getCampanaid();
+                return $this->getCampaignId();
                 break;
             case 3:
-                return $this->getVenta();
+                return $this->getSellDoc();
                 break;
             case 4:
-                return $this->getFechav();
+                return $this->getSellDate();
                 break;
             case 5:
-                return $this->getValorv();
+                return $this->getSellValue();
                 break;
             case 6:
-                return $this->getDevolucion();
+                return $this->getDevDoc();
                 break;
             case 7:
-                return $this->getFechad();
+                return $this->getDevDate();
                 break;
             case 8:
-                return $this->getValord();
+                return $this->getDevValue();
                 break;
             case 9:
-                return $this->getPagoaliado();
+                return $this->getPayId();
                 break;
             case 10:
-                return $this->getPorcentajecomision();
+                return $this->getPorcentajeComision();
                 break;
             case 11:
-                return $this->getPorcentajeivacomision();
+                return $this->getPorcentajeIva();
+                break;
+            case 12:
+                return $this->getStatus();
                 break;
             default:
                 return null;
@@ -1114,17 +1188,18 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
         $keys = QbcSciClosurePeer::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getId(),
-            $keys[1] => $this->getNitaliado(),
-            $keys[2] => $this->getCampanaid(),
-            $keys[3] => $this->getVenta(),
-            $keys[4] => $this->getFechav(),
-            $keys[5] => $this->getValorv(),
-            $keys[6] => $this->getDevolucion(),
-            $keys[7] => $this->getFechad(),
-            $keys[8] => $this->getValord(),
-            $keys[9] => $this->getPagoaliado(),
-            $keys[10] => $this->getPorcentajecomision(),
-            $keys[11] => $this->getPorcentajeivacomision(),
+            $keys[1] => $this->getNitAliado(),
+            $keys[2] => $this->getCampaignId(),
+            $keys[3] => $this->getSellDoc(),
+            $keys[4] => $this->getSellDate(),
+            $keys[5] => $this->getSellValue(),
+            $keys[6] => $this->getDevDoc(),
+            $keys[7] => $this->getDevDate(),
+            $keys[8] => $this->getDevValue(),
+            $keys[9] => $this->getPayId(),
+            $keys[10] => $this->getPorcentajeComision(),
+            $keys[11] => $this->getPorcentajeIva(),
+            $keys[12] => $this->getStatus(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -1169,37 +1244,40 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
                 $this->setId($value);
                 break;
             case 1:
-                $this->setNitaliado($value);
+                $this->setNitAliado($value);
                 break;
             case 2:
-                $this->setCampanaid($value);
+                $this->setCampaignId($value);
                 break;
             case 3:
-                $this->setVenta($value);
+                $this->setSellDoc($value);
                 break;
             case 4:
-                $this->setFechav($value);
+                $this->setSellDate($value);
                 break;
             case 5:
-                $this->setValorv($value);
+                $this->setSellValue($value);
                 break;
             case 6:
-                $this->setDevolucion($value);
+                $this->setDevDoc($value);
                 break;
             case 7:
-                $this->setFechad($value);
+                $this->setDevDate($value);
                 break;
             case 8:
-                $this->setValord($value);
+                $this->setDevValue($value);
                 break;
             case 9:
-                $this->setPagoaliado($value);
+                $this->setPayId($value);
                 break;
             case 10:
-                $this->setPorcentajecomision($value);
+                $this->setPorcentajeComision($value);
                 break;
             case 11:
-                $this->setPorcentajeivacomision($value);
+                $this->setPorcentajeIva($value);
+                break;
+            case 12:
+                $this->setStatus($value);
                 break;
         } // switch()
     }
@@ -1226,17 +1304,18 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
         $keys = QbcSciClosurePeer::getFieldNames($keyType);
 
         if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setNitaliado($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setCampanaid($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setVenta($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setFechav($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setValorv($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setDevolucion($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setFechad($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setValord($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setPagoaliado($arr[$keys[9]]);
-        if (array_key_exists($keys[10], $arr)) $this->setPorcentajecomision($arr[$keys[10]]);
-        if (array_key_exists($keys[11], $arr)) $this->setPorcentajeivacomision($arr[$keys[11]]);
+        if (array_key_exists($keys[1], $arr)) $this->setNitAliado($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCampaignId($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setSellDoc($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setSellDate($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setSellValue($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setDevDoc($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setDevDate($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setDevValue($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setPayId($arr[$keys[9]]);
+        if (array_key_exists($keys[10], $arr)) $this->setPorcentajeComision($arr[$keys[10]]);
+        if (array_key_exists($keys[11], $arr)) $this->setPorcentajeIva($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setStatus($arr[$keys[12]]);
     }
 
     /**
@@ -1249,17 +1328,18 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
         $criteria = new Criteria(QbcSciClosurePeer::DATABASE_NAME);
 
         if ($this->isColumnModified(QbcSciClosurePeer::ID)) $criteria->add(QbcSciClosurePeer::ID, $this->id);
-        if ($this->isColumnModified(QbcSciClosurePeer::NITALIADO)) $criteria->add(QbcSciClosurePeer::NITALIADO, $this->nitaliado);
-        if ($this->isColumnModified(QbcSciClosurePeer::CAMPANAID)) $criteria->add(QbcSciClosurePeer::CAMPANAID, $this->campanaid);
-        if ($this->isColumnModified(QbcSciClosurePeer::VENTA)) $criteria->add(QbcSciClosurePeer::VENTA, $this->venta);
-        if ($this->isColumnModified(QbcSciClosurePeer::FECHAV)) $criteria->add(QbcSciClosurePeer::FECHAV, $this->fechav);
-        if ($this->isColumnModified(QbcSciClosurePeer::VALORV)) $criteria->add(QbcSciClosurePeer::VALORV, $this->valorv);
-        if ($this->isColumnModified(QbcSciClosurePeer::DEVOLUCION)) $criteria->add(QbcSciClosurePeer::DEVOLUCION, $this->devolucion);
-        if ($this->isColumnModified(QbcSciClosurePeer::FECHAD)) $criteria->add(QbcSciClosurePeer::FECHAD, $this->fechad);
-        if ($this->isColumnModified(QbcSciClosurePeer::VALORD)) $criteria->add(QbcSciClosurePeer::VALORD, $this->valord);
-        if ($this->isColumnModified(QbcSciClosurePeer::PAGOALIADO)) $criteria->add(QbcSciClosurePeer::PAGOALIADO, $this->pagoaliado);
-        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJECOMISION)) $criteria->add(QbcSciClosurePeer::PORCENTAJECOMISION, $this->porcentajecomision);
-        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJEIVACOMISION)) $criteria->add(QbcSciClosurePeer::PORCENTAJEIVACOMISION, $this->porcentajeivacomision);
+        if ($this->isColumnModified(QbcSciClosurePeer::NIT_ALIADO)) $criteria->add(QbcSciClosurePeer::NIT_ALIADO, $this->nit_aliado);
+        if ($this->isColumnModified(QbcSciClosurePeer::CAMPAIGN_ID)) $criteria->add(QbcSciClosurePeer::CAMPAIGN_ID, $this->campaign_id);
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_DOC)) $criteria->add(QbcSciClosurePeer::SELL_DOC, $this->sell_doc);
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_DATE)) $criteria->add(QbcSciClosurePeer::SELL_DATE, $this->sell_date);
+        if ($this->isColumnModified(QbcSciClosurePeer::SELL_VALUE)) $criteria->add(QbcSciClosurePeer::SELL_VALUE, $this->sell_value);
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_DOC)) $criteria->add(QbcSciClosurePeer::DEV_DOC, $this->dev_doc);
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_DATE)) $criteria->add(QbcSciClosurePeer::DEV_DATE, $this->dev_date);
+        if ($this->isColumnModified(QbcSciClosurePeer::DEV_VALUE)) $criteria->add(QbcSciClosurePeer::DEV_VALUE, $this->dev_value);
+        if ($this->isColumnModified(QbcSciClosurePeer::PAY_ID)) $criteria->add(QbcSciClosurePeer::PAY_ID, $this->pay_id);
+        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJE_COMISION)) $criteria->add(QbcSciClosurePeer::PORCENTAJE_COMISION, $this->porcentaje_comision);
+        if ($this->isColumnModified(QbcSciClosurePeer::PORCENTAJE_IVA)) $criteria->add(QbcSciClosurePeer::PORCENTAJE_IVA, $this->porcentaje_iva);
+        if ($this->isColumnModified(QbcSciClosurePeer::STATUS)) $criteria->add(QbcSciClosurePeer::STATUS, $this->status);
 
         return $criteria;
     }
@@ -1323,17 +1403,18 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setNitaliado($this->getNitaliado());
-        $copyObj->setCampanaid($this->getCampanaid());
-        $copyObj->setVenta($this->getVenta());
-        $copyObj->setFechav($this->getFechav());
-        $copyObj->setValorv($this->getValorv());
-        $copyObj->setDevolucion($this->getDevolucion());
-        $copyObj->setFechad($this->getFechad());
-        $copyObj->setValord($this->getValord());
-        $copyObj->setPagoaliado($this->getPagoaliado());
-        $copyObj->setPorcentajecomision($this->getPorcentajecomision());
-        $copyObj->setPorcentajeivacomision($this->getPorcentajeivacomision());
+        $copyObj->setNitAliado($this->getNitAliado());
+        $copyObj->setCampaignId($this->getCampaignId());
+        $copyObj->setSellDoc($this->getSellDoc());
+        $copyObj->setSellDate($this->getSellDate());
+        $copyObj->setSellValue($this->getSellValue());
+        $copyObj->setDevDoc($this->getDevDoc());
+        $copyObj->setDevDate($this->getDevDate());
+        $copyObj->setDevValue($this->getDevValue());
+        $copyObj->setPayId($this->getPayId());
+        $copyObj->setPorcentajeComision($this->getPorcentajeComision());
+        $copyObj->setPorcentajeIva($this->getPorcentajeIva());
+        $copyObj->setStatus($this->getStatus());
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -1386,21 +1467,23 @@ abstract class BaseQbcSciClosure extends BaseObject implements Persistent
     public function clear()
     {
         $this->id = null;
-        $this->nitaliado = null;
-        $this->campanaid = null;
-        $this->venta = null;
-        $this->fechav = null;
-        $this->valorv = null;
-        $this->devolucion = null;
-        $this->fechad = null;
-        $this->valord = null;
-        $this->pagoaliado = null;
-        $this->porcentajecomision = null;
-        $this->porcentajeivacomision = null;
+        $this->nit_aliado = null;
+        $this->campaign_id = null;
+        $this->sell_doc = null;
+        $this->sell_date = null;
+        $this->sell_value = null;
+        $this->dev_doc = null;
+        $this->dev_date = null;
+        $this->dev_value = null;
+        $this->pay_id = null;
+        $this->porcentaje_comision = null;
+        $this->porcentaje_iva = null;
+        $this->status = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
