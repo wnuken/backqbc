@@ -22,7 +22,7 @@
                             <?php foreach($result as $key => $id): ?>
                             <div class="form-group col-md-2">
                                 <span class="input-group-addon">
-                                    <input class="multicheck" type="checkbox" id="<?php print $id; ?>"  name="<?php print $key; ?>" value="<?php print $id; ?>" >
+                                    <input class="multicheck" type="checkbox" id="<?php print $id; ?>"  name="<?php print $key; ?>" value="<?php print $id; ?>" checked>
                                 </span>
                                 <div class="input-group-addon">
                                     <label for="<?php print $id; ?>">Campaña id <?php print $id; ?></label>
