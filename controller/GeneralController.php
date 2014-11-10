@@ -874,6 +874,7 @@ class General {
                 if(empty($BaseQbcSciClosureQuery)){
                     // $result = '<h3>El id no es valido: </3>' . $GroupdealsId;
                     // return $result;
+                    $result[] = "El id no es valido:" . $GroupdealsId;
                     break;
                 }
             }catch (Exception $e){
@@ -887,6 +888,7 @@ class General {
                 if(empty($GroupdealsQuery)){
                     // $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
                     //return $result;
+                    $result[] = "El id no es valido:" . $GroupdealsId;
                     break;
                 }
             }catch (Exception $e){
