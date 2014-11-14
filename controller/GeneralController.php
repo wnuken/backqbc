@@ -870,7 +870,7 @@ class General {
         foreach($GroupdealsIds as $GroupdealsId){
 
             try{
-                $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->findByCampaignId($GroupdealsId);
+                $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->filterByStatus(0)->findByCampaignId($GroupdealsId);
                 if(empty($BaseQbcSciClosureQuery)){
                     // $result = '<h3>El id no es valido: </3>' . $GroupdealsId;
                     // return $result;
