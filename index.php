@@ -12,7 +12,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"])){
     
     if(in_array($urlpost[2] , $classarray['class'])){
         getRoute()->run();
-    }else{    
+    }else{
         require_once('./views/general.php');
     }
     

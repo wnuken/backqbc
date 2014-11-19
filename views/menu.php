@@ -23,8 +23,8 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li>
                         <li><a href="./ventas-fallidas"><i class="glyphicon glyphicon-random"></i> Reenviar ventas fallidas</a></li>
+                        <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li>
                         <li><a href="./ventas-xml"><i class="glyphicon glyphicon-align-justify"></i> Edición XML</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Otras opciones</li>

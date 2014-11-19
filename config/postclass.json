@@ -6,6 +6,7 @@
         "funtt",
         "encode",
         "closuresend",
-        "conpensationsend"
+        "conpensationsend",
+        "vfallidas"
     ]
 }

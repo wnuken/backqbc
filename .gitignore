@@ -9,7 +9,7 @@ nbproject
 #Backqbc
 /.htaccess
 /build/conf/atmadmin-conf.php
-/vendor/
+# /vendor/
 /controller/statics.php
 build.properties
 buildtime-conf.xml

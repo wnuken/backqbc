@@ -12,6 +12,7 @@ messageError['error_id_client'] = ERROR_ID_CLIENT;
 var $formSendpay = $('form#sendpay');
 var $formSendpayXml = $('form#sendpayxml');
 var $formChangeId = $('form#change_id');
+var $formvfallidas = $("form#vfallidas");
 var $FormSendClose = $('form#sendclose');
 var $FormSendCompensation = $('form#sendcompensation');
 var $bar = $('div#progress_bar');
@@ -66,6 +67,27 @@ function progresbar(){
     }
 }
 
+// Ventas
+
+$('input#summit', $formvfallidas).on('click', function(e){
+    var $that = $(this);
+    //$that.button('loading');
+    e.preventDefault();
+    var params = $('input#text').val();
+    console.log(params);
+    $('div#progress').css({'display':'block'});
+    $('div#response').html('');
+    $('div#response').css({'display':'none'});
+    $formvfallidas.getFuntions({'params':params, 'class':'vfallidas'});
+});
+
+$('input#summit', $formChangeId).on('click', function(e){
+    e.preventDefault();
+    var params = $('textarea#text').val();
+    console.log(params);
+    $formChangeId.getFuntions({'params':params, 'class':'changeid'});
+});
+
 // Pago Aliado
 
 $('button#summit', $formSendpay).on('click', function(e){
@@ -113,13 +135,6 @@ if(typeof($('textarea')[0]) !== 'undefined'){
         lineWrapping: true
     });
 }
-
-$('input#summit', $formChangeId).on('click', function(e){
-    e.preventDefault();
-    var params = $('textarea#text').val();
-    console.log(params);
-    $().getFuntions({'params':params, 'class':'changeid'});
-});
 
 $('button#summit', $formSendpayXml).on('click', function(e){
     var $that = $(this);
@@ -171,5 +186,6 @@ $('button#summit', $FormSendCompensation).on('click', function(e){
 
     myVar = setInterval(progresbar, 100);
 });
+
 
 

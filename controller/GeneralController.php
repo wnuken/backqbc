@@ -408,19 +408,35 @@ class General {
 
     public function vfallidas($params){
         $IncrementId = trim($params['params']);
-        $SalesFlatOrderQuery = SalesFlatOrderQuery::create()->findOneByIncrementId($IncrementId);
+        
+        // return $IncrementId;
+        
+        try{           
+            $SalesFlatOrderQuery = SalesFlatOrderQuery::create()->findOneByIncrementId($IncrementId);
+            if(empty($SalesFlatOrderQuery)){
+                $result = '<h3>No pedido no existe: </3>' . $IncrementId;
+                return $result;
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            return $result;
+        }
+        
+        
 
-        $comando = 'php ../controller/sell_resend_scmp.php ' . 
+        $comando = 'php ./controller/sell_resend_scmp.php ' . 
             $SalesFlatOrderQuery->getEntityId() .
             ' ' . $params['params'];
 
         $result = system($comando);
+        
+        return $result;
 
     }
 
     // ********* GENERAR PAGO ALIADO DB **********
 
-    public function & PagoAliado(&$params){ 
+    public function & PagoAliado(&$params){
         $SellsPetitionId = array();
         $SellsDocumentId = array();
         $DevolutionPetitionId = array();

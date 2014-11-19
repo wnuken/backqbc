@@ -10,9 +10,9 @@ class Views {
 		include './views/home.php';
 	}
 
-	static public function ventas(){
+	/*static public function ventas(){
 		include './views/ventas.php';
-	}
+	}*/
 
 	static public function ventasCambioId(){
 		include './views/changeid.php';
@@ -21,9 +21,20 @@ class Views {
 	static public function fallidas(){
 		include './views/vfallidas.php';
 	}
+    
+    static public function vfallidas(){
+		$General = new General();
+		$result = $General->vfallidas($_REQUEST);
+		print '<pre>'; print_r($result); print '</pre>';
+	}
 
 	static public function ventasxml(){
 		include './views/ventasxml.php';
+	}
+    
+    static public function revertir(){
+		//include './views/ventasxml.php';
+        print "Reversion de ventas";
 	}
 
 	static public function sendxmlsell(){
@@ -33,9 +44,9 @@ class Views {
 		print '<pre>'; print_r($result); print '</pre>';
 	}
 
-	static public function aliados(){
+	/*static public function aliados(){
 		include './views/aliados.php';
-	}
+	}*/
     
     static public function enviarpago(){
 		include './views/sendpay.php';
