@@ -6,7 +6,7 @@
 // require_once __DIR__.'/../abstract.php';
 //require_once '/data01/www/quebuenacompradocs/qbc/shell/abstract.php';
 require_once './classes.php';
-require_once '/data02/www/quebuenacompradocs/qa/qbc/shell/abstract.php';
+require_once QBC_ROUTE;
 
 class Qbc_Shell_Sell_Scmp extends Mage_Shell_Abstract
 {
