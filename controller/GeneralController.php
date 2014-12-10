@@ -770,13 +770,16 @@ class General {
                 'message' => 'VALUE_IS_NULL_OR_EMPTY');
             return $result;
         }
-
+        
+        libxml_use_internal_errors(true);
         $xml = simplexml_load_string($params['params']['xml']);
-
+        
         if($xml === false){
             $result = array(
                 'status' => 'error',
-                'message' => 'VALUE_IS_NOT_XML_FILE');
+                'message' => 'VALUE_IS_NOT_XML_FILE',
+                'error-list' => libxml_get_errors()
+            );
             return $result;
         }
 
