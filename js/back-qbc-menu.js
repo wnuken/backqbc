@@ -201,7 +201,7 @@ $('button#summit', $formSendXmlSell).on('click', function(e){
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
-    $FormSendCompensation.getFuntions({'params':params, 'class':'sendxmlsell'});
+    $formSendXmlSell.getFuntions({'params':params, 'class':'sendxmlsell'});
 
     myVar = setInterval(progresbar, 100);
 });
