@@ -25,7 +25,14 @@ class Views {
     static public function vfallidas(){
 		$General = new General();
 		$result = $General->vfallidas($_REQUEST);
-		print '<pre>'; print_r($result); print '</pre>';
+        
+        if($result['status'] == 'ok'){
+            print '<pre style="display:none;">'; $resultJson = system($result['message']); print '</pre>';
+            include './views/resultvfallidas.php';
+        }else{
+            print '<pre>'; print_r($result); print '</pre>';
+        }
+		
 	}
 
 	static public function ventasxml(){

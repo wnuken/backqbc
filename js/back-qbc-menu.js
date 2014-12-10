@@ -14,10 +14,12 @@ var $formSendpayXml = $('form#sendpayxml');
 var $formChangeId = $('form#change_id');
 var $formvfallidas = $("form#vfallidas");
 var $FormSendClose = $('form#sendclose');
+var $formSendXmlSell = $('form#sendxmlsell');
 var $FormSendCompensation = $('form#sendcompensation');
 var $bar = $('div#progress_bar');
 var $sendchange = $('ul#sendchange');
 var $menu = $('ul#menunav');
+
 
 var currentUrl = window.location.pathname;
 urlSplit =currentUrl.split('/');
@@ -186,6 +188,25 @@ $('button#summit', $FormSendCompensation).on('click', function(e){
 
     myVar = setInterval(progresbar, 100);
 });
+
+
+$('button#summit', $formSendXmlSell).on('click', function(e){
+    var $that = $(this);
+    $that.button('loading');
+    e.preventDefault();
+    editorPay.save();
+    var params = {
+        'xml' : $('textarea#xmltext', $formSendXmlSell).val()
+    };
+    $('div#progress').css({'display':'block'});
+    $('div#response').html('');
+    $('div#response').css({'display':'none'});
+    $FormSendCompensation.getFuntions({'params':params, 'class':'sendxmlsell'});
+
+    myVar = setInterval(progresbar, 100);
+});
+
+
 
 
 

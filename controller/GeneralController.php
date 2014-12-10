@@ -408,28 +408,30 @@ class General {
 
     public function vfallidas($params){
         $IncrementId = trim($params['params']);
-        
-        // return $IncrementId;
-        
+
         try{           
             $SalesFlatOrderQuery = SalesFlatOrderQuery::create()->findOneByIncrementId($IncrementId);
             if(empty($SalesFlatOrderQuery)){
-                $result = '<h3>No pedido no existe: </3>' . $IncrementId;
+                $result = array(
+                    'status' => 'error',
+                    'mesagge' => 'No se encuenta el pedido pedido '. $IncrementId
+                );
                 return $result;
             }
         }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
+            $result = array(
+                'status' => 'error',
+                'message' => $this->exception . $e->getMessage()
+            );
             return $result;
         }
-        
-        
 
-        $comando = 'php ./controller/sell_resend_scmp.php ' . 
+        $result = array(
+            'status' => 'ok',
+            'message' => 'php ./controller/sell_resend_scmp.php ' . 
             $SalesFlatOrderQuery->getEntityId() .
-            ' ' . $params['params'];
-
-        $result = system($comando);
-        
+            ' ' . $params['params']
+        );
         return $result;
 
     }
@@ -759,6 +761,8 @@ class General {
     }
 
     public function & sendxmlsell(&$params){
+        
+       // return $params;
 
         if(!isset($params['params']) || empty($params['params'])){
             $result = array(
@@ -767,7 +771,7 @@ class General {
             return $result;
         }
 
-        $xml = simplexml_load_string($params['params']);
+        $xml = simplexml_load_string($params['params']['xml']);
 
         if($xml === false){
             $result = array(

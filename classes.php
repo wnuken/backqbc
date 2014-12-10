@@ -21,9 +21,7 @@ include_once dirname(__FILE__) . '/src/Epi.php';
 include_once dirname(__FILE__) . '/controller/SettingsController.php';
 include_once dirname(__FILE__) . '/controller/ViewsController.php';
 include_once dirname(__FILE__) . '/controller/GeneralController.php';
-
 include_once dirname(__FILE__) . '/controller/statics.php';
-
 //include_once dirname(__FILE__) . '/predis/autoload.php';
 
 // Initialize Propel with the runtime configuration
