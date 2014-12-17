@@ -105,6 +105,7 @@ class Views {
 		$General = new General();
 		$result = $General->sendxmldev($_REQUEST);
 		//printf ("<pre>%s</pre>", $result);
+        //print '<textarea>'; print_r($result); print '</textarea>';
 		print '<pre>'; print_r($result); print '</pre>';
 	}
 }

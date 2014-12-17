@@ -761,8 +761,8 @@ class General {
     }
 
     public function & sendxmlsell(&$params){
-        
-       // return $params;
+
+        // return $params;
 
         if(!isset($params['params']) || empty($params['params'])){
             $result = array(
@@ -770,10 +770,10 @@ class General {
                 'message' => 'VALUE_IS_NULL_OR_EMPTY');
             return $result;
         }
-        
+
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($params['params']['xml']);
-        
+
         if($xml === false){
             $result = array(
                 'status' => 'error',
@@ -844,45 +844,40 @@ class General {
         return $result;
 
     }
-    
-     public function & sendxmldev(&$params){
-        
-      $wsResult = array();
-         
-         $DevolucionDTO = $params['params']['xml'];
 
+    public function & sendxmldev(&$params){
+
+        $wsResult = array();
+        
+        $xml = simplexml_load_string($params['params']['xml']);
+        $json = json_encode($xml);
+        $DevolucionDTO = json_decode($json,TRUE);
+            
         try {
             $client = new SoapClient($this->webService, $this->options);
         } catch (Exception $e) {
             $wsResult = $this->exception .  $e->getMessage() . "\n";
         }
 
+        $peticionDTO['peticionDTO'] = $DevolucionDTO;
+        
+        try
+        {
+            $webService = $client-> Devoluciones($peticionDTO);
+            $wsResult = $webService->DevolucionesResult;
+        }
+        catch (Exception $e)
+        {
+            $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
+        } 
 
+        $resultado =  array('wsResult' => $wsResult, 'DevolucionDTO' => $DevolucionDTO);
 
-       // if($PagoAliadoDTO['sendSCMP'] == 0){
-        //    $resultado =  array('wsResult' => $wsResult, 'DevolucionDTO' => $DevolucionDTO, 'XML' => $xmlResult);
-         //   return $resultado;
-        //}elseif($PagoAliadoDTO['sendSCMP'] == 1){
-          //  unset($PagoAliadoDTO['sendSCMP']);
-            $peticionDTO['peticionDTO'] = $DevolucionDTO;
-
-            try
-            {
-                $webService = $client-> Devoluciones($peticionDTO);
-                $wsResult = $webService->DevolucionesResult;
-            }
-            catch (Exception $e)
-            {
-                $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
-            } 
-
-            $resultado =  array('wsResult' => $wsResult, 'DevolucionDTO' => $DevolucionDTO);
-
-            return $resultado;
-       // }
+        return $resultado;
+        // }
 
     }
-    
+
 
     private function sendSell(&$params){
         try {

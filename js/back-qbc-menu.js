@@ -44,7 +44,7 @@ $.fn.getFuntions = function(params){
             $('div#response').fadeIn(3000, function() {
                 $('div#response').html(response);
             });
-            $('div#response').html(response);
+           // $('div#response').html(response);
             $('button#summit', $that).button('reset');
         },
         error: function() {
@@ -129,7 +129,8 @@ $('a', $sendchange).on('click', function(e){
 });
 
 if(typeof($('textarea')[0]) !== 'undefined'){
-    var idTextarea = $('textarea').attr('id');
+    var idTextarea = $('textarea').first().attr('id');
+    console.log(idTextarea);
     var editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
         lineNumbers: true,
         mode: "application/xml",
@@ -219,7 +220,6 @@ $('button#summit', $formSendXmlDev).on('click', function(e){
     $('div#response').html('');
     $('div#response').css({'display':'none'});
     $formSendXmlDev.getFuntions({'params':params, 'class':'sendxmldev'});
-
     myVar = setInterval(progresbar, 100);
 });
 
