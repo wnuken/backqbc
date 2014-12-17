@@ -95,5 +95,16 @@ class Views {
         $General = new General();
 		$result = $General->ConpensationOffer($_REQUEST);        
 		include './views/resultcierre.php';
-	}	
+	}
+    
+    static public function devolucionesxml(){
+		include './views/devolucionesxml.php';
+	}
+    
+    static public function sendxmldev(){
+		$General = new General();
+		$result = $General->sendxmldev($_REQUEST);
+		//printf ("<pre>%s</pre>", $result);
+		print '<pre>'; print_r($result); print '</pre>';
+	}
 }

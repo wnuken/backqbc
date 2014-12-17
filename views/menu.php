@@ -33,6 +33,15 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                     </ul>
                 </li>
                 <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Devoluciones <span class="caret"></span>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="./devoluciones-xml"><i class="glyphicon glyphicon-align-justify"></i> Edición XML</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="glyphicon glyphicon-briefcase"></i> Pago Aliado <span class="caret"></span>
                     </a>

@@ -844,6 +844,45 @@ class General {
         return $result;
 
     }
+    
+     public function & sendxmldev(&$params){
+        
+      $wsResult = array();
+         
+         $DevolucionDTO = $params['params']['xml'];
+
+        try {
+            $client = new SoapClient($this->webService, $this->options);
+        } catch (Exception $e) {
+            $wsResult = $this->exception .  $e->getMessage() . "\n";
+        }
+
+
+
+       // if($PagoAliadoDTO['sendSCMP'] == 0){
+        //    $resultado =  array('wsResult' => $wsResult, 'DevolucionDTO' => $DevolucionDTO, 'XML' => $xmlResult);
+         //   return $resultado;
+        //}elseif($PagoAliadoDTO['sendSCMP'] == 1){
+          //  unset($PagoAliadoDTO['sendSCMP']);
+            $peticionDTO['peticionDTO'] = $DevolucionDTO;
+
+            try
+            {
+                $webService = $client-> Devoluciones($peticionDTO);
+                $wsResult = $webService->DevolucionesResult;
+            }
+            catch (Exception $e)
+            {
+                $wsResult = 'Caught exception:' .  $e->getMessage() .  "\n";
+            } 
+
+            $resultado =  array('wsResult' => $wsResult, 'DevolucionDTO' => $DevolucionDTO);
+
+            return $resultado;
+       // }
+
+    }
+    
 
     private function sendSell(&$params){
         try {
