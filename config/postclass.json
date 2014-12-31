@@ -8,6 +8,7 @@
         "closuresend",
         "conpensationsend",
         "vfallidas",
-        "sendxmldev"
+        "sendxmldev",
+        "sendselldiscount"
     ]
 }

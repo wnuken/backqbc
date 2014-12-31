@@ -50,6 +50,20 @@ class Views {
 		//printf ("<pre>%s</pre>", $result);
 		print '<pre>'; print_r($result); print '</pre>';
 	}
+    
+    static public function descuento(){
+		include './views/vdescuento.php';
+	}
+    
+    static public function sendselldiscount(){
+		$General = new General();
+		$result = $General->sendSellDiscount($_REQUEST);
+		//printf ("<pre>%s</pre>", $result);
+		print '<pre>'; print_r($result); print '</pre>';
+	}
+    
+    
+    
 
 	/*static public function aliados(){
 		include './views/aliados.php';

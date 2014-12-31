@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<venta xmlns="http://www.eltiempo.com.co/schemas/scmp" xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsd="http://www.w3.org/2001/XMLSchema" totalNeto="" totalBruto="" tasaImpuesto1="" medio="QBC" 
+totalRecargos="0" totalImpuesto2="0" oficina="CQBC" id="" credito="0" totalDescuentoAgencia="0" 
+totalCostoPrepago="0" totalDescuentoComercial="0"> 
+  <pagos> 
+    <pago medio="" valor="" idVenta="" preAprobado="0" costoPrepago="0" id=""> 
+      <atributos> 
+      </atributos> 
+    </pago> 
+  </pagos> 
+  <productos> 
+	  <producto tasaImpuesto1="" impuesto1="" tasaImpuesto2="0" impuesto2="0" bruto="" recargos="0" neto="14350" 
+	porcentajeDescuentoAgencia="0" descuentoComercial="0" descuentoAgencia="0" porcentajeDescuentoComercial="0" 
+	cantidad="1" id="219591" porcentajeRecargo="0"> 
+      <atributos> 
+        <atributo clave="TipoTesoreria" valor="" /> 
+        <atributo clave="Texto" valor="" /> 
+        <atributo clave="NitAliado" valor="" />
+      </atributos> 
+    </producto> 
+  </productos> 
+  <conceptos> 
+    <concepto tasaImpuesto1="0" impuesto1="0" tasaImpuesto2="0" impuesto2="0" bruto="12371" recargos="0" neto="14350" 
+	porcentajeDescuentoAgencia="0" descuentoComercial="0" descuentoAgencia="0" porcentajeDescuentoComercial="0" 
+	cantidad="1" id="219591" porcentajeRecargo="0" /> 
+  </conceptos> 
+  <cliente tipoId="0" id="1020716070" nombre="Angela González" /> 
+  <contexto aplicacion="QBC" usuario="INGQBC" idPeticion="949748f88f3539b78e458322" password="0" /> 
+</venta>

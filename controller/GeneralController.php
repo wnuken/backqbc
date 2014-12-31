@@ -436,6 +436,315 @@ class General {
 
     }
 
+
+
+    //// ****** Funciones Querys ******* ////
+
+    private function CouponMappingQueryByIncrementId($params){
+        try{           
+            $result = CouponMappingQuery::create()->findOneByIncrementId($params);
+            if(empty($result)){
+                $result = '<h3>No hay ventas : </3>' . json_encode($params);
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+    private function SalesFlatOrderQueryByEntityId($params){
+        try{
+            $result = SalesFlatOrderQuery::create()->findOneByEntityId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe la orden: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function SalesFlatOrderQueryByIncrementId($params){
+        try{
+            $result = SalesFlatOrderQuery::create()->findOneByIncrementId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe la orden: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+    private function SalesFlatOrderItemQueryByItemId($params){
+        try{
+            $result = SalesFlatOrderItemQuery::create()->findOneByItemId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe el item: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function SalesFlatOrderItemQueryByOrderId($params){
+        try{
+            $result = SalesFlatOrderItemQuery::create()->findOneByOrderId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe el item: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function GroupdealsQueryByProductId($params){
+        try{
+            $result = GroupdealsQuery::create()->findOneByProductId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe el item: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+    private function TreasuryTypesQueryById($params){
+        try{
+            // TreasuryTypes
+            $result = TreasuryTypesQuery::create()->findOneById($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe el item: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+
+
+
+
+
+
+    private function PagosonlineQueryByIncrementId($params){
+        try{
+            $result = PagosonlineQuery::create()->findOneByOrderId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe la campaña: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+
+    private function GroupdealsQueryById($params){
+        try{
+            $result = GroupdealsQuery::create()->findOneByGroupdealsId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe la campaña: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+
+    private function GroupdealsMerchantsQueryById($params){
+        try{
+            $result = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No existe la el Aliado: </3>' . $params['id'];
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function CouponHistoryQueryByCampaignId($params){
+        try{
+            $result = CouponHistoryQuery::create()->findByCampaignId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No hay redenciones : </3>' . json_encode($params['id']);
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+
+    }
+
+    private function QbcSciSellQueryByIncrementId($params){
+        try{           
+            $result = QbcSciSellQuery::create()->findByOrderId($params);
+            if(empty($result)){
+                $result = '<h3>No hay ventas : </3>' . json_encode($params);
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function QbcSciSellDocQueryByPetitionId($params){
+        try{           
+            $result = QbcSciSellDocQuery::create()->findByPetitionId($params['petitions']);
+            if(empty($result)){
+                $result = '<h3>No hay docs de ventas : </3>' . json_encode($params['petitions']);
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+    }
+
+    private function QbcSciDevolutionQueryByCampaignId($params){
+        try{           
+            $result = QbcSciDevolutionQuery::create()->findByCampaignId($params['id']);
+            if(empty($result)){
+                $result = '<h3>No hay devoluciones : </3>' . json_encode($params['id']);
+                var_dump($result);
+                die();
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            var_dump($result);
+            die();
+        }
+        return $result;
+
+    }
+
+
+    private function getCouponsRedeemed($params){
+        $CouponHistoryQuery = $this->CouponHistoryQueryByCampaignId($params);
+
+        foreach ($CouponHistoryQuery as $key => $History) {
+            $IncrementIds[] = $History->getOrderId();
+            $couponH[$History->getOrderId()][$History->getUnit()] = true;
+        }
+
+        $result = array(
+            'ids' => $IncrementIds, 
+            'coupons' => $couponH
+        );
+        return $result;
+
+    }
+
+    private function getSellRedeemed($params){
+        $QbcSciSellQuery = $this->QbcSciSellQueryByIncrementId($params['ids']);
+
+        foreach ($QbcSciSellQuery as $key => $Sell) {
+            if($Sell->getProcessed() == 0 && isset($params['coupons'][$Sell->getOrderId()][$Sell->getUnit()])){
+                $SellsPetitionId[] = $Sell->getPetitionId();
+                $SellOrderId = $Sell->getOrderId();
+                $SellItemId = $Sell->getItemId();
+            }
+        }
+
+        $result = array(
+            'petitions' => $SellsPetitionId, 
+            'orderId' => $SellOrderId,
+            'itemId' => $SellItemId
+        );
+
+        return $result;
+    }
+
+    private function getSellDocuments($params){
+        $QbcSciSellDocQuery = $this->QbcSciSellDocQueryByPetitionId($params);
+
+        foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
+            $result['SellsDocumentId'][] =  $SellDoc->getDocumentId();
+            $result['SellsDocValue'][] =  $SellDoc->getDocValue();
+            $result['SellsDocPosition'][] =  "00000" . $SellDoc->getDocPosition();
+            $result['SellsDocDate'][] =  $SellDoc->getDocDate();
+        }
+        return $result;
+    }
+
+
+    private function getDevolutions($params, $coupons){
+        $QbcSciDevolutionQuery = QbcSciDevolutionQueryByCampaignId($params);
+
+        foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
+            $orderDev = explode('-', $Devolution->getCoupon());
+            if($Devolution->getProcessed() == 0 && isset($coupons[$orderDev[0]][$Devolution->getUnit()])){
+                $result['devolutionRedeemed'][] = $Devolution->getPetitionId();
+            }else if($Devolution->getProcessed() == 0){
+                $result['devolutionNoRedeemed'][] = $Devolution->getPetitionId(); // Para incluir las devoluciones no redimidas
+            }
+        }
+        return $result;
+    }
+
+
     // ********* GENERAR PAGO ALIADO DB **********
 
     public function & PagoAliado(&$params){
@@ -445,31 +754,15 @@ class General {
         $DevolutionNoRedemedPetitionId = array();
         $SellOrderId = "";
         $SellItemId = "";
-        $GroupdealsId = trim($params['params']['idcampaign']);
+        $GroupdealsParams['id'] = trim($params['params']['idcampaign']);
 
-        try{
-            $GroupdealsQuery = GroupdealsQuery::create()->findOneByGroupdealsId($GroupdealsId);
-            if(empty($GroupdealsQuery)){
-                $result = '<h3>No existe la campaña: </3>' . $GroupdealsId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+        $GroupdealsQuery = $this->GroupdealsQueryById($GroupdealsParams);
+        $MerchantParams['id'] = $GroupdealsQuery->getMerchantId();
 
-        $MerchantId = $GroupdealsQuery->getMerchantId();
+        $GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($MerchantParams);
 
-        try{           
-            $GroupdealsMerchantsQuery = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($MerchantId);
-            if(empty($GroupdealsQuery)){
-                $result = '<h3>No existe la el Aliado: </3>' . $MerchantId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+        $CouponsRedeemed = $this->getCouponsRedeemed($GroupdealsParams);
+        $SellRedeemed = $this->getSellRedeemed($CouponsRedeemed);
 
         $TaxStatus = 'false';
         if($params['params']['pcam'] == 0)
@@ -477,7 +770,7 @@ class General {
 
         $PagoAliadoDTO = array(
             'Campana' => array(
-                'CampanaId' => $GroupdealsId,
+                'CampanaId' => $GroupdealsParams['id'],
                 'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
                 'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
             'Contexto' => array(
@@ -495,80 +788,21 @@ class General {
         );
 
 
-        try{           
-            $CouponHistoryQuery = CouponHistoryQuery::create()->findByCampaignId($GroupdealsId);
-            if(empty($CouponHistoryQuery)){
-                $result = '<h3>No hay redenciones : </3>' . json_encode($GroupdealsId);
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
+        $paramsSend = $this->getSellDocuments($SellRedeemed);
 
-        foreach ($CouponHistoryQuery as $key => $History) {
-            $IncrementIds[] = $History->getOrderId();
-            $couponH[$History->getOrderId()][$History->getUnit()] = true;
-        }
+        /* $devolutions = $this->getDevolutions($GroupdealsParams, $CouponsRedeemed['coupons']);
 
-        //Sells Docs
+        $paramsSend = $this->getDevolutionDocs($devolutions['devolutionRedeemed']);
 
-        try{           
-            $QbcSciSellQuery = QbcSciSellQuery::create()->findByOrderId($IncrementIds);
-            if(empty($QbcSciSellQuery)){
-                $result = '<h3>No hay ventas : </3>' . json_encode($IncrementIds);
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
-
-
-        foreach ($QbcSciSellQuery as $key => $Sell) {
-            if($Sell->getProcessed() == 0 && isset($couponH[$Sell->getOrderId()][$Sell->getUnit()])){
-                $SellsPetitionId[] = $Sell->getPetitionId();
-                $SellOrderId = $Sell->getOrderId();
-                $SellItemId = $Sell->getItemId();
-            }
-        }
-
-        try{           
-            $QbcSciSellDocQuery = QbcSciSellDocQuery::create()->findByPetitionId($SellsPetitionId);
-            if(empty($QbcSciSellDocQuery)){
-                $result = '<h3>No hay docs de ventas : </3>' . json_encode($SellsPetitionId);
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
-
-
-        foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
-            $SellsDocumentId[] = $SellDoc->getDocumentId();
-            $paramsSend['SellsDocumentId'][] =  $SellDoc->getDocumentId();
-            $paramsSend['SellsDocValue'][] =  $SellDoc->getDocValue();
-            $paramsSend['SellsDocPosition'][] =  "00000" . $SellDoc->getDocPosition();
-            $paramsSend['SellsDocDate'][] =  $SellDoc->getDocDate();
-        }        
-
+        $paramsSend = $this->getDevolutionDocs($devolutions['devolutionNoRedeemed']);
+*/
         // Devolutions Docs
 
-        try{           
-            $QbcSciDevolutionQuery = QbcSciDevolutionQuery::create()->findByCampaignId($GroupdealsId);
-            if(empty($QbcSciDevolutionQuery)){
-                $result = '<h3>No hay devoluciones : </3>' . json_encode($GroupdealsId);
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception . $e->getMessage(). "\n";
-            return $error;
-        }
+        $QbcSciDevolutionQuery = $this->QbcSciDevolutionQueryByCampaignId($GroupdealsParams);
 
         foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
             $orderDev = explode('-', $Devolution->getCoupon());
-            if($Devolution->getProcessed() == 0 && isset($couponH[$orderDev[0]][$Devolution->getUnit()])){
+            if($Devolution->getProcessed() == 0 && isset($CouponsRedeemed['coupons'][$orderDev[0]][$Devolution->getUnit()])){
                 $DevolutionPetitionId[] = $Devolution->getPetitionId();
             }else if($Devolution->getProcessed() == 0){
                 $DevolutionNoRedemedPetitionId[] = $Devolution->getPetitionId(); // Para incluir las devoluciones no redimidas
@@ -593,7 +827,8 @@ class General {
         }
 
         try{           
-            $QbcSciDevolutionNoRedemedDocQuery = QbcSciDevolutionDocQuery::create()->findByPetitionId($DevolutionNoRedemedPetitionId);
+            $QbcSciDevolutionNoRedemedDocQuery = QbcSciDevolutionDocQuery::create()
+                ->findByPetitionId($DevolutionNoRedemedPetitionId);
             if(!empty($QbcSciDevolutionNoRedemedDocQuery)){
                 foreach ($QbcSciDevolutionNoRedemedDocQuery as $key => $DevolutionNoDoc) {
                     $DevolutionsNoDocumentId[] = $DevolutionNoDoc->getDocumentId();
@@ -608,8 +843,6 @@ class General {
             return $error;
         }
 
-        $jsonSellsDocumentId = json_encode($SellsDocumentId);
-
         $result = $this->SendPago($PagoAliadoDTO, $paramsSend);
 
         if(is_object($result['wsResult']) && $result['wsResult']->Estado == 'aprobado'){
@@ -622,8 +855,8 @@ class General {
 
             $QbcSciPayment = new QbcSciPayment();
             $QbcSciPayment->setPetitionId($result['PagoAliadoDTO']['Contexto']['PeticionId']);
-            $QbcSciPayment->setOrderId($SellOrderId); // revisar
-            $QbcSciPayment->setItemId($SellItemId);
+            $QbcSciPayment->setOrderId($SellRedeemed['orderId']); // revisar
+            $QbcSciPayment->setItemId($SellRedeemed['itemId']);
             $QbcSciPayment->save();
 
         }
@@ -762,8 +995,6 @@ class General {
 
     public function & sendxmlsell(&$params){
 
-        // return $params;
-
         if(!isset($params['params']) || empty($params['params'])){
             $result = array(
                 'status' => 'error',
@@ -837,6 +1068,12 @@ class General {
             $QbcSciSellQuery->setPetitionId($newIdPetition);
             $QbcSciSellQuery->save();
             $result['save'] = 'true';
+        }else if($resultSell->Estado == 'aprobado' && empty($QbcSciSellQuery)){
+            $QbcSciSell = new QbcSciSell();
+            $QbcSciSell->setPetitionId($newIdPetition);
+            $QbcSciSell->setOrderId($idSell);
+            //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
+            $QbcSciSell->save();
         }
 
         $result['resultSell'] = $resultSell;
@@ -845,14 +1082,254 @@ class General {
 
     }
 
+    ///// *********************** Descuento **************************** ///
+
+    public function & sendSellDiscount(&$params){
+
+        // Validacion id Pedido
+        if(!isset($params['params']) || empty($params['params'])){
+            $result = array(
+                'status' => 'error',
+                'message' => 'VALUE_IS_NULL_OR_EMPTY');
+            return $result;
+        }
+
+        // Obtener información del pedido
+        $paramsMapping['id'] = $params['params'];
+
+        $CouponMappingQuery = $this->CouponMappingQueryByIncrementId($paramsMapping);
+        $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
+        $paramsItem['id'] = $CouponMappingQuery->getItemId();
+
+        $SalesFlatOrderQuery = $this->SalesFlatOrderQueryByEntityId($paramsOrder);
+        //$totalPay = $SalesFlatOrderQuery->getBaseGrandTotal();
+        $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
+        $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
+        $CustomerIntentification = $SalesFlatOrderQuery->getCustomerIdentification();
+
+        $SalesFlatOrderItemQuery = $this->SalesFlatOrderItemQueryByItemId($paramsItem);
+        $paramsGroupDeals['id'] = $SalesFlatOrderItemQuery->getProductId(); 
+
+        $GroupdealsQuery = $this->GroupdealsQueryByProductId($paramsGroupDeals);
+        $gropdealsId = $GroupdealsQuery->getGroupdealsId();
+        $ProductName = $GroupdealsQuery->getTitleShort();
+        $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
+        $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
+
+        $TreasuryTypesQuery = $this->TreasuryTypesQueryById($paramsTreasury);
+        $tresauryCode = $TreasuryTypesQuery->getCode();
+        $tresauryIva = $TreasuryTypesQuery->getIva();
+
+        $PagosOnLineQuery = $this->PagosonlineQueryByIncrementId($paramsMapping);
+        $totalPay = $PagosOnLineQuery->getValor();
+
+        $GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($paramsMerchants);
+        $NitNumber = $GroupdealsMerchantsQuery->getNitNumber();
+
+        $totalPay = round($totalPay, 0);
+        $payToItem = $totalPay;
+        $payToLastItem = 0;
+        if($totalItems > 1){
+            $payToItem = round(($totalPay / $totalItems), 0);
+            $payToLastItem = $totalPay - ($payToItem * ($totalItems - 1));
+        }
+
+        $tasaIva = 0;
+        if($tresauryIva > 0)
+            $tasaIva = $tresauryIva / 100;
+
+        $order = array(
+            'totalPay' => $totalPay,
+            'totalItems' => $totalItems,
+            'payToItem' => $payToItem,
+            'payToLastItem' => $payToLastItem,
+            'tasaIva' => $tasaIva,
+            'tresauryIva' => $tresauryIva
+        );
+
+        $pagoItem['valor'] = $totalPay;
+
+        for($i =1; $i<=$totalItems;$i++){
+
+            $totalBruto = $order['payToItem'];
+            if($order['tresauryIva'] > 0)
+                $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
+
+            if($order['payToLastItem'] > 0 && $i == $totalItems){
+                $order['payToItem'] = $order['payToLastItem'];
+                $totalBruto = $order['payToLastItem'];
+                if($order['tresauryIva'] > 0)
+                    $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
+            }
+
+            $pagoItem['valorItem'][] = $order['payToItem'];
+            $pagoItem['payToLastItem'][] = $order['payToLastItem'];
+            // Creación XML
+            libxml_use_internal_errors(true);
+            $xml = simplexml_load_file("./views/sell.xml");
+
+            if($xml === false){
+                $result = array(
+                    'status' => 'error',
+                    'message' => 'VALUE_IS_NOT_XML_FILE',
+                    'error-list' => libxml_get_errors()
+                );
+                return $result;
+            }
+
+            $xml->attributes()->id = $paramsMapping['id'];
+            $xml->attributes()->totalNeto = $order['payToItem'];
+            $xml->attributes()->totalBruto = $totalBruto;
+            $xml->attributes()->tasaImpuesto1 = $order['tasaIva'];
+            // $xml->attributes()->tasaImpuesto1 = $payToItem - $totalBruto;
+
+            $xml->pagos->pago->attributes()->valor = $order['payToItem'];
+            $xml->pagos->pago->attributes()->idVenta = $paramsMapping['id'];
+            $xml->pagos->pago->attributes()->id = $i;
+
+            $medioPago = $PagosOnLineQuery->getTipoMedioPago();
+
+
+
+            if($medioPago == 2){
+                $xml->pagos->pago->attributes()->medio = 3;
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "numeroTarjeta");
+                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getNumeroVisible());
+
+                $franquicia = $PagosOnLineQuery->getMedioPago();
+
+                if($franquicia == 11){ // Master
+                    $franquiciaValue = 2;
+                }else if($franquicia == 10){ // Visa
+                    $franquiciaValue = 4;
+                }else if($franquicia == 22){ //Diners
+                    $franquiciaValue = 1;
+                }else if($franquicia == 12){ // Amex
+                    $franquiciaValue = 5;
+                }
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "Franquicia");
+                $pagoAtributos->addAttribute("valor", $franquiciaValue);
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "Autorizacion");
+                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCodigoAutorizacion());
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "numeroCuotas");
+                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCuotas());
+
+            }else if($medioPago == 4){
+                $xml->pagos->pago->attributes()->medio = 26;
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "Autorizacion");
+                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCus());
+
+
+            }else if($medioPago == 8){
+                $xml->pagos->pago->attributes()->medio = 30;
+
+                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+                $pagoAtributos->addAttribute("clave", "Autorizacion");
+                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getOrderId());
+            }
+
+
+
+            $xml->productos->producto->attributes()->tasaImpuesto1 = $order['tasaIva'];
+            $xml->productos->producto->attributes()->impuesto1 = $order['payToItem'] - $totalBruto;
+            $xml->productos->producto->attributes()->bruto = $totalBruto;
+            $xml->productos->producto->attributes()->neto = $order['payToItem'];
+            $xml->productos->producto->attributes()->id = $gropdealsId;
+            $xml->productos->producto->atributos->atributo[0]->attributes()->valor = $tresauryCode;
+            $xml->productos->producto->atributos->atributo[1]->attributes()->valor = $ProductName;
+            $xml->productos->producto->atributos->atributo[2]->attributes()->valor = $NitNumber;
+
+            $xml->conceptos->concepto->attributes()->tasaImpuesto1 = $order['tasaIva'];
+            $xml->conceptos->concepto->attributes()->impuesto1 = $order['payToItem'] - $totalBruto;
+            $xml->conceptos->concepto->attributes()->bruto = $totalBruto;
+            $xml->conceptos->concepto->attributes()->neto = $order['payToItem'];
+            $xml->conceptos->concepto->attributes()->id = $gropdealsId;
+
+            $xml->cliente->attributes()->id = $CustomerIntentification;
+            $xml->cliente->attributes()->nombre = $CustomerName;
+
+            $seemBaseIdPetition = strtotime('now');
+            $md5IdPetition = md5($seemBaseIdPetition);
+            $newIdPetition = substr($md5IdPetition, 0 ,24);
+
+            $xml->contexto->attributes()->idPeticion = $newIdPetition;
+
+
+            $xml = $xml->asXML();
+            $xml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $xml));
+
+            /*
+        print "<textarea>" . $xml . "</textarea>";
+
+        die();
+*/
+            $paramsSell = array(
+                'idPeticion' => $newIdPetition,
+                'idVenta' => $paramsMapping['id'],
+                'xml' =>  $xml);
+
+
+            $resultSell = $this->sendSell($paramsSell);
+
+            if($resultSell->Estado == 'aprobado'){
+                $QbcSciSell = new QbcSciSell();
+                $QbcSciSell->setPetitionId($newIdPetition);
+                $QbcSciSell->setOrderId($paramsMapping['id']);
+                $QbcSciSell->setItemId($paramsItem['id']);
+                $QbcSciSell->setUnit($i);
+                //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
+                $QbcSciSell->save();
+            }
+
+            $resultSellArray[] = $resultSell;
+        }
+
+        print "<pre>";
+        print_r($resultSellArray);
+        print_r($pagoItem);
+
+        print "<pre>";
+        die();
+
+
+
+        if($resultSell->Estado == 'aprobado' && !empty($QbcSciSellQuery)){
+            $QbcSciSellQuery->setPetitionId($newIdPetition);
+            $QbcSciSellQuery->save();
+            $result['save'] = 'true';
+        }else if($resultSell->Estado == 'aprobado' && empty($QbcSciSellQuery)){
+            $QbcSciSell = new QbcSciSell();
+            $QbcSciSell->setPetitionId($newIdPetition);
+            $QbcSciSell->setOrderId($idSell);
+            //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
+            $QbcSciSell->save();
+        }
+
+        $result['resultSell'] = $resultSell;
+
+        return $result;
+
+    }
+
+
     public function & sendxmldev(&$params){
 
         $wsResult = array();
-        
+
         $xml = simplexml_load_string($params['params']['xml']);
         $json = json_encode($xml);
         $DevolucionDTO = json_decode($json,TRUE);
-            
+
         try {
             $client = new SoapClient($this->webService, $this->options);
         } catch (Exception $e) {
@@ -860,7 +1337,7 @@ class General {
         }
 
         $peticionDTO['peticionDTO'] = $DevolucionDTO;
-        
+
         try
         {
             $webService = $client-> Devoluciones($peticionDTO);
@@ -1070,6 +1547,8 @@ class General {
 
 
     }
+
+    // ********* GENERAR CIERRE OFERTA DB **********
 
     public function & ClosureOffer(&$params){
         return $params;

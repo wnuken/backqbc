@@ -29,7 +29,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <li class="divider"></li>
                         <li class="dropdown-header">Otras opciones</li>
                         <li><a href="./ventas-revertir"><i class="glyphicon glyphicon-resize-small"></i> Revertir Ventas Fallidas</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-gift"></i> Ventas con descuento</a></li>
+                        <li><a href="./ventas-descuento"><i class="glyphicon glyphicon-gift"></i> Ventas con descuento</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

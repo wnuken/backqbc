@@ -7,8 +7,6 @@ messageError['error_general'] = ERROR_GENERAL;
 messageError['error_query'] = ERROR_QUERY;
 messageError['error_id_client'] = ERROR_ID_CLIENT;
 
-
-
 var $formSendpay = $('form#sendpay');
 var $formSendpayXml = $('form#sendpayxml');
 var $formChangeId = $('form#change_id');
@@ -20,11 +18,15 @@ var $FormSendCompensation = $('form#sendcompensation');
 var $bar = $('div#progress_bar');
 var $sendchange = $('ul#sendchange');
 var $menu = $('ul#menunav');
+var $formvdescuento = $("form#vdescuento");
+
 
 
 var currentUrl = window.location.pathname;
 urlSplit =currentUrl.split('/');
 console.log(urlSplit[2]);
+
+$('li', $menu).removeClass('active');
 
 var myVar = '';
 
@@ -222,6 +224,22 @@ $('button#summit', $formSendXmlDev).on('click', function(e){
     $formSendXmlDev.getFuntions({'params':params, 'class':'sendxmldev'});
     myVar = setInterval(progresbar, 100);
 });
+
+
+$('input#summit', $formvdescuento).on('click', function(e){
+    var $that = $(this);
+    //$that.button('loading');
+    e.preventDefault();
+    var params = $('input#text').val();
+    $('div#progress').css({'display':'block'});
+    $('div#response').html('');
+    $('div#response').css({'display':'none'});
+    $formvdescuento.getFuntions({'params':params, 'class':'sendselldiscount'});
+});
+
+
+
+
 
 
 

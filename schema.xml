@@ -546,6 +546,7 @@
         <column name="unit" phpName="Unit" type="INTEGER" size="5" required="false"/>
         <column name="personalized_coupon" phpName="PersonalizedCoupon" type="INTEGER" size="10" sqlType="int(10) unsigned" required="false"/>
         <column name="pos_number" phpName="PosNumber" type="VARCHAR" size="50" required="false"/>
+        <column name="hash" phpName="Hash" type="VARCHAR" size="255" required="true"/>
         <foreign-key foreignTable="sales_flat_order" name="fk_coupon_increment_id" onDelete="CASCADE" onUpdate="RESTRICT">
             <reference local="increment_id" foreign="increment_id"/>
         </foreign-key>
