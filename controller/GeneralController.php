@@ -1105,26 +1105,21 @@ class General {
         //$totalPay = $SalesFlatOrderQuery->getBaseGrandTotal();
         $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
         $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
-        $CustomerIntentification = $SalesFlatOrderQuery->getCustomerIdentification();
 
         $SalesFlatOrderItemQuery = $this->SalesFlatOrderItemQueryByItemId($paramsItem);
         $paramsGroupDeals['id'] = $SalesFlatOrderItemQuery->getProductId(); 
 
         $GroupdealsQuery = $this->GroupdealsQueryByProductId($paramsGroupDeals);
-        $gropdealsId = $GroupdealsQuery->getGroupdealsId();
-        $ProductName = $GroupdealsQuery->getTitleShort();
         $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
         $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
 
         $TreasuryTypesQuery = $this->TreasuryTypesQueryById($paramsTreasury);
-        $tresauryCode = $TreasuryTypesQuery->getCode();
         $tresauryIva = $TreasuryTypesQuery->getIva();
 
         $PagosOnLineQuery = $this->PagosonlineQueryByIncrementId($paramsMapping);
         $totalPay = $PagosOnLineQuery->getValor();
 
         $GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($paramsMerchants);
-        $NitNumber = $GroupdealsMerchantsQuery->getNitNumber();
 
         $totalPay = round($totalPay, 0);
         $payToItem = $totalPay;
@@ -1139,12 +1134,25 @@ class General {
             $tasaIva = $tresauryIva / 100;
 
         $order = array(
+            'ventaId' => $params['params']['id'],
             'totalPay' => $totalPay,
             'totalItems' => $totalItems,
             'payToItem' => $payToItem,
             'payToLastItem' => $payToLastItem,
             'tasaIva' => $tasaIva,
-            'tresauryIva' => $tresauryIva
+            'tresauryCode' => $TreasuryTypesQuery->getCode(),
+            'tresauryIva' => $tresauryIva,
+            'tipoMedioPAgo' => $PagosOnLineQuery->getTipoMedioPago(),
+            'numeroTarjeta' => $PagosOnLineQuery->getNumeroVisible(),
+            'medioPago' => $PagosOnLineQuery->getMedioPago(),
+            'autorizacion' => $PagosOnLineQuery->getCodigoAutorizacion(),
+            'cus' => $PagosOnLineQuery->getCus(),
+            'cuotas' => $PagosOnLineQuery->getCuotas(),
+            'productName' => utf8_encode($GroupdealsQuery->getTitleShort()),
+            'idCampaing' => $GroupdealsQuery->getGroupdealsId(),
+            'nit' => $GroupdealsMerchantsQuery->getNitNumber(),
+            'customerIdentification' => $SalesFlatOrderQuery->getCustomerIdentification(),
+            'customerName' => utf8_encode($CustomerName)
         );
 
         $pagoItem['valor'] = $totalPay;
@@ -1179,95 +1187,91 @@ class General {
                 return $result;
             }
 
-            $xml->attributes()->id = $paramsMapping['id'];
+            $xml->attributes()->id = $order['ventaId'];
             $xml->attributes()->totalNeto = $order['payToItem'];
             $xml->attributes()->totalBruto = $totalBruto;
             $xml->attributes()->tasaImpuesto1 = $order['tasaIva'];
 
             $xml->pagos->pago->attributes()->valor = $order['payToItem'];
-            $xml->pagos->pago->attributes()->idVenta = $paramsMapping['id'];
+            $xml->pagos->pago->attributes()->idVenta = $order['ventaId'];
             $xml->pagos->pago->attributes()->id = $i;
 
-            $medioPago = $PagosOnLineQuery->getTipoMedioPago();
-
-            if($medioPago == 2){
+            if($order['tipoMedioPAgo'] == 2){
                 $xml->pagos->pago->attributes()->medio = 3;
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "numeroTarjeta");
-                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getNumeroVisible());
+                $pagoAtributos->addAttribute("valor", $order['numeroTarjeta']);
 
-                $franquicia = $PagosOnLineQuery->getMedioPago();
-
-                if($franquicia == 11){ // Master
-                    $franquiciaValue = 2;
-                }else if($franquicia == 10){ // Visa
-                    $franquiciaValue = 4;
-                }else if($franquicia == 22){ //Diners
-                    $franquiciaValue = 1;
-                }else if($franquicia == 12){ // Amex
-                    $franquiciaValue = 5;
+                if($order['medioPago'] == 11){ // Master
+                   $order['franquicia'] = 2;
+                }else if($order['medioPago'] == 10){ // Visa
+                    $order['franquicia'] = 4;
+                }else if($order['medioPago'] == 22){ //Diners
+                    $order['franquicia'] = 1;
+                }else if($order['medioPago'] == 12){ // Amex
+                    $order['franquicia'] = 5;
                 }
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "Franquicia");
-                $pagoAtributos->addAttribute("valor", $franquiciaValue);
+                $pagoAtributos->addAttribute("valor", $order['franquicia']);
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "Autorizacion");
-                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCodigoAutorizacion());
+                $pagoAtributos->addAttribute("valor", $order['autorizacion']);
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "numeroCuotas");
-                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCuotas());
+                $pagoAtributos->addAttribute("valor", $order['cuotas']);
 
-            }else if($medioPago == 4){
+            }else if($order['tipoMedioPAgo'] == 4){
                 $xml->pagos->pago->attributes()->medio = 26;
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "Autorizacion");
-                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getCus());
+                $pagoAtributos->addAttribute("valor", $order['cus']);
 
 
-            }else if($medioPago == 8){
+            }else if($order['tipoMedioPAgo'] == 8){
                 $xml->pagos->pago->attributes()->medio = 30;
 
                 $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
                 $pagoAtributos->addAttribute("clave", "Autorizacion");
-                $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getOrderId());
+                $pagoAtributos->addAttribute("valor", $order['ventaId']);
             }
 
             $xml->productos->producto->attributes()->tasaImpuesto1 = $order['tasaIva'];
             $xml->productos->producto->attributes()->impuesto1 = $order['payToItem'] - $totalBruto;
             $xml->productos->producto->attributes()->bruto = $totalBruto;
             $xml->productos->producto->attributes()->neto = $order['payToItem'];
-            $xml->productos->producto->attributes()->id = $gropdealsId;
-            $xml->productos->producto->atributos->atributo[0]->attributes()->valor = $tresauryCode;
-            $xml->productos->producto->atributos->atributo[1]->attributes()->valor = utf8_encode($ProductName);
-            $xml->productos->producto->atributos->atributo[2]->attributes()->valor = $NitNumber;
+            $xml->productos->producto->attributes()->id = $order['idCampaing'];
+            $xml->productos->producto->atributos->atributo[0]->attributes()->valor = $order['tresauryCode'];
+            $xml->productos->producto->atributos->atributo[1]->attributes()->valor = utf8_encode($order['productName']);
+            $xml->productos->producto->atributos->atributo[2]->attributes()->valor = $order['nit'];
 
             $xml->conceptos->concepto->attributes()->tasaImpuesto1 = $order['tasaIva'];
             $xml->conceptos->concepto->attributes()->impuesto1 = $order['payToItem'] - $totalBruto;
             $xml->conceptos->concepto->attributes()->bruto = $totalBruto;
             $xml->conceptos->concepto->attributes()->neto = $order['payToItem'];
-            $xml->conceptos->concepto->attributes()->id = $gropdealsId;
+            $xml->conceptos->concepto->attributes()->id = $order['idCampaing'];
 
-            $xml->cliente->attributes()->id = $CustomerIntentification;
-            $xml->cliente->attributes()->nombre = $CustomerName;
+            $xml->cliente->attributes()->id = $order['customerIdentification'];
+            $xml->cliente->attributes()->nombre = $order['customerName'];
 
             $seemBaseIdPetition = strtotime('now');
             $md5IdPetition = md5($seemBaseIdPetition);
-            $newIdPetition = substr($md5IdPetition, 0 ,24);
+            $order['newIdPetition'] = substr($md5IdPetition, 0 ,24);
 
-            $xml->contexto->attributes()->idPeticion = $newIdPetition;
+            $xml->contexto->attributes()->idPeticion = $order['newIdPetition'];
 
 
             $xml = $xml->asXML();
             $xml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $xml));
 
             $paramsSell = array(
-                'idPeticion' => $newIdPetition,
-                'idVenta' => $paramsMapping['id'],
+                'idPeticion' => $order['newIdPetition'],
+                'idVenta' => $order['ventaId'],
                 'xml' =>  $xml);
 
             if($params['params']['sci_send'] == 1){
@@ -1283,21 +1287,13 @@ class General {
                 }
                 $resultSellArray[] = $resultSell;
             }
-
+            $orderArray[] = $order;
 
         }
 
-        print "<pre>";
-        print_r($resultSellArray);
-        print_r($pagoItem);
 
-        print "<pre>";
-        die();
-
-
-
-        $result['resultSell'] = $resultSell;
-
+        $result['resultSell'] = $resultSellArray;
+        $result['order'] = $orderArray;
         return $result;
 
     }
