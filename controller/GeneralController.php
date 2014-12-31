@@ -1095,7 +1095,7 @@ class General {
         }
 
         // Obtener información del pedido
-        $paramsMapping['id'] = $params['params'];
+        $paramsMapping['id'] = $params['params']['id'];
 
         $CouponMappingQuery = $this->CouponMappingQueryByIncrementId($paramsMapping);
         $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
@@ -1149,6 +1149,8 @@ class General {
 
         $pagoItem['valor'] = $totalPay;
 
+        $resultSellArray = array();
+
         for($i =1; $i<=$totalItems;$i++){
 
             $totalBruto = $order['payToItem'];
@@ -1181,15 +1183,12 @@ class General {
             $xml->attributes()->totalNeto = $order['payToItem'];
             $xml->attributes()->totalBruto = $totalBruto;
             $xml->attributes()->tasaImpuesto1 = $order['tasaIva'];
-            // $xml->attributes()->tasaImpuesto1 = $payToItem - $totalBruto;
 
             $xml->pagos->pago->attributes()->valor = $order['payToItem'];
             $xml->pagos->pago->attributes()->idVenta = $paramsMapping['id'];
             $xml->pagos->pago->attributes()->id = $i;
 
             $medioPago = $PagosOnLineQuery->getTipoMedioPago();
-
-
 
             if($medioPago == 2){
                 $xml->pagos->pago->attributes()->medio = 3;
@@ -1238,15 +1237,13 @@ class General {
                 $pagoAtributos->addAttribute("valor", $PagosOnLineQuery->getOrderId());
             }
 
-
-
             $xml->productos->producto->attributes()->tasaImpuesto1 = $order['tasaIva'];
             $xml->productos->producto->attributes()->impuesto1 = $order['payToItem'] - $totalBruto;
             $xml->productos->producto->attributes()->bruto = $totalBruto;
             $xml->productos->producto->attributes()->neto = $order['payToItem'];
             $xml->productos->producto->attributes()->id = $gropdealsId;
             $xml->productos->producto->atributos->atributo[0]->attributes()->valor = $tresauryCode;
-            $xml->productos->producto->atributos->atributo[1]->attributes()->valor = $ProductName;
+            $xml->productos->producto->atributos->atributo[1]->attributes()->valor = utf8_encode($ProductName);
             $xml->productos->producto->atributos->atributo[2]->attributes()->valor = $NitNumber;
 
             $xml->conceptos->concepto->attributes()->tasaImpuesto1 = $order['tasaIva'];
@@ -1268,30 +1265,26 @@ class General {
             $xml = $xml->asXML();
             $xml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $xml));
 
-            /*
-        print "<textarea>" . $xml . "</textarea>";
-
-        die();
-*/
             $paramsSell = array(
                 'idPeticion' => $newIdPetition,
                 'idVenta' => $paramsMapping['id'],
                 'xml' =>  $xml);
 
-
-            $resultSell = $this->sendSell($paramsSell);
-
-            if($resultSell->Estado == 'aprobado'){
-                $QbcSciSell = new QbcSciSell();
-                $QbcSciSell->setPetitionId($newIdPetition);
-                $QbcSciSell->setOrderId($paramsMapping['id']);
-                $QbcSciSell->setItemId($paramsItem['id']);
-                $QbcSciSell->setUnit($i);
-                //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
-                $QbcSciSell->save();
+            if($params['params']['sci_send'] == 1){
+                $resultSell = $this->sendSell($paramsSell);
+                if($resultSell->Estado == 'aprobado'){
+                    $QbcSciSell = new QbcSciSell();
+                    $QbcSciSell->setPetitionId($newIdPetition);
+                    $QbcSciSell->setOrderId($paramsMapping['id']);
+                    $QbcSciSell->setItemId($paramsItem['id']);
+                    $QbcSciSell->setUnit($i);
+                    //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
+                    $QbcSciSell->save();
+                }
+                $resultSellArray[] = $resultSell;
             }
 
-            $resultSellArray[] = $resultSell;
+
         }
 
         print "<pre>";
@@ -1302,18 +1295,6 @@ class General {
         die();
 
 
-
-        if($resultSell->Estado == 'aprobado' && !empty($QbcSciSellQuery)){
-            $QbcSciSellQuery->setPetitionId($newIdPetition);
-            $QbcSciSellQuery->save();
-            $result['save'] = 'true';
-        }else if($resultSell->Estado == 'aprobado' && empty($QbcSciSellQuery)){
-            $QbcSciSell = new QbcSciSell();
-            $QbcSciSell->setPetitionId($newIdPetition);
-            $QbcSciSell->setOrderId($idSell);
-            //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
-            $QbcSciSell->save();
-        }
 
         $result['resultSell'] = $resultSell;
 

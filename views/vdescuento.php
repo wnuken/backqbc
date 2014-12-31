@@ -7,7 +7,24 @@
             <div class="panel-body">
                 <h2>Enviar peticion descuento</h2>
                 <form id="vdescuento" name="vdescuento" method='POST'>
-                    <input placeholder="Pedido a procesar" id="text" name="text" type="text" >
+                    <div class="form-group">
+                        <label for="text">Pedido a procesar</label>
+                        <input class="form-control" placeholder="Pedido a procesar" id="text" name="text" type="text" >
+                    </div>
+                    <div class="form-group">
+                        <label for="button">Enviar al Mediador</label>
+                    </div>
+                    <div class="btn-group" id="send">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
+                            <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No enviar </span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" id='sendchange'>
+                            <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
+                            <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
+                            <input type="hidden" id="sci_send" value="0">
+                        </ul>
+                    </div>                    
+
                     <input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
                 </form>
             </div>

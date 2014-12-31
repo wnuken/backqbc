@@ -230,7 +230,11 @@ $('input#summit', $formvdescuento).on('click', function(e){
     var $that = $(this);
     //$that.button('loading');
     e.preventDefault();
-    var params = $('input#text').val();
+    var params = {
+        'id' : $('input#text').val(),
+        'sci_send' : $('input#sci_send').val()
+    };
+    
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
