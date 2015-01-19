@@ -61,7 +61,17 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
                     </ul>
                 </li>
-                <li><a href="#about">Generar XML</a></li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="glyphicon glyphicon-folder-close"></i> Pancartas NewsLetter <span class="caret"></span>
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="./pancartas-externas"><i class="glyphicon glyphicon-folder-close"></i> Externas </a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Procesos alternos</li>
+                        <li><a href="./pancartas-qbc"><i class="glyphicon glyphicon-adjust"></i> QBC </a></li>
+                    </ul>
+                </li>
                 <li><a href="#contact">Contactos</a></li>
                 <li class="dropdown" style="float:rigth;">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php print $user; ?> <span class="caret"></span></a>

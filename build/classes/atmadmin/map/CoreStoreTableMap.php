@@ -58,6 +58,7 @@ class CoreStoreTableMap extends TableMap
         $this->addRelation('CustomerEntity', 'CustomerEntity', RelationMap::ONE_TO_MANY, array('store_id' => 'store_id', ), 'SET NULL', 'CASCADE', 'CustomerEntitys');
         $this->addRelation('SalesFlatOrder', 'SalesFlatOrder', RelationMap::ONE_TO_MANY, array('store_id' => 'store_id', ), 'SET NULL', 'CASCADE', 'SalesFlatOrders');
         $this->addRelation('SalesFlatOrderItem', 'SalesFlatOrderItem', RelationMap::ONE_TO_MANY, array('store_id' => 'store_id', ), 'SET NULL', 'CASCADE', 'SalesFlatOrderItems');
+        $this->addRelation('EnterpriseBannerContent', 'EnterpriseBannerContent', RelationMap::ONE_TO_MANY, array('store_id' => 'store_id', ), 'CASCADE', 'CASCADE', 'EnterpriseBannerContents');
     } // buildRelations()
 
 } // CoreStoreTableMap

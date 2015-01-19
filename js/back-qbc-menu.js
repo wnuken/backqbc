@@ -19,6 +19,7 @@ var $bar = $('div#progress_bar');
 var $sendchange = $('ul#sendchange');
 var $menu = $('ul#menunav');
 var $formvdescuento = $("form#vdescuento");
+var $formPancarta = $("form#pancartas");
 
 
 
@@ -239,6 +240,21 @@ $('input#summit', $formvdescuento).on('click', function(e){
     $('div#response').html('');
     $('div#response').css({'display':'none'});
     $formvdescuento.getFuntions({'params':params, 'class':'sendselldiscount'});
+});
+
+
+$('input#submit', $formPancarta).on('click', function(e){
+    var $that = $(this);
+    // $that.button('loading');
+    e.preventDefault();
+    var params = {
+        'name' : $('input#name', $formPancarta).val()
+    };
+    
+    $('div#progress').css({'display':'block'});
+    $('div#response').html('');
+    $('div#response').css({'display':'none'});
+    $formPancarta.getFuntions({'params':params, 'class':'pancartacons'});
 });
 
 

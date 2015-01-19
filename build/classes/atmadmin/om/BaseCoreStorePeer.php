@@ -394,6 +394,9 @@ abstract class BaseCoreStorePeer
         // Invalidate objects in SalesFlatOrderItemPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         SalesFlatOrderItemPeer::clearInstancePool();
+        // Invalidate objects in EnterpriseBannerContentPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        EnterpriseBannerContentPeer::clearInstancePool();
     }
 
     /**

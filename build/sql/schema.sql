@@ -549,6 +549,7 @@ CREATE TABLE coupon_mapping
     unit INTEGER(5),
     personalized_coupon int(10) unsigned,
     pos_number VARCHAR(50),
+    hash VARCHAR(255) NOT NULL,
     PRIMARY KEY (mapping_id),
     UNIQUE INDEX UNQ_MAPPING (coupon_md5),
     INDEX ORDER_ID (order_id),
@@ -1515,6 +1516,50 @@ CREATE TABLE qbc_sci_closure
     porcentaje_iva DECIMAL(18,3),
     status INTEGER(10) DEFAULT 0 NOT NULL,
     PRIMARY KEY (Id)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- enterprise_banner
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS enterprise_banner;
+
+CREATE TABLE enterprise_banner
+(
+    banner_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255),
+    is_enabled INTEGER NOT NULL,
+    types VARCHAR(255),
+    subhome VARCHAR(255),
+    start_date DATETIME,
+    end_date DATETIME,
+    PRIMARY KEY (banner_id)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- enterprise_banner_content
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS enterprise_banner_content;
+
+CREATE TABLE enterprise_banner_content
+(
+    banner_id int(10) unsigned DEFAULT 0 NOT NULL,
+    store_id smallint(5) unsigned DEFAULT 0 NOT NULL,
+    banner_content TEXT,
+    PRIMARY KEY (banner_id,store_id),
+    INDEX IDX_ENTERPRISE_BANNER_CONTENT_BANNER_ID (banner_id),
+    INDEX IDX_ENTERPRISE_BANNER_CONTENT_STORE_ID (store_id),
+    CONSTRAINT FK_ENTERPRISE_BANNER_CONTENT_STORE_ID_CORE_STORE_STORE_ID
+        FOREIGN KEY (store_id)
+        REFERENCES core_store (store_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT FK_ENT_BANNER_CONTENT_BANNER_ID_ENT_BANNER_BANNER_ID
+        FOREIGN KEY (banner_id)
+        REFERENCES enterprise_banner (banner_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

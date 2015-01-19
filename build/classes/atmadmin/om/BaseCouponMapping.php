@@ -116,6 +116,12 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
     protected $pos_number;
 
     /**
+     * The value for the hash field.
+     * @var        string
+     */
+    protected $hash;
+
+    /**
      * @var        SalesFlatOrder
      */
     protected $aSalesFlatOrder;
@@ -348,6 +354,17 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
     {
 
         return $this->pos_number;
+    }
+
+    /**
+     * Get the [hash] column value.
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+
+        return $this->hash;
     }
 
     /**
@@ -655,6 +672,27 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
     } // setPosNumber()
 
     /**
+     * Set the value of [hash] column.
+     *
+     * @param  string $v new value
+     * @return CouponMapping The current object (for fluent API support)
+     */
+    public function setHash($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->hash !== $v) {
+            $this->hash = $v;
+            $this->modifiedColumns[] = CouponMappingPeer::HASH;
+        }
+
+
+        return $this;
+    } // setHash()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -708,6 +746,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
             $this->unit = ($row[$startcol + 11] !== null) ? (int) $row[$startcol + 11] : null;
             $this->personalized_coupon = ($row[$startcol + 12] !== null) ? (int) $row[$startcol + 12] : null;
             $this->pos_number = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
+            $this->hash = ($row[$startcol + 14] !== null) ? (string) $row[$startcol + 14] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -717,7 +756,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 14; // 14 = CouponMappingPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 15; // 15 = CouponMappingPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating CouponMapping object", $e);
@@ -998,6 +1037,9 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
         if ($this->isColumnModified(CouponMappingPeer::POS_NUMBER)) {
             $modifiedColumns[':p' . $index++]  = 'pos_number';
         }
+        if ($this->isColumnModified(CouponMappingPeer::HASH)) {
+            $modifiedColumns[':p' . $index++]  = 'hash';
+        }
 
         $sql = sprintf(
             'INSERT INTO coupon_mapping (%s) VALUES (%s)',
@@ -1050,6 +1092,9 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
                         break;
                     case 'pos_number':
                         $stmt->bindValue($identifier, $this->pos_number, PDO::PARAM_STR);
+                        break;
+                    case 'hash':
+                        $stmt->bindValue($identifier, $this->hash, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -1245,6 +1290,9 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
             case 13:
                 return $this->getPosNumber();
                 break;
+            case 14:
+                return $this->getHash();
+                break;
             default:
                 return null;
                 break;
@@ -1288,6 +1336,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
             $keys[11] => $this->getUnit(),
             $keys[12] => $this->getPersonalizedCoupon(),
             $keys[13] => $this->getPosNumber(),
+            $keys[14] => $this->getHash(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -1378,6 +1427,9 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
             case 13:
                 $this->setPosNumber($value);
                 break;
+            case 14:
+                $this->setHash($value);
+                break;
         } // switch()
     }
 
@@ -1416,6 +1468,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
         if (array_key_exists($keys[11], $arr)) $this->setUnit($arr[$keys[11]]);
         if (array_key_exists($keys[12], $arr)) $this->setPersonalizedCoupon($arr[$keys[12]]);
         if (array_key_exists($keys[13], $arr)) $this->setPosNumber($arr[$keys[13]]);
+        if (array_key_exists($keys[14], $arr)) $this->setHash($arr[$keys[14]]);
     }
 
     /**
@@ -1441,6 +1494,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
         if ($this->isColumnModified(CouponMappingPeer::UNIT)) $criteria->add(CouponMappingPeer::UNIT, $this->unit);
         if ($this->isColumnModified(CouponMappingPeer::PERSONALIZED_COUPON)) $criteria->add(CouponMappingPeer::PERSONALIZED_COUPON, $this->personalized_coupon);
         if ($this->isColumnModified(CouponMappingPeer::POS_NUMBER)) $criteria->add(CouponMappingPeer::POS_NUMBER, $this->pos_number);
+        if ($this->isColumnModified(CouponMappingPeer::HASH)) $criteria->add(CouponMappingPeer::HASH, $this->hash);
 
         return $criteria;
     }
@@ -1517,6 +1571,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
         $copyObj->setUnit($this->getUnit());
         $copyObj->setPersonalizedCoupon($this->getPersonalizedCoupon());
         $copyObj->setPosNumber($this->getPosNumber());
+        $copyObj->setHash($this->getHash());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1700,6 +1755,7 @@ abstract class BaseCouponMapping extends BaseObject implements Persistent
         $this->unit = null;
         $this->personalized_coupon = null;
         $this->pos_number = null;
+        $this->hash = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

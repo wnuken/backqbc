@@ -52,6 +52,7 @@ class CouponMappingTableMap extends TableMap
         $this->addColumn('unit', 'Unit', 'INTEGER', false, 5, null);
         $this->addForeignKey('personalized_coupon', 'PersonalizedCoupon', 'INTEGER', 'personalized_coupons', 'id', false, 10, null);
         $this->addColumn('pos_number', 'PosNumber', 'VARCHAR', false, 50, null);
+        $this->addColumn('hash', 'Hash', 'VARCHAR', true, 255, null);
         // validators
     } // initialize()
 

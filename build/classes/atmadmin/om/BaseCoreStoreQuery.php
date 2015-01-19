@@ -46,6 +46,10 @@
  * @method CoreStoreQuery rightJoinSalesFlatOrderItem($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SalesFlatOrderItem relation
  * @method CoreStoreQuery innerJoinSalesFlatOrderItem($relationAlias = null) Adds a INNER JOIN clause to the query using the SalesFlatOrderItem relation
  *
+ * @method CoreStoreQuery leftJoinEnterpriseBannerContent($relationAlias = null) Adds a LEFT JOIN clause to the query using the EnterpriseBannerContent relation
+ * @method CoreStoreQuery rightJoinEnterpriseBannerContent($relationAlias = null) Adds a RIGHT JOIN clause to the query using the EnterpriseBannerContent relation
+ * @method CoreStoreQuery innerJoinEnterpriseBannerContent($relationAlias = null) Adds a INNER JOIN clause to the query using the EnterpriseBannerContent relation
+ *
  * @method CoreStore findOne(PropelPDO $con = null) Return the first CoreStore matching the query
  * @method CoreStore findOneOrCreate(PropelPDO $con = null) Return the first CoreStore matching the query, or a new CoreStore object populated from the query conditions when no match is found
  *
@@ -903,6 +907,80 @@ abstract class BaseCoreStoreQuery extends ModelCriteria
         return $this
             ->joinSalesFlatOrderItem($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'SalesFlatOrderItem', 'SalesFlatOrderItemQuery');
+    }
+
+    /**
+     * Filter the query by a related EnterpriseBannerContent object
+     *
+     * @param   EnterpriseBannerContent|PropelObjectCollection $enterpriseBannerContent  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 CoreStoreQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByEnterpriseBannerContent($enterpriseBannerContent, $comparison = null)
+    {
+        if ($enterpriseBannerContent instanceof EnterpriseBannerContent) {
+            return $this
+                ->addUsingAlias(CoreStorePeer::STORE_ID, $enterpriseBannerContent->getStoreId(), $comparison);
+        } elseif ($enterpriseBannerContent instanceof PropelObjectCollection) {
+            return $this
+                ->useEnterpriseBannerContentQuery()
+                ->filterByPrimaryKeys($enterpriseBannerContent->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByEnterpriseBannerContent() only accepts arguments of type EnterpriseBannerContent or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the EnterpriseBannerContent relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return CoreStoreQuery The current query, for fluid interface
+     */
+    public function joinEnterpriseBannerContent($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('EnterpriseBannerContent');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'EnterpriseBannerContent');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the EnterpriseBannerContent relation EnterpriseBannerContent object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   EnterpriseBannerContentQuery A secondary query class using the current class as primary query
+     */
+    public function useEnterpriseBannerContentQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinEnterpriseBannerContent($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'EnterpriseBannerContent', 'EnterpriseBannerContentQuery');
     }
 
     /**

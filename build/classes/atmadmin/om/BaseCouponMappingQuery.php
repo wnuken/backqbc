@@ -20,6 +20,7 @@
  * @method CouponMappingQuery orderByUnit($order = Criteria::ASC) Order by the unit column
  * @method CouponMappingQuery orderByPersonalizedCoupon($order = Criteria::ASC) Order by the personalized_coupon column
  * @method CouponMappingQuery orderByPosNumber($order = Criteria::ASC) Order by the pos_number column
+ * @method CouponMappingQuery orderByHash($order = Criteria::ASC) Order by the hash column
  *
  * @method CouponMappingQuery groupByMappingId() Group by the mapping_id column
  * @method CouponMappingQuery groupByCoupon() Group by the coupon column
@@ -35,6 +36,7 @@
  * @method CouponMappingQuery groupByUnit() Group by the unit column
  * @method CouponMappingQuery groupByPersonalizedCoupon() Group by the personalized_coupon column
  * @method CouponMappingQuery groupByPosNumber() Group by the pos_number column
+ * @method CouponMappingQuery groupByHash() Group by the hash column
  *
  * @method CouponMappingQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method CouponMappingQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -64,6 +66,7 @@
  * @method CouponMapping findOneByUnit(int $unit) Return the first CouponMapping filtered by the unit column
  * @method CouponMapping findOneByPersonalizedCoupon(int $personalized_coupon) Return the first CouponMapping filtered by the personalized_coupon column
  * @method CouponMapping findOneByPosNumber(string $pos_number) Return the first CouponMapping filtered by the pos_number column
+ * @method CouponMapping findOneByHash(string $hash) Return the first CouponMapping filtered by the hash column
  *
  * @method array findByMappingId(int $mapping_id) Return CouponMapping objects filtered by the mapping_id column
  * @method array findByCoupon(string $coupon) Return CouponMapping objects filtered by the coupon column
@@ -79,6 +82,7 @@
  * @method array findByUnit(int $unit) Return CouponMapping objects filtered by the unit column
  * @method array findByPersonalizedCoupon(int $personalized_coupon) Return CouponMapping objects filtered by the personalized_coupon column
  * @method array findByPosNumber(string $pos_number) Return CouponMapping objects filtered by the pos_number column
+ * @method array findByHash(string $hash) Return CouponMapping objects filtered by the hash column
  *
  * @package    propel.generator.atmadmin.om
  */
@@ -186,7 +190,7 @@ abstract class BaseCouponMappingQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT mapping_id, coupon, coupon_md5, expiration_date, customer_id, can_send, status, order_id, item_id, payed_for_return, increment_id, unit, personalized_coupon, pos_number FROM coupon_mapping WHERE mapping_id = :p0';
+        $sql = 'SELECT mapping_id, coupon, coupon_md5, expiration_date, customer_id, can_send, status, order_id, item_id, payed_for_return, increment_id, unit, personalized_coupon, pos_number, hash FROM coupon_mapping WHERE mapping_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -812,6 +816,35 @@ abstract class BaseCouponMappingQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(CouponMappingPeer::POS_NUMBER, $posNumber, $comparison);
+    }
+
+    /**
+     * Filter the query on the hash column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByHash('fooValue');   // WHERE hash = 'fooValue'
+     * $query->filterByHash('%fooValue%'); // WHERE hash LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $hash The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return CouponMappingQuery The current query, for fluid interface
+     */
+    public function filterByHash($hash = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($hash)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $hash)) {
+                $hash = str_replace('*', '%', $hash);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(CouponMappingPeer::HASH, $hash, $comparison);
     }
 
     /**

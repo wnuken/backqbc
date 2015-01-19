@@ -104,6 +104,12 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
     protected $collSalesFlatOrderItemsPartial;
 
     /**
+     * @var        PropelObjectCollection|EnterpriseBannerContent[] Collection to store aggregation of EnterpriseBannerContent objects.
+     */
+    protected $collEnterpriseBannerContents;
+    protected $collEnterpriseBannerContentsPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -140,6 +146,12 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
      * @var		PropelObjectCollection
      */
     protected $salesFlatOrderItemsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $enterpriseBannerContentsScheduledForDeletion = null;
 
     /**
      * Applies default values to this object.
@@ -537,6 +549,8 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
 
             $this->collSalesFlatOrderItems = null;
 
+            $this->collEnterpriseBannerContents = null;
+
         } // if (deep)
     }
 
@@ -728,6 +742,23 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
 
             if ($this->collSalesFlatOrderItems !== null) {
                 foreach ($this->collSalesFlatOrderItems as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->enterpriseBannerContentsScheduledForDeletion !== null) {
+                if (!$this->enterpriseBannerContentsScheduledForDeletion->isEmpty()) {
+                    EnterpriseBannerContentQuery::create()
+                        ->filterByPrimaryKeys($this->enterpriseBannerContentsScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->enterpriseBannerContentsScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collEnterpriseBannerContents !== null) {
+                foreach ($this->collEnterpriseBannerContents as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -954,6 +985,14 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->collEnterpriseBannerContents !== null) {
+                    foreach ($this->collEnterpriseBannerContents as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -1068,6 +1107,9 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
             }
             if (null !== $this->collSalesFlatOrderItems) {
                 $result['SalesFlatOrderItems'] = $this->collSalesFlatOrderItems->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collEnterpriseBannerContents) {
+                $result['EnterpriseBannerContents'] = $this->collEnterpriseBannerContents->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1268,6 +1310,12 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
                 }
             }
 
+            foreach ($this->getEnterpriseBannerContents() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addEnterpriseBannerContent($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
@@ -1441,6 +1489,9 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
         }
         if ('SalesFlatOrderItem' == $relationName) {
             $this->initSalesFlatOrderItems();
+        }
+        if ('EnterpriseBannerContent' == $relationName) {
+            $this->initEnterpriseBannerContents();
         }
     }
 
@@ -2195,6 +2246,259 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collEnterpriseBannerContents collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return CoreStore The current object (for fluent API support)
+     * @see        addEnterpriseBannerContents()
+     */
+    public function clearEnterpriseBannerContents()
+    {
+        $this->collEnterpriseBannerContents = null; // important to set this to null since that means it is uninitialized
+        $this->collEnterpriseBannerContentsPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collEnterpriseBannerContents collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialEnterpriseBannerContents($v = true)
+    {
+        $this->collEnterpriseBannerContentsPartial = $v;
+    }
+
+    /**
+     * Initializes the collEnterpriseBannerContents collection.
+     *
+     * By default this just sets the collEnterpriseBannerContents collection to an empty array (like clearcollEnterpriseBannerContents());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initEnterpriseBannerContents($overrideExisting = true)
+    {
+        if (null !== $this->collEnterpriseBannerContents && !$overrideExisting) {
+            return;
+        }
+        $this->collEnterpriseBannerContents = new PropelObjectCollection();
+        $this->collEnterpriseBannerContents->setModel('EnterpriseBannerContent');
+    }
+
+    /**
+     * Gets an array of EnterpriseBannerContent objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this CoreStore is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|EnterpriseBannerContent[] List of EnterpriseBannerContent objects
+     * @throws PropelException
+     */
+    public function getEnterpriseBannerContents($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collEnterpriseBannerContentsPartial && !$this->isNew();
+        if (null === $this->collEnterpriseBannerContents || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collEnterpriseBannerContents) {
+                // return empty collection
+                $this->initEnterpriseBannerContents();
+            } else {
+                $collEnterpriseBannerContents = EnterpriseBannerContentQuery::create(null, $criteria)
+                    ->filterByCoreStore($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collEnterpriseBannerContentsPartial && count($collEnterpriseBannerContents)) {
+                      $this->initEnterpriseBannerContents(false);
+
+                      foreach ($collEnterpriseBannerContents as $obj) {
+                        if (false == $this->collEnterpriseBannerContents->contains($obj)) {
+                          $this->collEnterpriseBannerContents->append($obj);
+                        }
+                      }
+
+                      $this->collEnterpriseBannerContentsPartial = true;
+                    }
+
+                    $collEnterpriseBannerContents->getInternalIterator()->rewind();
+
+                    return $collEnterpriseBannerContents;
+                }
+
+                if ($partial && $this->collEnterpriseBannerContents) {
+                    foreach ($this->collEnterpriseBannerContents as $obj) {
+                        if ($obj->isNew()) {
+                            $collEnterpriseBannerContents[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collEnterpriseBannerContents = $collEnterpriseBannerContents;
+                $this->collEnterpriseBannerContentsPartial = false;
+            }
+        }
+
+        return $this->collEnterpriseBannerContents;
+    }
+
+    /**
+     * Sets a collection of EnterpriseBannerContent objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $enterpriseBannerContents A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return CoreStore The current object (for fluent API support)
+     */
+    public function setEnterpriseBannerContents(PropelCollection $enterpriseBannerContents, PropelPDO $con = null)
+    {
+        $enterpriseBannerContentsToDelete = $this->getEnterpriseBannerContents(new Criteria(), $con)->diff($enterpriseBannerContents);
+
+
+        //since at least one column in the foreign key is at the same time a PK
+        //we can not just set a PK to NULL in the lines below. We have to store
+        //a backup of all values, so we are able to manipulate these items based on the onDelete value later.
+        $this->enterpriseBannerContentsScheduledForDeletion = clone $enterpriseBannerContentsToDelete;
+
+        foreach ($enterpriseBannerContentsToDelete as $enterpriseBannerContentRemoved) {
+            $enterpriseBannerContentRemoved->setCoreStore(null);
+        }
+
+        $this->collEnterpriseBannerContents = null;
+        foreach ($enterpriseBannerContents as $enterpriseBannerContent) {
+            $this->addEnterpriseBannerContent($enterpriseBannerContent);
+        }
+
+        $this->collEnterpriseBannerContents = $enterpriseBannerContents;
+        $this->collEnterpriseBannerContentsPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related EnterpriseBannerContent objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related EnterpriseBannerContent objects.
+     * @throws PropelException
+     */
+    public function countEnterpriseBannerContents(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collEnterpriseBannerContentsPartial && !$this->isNew();
+        if (null === $this->collEnterpriseBannerContents || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collEnterpriseBannerContents) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getEnterpriseBannerContents());
+            }
+            $query = EnterpriseBannerContentQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByCoreStore($this)
+                ->count($con);
+        }
+
+        return count($this->collEnterpriseBannerContents);
+    }
+
+    /**
+     * Method called to associate a EnterpriseBannerContent object to this object
+     * through the EnterpriseBannerContent foreign key attribute.
+     *
+     * @param    EnterpriseBannerContent $l EnterpriseBannerContent
+     * @return CoreStore The current object (for fluent API support)
+     */
+    public function addEnterpriseBannerContent(EnterpriseBannerContent $l)
+    {
+        if ($this->collEnterpriseBannerContents === null) {
+            $this->initEnterpriseBannerContents();
+            $this->collEnterpriseBannerContentsPartial = true;
+        }
+
+        if (!in_array($l, $this->collEnterpriseBannerContents->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddEnterpriseBannerContent($l);
+
+            if ($this->enterpriseBannerContentsScheduledForDeletion and $this->enterpriseBannerContentsScheduledForDeletion->contains($l)) {
+                $this->enterpriseBannerContentsScheduledForDeletion->remove($this->enterpriseBannerContentsScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	EnterpriseBannerContent $enterpriseBannerContent The enterpriseBannerContent object to add.
+     */
+    protected function doAddEnterpriseBannerContent($enterpriseBannerContent)
+    {
+        $this->collEnterpriseBannerContents[]= $enterpriseBannerContent;
+        $enterpriseBannerContent->setCoreStore($this);
+    }
+
+    /**
+     * @param	EnterpriseBannerContent $enterpriseBannerContent The enterpriseBannerContent object to remove.
+     * @return CoreStore The current object (for fluent API support)
+     */
+    public function removeEnterpriseBannerContent($enterpriseBannerContent)
+    {
+        if ($this->getEnterpriseBannerContents()->contains($enterpriseBannerContent)) {
+            $this->collEnterpriseBannerContents->remove($this->collEnterpriseBannerContents->search($enterpriseBannerContent));
+            if (null === $this->enterpriseBannerContentsScheduledForDeletion) {
+                $this->enterpriseBannerContentsScheduledForDeletion = clone $this->collEnterpriseBannerContents;
+                $this->enterpriseBannerContentsScheduledForDeletion->clear();
+            }
+            $this->enterpriseBannerContentsScheduledForDeletion[]= clone $enterpriseBannerContent;
+            $enterpriseBannerContent->setCoreStore(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this CoreStore is new, it will return
+     * an empty collection; or if this CoreStore has previously
+     * been saved, it will retrieve related EnterpriseBannerContents from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in CoreStore.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|EnterpriseBannerContent[] List of EnterpriseBannerContent objects
+     */
+    public function getEnterpriseBannerContentsJoinEnterpriseBanner($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = EnterpriseBannerContentQuery::create(null, $criteria);
+        $query->joinWith('EnterpriseBanner', $join_behavior);
+
+        return $this->getEnterpriseBannerContents($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -2244,6 +2548,11 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collEnterpriseBannerContents) {
+                foreach ($this->collEnterpriseBannerContents as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->aCoreStoreGroup instanceof Persistent) {
               $this->aCoreStoreGroup->clearAllReferences($deep);
             }
@@ -2266,6 +2575,10 @@ abstract class BaseCoreStore extends BaseObject implements Persistent
             $this->collSalesFlatOrderItems->clearIterator();
         }
         $this->collSalesFlatOrderItems = null;
+        if ($this->collEnterpriseBannerContents instanceof PropelCollection) {
+            $this->collEnterpriseBannerContents->clearIterator();
+        }
+        $this->collEnterpriseBannerContents = null;
         $this->aCoreStoreGroup = null;
         $this->aCoreWebsite = null;
     }

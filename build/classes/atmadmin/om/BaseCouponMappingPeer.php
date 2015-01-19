@@ -24,13 +24,13 @@ abstract class BaseCouponMappingPeer
     const TM_CLASS = 'CouponMappingTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 14;
+    const NUM_COLUMNS = 15;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 14;
+    const NUM_HYDRATE_COLUMNS = 15;
 
     /** the column name for the mapping_id field */
     const MAPPING_ID = 'coupon_mapping.mapping_id';
@@ -74,6 +74,9 @@ abstract class BaseCouponMappingPeer
     /** the column name for the pos_number field */
     const POS_NUMBER = 'coupon_mapping.pos_number';
 
+    /** the column name for the hash field */
+    const HASH = 'coupon_mapping.hash';
+
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
@@ -93,12 +96,12 @@ abstract class BaseCouponMappingPeer
      * e.g. CouponMappingPeer::$fieldNames[CouponMappingPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('MappingId', 'Coupon', 'CouponMd5', 'ExpirationDate', 'CustomerId', 'CanSend', 'Status', 'OrderId', 'ItemId', 'PayedForReturn', 'IncrementId', 'Unit', 'PersonalizedCoupon', 'PosNumber', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('mappingId', 'coupon', 'couponMd5', 'expirationDate', 'customerId', 'canSend', 'status', 'orderId', 'itemId', 'payedForReturn', 'incrementId', 'unit', 'personalizedCoupon', 'posNumber', ),
-        BasePeer::TYPE_COLNAME => array (CouponMappingPeer::MAPPING_ID, CouponMappingPeer::COUPON, CouponMappingPeer::COUPON_MD5, CouponMappingPeer::EXPIRATION_DATE, CouponMappingPeer::CUSTOMER_ID, CouponMappingPeer::CAN_SEND, CouponMappingPeer::STATUS, CouponMappingPeer::ORDER_ID, CouponMappingPeer::ITEM_ID, CouponMappingPeer::PAYED_FOR_RETURN, CouponMappingPeer::INCREMENT_ID, CouponMappingPeer::UNIT, CouponMappingPeer::PERSONALIZED_COUPON, CouponMappingPeer::POS_NUMBER, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('MAPPING_ID', 'COUPON', 'COUPON_MD5', 'EXPIRATION_DATE', 'CUSTOMER_ID', 'CAN_SEND', 'STATUS', 'ORDER_ID', 'ITEM_ID', 'PAYED_FOR_RETURN', 'INCREMENT_ID', 'UNIT', 'PERSONALIZED_COUPON', 'POS_NUMBER', ),
-        BasePeer::TYPE_FIELDNAME => array ('mapping_id', 'coupon', 'coupon_md5', 'expiration_date', 'customer_id', 'can_send', 'status', 'order_id', 'item_id', 'payed_for_return', 'increment_id', 'unit', 'personalized_coupon', 'pos_number', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+        BasePeer::TYPE_PHPNAME => array ('MappingId', 'Coupon', 'CouponMd5', 'ExpirationDate', 'CustomerId', 'CanSend', 'Status', 'OrderId', 'ItemId', 'PayedForReturn', 'IncrementId', 'Unit', 'PersonalizedCoupon', 'PosNumber', 'Hash', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('mappingId', 'coupon', 'couponMd5', 'expirationDate', 'customerId', 'canSend', 'status', 'orderId', 'itemId', 'payedForReturn', 'incrementId', 'unit', 'personalizedCoupon', 'posNumber', 'hash', ),
+        BasePeer::TYPE_COLNAME => array (CouponMappingPeer::MAPPING_ID, CouponMappingPeer::COUPON, CouponMappingPeer::COUPON_MD5, CouponMappingPeer::EXPIRATION_DATE, CouponMappingPeer::CUSTOMER_ID, CouponMappingPeer::CAN_SEND, CouponMappingPeer::STATUS, CouponMappingPeer::ORDER_ID, CouponMappingPeer::ITEM_ID, CouponMappingPeer::PAYED_FOR_RETURN, CouponMappingPeer::INCREMENT_ID, CouponMappingPeer::UNIT, CouponMappingPeer::PERSONALIZED_COUPON, CouponMappingPeer::POS_NUMBER, CouponMappingPeer::HASH, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('MAPPING_ID', 'COUPON', 'COUPON_MD5', 'EXPIRATION_DATE', 'CUSTOMER_ID', 'CAN_SEND', 'STATUS', 'ORDER_ID', 'ITEM_ID', 'PAYED_FOR_RETURN', 'INCREMENT_ID', 'UNIT', 'PERSONALIZED_COUPON', 'POS_NUMBER', 'HASH', ),
+        BasePeer::TYPE_FIELDNAME => array ('mapping_id', 'coupon', 'coupon_md5', 'expiration_date', 'customer_id', 'can_send', 'status', 'order_id', 'item_id', 'payed_for_return', 'increment_id', 'unit', 'personalized_coupon', 'pos_number', 'hash', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
     );
 
     /**
@@ -108,12 +111,12 @@ abstract class BaseCouponMappingPeer
      * e.g. CouponMappingPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('MappingId' => 0, 'Coupon' => 1, 'CouponMd5' => 2, 'ExpirationDate' => 3, 'CustomerId' => 4, 'CanSend' => 5, 'Status' => 6, 'OrderId' => 7, 'ItemId' => 8, 'PayedForReturn' => 9, 'IncrementId' => 10, 'Unit' => 11, 'PersonalizedCoupon' => 12, 'PosNumber' => 13, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('mappingId' => 0, 'coupon' => 1, 'couponMd5' => 2, 'expirationDate' => 3, 'customerId' => 4, 'canSend' => 5, 'status' => 6, 'orderId' => 7, 'itemId' => 8, 'payedForReturn' => 9, 'incrementId' => 10, 'unit' => 11, 'personalizedCoupon' => 12, 'posNumber' => 13, ),
-        BasePeer::TYPE_COLNAME => array (CouponMappingPeer::MAPPING_ID => 0, CouponMappingPeer::COUPON => 1, CouponMappingPeer::COUPON_MD5 => 2, CouponMappingPeer::EXPIRATION_DATE => 3, CouponMappingPeer::CUSTOMER_ID => 4, CouponMappingPeer::CAN_SEND => 5, CouponMappingPeer::STATUS => 6, CouponMappingPeer::ORDER_ID => 7, CouponMappingPeer::ITEM_ID => 8, CouponMappingPeer::PAYED_FOR_RETURN => 9, CouponMappingPeer::INCREMENT_ID => 10, CouponMappingPeer::UNIT => 11, CouponMappingPeer::PERSONALIZED_COUPON => 12, CouponMappingPeer::POS_NUMBER => 13, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('MAPPING_ID' => 0, 'COUPON' => 1, 'COUPON_MD5' => 2, 'EXPIRATION_DATE' => 3, 'CUSTOMER_ID' => 4, 'CAN_SEND' => 5, 'STATUS' => 6, 'ORDER_ID' => 7, 'ITEM_ID' => 8, 'PAYED_FOR_RETURN' => 9, 'INCREMENT_ID' => 10, 'UNIT' => 11, 'PERSONALIZED_COUPON' => 12, 'POS_NUMBER' => 13, ),
-        BasePeer::TYPE_FIELDNAME => array ('mapping_id' => 0, 'coupon' => 1, 'coupon_md5' => 2, 'expiration_date' => 3, 'customer_id' => 4, 'can_send' => 5, 'status' => 6, 'order_id' => 7, 'item_id' => 8, 'payed_for_return' => 9, 'increment_id' => 10, 'unit' => 11, 'personalized_coupon' => 12, 'pos_number' => 13, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+        BasePeer::TYPE_PHPNAME => array ('MappingId' => 0, 'Coupon' => 1, 'CouponMd5' => 2, 'ExpirationDate' => 3, 'CustomerId' => 4, 'CanSend' => 5, 'Status' => 6, 'OrderId' => 7, 'ItemId' => 8, 'PayedForReturn' => 9, 'IncrementId' => 10, 'Unit' => 11, 'PersonalizedCoupon' => 12, 'PosNumber' => 13, 'Hash' => 14, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('mappingId' => 0, 'coupon' => 1, 'couponMd5' => 2, 'expirationDate' => 3, 'customerId' => 4, 'canSend' => 5, 'status' => 6, 'orderId' => 7, 'itemId' => 8, 'payedForReturn' => 9, 'incrementId' => 10, 'unit' => 11, 'personalizedCoupon' => 12, 'posNumber' => 13, 'hash' => 14, ),
+        BasePeer::TYPE_COLNAME => array (CouponMappingPeer::MAPPING_ID => 0, CouponMappingPeer::COUPON => 1, CouponMappingPeer::COUPON_MD5 => 2, CouponMappingPeer::EXPIRATION_DATE => 3, CouponMappingPeer::CUSTOMER_ID => 4, CouponMappingPeer::CAN_SEND => 5, CouponMappingPeer::STATUS => 6, CouponMappingPeer::ORDER_ID => 7, CouponMappingPeer::ITEM_ID => 8, CouponMappingPeer::PAYED_FOR_RETURN => 9, CouponMappingPeer::INCREMENT_ID => 10, CouponMappingPeer::UNIT => 11, CouponMappingPeer::PERSONALIZED_COUPON => 12, CouponMappingPeer::POS_NUMBER => 13, CouponMappingPeer::HASH => 14, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('MAPPING_ID' => 0, 'COUPON' => 1, 'COUPON_MD5' => 2, 'EXPIRATION_DATE' => 3, 'CUSTOMER_ID' => 4, 'CAN_SEND' => 5, 'STATUS' => 6, 'ORDER_ID' => 7, 'ITEM_ID' => 8, 'PAYED_FOR_RETURN' => 9, 'INCREMENT_ID' => 10, 'UNIT' => 11, 'PERSONALIZED_COUPON' => 12, 'POS_NUMBER' => 13, 'HASH' => 14, ),
+        BasePeer::TYPE_FIELDNAME => array ('mapping_id' => 0, 'coupon' => 1, 'coupon_md5' => 2, 'expiration_date' => 3, 'customer_id' => 4, 'can_send' => 5, 'status' => 6, 'order_id' => 7, 'item_id' => 8, 'payed_for_return' => 9, 'increment_id' => 10, 'unit' => 11, 'personalized_coupon' => 12, 'pos_number' => 13, 'hash' => 14, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
     );
 
     /**
@@ -201,6 +204,7 @@ abstract class BaseCouponMappingPeer
             $criteria->addSelectColumn(CouponMappingPeer::UNIT);
             $criteria->addSelectColumn(CouponMappingPeer::PERSONALIZED_COUPON);
             $criteria->addSelectColumn(CouponMappingPeer::POS_NUMBER);
+            $criteria->addSelectColumn(CouponMappingPeer::HASH);
         } else {
             $criteria->addSelectColumn($alias . '.mapping_id');
             $criteria->addSelectColumn($alias . '.coupon');
@@ -216,6 +220,7 @@ abstract class BaseCouponMappingPeer
             $criteria->addSelectColumn($alias . '.unit');
             $criteria->addSelectColumn($alias . '.personalized_coupon');
             $criteria->addSelectColumn($alias . '.pos_number');
+            $criteria->addSelectColumn($alias . '.hash');
         }
     }
 

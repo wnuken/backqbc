@@ -9,6 +9,7 @@
         "conpensationsend",
         "vfallidas",
         "sendxmldev",
-        "sendselldiscount"
+        "sendselldiscount",
+        "pancartacons"
     ]
 }

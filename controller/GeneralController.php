@@ -436,253 +436,9 @@ class General {
 
     }
 
-
-
-    //// ****** Funciones Querys ******* ////
-
-    private function CouponMappingQueryByIncrementId($params){
-        try{           
-            $result = CouponMappingQuery::create()->findOneByIncrementId($params);
-            if(empty($result)){
-                $result = '<h3>No hay ventas : </3>' . json_encode($params);
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception . $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-    private function SalesFlatOrderQueryByEntityId($params){
-        try{
-            $result = SalesFlatOrderQuery::create()->findOneByEntityId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe la orden: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function SalesFlatOrderQueryByIncrementId($params){
-        try{
-            $result = SalesFlatOrderQuery::create()->findOneByIncrementId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe la orden: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-    private function SalesFlatOrderItemQueryByItemId($params){
-        try{
-            $result = SalesFlatOrderItemQuery::create()->findOneByItemId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe el item: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function SalesFlatOrderItemQueryByOrderId($params){
-        try{
-            $result = SalesFlatOrderItemQuery::create()->findOneByOrderId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe el item: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function GroupdealsQueryByProductId($params){
-        try{
-            $result = GroupdealsQuery::create()->findOneByProductId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe el item: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-    private function TreasuryTypesQueryById($params){
-        try{
-            // TreasuryTypes
-            $result = TreasuryTypesQuery::create()->findOneById($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe el item: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-
-
-
-
-
-
-    private function PagosonlineQueryByIncrementId($params){
-        try{
-            $result = PagosonlineQuery::create()->findOneByOrderId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe la campaña: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-
-    private function GroupdealsQueryById($params){
-        try{
-            $result = GroupdealsQuery::create()->findOneByGroupdealsId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe la campaña: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-
-    private function GroupdealsMerchantsQueryById($params){
-        try{
-            $result = GroupdealsMerchantsQuery::create()->findOneByMerchantsId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No existe la el Aliado: </3>' . $params['id'];
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception .  $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function CouponHistoryQueryByCampaignId($params){
-        try{
-            $result = CouponHistoryQuery::create()->findByCampaignId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No hay redenciones : </3>' . json_encode($params['id']);
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception . $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-
-    }
-
-    private function QbcSciSellQueryByIncrementId($params){
-        try{           
-            $result = QbcSciSellQuery::create()->findByOrderId($params);
-            if(empty($result)){
-                $result = '<h3>No hay ventas : </3>' . json_encode($params);
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception . $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function QbcSciSellDocQueryByPetitionId($params){
-        try{           
-            $result = QbcSciSellDocQuery::create()->findByPetitionId($params['petitions']);
-            if(empty($result)){
-                $result = '<h3>No hay docs de ventas : </3>' . json_encode($params['petitions']);
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception . $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-    }
-
-    private function QbcSciDevolutionQueryByCampaignId($params){
-        try{           
-            $result = QbcSciDevolutionQuery::create()->findByCampaignId($params['id']);
-            if(empty($result)){
-                $result = '<h3>No hay devoluciones : </3>' . json_encode($params['id']);
-                var_dump($result);
-                die();
-            }
-        }catch (Exception $e){
-            $result = $this->exception . $e->getMessage(). "\n";
-            var_dump($result);
-            die();
-        }
-        return $result;
-
-    }
-
-
     private function getCouponsRedeemed($params){
-        $CouponHistoryQuery = $this->CouponHistoryQueryByCampaignId($params);
+        $Querys = new Querys();
+        $CouponHistoryQuery = $Querys->CouponHistoryByCampaignId($params);
 
         foreach ($CouponHistoryQuery as $key => $History) {
             $IncrementIds[] = $History->getOrderId();
@@ -698,7 +454,11 @@ class General {
     }
 
     private function getSellRedeemed($params){
-        $QbcSciSellQuery = $this->QbcSciSellQueryByIncrementId($params['ids']);
+        $Querys = new Querys();
+        $SellsPetitionId = array();
+        $SellOrderId = '';
+        $SellItemId = '';
+        $QbcSciSellQuery = $Querys->QbcSciSellByIncrementId($params['ids']);
 
         foreach ($QbcSciSellQuery as $key => $Sell) {
             if($Sell->getProcessed() == 0 && isset($params['coupons'][$Sell->getOrderId()][$Sell->getUnit()])){
@@ -718,7 +478,9 @@ class General {
     }
 
     private function getSellDocuments($params){
-        $QbcSciSellDocQuery = $this->QbcSciSellDocQueryByPetitionId($params);
+        $Querys = new Querys();
+        $result = array();
+        $QbcSciSellDocQuery = $Querys->QbcSciSellDocByPetitionId($params);
 
         foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
             $result['SellsDocumentId'][] =  $SellDoc->getDocumentId();
@@ -755,14 +517,20 @@ class General {
         $SellOrderId = "";
         $SellItemId = "";
         $GroupdealsParams['id'] = trim($params['params']['idcampaign']);
+        $Querys = new Querys();
 
-        $GroupdealsQuery = $this->GroupdealsQueryById($GroupdealsParams);
+        //$GroupdealsQuery = $this->GroupdealsQueryById($GroupdealsParams);
+
+        $GroupdealsQuery   = $Querys->GroupdealsById($GroupdealsParams);
+
         $MerchantParams['id'] = $GroupdealsQuery->getMerchantId();
 
-        $GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($MerchantParams);
+        //$GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($MerchantParams);
+        $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($MerchantParams);
 
         $CouponsRedeemed = $this->getCouponsRedeemed($GroupdealsParams);
         $SellRedeemed = $this->getSellRedeemed($CouponsRedeemed);
+        $paramsSend = $this->getSellDocuments($SellRedeemed);
 
         $TaxStatus = 'false';
         if($params['params']['pcam'] == 0)
@@ -788,7 +556,7 @@ class General {
         );
 
 
-        $paramsSend = $this->getSellDocuments($SellRedeemed);
+
 
         /* $devolutions = $this->getDevolutions($GroupdealsParams, $CouponsRedeemed['coupons']);
 
@@ -798,7 +566,8 @@ class General {
 */
         // Devolutions Docs
 
-        $QbcSciDevolutionQuery = $this->QbcSciDevolutionQueryByCampaignId($GroupdealsParams);
+        //$QbcSciDevolutionQuery = $this->QbcSciDevolutionQueryByCampaignId($GroupdealsParams);
+        $QbcSciDevolutionQuery = $Querys->QbcSciDevolutionByCampaignId($GroupdealsParams);
 
         foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
             $orderDev = explode('-', $Devolution->getCoupon());
@@ -1082,9 +851,11 @@ class General {
 
     }
 
-    ///// *********************** Descuento **************************** ///
+    ///// *********************** Ventas por valor POL - Descuento **************************** ///
 
     public function & sendSellDiscount(&$params){
+
+        $Querys = new Querys();
 
         // Validacion id Pedido
         if(!isset($params['params']) || empty($params['params'])){
@@ -1096,30 +867,32 @@ class General {
 
         // Obtener información del pedido
         $paramsMapping['id'] = $params['params']['id'];
+        $paramsMapping['one'] = 1;
 
-        $CouponMappingQuery = $this->CouponMappingQueryByIncrementId($paramsMapping);
+        $CouponMappingQuery = $Querys->CouponMappingByIncrementId($paramsMapping);
         $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
         $paramsItem['id'] = $CouponMappingQuery->getItemId();
 
-        $SalesFlatOrderQuery = $this->SalesFlatOrderQueryByEntityId($paramsOrder);
+        $SalesFlatOrderQuery = $Querys->SalesFlatOrderByEntityId($paramsOrder);
         //$totalPay = $SalesFlatOrderQuery->getBaseGrandTotal();
         $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
         $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
 
-        $SalesFlatOrderItemQuery = $this->SalesFlatOrderItemQueryByItemId($paramsItem);
+        $SalesFlatOrderItemQuery = $Querys->SalesFlatOrderItemByItemId($paramsItem);
         $paramsGroupDeals['id'] = $SalesFlatOrderItemQuery->getProductId(); 
+        $paramsGroupDeals['one'] = 1;
 
-        $GroupdealsQuery = $this->GroupdealsQueryByProductId($paramsGroupDeals);
+        $GroupdealsQuery = $Querys->GroupdealsByProductId($paramsGroupDeals);
         $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
         $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
 
-        $TreasuryTypesQuery = $this->TreasuryTypesQueryById($paramsTreasury);
+        $TreasuryTypesQuery = $Querys->TreasuryTypesById($paramsTreasury);
         $tresauryIva = $TreasuryTypesQuery->getIva();
 
-        $PagosOnLineQuery = $this->PagosonlineQueryByIncrementId($paramsMapping);
+        $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($paramsMapping);
         $totalPay = $PagosOnLineQuery->getValor();
 
-        $GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($paramsMerchants);
+        $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchants);
 
         $totalPay = round($totalPay, 0);
         $payToItem = $totalPay;
@@ -1204,7 +977,7 @@ class General {
                 $pagoAtributos->addAttribute("valor", $order['numeroTarjeta']);
 
                 if($order['medioPago'] == 11){ // Master
-                   $order['franquicia'] = 2;
+                    $order['franquicia'] = 2;
                 }else if($order['medioPago'] == 10){ // Visa
                     $order['franquicia'] = 4;
                 }else if($order['medioPago'] == 22){ //Diners
@@ -1278,8 +1051,8 @@ class General {
                 $resultSell = $this->sendSell($paramsSell);
                 if($resultSell->Estado == 'aprobado'){
                     $QbcSciSell = new QbcSciSell();
-                    $QbcSciSell->setPetitionId($newIdPetition);
-                    $QbcSciSell->setOrderId($paramsMapping['id']);
+                    $QbcSciSell->setPetitionId($order['newIdPetition']);
+                    $QbcSciSell->setOrderId($order['ventaId']);
                     $QbcSciSell->setItemId($paramsItem['id']);
                     $QbcSciSell->setUnit($i);
                     //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
@@ -1552,7 +1325,11 @@ class General {
         return $result;
     }
 
+    public function & pancartaCons(&$params){
+        // $Querys = new Querys();
 
+        return $params;
 
+    }
 
 }
