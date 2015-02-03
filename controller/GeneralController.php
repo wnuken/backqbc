@@ -1331,5 +1331,12 @@ class General {
         return $params;
 
     }
+    
+    public function & tryPay($params){
+        $Querys = new Querys();
+        $result = $Querys->GroupdealsPaginateComision($params);
+        return $result;
+    }
+    
 
 }

@@ -46,6 +46,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <i class="glyphicon glyphicon-briefcase"></i> Pago Aliado <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
+                        <li><a href="./aliados-revision"><i class="glyphicon glyphicon-list"></i> Revisión de campaña</a></li>
                         <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-briefcase"></i> Enviar petición</a></li>
                         <li><a href="./deletepay"><i class="glyphicon glyphicon-trash"></i> Elimiar petición</a></li>
                     </ul>

@@ -47,7 +47,7 @@ $.fn.getFuntions = function(params){
             $('div#response').fadeIn(3000, function() {
                 $('div#response').html(response);
             });
-           // $('div#response').html(response);
+            // $('div#response').html(response);
             $('button#summit', $that).button('reset');
         },
         error: function() {
@@ -131,17 +131,24 @@ $('a', $sendchange).on('click', function(e){
     }
 });
 
-if(typeof($('textarea')[0]) !== 'undefined'){
-    var idTextarea = $('textarea').first().attr('id');
-    console.log(idTextarea);
-    var editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
-        lineNumbers: true,
-        mode: "application/xml",
-        matchBrackets: true,
-        styleActiveLine: true,
-        lineWrapping: true
-    });
-}
+$.each($('textarea'), function(){
+    $that = $(this);
+    if(typeof($that) !== 'undefined'){
+        var idTextarea = $that.attr('id');
+        var textmode = $that.attr('data-mode');
+        console.log(idTextarea);
+        var editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
+            indentWithTabs: true,
+            smartIndent: true,
+            autofocus: true,
+            lineNumbers: true,
+            mode: textmode,
+            matchBrackets: true,
+            styleActiveLine: true,
+            lineWrapping: true
+        });
+    }
+});
 
 $('button#summit', $formSendpayXml).on('click', function(e){
     var $that = $(this);
@@ -235,7 +242,7 @@ $('input#summit', $formvdescuento).on('click', function(e){
         'id' : $('input#text').val(),
         'sci_send' : $('input#sci_send').val()
     };
-    
+
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
@@ -250,7 +257,7 @@ $('input#submit', $formPancarta).on('click', function(e){
     var params = {
         'name' : $('input#name', $formPancarta).val()
     };
-    
+
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});

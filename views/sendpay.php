@@ -45,7 +45,7 @@
                 <form id="sendpayxml">
                     <fieldset>
                         <div class="form-group">
-                            <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="xml-pay"></textarea>
+                            <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="xml-pay" data-mode="application/xml"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enviar al Mediador</label>

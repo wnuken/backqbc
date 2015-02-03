@@ -12,7 +12,7 @@
             </div>
             <div class="panel-body">
                 <form id="change_id" name="change_id" method='POST'>
-                    <textarea placeholder="Cada id se debe separar por un salto de línea" id="text" name="text" rows="10" style="width: 100%;"></textarea>
+                    <textarea placeholder="Cada id se debe separar por un salto de línea" id="text" name="text" rows="10" style="width: 100%;" data-mode="application/xml"></textarea>
                     <input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
                 </form>
             </div>

@@ -98,6 +98,24 @@ class Querys {
         return $result;
     }
 
+
+    public function GroupdealsPaginateComision($params){
+        try{
+            $result = GroupdealsQuery::create()
+                ->filterByNegociationType(2)
+               // ->where($where = 'edition_state != 6')
+                ->paginate($page = 1, $maxPerPage = 20);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . $params['id'];
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception .  $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
     public function GroupdealsByProductId($params){
         try{
             if($params['one'] == 1){

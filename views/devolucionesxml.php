@@ -3,7 +3,7 @@
         <h2>Devoluciones XML</h2>
         <form id="sendxmldev" name="sendxmldev" method='POST'>
             <div class="form-group">
-                <textarea placeholder="Pedido a procesar" id="xmltext" class="xmltext" name="xmltext"></textarea>
+                <textarea placeholder="Pedido a procesar" id="xmltext" class="xmltext" name="xmltext" data-mode="application/xml"></textarea>
             </div>
             <div class="btn-group pull-right">
                 <button class="btn btn-danger" id="summit" type="submit">Procesar</button>

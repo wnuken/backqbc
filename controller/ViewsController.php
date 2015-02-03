@@ -69,6 +69,15 @@ class Views {
 		include './views/aliados.php';
 	}*/
 
+    static public function trypay(){
+        $General = new General();
+        $result = $General->tryPay($_REQUEST);
+        $totalForPage = ceil($result->getNbResults() / 20);
+        $totalPages = $result->getLinks($totalForPage);
+        $currentPage = trim($result->haveToPaginate());
+        include './views/trypay.php';
+    }
+    
     static public function enviarpago(){
         include './views/sendpay.php';
     }
