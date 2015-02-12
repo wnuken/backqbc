@@ -546,7 +546,7 @@ class General {
             'Campana' => array(
                 'CampanaId' => $GroupdealsParams['id'],
                 'Detalle' => utf8_encode($GroupdealsQuery->getTitleMidium()),
-                'Nombre' => utf8_encode($GroupdealsQuery->getTitleShort())),
+                'Nombre' => 'COMISIÓN ' .  utf8_encode($GroupdealsQuery->getTitleShort())),
             'Contexto' => array(
                 'Aplicacion' => 'QBC',
                 'PeticionId' => substr(md5(strtotime('now')), 0, 24),
