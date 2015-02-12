@@ -557,7 +557,7 @@ class General {
             'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
             'Periodo' => date('Y')-1 . date('-m-d') . ' ' . date('Y-m-d'),
             'PorcentajeComision' =>  ($GroupdealsQuery->getEtGain() / 100),
-            'PorcentajeIVAComision' => ($params['params']['pcam'] / 100),
+            'PorcentajeIVAComision' => ($params['campaing_tax'] / 100),
             'sendSCMP' => $params['send']
         );
 
