@@ -186,11 +186,15 @@ print substr($md5, 0 ,24);
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Querys Pago Aliado</h3>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h3 class="panel-title">Querys Pago Aliado</h3>
+                </a>
             </div>
-            <div class="panel-body">
-                <textarea id="xmltext" class="xmltext" data-mode="text/x-mysql"><?php print $text1; ?>
-                </textarea>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <textarea id="xmltext" class="xmltext" data-mode="text/x-mysql"><?php print $text1; ?>
+                    </textarea>
+                </div>
             </div>
         </div>   
     </div>

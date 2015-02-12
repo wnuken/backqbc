@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <?php if(isset($result)): ?>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -18,32 +18,33 @@
                     <?php endforeach; ?>
                 </ul>
                 <nav class="text-center">
-                    <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
+                    <ul id="pagination" class="pagination">
+                        <?php if($currentPage == 1){ $liclas = 'class="hide"';}else{ $liclas = '';} ?>
+                        <li  <?php print $liclas; ?> id="liprevious">
+                            <a href="javascript:void(0)" aria-label="Previous" id="previous" data-ini="1">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
+
                         <!--li class="active"><a href="#">1</a></li-->
                         <?php foreach($totalPages as $page): ?>
                         <li <?php if($page == $currentPage){print 'class="active"';} ?>>
-                            <a href="javascript:void(0)"><?php print $page; ?></a>
+                            <a data-num="<?php print $page; ?>" href="javascript:void(0)"><?php print $page; ?></a>
                         </li>
+                        <?php if($page == ($currentPage+9)){break;} ?>
                         <?php endforeach; ?>
-                        <li>
-                            <a href="#" aria-label="Next">
+                        <li id="linext">
+                            <a href="javascript:void(0)" aria-label="Next" id="next" data-ini="10" data-end="<?php print $totalForPage; ?>">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     </ul>
                 </nav>
-
-
             </div>
         </div>
         <?php endif; ?>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Información de campaña <span class="badge">ID: XXXX</span></h3>

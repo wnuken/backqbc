@@ -8,28 +8,37 @@
                 <form id="sendpay">
                     <fieldset>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">ID Campaña</label>
-                            <input type="text" class="form-control" id="campaing_id" placeholder="Id Campaña">
+                            <label for="campaing_id">ID Campaña</label>
+                            <input type="text" class="form-control" id="campaing_id" name="campaing_id" placeholder="Id Campaña">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Porcentaje Campaña</label>
-                            <input type="text" class="form-control" id="campaing_tax" placeholder="Porcentaje Campaña" value="16">
+                            <label for="campaing_tax">Porcentaje Campaña</label>
+                            <input type="text" class="form-control" id="campaing_tax" name="campaing_tax" placeholder="Porcentaje Campaña" value="16">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Enviar al Mediador</label>
+                            <label for="currency">Moneda</label>
                         </div>
-                        <div class="btn-group" id="send">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
-                                <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No enviar </span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" id='sendchange'>
-                                <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
-                                <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
-                                <input type="hidden" id="sci_send" value="0">
-                            </ul>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="currency" id="option1" autocomplete="off" checked value="COP"> Pesos
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="currency" id="option2" autocomplete="off" value="USD"> Dolares
+                            </label>
+                        </div> <br /><br />
+                        <div class="form-group">
+                            <label for="send">Enviar al Mediador</label>
+                        </div>                        
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="send" id="send1" autocomplete="off" checked value="0"> No enviar
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="send" id="send2" autocomplete="off" value="1"> Enviar
+                            </label>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-default" id="summit" type="submit">Procesar</button>
+                            <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -45,20 +54,18 @@
                 <form id="sendpayxml">
                     <fieldset>
                         <div class="form-group">
-                            <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="xml-pay" data-mode="application/xml"></textarea>
+                            <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="file" name="file" data-mode="application/xml"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enviar al Mediador</label>
                         </div>
-                        <div class="btn-group" id="sendxml">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
-                                <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No Enviar </span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" id='sendchange'>
-                                <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
-                                <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
-                                <input type="hidden" id="sci_send" value="0">
-                            </ul>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="send" id="send3" autocomplete="off" checked value="0"> No enviar
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="send" id="send4" autocomplete="off" value="1"> Enviar
+                            </label>
                         </div>
                         <div class="btn-group pull-right">
                             <button class="btn btn-danger" id="summit" type="submit">Procesar</button>

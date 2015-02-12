@@ -20,8 +20,7 @@ var $sendchange = $('ul#sendchange');
 var $menu = $('ul#menunav');
 var $formvdescuento = $("form#vdescuento");
 var $formPancarta = $("form#pancartas");
-
-
+var editorPay = {};
 
 var currentUrl = window.location.pathname;
 urlSplit =currentUrl.split('/');
@@ -31,7 +30,37 @@ $('li', $menu).removeClass('active');
 
 var myVar = '';
 
-$.fn.getFuntions = function(params){
+$.fn.getFuntions = function(path){
+    var $that = $(this);
+    var params = $that.serialize();
+    $('div#loader').css({'display':'block'});
+    $.ajax({
+        type: "POST",
+        url: path.class,
+        dataType: 'html',
+        data: params,
+        async: true,
+        success: function(response) {
+            $('div#progress_bar').css({'width':'95%'});
+            $('div#progress_bar').attr({'aria-valuenow': 95});
+            $('div#progress').fadeOut( "slow");
+            $('div#response').fadeIn(3000, function() {
+                $('div#response').html(response);
+            });
+            // $('div#response').html(response);
+            $('button#summit', $that).button('reset');
+        },
+        error: function() {
+            //console.log('da error');
+            var message = "Rayos parece que no puedo traer datos";
+            $('div#response').html(message);
+            $('div#loader').css({'display':'none'});
+        }
+    });
+
+}
+
+$.fn.getLists = function(params){
     var $that = $(this);
     $('div#loader').css({'display':'block'});
     $.ajax({
@@ -97,19 +126,13 @@ $('input#summit', $formChangeId).on('click', function(e){
 // Pago Aliado
 
 $('button#summit', $formSendpay).on('click', function(e){
+    e.preventDefault();
     var $that = $(this);
     $that.button('loading');
-    e.preventDefault();
-    var params = {
-        'idcampaign': $('input#campaing_id', $formSendpay).val(),
-        'pcam': $('input#campaing_tax', $formSendpay).val(),
-        'send' : $('input#sci_send', $formSendpay).val()
-    };
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
-    $formSendpay.getFuntions({'params':params, 'class':'sendpay'});
-
+    $formSendpay.getFuntions({'class':'sendpay'});
     myVar = setInterval(progresbar, 100);
 });
 
@@ -133,11 +156,11 @@ $('a', $sendchange).on('click', function(e){
 
 $.each($('textarea'), function(){
     $that = $(this);
-    if(typeof($that) !== 'undefined'){
+   // if(typeof($that) !== 'undefined'){
         var idTextarea = $that.attr('id');
         var textmode = $that.attr('data-mode');
         console.log(idTextarea);
-        var editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
+        editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
             indentWithTabs: true,
             smartIndent: true,
             autofocus: true,
@@ -147,7 +170,7 @@ $.each($('textarea'), function(){
             styleActiveLine: true,
             lineWrapping: true
         });
-    }
+   // }
 });
 
 $('button#summit', $formSendpayXml).on('click', function(e){
@@ -155,17 +178,15 @@ $('button#summit', $formSendpayXml).on('click', function(e){
     $that.button('loading');
     e.preventDefault();
     editorPay.save();
-    var params = {
-        'file': $('textarea#xml-pay', $formSendpayXml).val(),
-        'send' : $('input#sci_send', $formSendpayXml).val()
-    };
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
-    $formSendpayXml.getFuntions({'params':params, 'class':'sendpayxml'});
+    $formSendpayXml.getFuntions({'class':'sendpayxml'});
 
     myVar = setInterval(progresbar, 100);
 });
+
+// Cierre oferta
 
 $('button#summit', $FormSendClose).on('click', function(e){
     var $that = $(this);
@@ -263,12 +284,4 @@ $('input#submit', $formPancarta).on('click', function(e){
     $('div#response').css({'display':'none'});
     $formPancarta.getFuntions({'params':params, 'class':'pancartacons'});
 });
-
-
-
-
-
-
-
-
 

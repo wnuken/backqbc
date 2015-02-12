@@ -11,3 +11,5 @@
 <script src="js/angularjs-min-1.2.js"></script>
 <!-- Internal -->
 <script src="js/back-qbc-menu.js"></script>
+<!-- Internal -->
+<script src="js/paginer.js"></script>

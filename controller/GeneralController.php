@@ -510,13 +510,19 @@ class General {
     // ********* GENERAR PAGO ALIADO DB **********
 
     public function & PagoAliado(&$params){
+        
+        // var_dump($params); die();
+        
+        if(empty($params) || !isset($params))
+            die('VALUE_NULL');
+        
         $SellsPetitionId = array();
         $SellsDocumentId = array();
         $DevolutionPetitionId = array();
         $DevolutionNoRedemedPetitionId = array();
         $SellOrderId = "";
         $SellItemId = "";
-        $GroupdealsParams['id'] = trim($params['params']['idcampaign']);
+        $GroupdealsParams['id'] = trim($params['campaing_id']);
         $Querys = new Querys();
 
         //$GroupdealsQuery = $this->GroupdealsQueryById($GroupdealsParams);
@@ -533,7 +539,7 @@ class General {
         $paramsSend = $this->getSellDocuments($SellRedeemed);
 
         $TaxStatus = 'false';
-        if($params['params']['pcam'] == 0)
+        if($params['campaing_tax'] == 0)
             $TaxStatus = 'true';
 
         $PagoAliadoDTO = array(
@@ -547,12 +553,12 @@ class General {
                 'Usuario' => 'INGQBC'),
             'Exento' => $TaxStatus,
             'Fecha' => date("Y-m-d\TH:i:s"),
-            'Moneda' => 'COP',
+            'Moneda' => $params['currency'],
             'NitAliado' => $GroupdealsMerchantsQuery->getNitNumber(),
             'Periodo' => date('Y')-1 . date('-m-d') . ' ' . date('Y-m-d'),
             'PorcentajeComision' =>  ($GroupdealsQuery->getEtGain() / 100),
             'PorcentajeIVAComision' => ($params['params']['pcam'] / 100),
-            'sendSCMP' => $params['params']['send']
+            'sendSCMP' => $params['send']
         );
 
 
@@ -634,10 +640,10 @@ class General {
     }
 
     public function PagoAlidoXML($params){
-        $xml = simplexml_load_string($params['params']['file']);
+        $xml = simplexml_load_string($params['file']);
         $json = json_encode($xml);
         $PagoAliadoDTO = json_decode($json,TRUE);
-        $PagoAliadoDTO['sendSCMP'] = $params['params']['send'];
+        $PagoAliadoDTO['sendSCMP'] = $params['send'];
         $result = $this->SendPago($PagoAliadoDTO);
         return $result;
     }
