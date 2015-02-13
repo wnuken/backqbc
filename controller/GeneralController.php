@@ -770,7 +770,7 @@ class General {
 
     public function & sendxmlsell(&$params){
 
-        if(!isset($params['params']) || empty($params['params'])){
+        if(!isset($params['xmltext']) || empty($params['xmltext'])){
             $result = array(
                 'status' => 'error',
                 'message' => 'VALUE_IS_NULL_OR_EMPTY');
@@ -778,7 +778,7 @@ class General {
         }
 
         libxml_use_internal_errors(true);
-        $xml = simplexml_load_string($params['params']['xml']);
+        $xml = simplexml_load_string($params['xmltext']);
 
         if($xml === false){
             $result = array(

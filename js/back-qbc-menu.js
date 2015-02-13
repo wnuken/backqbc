@@ -228,13 +228,10 @@ $('button#summit', $formSendXmlSell).on('click', function(e){
     $that.button('loading');
     e.preventDefault();
     editorPay.save();
-    var params = {
-        'xml' : $('textarea#xmltext', $formSendXmlSell).val()
-    };
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
-    $formSendXmlSell.getFuntions({'params':params, 'class':'sendxmlsell'});
+    $formSendXmlSell.getFuntions({'class':'sendxmlsell'});
 
     myVar = setInterval(progresbar, 100);
 });
