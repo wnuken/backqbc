@@ -38,8 +38,7 @@ $urlPreview = "http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "loe
                                         <label for="image">Imágen</label>
                                         <input type="text" class="form-control" id="image" name="image" placeholder="Imágen">
                                     </div>
-                                    <div id="information_box">
-                                    </div>
+                                    <div id="information_box"><div class="col-md-4"><div class="form-group"><label>Retailer</label><input class="form-control" id="retaila" name="retaila" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><label>Valor</label><input class="form-control" id="valuea" name="valuea" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><label>URL</label><input class="form-control" id="urla" name="urla" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retailb" name="retailb" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valueb" name="valueb" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urlb" name="urlb" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retailc" name="retailc" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valuec" name="valuec" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urlc" name="urlc" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retaild" name="retaild" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valued" name="valued" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urld" name="urld" placeholder="URL" type="text"></div></div></div>
                                     <input type="hidden" id="position" name="position" value="1">
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
@@ -73,8 +72,7 @@ $urlPreview = "http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "loe
                                         <label for="image">Imágen</label>
                                         <input type="text" class="form-control" id="image" name="image" placeholder="Imágen">
                                     </div>
-                                    <div id="information_box">
-                                    </div>
+                                    <div id="information_box"><div class="col-md-4"><div class="form-group"><label>Retailer</label><input class="form-control" id="retaila" name="retaila" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><label>Valor</label><input class="form-control" id="valuea" name="valuea" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><label>URL</label><input class="form-control" id="urla" name="urla" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retailb" name="retailb" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valueb" name="valueb" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urlb" name="urlb" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retailc" name="retailc" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valuec" name="valuec" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urlc" name="urlc" placeholder="URL" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="retaild" name="retaild" placeholder="Retailer" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="valued" name="valued" placeholder="Valor" type="text"></div></div><div class="col-md-4"><div class="form-group"><input class="form-control" id="urld" name="urld" placeholder="URL" type="text"></div></div></div>
                                     <input type="hidden" id="position" name="position" value="2">
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
@@ -110,8 +108,7 @@ $urlPreview = "http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "loe
                                         <label for="image">Imágen</label>
                                         <input type="text" class="form-control" id="image" name="image" placeholder="Imágen">
                                     </div>
-                                    <div id="information_box">
-                                    </div>
+                                    <div id="information_box"><div class="form-group"><label>Porcentaje</label><input class="form-control" id="percent" name="percent" placeholder="Porcentaje" type="text"></div><div class="col-md-6"><div class="form-group"><label>Retailer</label><input class="form-control" id="retail" name="retail" placeholder="Retailer" type="text"></div></div><div class="col-md-6"><div class="form-group"><label>Valor</label><input class="form-control" id="value" name="value" placeholder="Valor" type="text"></div></div></div>
                                     <input type="hidden" id="position" name="position" value="3">
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
@@ -145,8 +142,7 @@ $urlPreview = "http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "loe
                                         <label for="image">Imágen</label>
                                         <input type="text" class="form-control" id="image" name="image" placeholder="Imágen">
                                     </div>
-                                    <div id="information_box">
-                                    </div>
+                                    <div id="information_box"><div class="form-group"><label>Porcentaje</label><input class="form-control" id="percent" name="percent" placeholder="Porcentaje" type="text"></div><div class="col-md-6"><div class="form-group"><label>Retailer</label><input class="form-control" id="retail" name="retail" placeholder="Retailer" type="text"></div></div><div class="col-md-6"><div class="form-group"><label>Valor</label><input class="form-control" id="value" name="value" placeholder="Valor" type="text"></div></div></div>
                                     <input type="hidden" id="position" name="position" value="4">
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-danger" id="submit" type="submit">Guardar</button>

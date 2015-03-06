@@ -63,6 +63,11 @@ class Settings {
                 'user' => 'other',
                 'pass' => '6e2b131b4ca3b2ff6aa3cbb7bf6711582766c7cb',
                 'rol' => '300'
+            ),
+            3 => array(
+                'user' => 'camsua',
+                'pass' => '6a8fea5f1fa661184f1d5d1956ee85978a1ebb06', // 6grFt56
+                'rol' => '200'
             )
         );
 
