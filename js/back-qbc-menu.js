@@ -7,14 +7,8 @@ messageError['error_general'] = ERROR_GENERAL;
 messageError['error_query'] = ERROR_QUERY;
 messageError['error_id_client'] = ERROR_ID_CLIENT;
 
-var $formSendpay = $('form#sendpay');
-var $formSendpayXml = $('form#sendpayxml');
-var $formChangeId = $('form#change_id');
-var $formvfallidas = $("form#vfallidas");
-var $FormSendClose = $('form#sendclose');
-var $formSendXmlSell = $('form#sendxmlsell');
-var $formSendXmlDev = $('form#sendxmldev');
-var $FormSendCompensation = $('form#sendcompensation');
+var submitButton = 'button#submit';
+
 var $bar = $('div#progress_bar');
 var $sendchange = $('ul#sendchange');
 var $menu = $('ul#menunav');
@@ -47,11 +41,9 @@ $.fn.getFuntions = function(path){
             $('div#response').fadeIn(3000, function() {
                 $('div#response').html(response);
             });
-            // $('div#response').html(response);
-            $('button#summit', $that).button('reset');
+            $(submitButton, $that).button('reset');
         },
         error: function() {
-            //console.log('da error');
             var message = "Rayos parece que no puedo traer datos";
             $('div#response').html(message);
             $('div#loader').css({'display':'none'});
@@ -76,8 +68,7 @@ $.fn.getLists = function(params){
             $('div#response').fadeIn(3000, function() {
                 $('div#response').html(response);
             });
-            // $('div#response').html(response);
-            $('button#summit', $that).button('reset');
+            $(submitButton, $that).button('reset');
         },
         error: function() {
             //console.log('da error');
@@ -102,39 +93,23 @@ function progresbar(){
     }
 }
 
-// Ventas
 
-$('input#summit', $formvfallidas).on('click', function(e){
-    var $that = $(this);
-    //$that.button('loading');
+$(submitButton).on('click', function(e){
     e.preventDefault();
-    var params = $('input#text').val();
-    console.log(params);
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formvfallidas.getFuntions({'params':params, 'class':'vfallidas'});
-});
-
-$('input#summit', $formChangeId).on('click', function(e){
-    e.preventDefault();
-    var params = $('textarea#text').val();
-    console.log(params);
-    $formChangeId.getFuntions({'params':params, 'class':'changeid'});
-});
-
-// Pago Aliado
-
-$('button#summit', $formSendpay).on('click', function(e){
-    e.preventDefault();
+    if(!$.isEmptyObject(editorPay)){
+        editorPay.save();
+    }
     var $that = $(this);
     $that.button('loading');
+    var $form = $that.closest('form.formsend');
+    var className = $form.attr('id');
     $('div#progress').css({'display':'block'});
     $('div#response').html('');
     $('div#response').css({'display':'none'});
-    $formSendpay.getFuntions({'class':'sendpay'});
+    $form.getFuntions({'class':className});
     myVar = setInterval(progresbar, 100);
 });
+
 
 $('a', $sendchange).on('click', function(e){
     e.preventDefault();
@@ -156,129 +131,22 @@ $('a', $sendchange).on('click', function(e){
 
 $.each($('textarea'), function(){
     $that = $(this);
-   // if(typeof($that) !== 'undefined'){
-        var idTextarea = $that.attr('id');
-        var textmode = $that.attr('data-mode');
-        console.log(idTextarea);
-        editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
-            indentWithTabs: true,
-            smartIndent: true,
-            autofocus: true,
-            lineNumbers: true,
-            mode: textmode,
-            matchBrackets: true,
-            styleActiveLine: true,
-            lineWrapping: true
-        });
-   // }
-});
-
-$('button#summit', $formSendpayXml).on('click', function(e){
-    var $that = $(this);
-    $that.button('loading');
-    e.preventDefault();
-    editorPay.save();
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formSendpayXml.getFuntions({'class':'sendpayxml'});
-
-    myVar = setInterval(progresbar, 100);
-});
-
-// Cierre oferta
-
-$('button#summit', $FormSendClose).on('click', function(e){
-    var $that = $(this);
-    $that.button('loading');
-    e.preventDefault();
-    var params = {
-        'idcampaign': $('input#campaing_id', $FormSendClose).val(),
-        'pcam': $('input#campaing_tax', $FormSendClose).val(),
-        'send' : $('input#sci_send', $FormSendClose).val()
-    };
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $FormSendClose.getFuntions({'params':params, 'class':'closuresend'});
-
-    myVar = setInterval(progresbar, 100);
-});
-
-$('button#summit', $FormSendCompensation).on('click', function(e){
-    var $that = $(this);
-    $that.button('loading');
-    e.preventDefault();
-    var idsCampaigns = $FormSendCompensation.serialize();
-    var params = {
-        'idcampaign': idsCampaigns,
-        'send' : $('input#sci_send', $FormSendCompensation).val()
-    };
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $FormSendCompensation.getFuntions({'params':params, 'class':'conpensationsend'});
-
-    myVar = setInterval(progresbar, 100);
+    // if(typeof($that) !== 'undefined'){
+    var idTextarea = $that.attr('id');
+    var textmode = $that.attr('data-mode');
+    console.log(idTextarea);
+    editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
+        indentWithTabs: true,
+        smartIndent: true,
+        autofocus: true,
+        lineNumbers: true,
+        mode: textmode,
+        matchBrackets: true,
+        styleActiveLine: true,
+        lineWrapping: true
+    });
+    // }
 });
 
 
-$('button#summit', $formSendXmlSell).on('click', function(e){
-    var $that = $(this);
-    $that.button('loading');
-    e.preventDefault();
-    editorPay.save();
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formSendXmlSell.getFuntions({'class':'sendxmlsell'});
-
-    myVar = setInterval(progresbar, 100);
-});
-
-$('button#summit', $formSendXmlDev).on('click', function(e){
-    var $that = $(this);
-    $that.button('loading');
-    e.preventDefault();
-    editorPay.save();
-    var params = {
-        'xml' : $('textarea#xmltext', $formSendXmlDev).val()
-    };
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formSendXmlDev.getFuntions({'params':params, 'class':'sendxmldev'});
-    myVar = setInterval(progresbar, 100);
-});
-
-
-$('input#summit', $formvdescuento).on('click', function(e){
-    var $that = $(this);
-    //$that.button('loading');
-    e.preventDefault();
-    var params = {
-        'id' : $('input#text').val(),
-        'sci_send' : $('input#sci_send').val()
-    };
-
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formvdescuento.getFuntions({'params':params, 'class':'sendselldiscount'});
-});
-
-
-$('input#submit', $formPancarta).on('click', function(e){
-    var $that = $(this);
-    // $that.button('loading');
-    e.preventDefault();
-    var params = {
-        'name' : $('input#name', $formPancarta).val()
-    };
-
-    $('div#progress').css({'display':'block'});
-    $('div#response').html('');
-    $('div#response').css({'display':'none'});
-    $formPancarta.getFuntions({'params':params, 'class':'pancartacons'});
-});
 

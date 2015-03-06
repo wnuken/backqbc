@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-md-12">
         <h2>Devoluciones XML</h2>
-        <form id="sendxmldev" name="sendxmldev" method='POST'>
+        <form id="sendxmldev" name="sendxmldev" method='POST' class="formsend">
             <div class="form-group">
                 <textarea placeholder="Pedido a procesar" id="xmltext" class="xmltext" name="xmltext" data-mode="application/xml"></textarea>
             </div>
             <div class="btn-group pull-right">
-                <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
+                <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
             </div>
         </form>
     </div>

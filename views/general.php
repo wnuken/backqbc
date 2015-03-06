@@ -12,5 +12,5 @@
 
         </div>
     </body>
-   <?php require_once('./views/foot.php'); ?>
+    <?php require_once('./views/foot.php'); ?>
 </html>

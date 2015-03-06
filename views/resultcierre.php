@@ -10,7 +10,7 @@ if(is_array($result)){
         <div class="panel-body">
             <?php
     if(isset($result['XML']))
-        print htmlentities($result['XML']);
+        print "<pre>" . htmlentities($result['XML']) . "</pre>";
             ?>
         </div>
     </div>    

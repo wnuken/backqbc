@@ -11,9 +11,9 @@
                 <h3 class="panel-title">Esta función Cambiará los Ids petición y elinará los registros de qbc_sci_sell_doc, por favor proceder con precaución.</h3>
             </div>
             <div class="panel-body">
-                <form id="change_id" name="change_id" method='POST'>
+                <form id="changeid" name="change_id" method='POST' class="formsend">
                     <textarea placeholder="Cada id se debe separar por un salto de línea" id="text" name="text" rows="10" style="width: 100%;" data-mode="application/xml"></textarea>
-                    <input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
+                    <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                 </form>
             </div>
         </div>

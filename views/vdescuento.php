@@ -1,4 +1,5 @@
-<div class="row"> 
+<div class="row">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -6,30 +7,31 @@
             </div>
             <div class="panel-body">
                 <h2>Enviar peticion descuento</h2>
-                <form id="vdescuento" name="vdescuento" method='POST'>
+                <form id="sendselldiscount" class="formsend">
                     <div class="form-group">
                         <label for="text">Pedido a procesar</label>
-                        <input class="form-control" placeholder="Pedido a procesar" id="text" name="text" type="text" >
+                        <input class="form-control" placeholder="Pedido a procesar" id="text" name="id" type="text" >
+                        <input type="hidden" id="one" name="one" value="1">
                     </div>
                     <div class="form-group">
-                        <label for="button">Enviar al Mediador</label>
+                        <label for="send">Enviar al Mediador</label>
+                    </div>                        
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input type="radio" name="send" id="send1" autocomplete="off" checked value="0"> No enviar
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="send" id="send2" autocomplete="off" value="1"> Enviar
+                        </label>
+                    </div>  
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                     </div>
-                    <div class="btn-group" id="send">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
-                            <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No enviar </span> <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" id='sendchange'>
-                            <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
-                            <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
-                            <input type="hidden" id="sci_send" value="0">
-                        </ul>
-                    </div>                    
-
-                    <input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
                 </form>
             </div>
         </div>
     </div>
+    <div class="col-md-4"></div>
 </div>
 <div class="row"> 
     <div class="col-md-12">
@@ -41,6 +43,7 @@
     </div>
 </div>
 <div class="row">
-    <div id="response" style="display:none;"></div>
-
+    <div class="col-md-12">
+        <div id="response" style="display:none;"></div>
+    </div>
 </div>

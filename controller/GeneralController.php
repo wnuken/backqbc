@@ -407,30 +407,13 @@ class General {
     }
 
     public function vfallidas($params){
-        $IncrementId = trim($params['params']);
-
-        try{           
-            $SalesFlatOrderQuery = SalesFlatOrderQuery::create()->findOneByIncrementId($IncrementId);
-            if(empty($SalesFlatOrderQuery)){
-                $result = array(
-                    'status' => 'error',
-                    'mesagge' => 'No se encuenta el pedido pedido '. $IncrementId
-                );
-                return $result;
-            }
-        }catch (Exception $e){
-            $result = array(
-                'status' => 'error',
-                'message' => $this->exception . $e->getMessage()
-            );
-            return $result;
-        }
-
+        $Querys = new Querys();
+        $SalesFlatOrderQuery = $Querys->SalesFlatOrderByIncrementId($params);
         $result = array(
             'status' => 'ok',
             'message' => 'php ./controller/sell_resend_scmp.php ' . 
             $SalesFlatOrderQuery->getEntityId() .
-            ' ' . $params['params']
+            ' ' . $params['id']
         );
         return $result;
 
@@ -510,12 +493,12 @@ class General {
     // ********* GENERAR PAGO ALIADO DB **********
 
     public function & PagoAliado(&$params){
-        
+
         // var_dump($params); die();
-        
+
         if(empty($params) || !isset($params))
             die('VALUE_NULL');
-        
+
         $SellsPetitionId = array();
         $SellsDocumentId = array();
         $DevolutionPetitionId = array();
@@ -811,21 +794,14 @@ class General {
         $md5IdPetition = md5($seemBaseIdPetition);
         $newIdPetition = substr($md5IdPetition, 0 ,24);
 
-        try{
-            $QbcSciSellQuery = QbcSciSellQuery::create()->findOneByPetitionId(trim($oldIdPetition));
-            if(empty($QbcSciSellQuery)){
-                $result = array(
-                    'status' => 'error',
-                    'message' => 'Id petition: ' . $oldIdPetition . ' is no set - The new one is: ' . $newIdPetition,
-                    'oldIdPetition' => "$oldIdPetition",
-                    'newIdPetition' => $newIdPetition);
-            }
-        }catch (Exception $e){
-            $result = array(
-                'status' => 'exception',
-                'message' => 'Caught exception:'.  $e->getMessage());
-            return $result;
-        }
+        $Querys = new Querys();
+
+        $paramsQuery = array(
+            'id' => trim($oldIdPetition),
+            'no_die' => 'true'
+        );
+
+        $QbcSciSellQuery = $Querys->QbcSciSellByPetitionId($paramsQuery);
 
         $xml->contexto->attributes()->idPeticion = $newIdPetition;
 
@@ -839,16 +815,21 @@ class General {
 
         $resultSell = $this->sendSell($paramsSell);
 
-        if($resultSell->Estado == 'aprobado' && !empty($QbcSciSellQuery)){
+        if($resultSell->Estado == 'aprobado' && is_object($QbcSciSellQuery)){
             $QbcSciSellQuery->setPetitionId($newIdPetition);
             $QbcSciSellQuery->save();
             $result['save'] = 'true';
-        }else if($resultSell->Estado == 'aprobado' && empty($QbcSciSellQuery)){
+            $result['create'] = $oldIdPetition . ' - ' . $newIdPetition;
+            $result['replace'] = 'false';
+        }else if($resultSell->Estado == 'aprobado' && !is_object($QbcSciSellQuery)){
             $QbcSciSell = new QbcSciSell();
             $QbcSciSell->setPetitionId($newIdPetition);
             $QbcSciSell->setOrderId($idSell);
             //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
             $QbcSciSell->save();
+            $result['save'] = 'true';
+            $result['create'] = $newIdPetition;
+            $result['replace'] = 'false';
         }
 
         $result['resultSell'] = $resultSell;
@@ -864,23 +845,18 @@ class General {
         $Querys = new Querys();
 
         // Validacion id Pedido
-        if(!isset($params['params']) || empty($params['params'])){
+        if(!isset($params['id']) || empty($params['id'])){
             $result = array(
                 'status' => 'error',
                 'message' => 'VALUE_IS_NULL_OR_EMPTY');
             return $result;
         }
 
-        // Obtener información del pedido
-        $paramsMapping['id'] = $params['params']['id'];
-        $paramsMapping['one'] = 1;
-
-        $CouponMappingQuery = $Querys->CouponMappingByIncrementId($paramsMapping);
+        $CouponMappingQuery = $Querys->CouponMappingByIncrementId($params);
         $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
         $paramsItem['id'] = $CouponMappingQuery->getItemId();
 
         $SalesFlatOrderQuery = $Querys->SalesFlatOrderByEntityId($paramsOrder);
-        //$totalPay = $SalesFlatOrderQuery->getBaseGrandTotal();
         $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
         $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
 
@@ -895,7 +871,7 @@ class General {
         $TreasuryTypesQuery = $Querys->TreasuryTypesById($paramsTreasury);
         $tresauryIva = $TreasuryTypesQuery->getIva();
 
-        $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($paramsMapping);
+        $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($params);
         $totalPay = $PagosOnLineQuery->getValor();
 
         $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchants);
@@ -913,7 +889,7 @@ class General {
             $tasaIva = $tresauryIva / 100;
 
         $order = array(
-            'ventaId' => $params['params']['id'],
+            'ventaId' => $params['id'],
             'totalPay' => $totalPay,
             'totalItems' => $totalItems,
             'payToItem' => $payToItem,
@@ -1053,7 +1029,7 @@ class General {
                 'idVenta' => $order['ventaId'],
                 'xml' =>  $xml);
 
-            if($params['params']['sci_send'] == 1){
+            if($params['send'] == 1){
                 $resultSell = $this->sendSell($paramsSell);
                 if($resultSell->Estado == 'aprobado'){
                     $QbcSciSell = new QbcSciSell();
@@ -1151,16 +1127,16 @@ class General {
 
     public function & ConpensationOffer(&$params){
 
+        $sendSCMP = $params['send'];
         $GroupdealsIds = array();
 
-        parse_str($params['params']['idcampaign'], $GroupdealsIds);
+        unset($params['__route__']);
+        unset($params['send']);
 
-        $sendSCMP = $params['params']['send'];
-
-        foreach($GroupdealsIds as $GroupdealsId){
+        foreach($params as $GroupdealsId){
 
             try{
-                $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->filterByStatus(0)->findByCampaignId($GroupdealsId);
+                $BaseQbcSciClosureQuery = QbcSciClosureQuery::create()->filterByStatus(0)->findByCampaignId($GroupdealsId);
                 if(empty($BaseQbcSciClosureQuery)){
                     // $result = '<h3>El id no es valido: </3>' . $GroupdealsId;
                     // return $result;
@@ -1337,12 +1313,158 @@ class General {
         return $params;
 
     }
-    
+
     public function & tryPay($params){
         $Querys = new Querys();
         $result = $Querys->GroupdealsPaginateComision($params);
         return $result;
     }
+
+    public function & newsloe(&$params){
     
+ 
+        $jsonfile = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/loeproducts.json");
+        
+        $dataInfo = json_decode($jsonfile, true);
+
+       
+        if($params['type'] == 0){
+            $dataArray = array(
+                'type' => $params['type'],
+                'title' => $params['title'],
+                'image' => $params['image'],
+                'url' => $params['url']
+            );
+
+            if(!empty($params['retaila'])){
+                $dataArray['sites']['0'] = array(
+                    'name' => $params['retaila'],
+                    'value' => $params['valuea'],
+                    'url' => $params['urla'],
+                    'active' => '1'
+                );
+            }
+
+            if(!empty($params['retailb'])){
+                $dataArray['sites']['1'] = array(
+                    'name' => $params['retailb'],
+                    'value' => $params['valueb'],
+                    'url' => $params['urlb'],
+                    'active' => '0'
+                );
+            }
+
+            if(!empty($params['retailc'])){
+                $dataArray['sites']['2'] = array(
+                    'name' => $params['retailc'],
+                    'value' => $params['valuec'],
+                    'url' => $params['urlc'],
+                    'active' => '0'
+                );
+            }
+
+            if(!empty($params['retaild'])){
+                $dataArray['sites']['3'] = array(
+                    'name' => $params['retaild'],
+                    'value' => $params['valued'],
+                    'url' => $params['urld'],
+                    'active' => '0'
+                );
+            }
+
+            if($params['position'] == 1){
+                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
+            }
+
+            if($params['position'] == 2){
+                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
+            }
+
+            if($params['position'] == 3){
+                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
+            }
+
+            if($params['position'] == 4){
+                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
+            }
+
+
+            // print "<pre>"; var_dump($dataInfo); print "</pre>"; die();
+
+
+
+
+            $result = $dataInfo;
+
+
+
+        }else{
+
+
+
+            $dataArray = array(
+                'type' => $params['type'],
+                'title' => $params['title'],
+                'image' => $params['image'],
+                'url' => $params['url'],
+                'percent' => $params['percent'],
+                'retail' => $params['retail'],
+                'value' => $params['value']
+            );
+
+            if($params['position'] == 1){
+                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
+            }
+
+            if($params['position'] == 2){
+                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
+            }
+
+            if($params['position'] == 3){
+                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
+            }
+
+            if($params['position'] == 4){
+                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
+            }
+
+
+            $result = $dataInfo;
+
+
+        }
+
+        $jsonDataInfo = json_encode($dataInfo);
+
+
+        $dirname = dirname(__FILE__);
+
+        $path = trim($dirname, 'controller');
+
+        $file = fopen($path . "/loe/loeproducts.json", "w");
+
+        fwrite($file, $jsonDataInfo . PHP_EOL);
+
+        fclose($file);
+        
+        
+        $fileSave = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/");
+        
+        $Querys = new Querys();
+        
+        $paramsBanner['name'] = 'NewsletterLOE';
+        
+        $Banner = $Querys->EnterpriseBannerByName($paramsBanner);
+        
+        $paramsBannerContent['id'] = $Banner->getBannerId();
+        
+        $BannerContent = $Querys->EnterpriseBannerContentById($paramsBannerContent);
+        
+        $BannerContent->setBannerContent($fileSave);
+        $BannerContent->save();
+
+        return $result;
+    }
+
 
 }

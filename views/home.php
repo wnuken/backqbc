@@ -25,7 +25,9 @@ print '<pre>';
 print_r($responses);
 print '</pre>';*/
 
-$text1 = "set @id_camp = 'CampignID';
+if($_SESSION['k_rol'] == '0'){
+
+    $text1 = "set @id_camp = 'CampignID';
 
 set @product_id = (select g.product_id from
 groupdeals g
@@ -94,7 +96,7 @@ and dv.campaign_id in
 @id_camp
 );";
 
-$text2 = "select * from
+    $text2 = "select * from
 DocumentoContableVenta dv
 where
 dv.Numero in
@@ -158,8 +160,8 @@ group by dv.PadreId;";
             </div>
             <div class="panel-body">
                 <?php 
-//print $mysqli->host_info . '<br />';
-print 'MySQL Server';
+    //print $mysqli->host_info . '<br />';
+    print 'MySQL Server';
                 ?>
             </div>
         </div>    
@@ -173,10 +175,10 @@ print 'MySQL Server';
             </div>
             <div class="panel-body">
                 <?php 
-$actualTime = strtotime('now');
-$md5 = md5($actualTime);
-print $actualTime . '<br />';
-print substr($md5, 0 ,24);
+    $actualTime = strtotime('now');
+    $md5 = md5($actualTime);
+    print $actualTime . '<br />';
+    print substr($md5, 0 ,24);
                 ?>
             </div>
         </div>    
@@ -209,7 +211,10 @@ print substr($md5, 0 ,24);
         </div>   
     </div>
 </div>
-
-
+<?php 
+}else{  
+    require_once('./views/newsloe.php'); 
+} 
+?>
 
 

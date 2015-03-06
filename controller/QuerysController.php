@@ -103,7 +103,7 @@ class Querys {
         try{
             $result = GroupdealsQuery::create()
                 ->filterByNegociationType(2)
-               // ->where($where = 'edition_state != 6')
+                // ->where($where = 'edition_state != 6')
                 ->paginate($page = 1, $maxPerPage = 20);
             if(empty($result)){
                 $result = $this->error['NO_FOUND'] . $params['id'];
@@ -224,6 +224,21 @@ class Querys {
         return $result;
     }
 
+    public function QbcSciSellByPetitionId($params){
+        try{           
+            $result = QbcSciSellQuery::create()->findOneByPetitionId($params['id']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                if(!isset($params['no_die']))
+                    $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
     public function QbcSciSellDocByPetitionId($params){
         try{           
             $result = QbcSciSellDocQuery::create()->findByPetitionId($params['petitions']);
@@ -257,6 +272,20 @@ class Querys {
             $result = EnterpriseBannerQuery::create()->findOneByName($params['name']);
             if(empty($result)){
                 $result = $this->error['NO_FOUND'] . json_encode($params['name']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+    
+    public function EnterpriseBannerContentById($params){
+        try{           
+            $result = EnterpriseBannerContentQuery::create()->findOneByBannerId($params['id']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
                 $this->ErrorMessage($result);
             }
         }catch (Exception $e){

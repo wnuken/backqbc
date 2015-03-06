@@ -1,18 +1,27 @@
 <div class="row"> 
-    <div class="col-md-4">
+    <div class="col-md-4"></div>
+    <div class="text-center col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Enviar Venta</h3>
+                <h3 class="panel-title">Enviar peticion de venta fallida</h3>
             </div>
             <div class="panel-body">
-                <h2>Reenviar peticion fallida</h2>
-                <form id="vfallidas" name="vfallidas" method='POST'>
-                    <input placeholder="Pedido a procesar" id="text" name="text" type="text" >
-                    <input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
+                <form id="vfallidas" class="formsend">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="id">ID Pedido</label>
+                            <input placeholder="Pedido a procesar" id="id_pedido" name="id" type="text" class="form-control">
+                            <input id="one" name="one" type="hidden" value="1">
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
         </div>
     </div>
+    <div class="col-md-4"></div>
 </div>
 <div class="row"> 
     <div class="col-md-12">
@@ -24,6 +33,7 @@
     </div>
 </div>
 <div class="row">
-    <div id="response" style="display:none;"></div>
-
+    <div class="col-md-12">
+        <div id="response" style="display:none;"></div>
+    </div>
 </div>

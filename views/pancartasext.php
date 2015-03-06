@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body">
                 <h2>Enviar consulta</h2>
-                <form id="pancartas" name="pancartas" method='POST'>
+                <form id="pancartacons" name="pancartas" method='POST' class="formsend">
                     <div class="form-group">
                         <label for="text">Nombre Pancarta</label>
                         <input class="form-control" placeholder="Nombre Pancarta" id="name" name="name" type="text" >
@@ -24,7 +24,7 @@
                             <input type="hidden" id="sci_send" value="0">
                         </ul>
                     </div>                    
-                    <input class="btn btn-primary" id="submit" type='submit' value='Procesar'>
+                    <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                 </form>
             </div>
         </div>

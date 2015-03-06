@@ -4,9 +4,9 @@ require_once '../classes.php';
 ?>
 <div>
 <p>Escriba el NIT de aliado a consultar</p>
-<form id="salesxml" name="salesxml" method='POST'>
+<form id="sendxmlsell" name="salesxml" method='POST' class="formsend">
 	<input placeholder="NIT Aliado" id="idmerchant" name="idmerchant" value="900190044">
-	<input class="btn btn-primary" id="summit" type='submit' value='Procesar'>
+	<button class="btn btn-danger" id="submit" type="submit">Procesar</button>
 </form>
 <div id="response"></div>
 </div>

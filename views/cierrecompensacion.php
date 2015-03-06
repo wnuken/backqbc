@@ -5,7 +5,7 @@
                 <h3 class="panel-title">Envar / Consultar Cierre</h3>
             </div>
             <div class="panel-body">
-                <form id="sendcompensation">
+                <form id="conpensationsend" class="formsend">
                     <fieldset>
                         <!--div class="form-group">
 <label for="exampleInputEmail1">ID Campaña</label>
@@ -32,18 +32,16 @@
                             <?php endforeach;  ?>
                         </div>
                         <div class="row"></div>
-                        <div class="btn-group" id="send">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button_send">
-                                <i class="glyphicon glyphicon-remove-sign"></i><span id="text_send"> No enviar </span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" id='sendchange'>
-                                <li><a href="javascript:void(0);" value-send="0">No Enviar</a></li>
-                                <li><a href="javascript:void(0);" value-send="1">Enviar</a></li>
-                                <input type="hidden" id="sci_send" value="0">
-                            </ul>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="send" id="send1" autocomplete="off" checked value="0"> No enviar
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="send" id="send2" autocomplete="off" value="1"> Enviar
+                            </label>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-default" id="summit" type="submit">Procesar</button>
+                            <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                         </div>
                     </fieldset>
                 </form>

@@ -7,12 +7,12 @@
 
             <div class="panel-body">
                 <fieldset>
-                    <form id="sendxmlsell" name="sendxmlsell" method='POST'>
+                    <form id="sendxmlsell" name="sendxmlsell" method='POST' class="formsend">
                         <div class="form-group">
                             <textarea placeholder="Pedido a procesar" id="xmltext" class="xmltext" name="xmltext" data-mode="application/xml"></textarea>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
+                            <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                         </div>
                     </form>
                 </fieldset>
@@ -30,7 +30,8 @@
     </div>
 </div>
 <div class="row">
-    <div id="response" style="display:none;"></div>
-
+    <div class="col-md-12">
+        <div id="response" style="display:none;"></div>
+    </div>
 </div>
 

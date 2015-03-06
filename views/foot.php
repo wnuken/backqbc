@@ -13,3 +13,4 @@
 <script src="js/back-qbc-menu.js"></script>
 <!-- Internal -->
 <script src="js/paginer.js"></script>
+<script src="js/product_change.js"></script>

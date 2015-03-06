@@ -5,7 +5,7 @@
                 <h3 class="panel-title">Envar / Consultar Pago</h3>
             </div>
             <div class="panel-body">
-                <form id="sendpay">
+                <form id="sendpay" class="formsend">
                     <fieldset>
                         <div class="form-group">
                             <label for="campaing_id">ID Campaña</label>
@@ -38,7 +38,7 @@
                             </label>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
+                            <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -51,7 +51,7 @@
                 <h3 class="panel-title">Modificar XML manualmente</h3>
             </div>
             <div class="panel-body">
-                <form id="sendpayxml">
+                <form id="sendpayxml" class="formsend">
                     <fieldset>
                         <div class="form-group">
                             <textarea style="width:100%;height:131px;" placeholder="Agrege XML" id="file" name="file" data-mode="application/xml"></textarea>
@@ -68,7 +68,7 @@
                             </label>
                         </div>
                         <div class="btn-group pull-right">
-                            <button class="btn btn-danger" id="summit" type="submit">Procesar</button>
+                            <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
                         </div>
                     </fieldset>
                 </form>
