@@ -5,7 +5,7 @@ var $preview = $('button#previewloe');
 $productChange.on('change', function(){
     var $that = $(this);
     var value = $that.val();
-    var $content = $that.closest('.col-md-6');
+    var $content = $that.closest('.col-md-3');
     var position = $content.attr('ofer-position');
     console.log(position);
 
@@ -22,15 +22,16 @@ $productChange.on('change', function(){
         '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valued" name="valued" placeholder="Valor"></div></div>'+
         '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urld" name="urld" placeholder="URL"></div></div>';
 
-    var box2 = '<div class="form-group">'+
+    var box2 = '<div class="col-md-4">'+
+        '<div class="form-group">'+
         '<label>Porcentaje</label><input type="text" class="form-control" id="percent" name="percent" placeholder="Porcentaje">'+
-        '</div>'+
-        '<div class="col-md-6">'+
+        '</div></div>'+
+        '<div class="col-md-4">'+
         '<div class="form-group">'+
         '<label>Retailer</label><input type="text" class="form-control" id="retail" name="retail" placeholder="Retailer">'+
         '</div>'+
         '</div>'+
-        '<div class="col-md-6">'+
+        '<div class="col-md-4">'+
         '<div class="form-group">'+
         '<label>Valor</label><input type="text" class="form-control" id="value" name="value" placeholder="Valor">'+
         '</div>'+
@@ -56,9 +57,10 @@ $preview.on('click', function(){
         data: params,
         async: true,
         success: function(response) {
-            $('div#previewloe').fadeOut( "slow");
+            $('div#previewloe').fadeOut( "fast");
+            $('div#previewloe').html(response);           
             $('div#previewloe').fadeIn(3000, function() {
-                $('div#previewloe').html(response);
+                
             });
         },
         error: function() {

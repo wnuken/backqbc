@@ -1394,7 +1394,7 @@ class General {
 
 
 
-            $result = $dataInfo;
+            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
 
 
 
@@ -1429,7 +1429,7 @@ class General {
             }
 
 
-            $result = $dataInfo;
+            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
 
 
         }

@@ -57,7 +57,7 @@ function changeAcutes($params){
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
                                         </td>
                                     </tr>
-                                    <tr style="height: 40px;">
+                                    <tr style="height: 45px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $upper['url'] ?>" target="_blank" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;">
@@ -130,7 +130,7 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
-                                    <tr style="height: 40px;">
+                                    <tr style="height: 45px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $upper['url']; ?>" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
@@ -273,7 +273,7 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
-                                    <tr style="height: 40px;">
+                                    <tr style="height: 45px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $lower['url']; ?>" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
@@ -399,7 +399,7 @@ function changeAcutes($params){
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
                                         </td>
                                     </tr>
-                                    <tr style="height: 40px;">
+                                    <tr style="height: 45px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $lower['url'] ?>" target="_blank" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;">
