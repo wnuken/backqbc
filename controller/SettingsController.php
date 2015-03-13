@@ -63,15 +63,8 @@ class Settings {
             $result['validate'] = true;
             $paramsRoleId['id'] = $userValues->getUserId();
             $RoleQuery = $Querys->AdminRoleQueryByUserId($paramsRoleId);
-            $rol = $RoleQuery->getParentId();
+            $result['rol'] = $RoleQuery->getParentId();
 
-           // print "<pre>". $RoleQuery->getParentId() . "</pre>";die();
-
-            if($rol == 0){
-                $result['rol'] = '0';
-            }else{
-                $result['rol'] = '200'; 
-            }
         }else{
             $result['validate'] = false;
         }

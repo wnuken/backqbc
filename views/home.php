@@ -25,7 +25,7 @@ print '<pre>';
 print_r($responses);
 print '</pre>';*/
 
-if($_SESSION['k_rol'] == '0'){
+if($_SESSION['k_rol'] == 1){
 
     $text1 = "set @id_camp = 'CampignID';
 
