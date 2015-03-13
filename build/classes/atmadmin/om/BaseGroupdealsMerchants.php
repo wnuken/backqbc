@@ -223,6 +223,12 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
     protected $collQbcMerchantsContactssPartial;
 
     /**
+     * @var        PropelObjectCollection|AdminUser[] Collection to store aggregation of AdminUser objects.
+     */
+    protected $collAdminUsers;
+    protected $collAdminUsersPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -253,6 +259,12 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
      * @var		PropelObjectCollection
      */
     protected $qbcMerchantsContactssScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $adminUsersScheduledForDeletion = null;
 
     /**
      * Applies default values to this object.
@@ -1356,6 +1368,8 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
 
             $this->collQbcMerchantsContactss = null;
 
+            $this->collAdminUsers = null;
+
         } // if (deep)
     }
 
@@ -1520,6 +1534,23 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
 
             if ($this->collQbcMerchantsContactss !== null) {
                 foreach ($this->collQbcMerchantsContactss as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->adminUsersScheduledForDeletion !== null) {
+                if (!$this->adminUsersScheduledForDeletion->isEmpty()) {
+                    AdminUserQuery::create()
+                        ->filterByPrimaryKeys($this->adminUsersScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->adminUsersScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collAdminUsers !== null) {
+                foreach ($this->collAdminUsers as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1864,6 +1895,14 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
                     }
                 }
 
+                if ($this->collAdminUsers !== null) {
+                    foreach ($this->collAdminUsers as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -2060,6 +2099,9 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
             }
             if (null !== $this->collQbcMerchantsContactss) {
                 $result['QbcMerchantsContactss'] = $this->collQbcMerchantsContactss->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collAdminUsers) {
+                $result['AdminUsers'] = $this->collAdminUsers->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -2386,6 +2428,12 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
                 }
             }
 
+            foreach ($this->getAdminUsers() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addAdminUser($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
@@ -2504,6 +2552,9 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
         }
         if ('QbcMerchantsContacts' == $relationName) {
             $this->initQbcMerchantsContactss();
+        }
+        if ('AdminUser' == $relationName) {
+            $this->initAdminUsers();
         }
     }
 
@@ -2958,6 +3009,256 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
     }
 
     /**
+     * Clears out the collAdminUsers collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return GroupdealsMerchants The current object (for fluent API support)
+     * @see        addAdminUsers()
+     */
+    public function clearAdminUsers()
+    {
+        $this->collAdminUsers = null; // important to set this to null since that means it is uninitialized
+        $this->collAdminUsersPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collAdminUsers collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialAdminUsers($v = true)
+    {
+        $this->collAdminUsersPartial = $v;
+    }
+
+    /**
+     * Initializes the collAdminUsers collection.
+     *
+     * By default this just sets the collAdminUsers collection to an empty array (like clearcollAdminUsers());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initAdminUsers($overrideExisting = true)
+    {
+        if (null !== $this->collAdminUsers && !$overrideExisting) {
+            return;
+        }
+        $this->collAdminUsers = new PropelObjectCollection();
+        $this->collAdminUsers->setModel('AdminUser');
+    }
+
+    /**
+     * Gets an array of AdminUser objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this GroupdealsMerchants is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|AdminUser[] List of AdminUser objects
+     * @throws PropelException
+     */
+    public function getAdminUsers($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collAdminUsersPartial && !$this->isNew();
+        if (null === $this->collAdminUsers || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collAdminUsers) {
+                // return empty collection
+                $this->initAdminUsers();
+            } else {
+                $collAdminUsers = AdminUserQuery::create(null, $criteria)
+                    ->filterByGroupdealsMerchants($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collAdminUsersPartial && count($collAdminUsers)) {
+                      $this->initAdminUsers(false);
+
+                      foreach ($collAdminUsers as $obj) {
+                        if (false == $this->collAdminUsers->contains($obj)) {
+                          $this->collAdminUsers->append($obj);
+                        }
+                      }
+
+                      $this->collAdminUsersPartial = true;
+                    }
+
+                    $collAdminUsers->getInternalIterator()->rewind();
+
+                    return $collAdminUsers;
+                }
+
+                if ($partial && $this->collAdminUsers) {
+                    foreach ($this->collAdminUsers as $obj) {
+                        if ($obj->isNew()) {
+                            $collAdminUsers[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collAdminUsers = $collAdminUsers;
+                $this->collAdminUsersPartial = false;
+            }
+        }
+
+        return $this->collAdminUsers;
+    }
+
+    /**
+     * Sets a collection of AdminUser objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $adminUsers A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return GroupdealsMerchants The current object (for fluent API support)
+     */
+    public function setAdminUsers(PropelCollection $adminUsers, PropelPDO $con = null)
+    {
+        $adminUsersToDelete = $this->getAdminUsers(new Criteria(), $con)->diff($adminUsers);
+
+
+        $this->adminUsersScheduledForDeletion = $adminUsersToDelete;
+
+        foreach ($adminUsersToDelete as $adminUserRemoved) {
+            $adminUserRemoved->setGroupdealsMerchants(null);
+        }
+
+        $this->collAdminUsers = null;
+        foreach ($adminUsers as $adminUser) {
+            $this->addAdminUser($adminUser);
+        }
+
+        $this->collAdminUsers = $adminUsers;
+        $this->collAdminUsersPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related AdminUser objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related AdminUser objects.
+     * @throws PropelException
+     */
+    public function countAdminUsers(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collAdminUsersPartial && !$this->isNew();
+        if (null === $this->collAdminUsers || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collAdminUsers) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getAdminUsers());
+            }
+            $query = AdminUserQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByGroupdealsMerchants($this)
+                ->count($con);
+        }
+
+        return count($this->collAdminUsers);
+    }
+
+    /**
+     * Method called to associate a AdminUser object to this object
+     * through the AdminUser foreign key attribute.
+     *
+     * @param    AdminUser $l AdminUser
+     * @return GroupdealsMerchants The current object (for fluent API support)
+     */
+    public function addAdminUser(AdminUser $l)
+    {
+        if ($this->collAdminUsers === null) {
+            $this->initAdminUsers();
+            $this->collAdminUsersPartial = true;
+        }
+
+        if (!in_array($l, $this->collAdminUsers->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddAdminUser($l);
+
+            if ($this->adminUsersScheduledForDeletion and $this->adminUsersScheduledForDeletion->contains($l)) {
+                $this->adminUsersScheduledForDeletion->remove($this->adminUsersScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	AdminUser $adminUser The adminUser object to add.
+     */
+    protected function doAddAdminUser($adminUser)
+    {
+        $this->collAdminUsers[]= $adminUser;
+        $adminUser->setGroupdealsMerchants($this);
+    }
+
+    /**
+     * @param	AdminUser $adminUser The adminUser object to remove.
+     * @return GroupdealsMerchants The current object (for fluent API support)
+     */
+    public function removeAdminUser($adminUser)
+    {
+        if ($this->getAdminUsers()->contains($adminUser)) {
+            $this->collAdminUsers->remove($this->collAdminUsers->search($adminUser));
+            if (null === $this->adminUsersScheduledForDeletion) {
+                $this->adminUsersScheduledForDeletion = clone $this->collAdminUsers;
+                $this->adminUsersScheduledForDeletion->clear();
+            }
+            $this->adminUsersScheduledForDeletion[]= $adminUser;
+            $adminUser->setGroupdealsMerchants(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this GroupdealsMerchants is new, it will return
+     * an empty collection; or if this GroupdealsMerchants has previously
+     * been saved, it will retrieve related AdminUsers from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in GroupdealsMerchants.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|AdminUser[] List of AdminUser objects
+     */
+    public function getAdminUsersJoinQbcPos($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = AdminUserQuery::create(null, $criteria);
+        $query->joinWith('QbcPos', $join_behavior);
+
+        return $this->getAdminUsers($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -3024,6 +3325,11 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collAdminUsers) {
+                foreach ($this->collAdminUsers as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->aMerchantBankInfo instanceof Persistent) {
               $this->aMerchantBankInfo->clearAllReferences($deep);
             }
@@ -3039,6 +3345,10 @@ abstract class BaseGroupdealsMerchants extends BaseObject implements Persistent
             $this->collQbcMerchantsContactss->clearIterator();
         }
         $this->collQbcMerchantsContactss = null;
+        if ($this->collAdminUsers instanceof PropelCollection) {
+            $this->collAdminUsers->clearIterator();
+        }
+        $this->collAdminUsers = null;
         $this->aMerchantBankInfo = null;
     }
 

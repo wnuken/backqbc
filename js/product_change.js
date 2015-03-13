@@ -5,7 +5,7 @@ var $preview = $('button#previewloe');
 $productChange.on('change', function(){
     var $that = $(this);
     var value = $that.val();
-    var $content = $that.closest('.col-md-3');
+    var $content = $that.closest('.formpositions');
     var position = $content.attr('ofer-position');
     console.log(position);
 

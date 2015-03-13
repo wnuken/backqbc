@@ -84,6 +84,12 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
     protected $phone;
 
     /**
+     * @var        PropelObjectCollection|AdminUser[] Collection to store aggregation of AdminUser objects.
+     */
+    protected $collAdminUsers;
+    protected $collAdminUsersPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -102,6 +108,12 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
      * @var        boolean
      */
     protected $alreadyInClearAllReferencesDeep = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $adminUsersScheduledForDeletion = null;
 
     /**
      * Get the [id] column value.
@@ -503,6 +515,8 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->collAdminUsers = null;
+
         } // if (deep)
     }
 
@@ -625,6 +639,24 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
                 }
                 $affectedRows += 1;
                 $this->resetModified();
+            }
+
+            if ($this->adminUsersScheduledForDeletion !== null) {
+                if (!$this->adminUsersScheduledForDeletion->isEmpty()) {
+                    foreach ($this->adminUsersScheduledForDeletion as $adminUser) {
+                        // need to save related object because we set the relation to null
+                        $adminUser->save($con);
+                    }
+                    $this->adminUsersScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collAdminUsers !== null) {
+                foreach ($this->collAdminUsers as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             $this->alreadyInSave = false;
@@ -817,6 +849,14 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
             }
 
 
+                if ($this->collAdminUsers !== null) {
+                    foreach ($this->collAdminUsers as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -896,10 +936,11 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to true.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
         if (isset($alreadyDumpedObjects['QbcPos'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
@@ -923,6 +964,11 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
             $result[$key] = $virtualColumn;
         }
 
+        if ($includeForeignObjects) {
+            if (null !== $this->collAdminUsers) {
+                $result['AdminUsers'] = $this->collAdminUsers->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+        }
 
         return $result;
     }
@@ -1107,6 +1153,24 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
         $copyObj->setPostalCode($this->getPostalCode());
         $copyObj->setAddress($this->getAddress());
         $copyObj->setPhone($this->getPhone());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            foreach ($this->getAdminUsers() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addAdminUser($relObj->copy($deepCopy));
+                }
+            }
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -1153,6 +1217,272 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
         return self::$peer;
     }
 
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('AdminUser' == $relationName) {
+            $this->initAdminUsers();
+        }
+    }
+
+    /**
+     * Clears out the collAdminUsers collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return QbcPos The current object (for fluent API support)
+     * @see        addAdminUsers()
+     */
+    public function clearAdminUsers()
+    {
+        $this->collAdminUsers = null; // important to set this to null since that means it is uninitialized
+        $this->collAdminUsersPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collAdminUsers collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialAdminUsers($v = true)
+    {
+        $this->collAdminUsersPartial = $v;
+    }
+
+    /**
+     * Initializes the collAdminUsers collection.
+     *
+     * By default this just sets the collAdminUsers collection to an empty array (like clearcollAdminUsers());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initAdminUsers($overrideExisting = true)
+    {
+        if (null !== $this->collAdminUsers && !$overrideExisting) {
+            return;
+        }
+        $this->collAdminUsers = new PropelObjectCollection();
+        $this->collAdminUsers->setModel('AdminUser');
+    }
+
+    /**
+     * Gets an array of AdminUser objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this QbcPos is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|AdminUser[] List of AdminUser objects
+     * @throws PropelException
+     */
+    public function getAdminUsers($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collAdminUsersPartial && !$this->isNew();
+        if (null === $this->collAdminUsers || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collAdminUsers) {
+                // return empty collection
+                $this->initAdminUsers();
+            } else {
+                $collAdminUsers = AdminUserQuery::create(null, $criteria)
+                    ->filterByQbcPos($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collAdminUsersPartial && count($collAdminUsers)) {
+                      $this->initAdminUsers(false);
+
+                      foreach ($collAdminUsers as $obj) {
+                        if (false == $this->collAdminUsers->contains($obj)) {
+                          $this->collAdminUsers->append($obj);
+                        }
+                      }
+
+                      $this->collAdminUsersPartial = true;
+                    }
+
+                    $collAdminUsers->getInternalIterator()->rewind();
+
+                    return $collAdminUsers;
+                }
+
+                if ($partial && $this->collAdminUsers) {
+                    foreach ($this->collAdminUsers as $obj) {
+                        if ($obj->isNew()) {
+                            $collAdminUsers[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collAdminUsers = $collAdminUsers;
+                $this->collAdminUsersPartial = false;
+            }
+        }
+
+        return $this->collAdminUsers;
+    }
+
+    /**
+     * Sets a collection of AdminUser objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $adminUsers A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return QbcPos The current object (for fluent API support)
+     */
+    public function setAdminUsers(PropelCollection $adminUsers, PropelPDO $con = null)
+    {
+        $adminUsersToDelete = $this->getAdminUsers(new Criteria(), $con)->diff($adminUsers);
+
+
+        $this->adminUsersScheduledForDeletion = $adminUsersToDelete;
+
+        foreach ($adminUsersToDelete as $adminUserRemoved) {
+            $adminUserRemoved->setQbcPos(null);
+        }
+
+        $this->collAdminUsers = null;
+        foreach ($adminUsers as $adminUser) {
+            $this->addAdminUser($adminUser);
+        }
+
+        $this->collAdminUsers = $adminUsers;
+        $this->collAdminUsersPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related AdminUser objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related AdminUser objects.
+     * @throws PropelException
+     */
+    public function countAdminUsers(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collAdminUsersPartial && !$this->isNew();
+        if (null === $this->collAdminUsers || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collAdminUsers) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getAdminUsers());
+            }
+            $query = AdminUserQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByQbcPos($this)
+                ->count($con);
+        }
+
+        return count($this->collAdminUsers);
+    }
+
+    /**
+     * Method called to associate a AdminUser object to this object
+     * through the AdminUser foreign key attribute.
+     *
+     * @param    AdminUser $l AdminUser
+     * @return QbcPos The current object (for fluent API support)
+     */
+    public function addAdminUser(AdminUser $l)
+    {
+        if ($this->collAdminUsers === null) {
+            $this->initAdminUsers();
+            $this->collAdminUsersPartial = true;
+        }
+
+        if (!in_array($l, $this->collAdminUsers->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddAdminUser($l);
+
+            if ($this->adminUsersScheduledForDeletion and $this->adminUsersScheduledForDeletion->contains($l)) {
+                $this->adminUsersScheduledForDeletion->remove($this->adminUsersScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	AdminUser $adminUser The adminUser object to add.
+     */
+    protected function doAddAdminUser($adminUser)
+    {
+        $this->collAdminUsers[]= $adminUser;
+        $adminUser->setQbcPos($this);
+    }
+
+    /**
+     * @param	AdminUser $adminUser The adminUser object to remove.
+     * @return QbcPos The current object (for fluent API support)
+     */
+    public function removeAdminUser($adminUser)
+    {
+        if ($this->getAdminUsers()->contains($adminUser)) {
+            $this->collAdminUsers->remove($this->collAdminUsers->search($adminUser));
+            if (null === $this->adminUsersScheduledForDeletion) {
+                $this->adminUsersScheduledForDeletion = clone $this->collAdminUsers;
+                $this->adminUsersScheduledForDeletion->clear();
+            }
+            $this->adminUsersScheduledForDeletion[]= $adminUser;
+            $adminUser->setQbcPos(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this QbcPos is new, it will return
+     * an empty collection; or if this QbcPos has previously
+     * been saved, it will retrieve related AdminUsers from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in QbcPos.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|AdminUser[] List of AdminUser objects
+     */
+    public function getAdminUsersJoinGroupdealsMerchants($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = AdminUserQuery::create(null, $criteria);
+        $query->joinWith('GroupdealsMerchants', $join_behavior);
+
+        return $this->getAdminUsers($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
@@ -1189,10 +1519,19 @@ abstract class BaseQbcPos extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collAdminUsers) {
+                foreach ($this->collAdminUsers as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collAdminUsers instanceof PropelCollection) {
+            $this->collAdminUsers->clearIterator();
+        }
+        $this->collAdminUsers = null;
     }
 
     /**

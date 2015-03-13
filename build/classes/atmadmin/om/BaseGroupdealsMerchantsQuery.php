@@ -82,6 +82,10 @@
  * @method GroupdealsMerchantsQuery rightJoinQbcMerchantsContacts($relationAlias = null) Adds a RIGHT JOIN clause to the query using the QbcMerchantsContacts relation
  * @method GroupdealsMerchantsQuery innerJoinQbcMerchantsContacts($relationAlias = null) Adds a INNER JOIN clause to the query using the QbcMerchantsContacts relation
  *
+ * @method GroupdealsMerchantsQuery leftJoinAdminUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the AdminUser relation
+ * @method GroupdealsMerchantsQuery rightJoinAdminUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the AdminUser relation
+ * @method GroupdealsMerchantsQuery innerJoinAdminUser($relationAlias = null) Adds a INNER JOIN clause to the query using the AdminUser relation
+ *
  * @method GroupdealsMerchants findOne(PropelPDO $con = null) Return the first GroupdealsMerchants matching the query
  * @method GroupdealsMerchants findOneOrCreate(PropelPDO $con = null) Return the first GroupdealsMerchants matching the query, or a new GroupdealsMerchants object populated from the query conditions when no match is found
  *
@@ -1469,6 +1473,80 @@ abstract class BaseGroupdealsMerchantsQuery extends ModelCriteria
         return $this
             ->joinQbcMerchantsContacts($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'QbcMerchantsContacts', 'QbcMerchantsContactsQuery');
+    }
+
+    /**
+     * Filter the query by a related AdminUser object
+     *
+     * @param   AdminUser|PropelObjectCollection $adminUser  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 GroupdealsMerchantsQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterByAdminUser($adminUser, $comparison = null)
+    {
+        if ($adminUser instanceof AdminUser) {
+            return $this
+                ->addUsingAlias(GroupdealsMerchantsPeer::MERCHANTS_ID, $adminUser->getMerchantId(), $comparison);
+        } elseif ($adminUser instanceof PropelObjectCollection) {
+            return $this
+                ->useAdminUserQuery()
+                ->filterByPrimaryKeys($adminUser->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByAdminUser() only accepts arguments of type AdminUser or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the AdminUser relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return GroupdealsMerchantsQuery The current query, for fluid interface
+     */
+    public function joinAdminUser($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('AdminUser');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'AdminUser');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the AdminUser relation AdminUser object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   AdminUserQuery A secondary query class using the current class as primary query
+     */
+    public function useAdminUserQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinAdminUser($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'AdminUser', 'AdminUserQuery');
     }
 
     /**

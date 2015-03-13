@@ -501,6 +501,9 @@ abstract class BaseGroupdealsMerchantsPeer
         // Invalidate objects in QbcMerchantsContactsPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         QbcMerchantsContactsPeer::clearInstancePool();
+        // Invalidate objects in AdminUserPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        AdminUserPeer::clearInstancePool();
     }
 
     /**

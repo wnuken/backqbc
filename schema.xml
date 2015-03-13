@@ -1416,4 +1416,74 @@
         </vendor>
     </table>
 
+    <table name="admin_user" phpName="AdminUser" idMethod="native">
+        <column name="user_id" phpName="UserId" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="firstname" phpName="Firstname" type="VARCHAR" size="32" required="false"/>
+        <column name="lastname" phpName="Lastname" type="VARCHAR" size="32" required="false"/>
+        <column name="email" phpName="Email" type="VARCHAR" size="128" required="false"/>
+        <column name="username" phpName="Username" type="VARCHAR" size="40" required="false"/>
+        <column name="password" phpName="Password" type="VARCHAR" size="100" required="false"/>
+        <column name="created" phpName="Created" type="TIMESTAMP" required="true" defaultValue="0000-00-00 00:00:00"/>
+        <column name="modified" phpName="Modified" type="TIMESTAMP" required="false"/>
+        <column name="logdate" phpName="Logdate" type="TIMESTAMP" required="false"/>
+        <column name="lognum" phpName="Lognum" type="SMALLINT" size="5" sqlType="smallint(5) unsigned" required="true" defaultValue="0"/>
+        <column name="reload_acl_flag" phpName="ReloadAclFlag" type="SMALLINT" required="true" defaultValue="0"/>
+        <column name="is_active" phpName="IsActive" type="SMALLINT" required="true" defaultValue="1"/>
+        <column name="extra" phpName="Extra" type="LONGVARCHAR" required="false"/>
+        <column name="rp_token" phpName="RpToken" type="LONGVARCHAR" required="false"/>
+        <column name="rp_token_created_at" phpName="RpTokenCreatedAt" type="TIMESTAMP" required="false"/>
+        <column name="failures_num" phpName="FailuresNum" type="SMALLINT" required="false" defaultValue="0"/>
+        <column name="first_failure" phpName="FirstFailure" type="TIMESTAMP" required="false"/>
+        <column name="lock_expires" phpName="LockExpires" type="TIMESTAMP" required="false"/>
+        <column name="movil" phpName="Movil" type="VARCHAR" size="255" required="false"/>
+        <column name="id_employee" phpName="IdEmployee" type="VARCHAR" size="255" required="false"/>
+        <column name="position" phpName="Position" type="VARCHAR" size="255" required="false"/>
+        <column name="merchant_id" phpName="MerchantId" type="INTEGER" sqlType="int(11) unsigned" required="false"/>
+        <column name="dob" phpName="Dob" type="VARCHAR" size="20" required="false"/>
+        <column name="phone" phpName="Phone" type="VARCHAR" size="20" required="false"/>
+        <column name="workmovil" phpName="Workmovil" type="VARCHAR" size="20" required="false"/>
+        <column name="pos_id" phpName="PosId" type="INTEGER" size="10" sqlType="int(10) unsigned" required="false"/>
+        <foreign-key foreignTable="groupdeals_merchants" name="fk_admin_user_merchant_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="merchant_id" foreign="merchants_id"/>
+        </foreign-key>
+        <foreign-key foreignTable="qbc_pos" name="fk_admin_user_pos_id" onDelete="SET NULL" onUpdate="RESTRICT">
+            <reference local="pos_id" foreign="id"/>
+        </foreign-key>
+        <unique name="UNQ_ADMIN_USER_USERNAME">
+            <unique-column name="username"/>
+        </unique>
+        <index name="fk_admin_user_merchant_id">
+            <index-column name="merchant_id"/>
+        </index>
+        <index name="fk_admin_user_pos_id">
+            <index-column name="pos_id"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+
+    <table name="admin_role" phpName="AdminRole" idMethod="native">
+        <column name="role_id" phpName="RoleId" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="parent_id" phpName="ParentId" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="tree_level" phpName="TreeLevel" type="SMALLINT" size="5" sqlType="smallint(5) unsigned" required="true" defaultValue="0"/>
+        <column name="sort_order" phpName="SortOrder" type="SMALLINT" size="5" sqlType="smallint(5) unsigned" required="true" defaultValue="0"/>
+        <column name="role_type" phpName="RoleType" type="VARCHAR" size="1" required="true" defaultValue="0"/>
+        <column name="user_id" phpName="UserId" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+        <column name="role_name" phpName="RoleName" type="VARCHAR" size="50" required="false"/>
+        <column name="gws_is_all" phpName="GwsIsAll" type="INTEGER" required="true" defaultValue="1"/>
+        <column name="gws_websites" phpName="GwsWebsites" type="VARCHAR" size="255" required="false"/>
+        <column name="gws_store_groups" phpName="GwsStoreGroups" type="VARCHAR" size="255" required="false"/>
+        <index name="IDX_ADMIN_ROLE_PARENT_ID_SORT_ORDER">
+            <index-column name="parent_id"/>
+            <index-column name="sort_order"/>
+        </index>
+        <index name="IDX_ADMIN_ROLE_TREE_LEVEL">
+            <index-column name="tree_level"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+
 </database>

@@ -294,5 +294,36 @@ class Querys {
         }
         return $result;
     }
+    
+    public function AdminUserByUsername($params){
+        try{           
+            $result = AdminUserQuery::create()->findOneByUsername($params['user']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['user']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+    
+    public function AdminRoleQueryByUserId($params){
+        try{           
+            $result = AdminRoleQuery::create()->findOneByUserId($params['id']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+    
+    
+    
 
 }

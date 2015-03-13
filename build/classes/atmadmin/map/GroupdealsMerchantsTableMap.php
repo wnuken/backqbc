@@ -78,6 +78,7 @@ class GroupdealsMerchantsTableMap extends TableMap
         $this->addRelation('MerchantBankInfo', 'MerchantBankInfo', RelationMap::MANY_TO_ONE, array('bank_info' => 'info_id', ), null, null);
         $this->addRelation('QbcMerchantsCommercialNames', 'QbcMerchantsCommercialNames', RelationMap::ONE_TO_MANY, array('merchants_id' => 'merchants_id', ), 'CASCADE', null, 'QbcMerchantsCommercialNamess');
         $this->addRelation('QbcMerchantsContacts', 'QbcMerchantsContacts', RelationMap::ONE_TO_MANY, array('merchants_id' => 'merchants_id', ), 'CASCADE', null, 'QbcMerchantsContactss');
+        $this->addRelation('AdminUser', 'AdminUser', RelationMap::ONE_TO_MANY, array('merchants_id' => 'merchant_id', ), 'CASCADE', null, 'AdminUsers');
     } // buildRelations()
 
 } // GroupdealsMerchantsTableMap

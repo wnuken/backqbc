@@ -48,7 +48,35 @@ class Settings {
     }
 
     public function & loginRolValidate($params){
-        $logins = array(
+
+        //$params['name'] = 'admin';
+        $Querys = new Querys();
+
+        $userValues = $Querys->AdminUserByUsername($params);
+
+        $passBd = $userValues->getPassword();
+        $salt = explode(':', $passBd);
+        $pass = $params['pass'];
+        $passGen = hash('sha256',$salt[1]. $pass);
+
+        if($salt[0] == $passGen){
+            $result['validate'] = true;
+            $paramsRoleId['id'] = $userValues->getUserId();
+            $RoleQuery = $Querys->AdminRoleQueryByUserId($paramsRoleId);
+            $rol = $RoleQuery->getParentId();
+
+           // print "<pre>". $RoleQuery->getParentId() . "</pre>";die();
+
+            if($rol == 0){
+                $result['rol'] = '0';
+            }else{
+                $result['rol'] = '200'; 
+            }
+        }else{
+            $result['validate'] = false;
+        }
+
+        /* $logins = array(
             0 => array(
                 'user' => 'admin',
                 'pass' => '6e2b131b4ca3b2ff6aa3cbb7bf6711582766c7cb',
@@ -82,7 +110,7 @@ class Settings {
             $result['rol'] = $logins[$key]['rol'];
         }else{
             $result['validate'] = false;
-        }
+        } */
 
         return $result;
 

@@ -1562,5 +1562,76 @@ CREATE TABLE enterprise_banner_content
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- admin_user
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS admin_user;
+
+CREATE TABLE admin_user
+(
+    user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR(32),
+    lastname VARCHAR(32),
+    email VARCHAR(128),
+    username VARCHAR(40),
+    password VARCHAR(100),
+    created DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
+    modified DATETIME,
+    logdate DATETIME,
+    lognum smallint(5) unsigned DEFAULT 0 NOT NULL,
+    reload_acl_flag SMALLINT DEFAULT 0 NOT NULL,
+    is_active SMALLINT DEFAULT 1 NOT NULL,
+    extra TEXT,
+    rp_token TEXT,
+    rp_token_created_at DATETIME,
+    failures_num SMALLINT DEFAULT 0,
+    first_failure DATETIME,
+    lock_expires DATETIME,
+    movil VARCHAR(255),
+    id_employee VARCHAR(255),
+    position VARCHAR(255),
+    merchant_id int(11) unsigned,
+    dob VARCHAR(20),
+    phone VARCHAR(20),
+    workmovil VARCHAR(20),
+    pos_id int(10) unsigned,
+    PRIMARY KEY (user_id),
+    UNIQUE INDEX UNQ_ADMIN_USER_USERNAME (username),
+    INDEX fk_admin_user_merchant_id (merchant_id),
+    INDEX fk_admin_user_pos_id (pos_id),
+    CONSTRAINT fk_admin_user_merchant_id
+        FOREIGN KEY (merchant_id)
+        REFERENCES groupdeals_merchants (merchants_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_admin_user_pos_id
+        FOREIGN KEY (pos_id)
+        REFERENCES qbc_pos (id)
+        ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- admin_role
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS admin_role;
+
+CREATE TABLE admin_role
+(
+    role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+    parent_id int(10) unsigned DEFAULT 0 NOT NULL,
+    tree_level smallint(5) unsigned DEFAULT 0 NOT NULL,
+    sort_order smallint(5) unsigned DEFAULT 0 NOT NULL,
+    role_type VARCHAR(1) DEFAULT '0' NOT NULL,
+    user_id int(10) unsigned DEFAULT 0 NOT NULL,
+    role_name VARCHAR(50),
+    gws_is_all INTEGER DEFAULT 1 NOT NULL,
+    gws_websites VARCHAR(255),
+    gws_store_groups VARCHAR(255),
+    PRIMARY KEY (role_id),
+    INDEX IDX_ADMIN_ROLE_PARENT_ID_SORT_ORDER (parent_id, sort_order),
+    INDEX IDX_ADMIN_ROLE_TREE_LEVEL (tree_level)
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

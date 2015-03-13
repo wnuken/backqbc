@@ -2,71 +2,74 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'qbc_pos' table.
+ * Base static class for performing query and update operations on the 'admin_role' table.
  *
  *
  *
  * @package propel.generator.atmadmin.om
  */
-abstract class BaseQbcPosPeer
+abstract class BaseAdminRolePeer
 {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'atmadmin';
 
     /** the table name for this class */
-    const TABLE_NAME = 'qbc_pos';
+    const TABLE_NAME = 'admin_role';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'QbcPos';
+    const OM_CLASS = 'AdminRole';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'QbcPosTableMap';
+    const TM_CLASS = 'AdminRoleTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 9;
+    const NUM_COLUMNS = 10;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 9;
+    const NUM_HYDRATE_COLUMNS = 10;
 
-    /** the column name for the id field */
-    const ID = 'qbc_pos.id';
+    /** the column name for the role_id field */
+    const ROLE_ID = 'admin_role.role_id';
 
-    /** the column name for the pos_id field */
-    const POS_ID = 'qbc_pos.pos_id';
+    /** the column name for the parent_id field */
+    const PARENT_ID = 'admin_role.parent_id';
 
-    /** the column name for the office field */
-    const OFFICE = 'qbc_pos.office';
+    /** the column name for the tree_level field */
+    const TREE_LEVEL = 'admin_role.tree_level';
 
-    /** the column name for the code field */
-    const CODE = 'qbc_pos.code';
+    /** the column name for the sort_order field */
+    const SORT_ORDER = 'admin_role.sort_order';
 
-    /** the column name for the country field */
-    const COUNTRY = 'qbc_pos.country';
+    /** the column name for the role_type field */
+    const ROLE_TYPE = 'admin_role.role_type';
 
-    /** the column name for the city field */
-    const CITY = 'qbc_pos.city';
+    /** the column name for the user_id field */
+    const USER_ID = 'admin_role.user_id';
 
-    /** the column name for the postal_code field */
-    const POSTAL_CODE = 'qbc_pos.postal_code';
+    /** the column name for the role_name field */
+    const ROLE_NAME = 'admin_role.role_name';
 
-    /** the column name for the address field */
-    const ADDRESS = 'qbc_pos.address';
+    /** the column name for the gws_is_all field */
+    const GWS_IS_ALL = 'admin_role.gws_is_all';
 
-    /** the column name for the phone field */
-    const PHONE = 'qbc_pos.phone';
+    /** the column name for the gws_websites field */
+    const GWS_WEBSITES = 'admin_role.gws_websites';
+
+    /** the column name for the gws_store_groups field */
+    const GWS_STORE_GROUPS = 'admin_role.gws_store_groups';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identity map to hold any loaded instances of QbcPos objects.
+     * An identity map to hold any loaded instances of AdminRole objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array QbcPos[]
+     * @var        array AdminRole[]
      */
     public static $instances = array();
 
@@ -75,30 +78,30 @@ abstract class BaseQbcPosPeer
      * holds an array of fieldnames
      *
      * first dimension keys are the type constants
-     * e.g. QbcPosPeer::$fieldNames[QbcPosPeer::TYPE_PHPNAME][0] = 'Id'
+     * e.g. AdminRolePeer::$fieldNames[AdminRolePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'PosId', 'Office', 'Code', 'Country', 'City', 'PostalCode', 'Address', 'Phone', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'posId', 'office', 'code', 'country', 'city', 'postalCode', 'address', 'phone', ),
-        BasePeer::TYPE_COLNAME => array (QbcPosPeer::ID, QbcPosPeer::POS_ID, QbcPosPeer::OFFICE, QbcPosPeer::CODE, QbcPosPeer::COUNTRY, QbcPosPeer::CITY, QbcPosPeer::POSTAL_CODE, QbcPosPeer::ADDRESS, QbcPosPeer::PHONE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'POS_ID', 'OFFICE', 'CODE', 'COUNTRY', 'CITY', 'POSTAL_CODE', 'ADDRESS', 'PHONE', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'pos_id', 'office', 'code', 'country', 'city', 'postal_code', 'address', 'phone', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('RoleId', 'ParentId', 'TreeLevel', 'SortOrder', 'RoleType', 'UserId', 'RoleName', 'GwsIsAll', 'GwsWebsites', 'GwsStoreGroups', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('roleId', 'parentId', 'treeLevel', 'sortOrder', 'roleType', 'userId', 'roleName', 'gwsIsAll', 'gwsWebsites', 'gwsStoreGroups', ),
+        BasePeer::TYPE_COLNAME => array (AdminRolePeer::ROLE_ID, AdminRolePeer::PARENT_ID, AdminRolePeer::TREE_LEVEL, AdminRolePeer::SORT_ORDER, AdminRolePeer::ROLE_TYPE, AdminRolePeer::USER_ID, AdminRolePeer::ROLE_NAME, AdminRolePeer::GWS_IS_ALL, AdminRolePeer::GWS_WEBSITES, AdminRolePeer::GWS_STORE_GROUPS, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ROLE_ID', 'PARENT_ID', 'TREE_LEVEL', 'SORT_ORDER', 'ROLE_TYPE', 'USER_ID', 'ROLE_NAME', 'GWS_IS_ALL', 'GWS_WEBSITES', 'GWS_STORE_GROUPS', ),
+        BasePeer::TYPE_FIELDNAME => array ('role_id', 'parent_id', 'tree_level', 'sort_order', 'role_type', 'user_id', 'role_name', 'gws_is_all', 'gws_websites', 'gws_store_groups', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
      * holds an array of keys for quick access to the fieldnames array
      *
      * first dimension keys are the type constants
-     * e.g. QbcPosPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
+     * e.g. AdminRolePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'PosId' => 1, 'Office' => 2, 'Code' => 3, 'Country' => 4, 'City' => 5, 'PostalCode' => 6, 'Address' => 7, 'Phone' => 8, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'posId' => 1, 'office' => 2, 'code' => 3, 'country' => 4, 'city' => 5, 'postalCode' => 6, 'address' => 7, 'phone' => 8, ),
-        BasePeer::TYPE_COLNAME => array (QbcPosPeer::ID => 0, QbcPosPeer::POS_ID => 1, QbcPosPeer::OFFICE => 2, QbcPosPeer::CODE => 3, QbcPosPeer::COUNTRY => 4, QbcPosPeer::CITY => 5, QbcPosPeer::POSTAL_CODE => 6, QbcPosPeer::ADDRESS => 7, QbcPosPeer::PHONE => 8, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'POS_ID' => 1, 'OFFICE' => 2, 'CODE' => 3, 'COUNTRY' => 4, 'CITY' => 5, 'POSTAL_CODE' => 6, 'ADDRESS' => 7, 'PHONE' => 8, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'pos_id' => 1, 'office' => 2, 'code' => 3, 'country' => 4, 'city' => 5, 'postal_code' => 6, 'address' => 7, 'phone' => 8, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('RoleId' => 0, 'ParentId' => 1, 'TreeLevel' => 2, 'SortOrder' => 3, 'RoleType' => 4, 'UserId' => 5, 'RoleName' => 6, 'GwsIsAll' => 7, 'GwsWebsites' => 8, 'GwsStoreGroups' => 9, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('roleId' => 0, 'parentId' => 1, 'treeLevel' => 2, 'sortOrder' => 3, 'roleType' => 4, 'userId' => 5, 'roleName' => 6, 'gwsIsAll' => 7, 'gwsWebsites' => 8, 'gwsStoreGroups' => 9, ),
+        BasePeer::TYPE_COLNAME => array (AdminRolePeer::ROLE_ID => 0, AdminRolePeer::PARENT_ID => 1, AdminRolePeer::TREE_LEVEL => 2, AdminRolePeer::SORT_ORDER => 3, AdminRolePeer::ROLE_TYPE => 4, AdminRolePeer::USER_ID => 5, AdminRolePeer::ROLE_NAME => 6, AdminRolePeer::GWS_IS_ALL => 7, AdminRolePeer::GWS_WEBSITES => 8, AdminRolePeer::GWS_STORE_GROUPS => 9, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ROLE_ID' => 0, 'PARENT_ID' => 1, 'TREE_LEVEL' => 2, 'SORT_ORDER' => 3, 'ROLE_TYPE' => 4, 'USER_ID' => 5, 'ROLE_NAME' => 6, 'GWS_IS_ALL' => 7, 'GWS_WEBSITES' => 8, 'GWS_STORE_GROUPS' => 9, ),
+        BasePeer::TYPE_FIELDNAME => array ('role_id' => 0, 'parent_id' => 1, 'tree_level' => 2, 'sort_order' => 3, 'role_type' => 4, 'user_id' => 5, 'role_name' => 6, 'gws_is_all' => 7, 'gws_websites' => 8, 'gws_store_groups' => 9, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -113,10 +116,10 @@ abstract class BaseQbcPosPeer
      */
     public static function translateFieldName($name, $fromType, $toType)
     {
-        $toNames = QbcPosPeer::getFieldNames($toType);
-        $key = isset(QbcPosPeer::$fieldKeys[$fromType][$name]) ? QbcPosPeer::$fieldKeys[$fromType][$name] : null;
+        $toNames = AdminRolePeer::getFieldNames($toType);
+        $key = isset(AdminRolePeer::$fieldKeys[$fromType][$name]) ? AdminRolePeer::$fieldKeys[$fromType][$name] : null;
         if ($key === null) {
-            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(QbcPosPeer::$fieldKeys[$fromType], true));
+            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(AdminRolePeer::$fieldKeys[$fromType], true));
         }
 
         return $toNames[$key];
@@ -133,11 +136,11 @@ abstract class BaseQbcPosPeer
      */
     public static function getFieldNames($type = BasePeer::TYPE_PHPNAME)
     {
-        if (!array_key_exists($type, QbcPosPeer::$fieldNames)) {
+        if (!array_key_exists($type, AdminRolePeer::$fieldNames)) {
             throw new PropelException('Method getFieldNames() expects the parameter $type to be one of the class constants BasePeer::TYPE_PHPNAME, BasePeer::TYPE_STUDLYPHPNAME, BasePeer::TYPE_COLNAME, BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_NUM. ' . $type . ' was given.');
         }
 
-        return QbcPosPeer::$fieldNames[$type];
+        return AdminRolePeer::$fieldNames[$type];
     }
 
     /**
@@ -149,12 +152,12 @@ abstract class BaseQbcPosPeer
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. QbcPosPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. AdminRolePeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(QbcPosPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(AdminRolePeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -172,25 +175,27 @@ abstract class BaseQbcPosPeer
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(QbcPosPeer::ID);
-            $criteria->addSelectColumn(QbcPosPeer::POS_ID);
-            $criteria->addSelectColumn(QbcPosPeer::OFFICE);
-            $criteria->addSelectColumn(QbcPosPeer::CODE);
-            $criteria->addSelectColumn(QbcPosPeer::COUNTRY);
-            $criteria->addSelectColumn(QbcPosPeer::CITY);
-            $criteria->addSelectColumn(QbcPosPeer::POSTAL_CODE);
-            $criteria->addSelectColumn(QbcPosPeer::ADDRESS);
-            $criteria->addSelectColumn(QbcPosPeer::PHONE);
+            $criteria->addSelectColumn(AdminRolePeer::ROLE_ID);
+            $criteria->addSelectColumn(AdminRolePeer::PARENT_ID);
+            $criteria->addSelectColumn(AdminRolePeer::TREE_LEVEL);
+            $criteria->addSelectColumn(AdminRolePeer::SORT_ORDER);
+            $criteria->addSelectColumn(AdminRolePeer::ROLE_TYPE);
+            $criteria->addSelectColumn(AdminRolePeer::USER_ID);
+            $criteria->addSelectColumn(AdminRolePeer::ROLE_NAME);
+            $criteria->addSelectColumn(AdminRolePeer::GWS_IS_ALL);
+            $criteria->addSelectColumn(AdminRolePeer::GWS_WEBSITES);
+            $criteria->addSelectColumn(AdminRolePeer::GWS_STORE_GROUPS);
         } else {
-            $criteria->addSelectColumn($alias . '.id');
-            $criteria->addSelectColumn($alias . '.pos_id');
-            $criteria->addSelectColumn($alias . '.office');
-            $criteria->addSelectColumn($alias . '.code');
-            $criteria->addSelectColumn($alias . '.country');
-            $criteria->addSelectColumn($alias . '.city');
-            $criteria->addSelectColumn($alias . '.postal_code');
-            $criteria->addSelectColumn($alias . '.address');
-            $criteria->addSelectColumn($alias . '.phone');
+            $criteria->addSelectColumn($alias . '.role_id');
+            $criteria->addSelectColumn($alias . '.parent_id');
+            $criteria->addSelectColumn($alias . '.tree_level');
+            $criteria->addSelectColumn($alias . '.sort_order');
+            $criteria->addSelectColumn($alias . '.role_type');
+            $criteria->addSelectColumn($alias . '.user_id');
+            $criteria->addSelectColumn($alias . '.role_name');
+            $criteria->addSelectColumn($alias . '.gws_is_all');
+            $criteria->addSelectColumn($alias . '.gws_websites');
+            $criteria->addSelectColumn($alias . '.gws_store_groups');
         }
     }
 
@@ -210,21 +215,21 @@ abstract class BaseQbcPosPeer
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(QbcPosPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(AdminRolePeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            QbcPosPeer::addSelectColumns($criteria);
+            AdminRolePeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-        $criteria->setDbName(QbcPosPeer::DATABASE_NAME); // Set the correct dbName
+        $criteria->setDbName(AdminRolePeer::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
         // BasePeer returns a PDOStatement
         $stmt = BasePeer::doCount($criteria, $con);
@@ -243,7 +248,7 @@ abstract class BaseQbcPosPeer
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return QbcPos
+     * @return AdminRole
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -251,7 +256,7 @@ abstract class BaseQbcPosPeer
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = QbcPosPeer::doSelect($critcopy, $con);
+        $objects = AdminRolePeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -269,7 +274,7 @@ abstract class BaseQbcPosPeer
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return QbcPosPeer::populateObjects(QbcPosPeer::doSelectStmt($criteria, $con));
+        return AdminRolePeer::populateObjects(AdminRolePeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -287,16 +292,16 @@ abstract class BaseQbcPosPeer
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            QbcPosPeer::addSelectColumns($criteria);
+            AdminRolePeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
-        $criteria->setDbName(QbcPosPeer::DATABASE_NAME);
+        $criteria->setDbName(AdminRolePeer::DATABASE_NAME);
 
         // BasePeer returns a PDOStatement
         return BasePeer::doSelect($criteria, $con);
@@ -310,16 +315,16 @@ abstract class BaseQbcPosPeer
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param QbcPos $obj A QbcPos object.
+     * @param AdminRole $obj A AdminRole object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getId();
+                $key = (string) $obj->getRoleId();
             } // if key === null
-            QbcPosPeer::$instances[$key] = $obj;
+            AdminRolePeer::$instances[$key] = $obj;
         }
     }
 
@@ -331,7 +336,7 @@ abstract class BaseQbcPosPeer
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A QbcPos object or a primary key value.
+     * @param      mixed $value A AdminRole object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -339,17 +344,17 @@ abstract class BaseQbcPosPeer
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof QbcPos) {
-                $key = (string) $value->getId();
+            if (is_object($value) && $value instanceof AdminRole) {
+                $key = (string) $value->getRoleId();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or QbcPos object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or AdminRole object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
-            unset(QbcPosPeer::$instances[$key]);
+            unset(AdminRolePeer::$instances[$key]);
         }
     } // removeInstanceFromPool()
 
@@ -360,14 +365,14 @@ abstract class BaseQbcPosPeer
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return QbcPos Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return AdminRole Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
     {
         if (Propel::isInstancePoolingEnabled()) {
-            if (isset(QbcPosPeer::$instances[$key])) {
-                return QbcPosPeer::$instances[$key];
+            if (isset(AdminRolePeer::$instances[$key])) {
+                return AdminRolePeer::$instances[$key];
             }
         }
 
@@ -382,22 +387,19 @@ abstract class BaseQbcPosPeer
     public static function clearInstancePool($and_clear_all_references = false)
     {
       if ($and_clear_all_references) {
-        foreach (QbcPosPeer::$instances as $instance) {
+        foreach (AdminRolePeer::$instances as $instance) {
           $instance->clearAllReferences(true);
         }
       }
-        QbcPosPeer::$instances = array();
+        AdminRolePeer::$instances = array();
     }
 
     /**
-     * Method to invalidate the instance pool of all tables related to qbc_pos
+     * Method to invalidate the instance pool of all tables related to admin_role
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
     {
-        // Invalidate objects in AdminUserPeer instance pool,
-        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
-        AdminUserPeer::clearInstancePool();
     }
 
     /**
@@ -447,11 +449,11 @@ abstract class BaseQbcPosPeer
         $results = array();
 
         // set the class once to avoid overhead in the loop
-        $cls = QbcPosPeer::getOMClass();
+        $cls = AdminRolePeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = QbcPosPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = QbcPosPeer::getInstanceFromPool($key))) {
+            $key = AdminRolePeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = AdminRolePeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -460,7 +462,7 @@ abstract class BaseQbcPosPeer
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                QbcPosPeer::addInstanceToPool($obj, $key);
+                AdminRolePeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -474,21 +476,21 @@ abstract class BaseQbcPosPeer
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (QbcPos object, last column rank)
+     * @return array (AdminRole object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = QbcPosPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = QbcPosPeer::getInstanceFromPool($key))) {
+        $key = AdminRolePeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = AdminRolePeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + QbcPosPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + AdminRolePeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = QbcPosPeer::OM_CLASS;
+            $cls = AdminRolePeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            QbcPosPeer::addInstanceToPool($obj, $key);
+            AdminRolePeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -503,7 +505,7 @@ abstract class BaseQbcPosPeer
      */
     public static function getTableMap()
     {
-        return Propel::getDatabaseMap(QbcPosPeer::DATABASE_NAME)->getTable(QbcPosPeer::TABLE_NAME);
+        return Propel::getDatabaseMap(AdminRolePeer::DATABASE_NAME)->getTable(AdminRolePeer::TABLE_NAME);
     }
 
     /**
@@ -511,9 +513,9 @@ abstract class BaseQbcPosPeer
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseQbcPosPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseQbcPosPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new \QbcPosTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseAdminRolePeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseAdminRolePeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new \AdminRoleTableMap());
       }
     }
 
@@ -525,13 +527,13 @@ abstract class BaseQbcPosPeer
      */
     public static function getOMClass($row = 0, $colnum = 0)
     {
-        return QbcPosPeer::OM_CLASS;
+        return AdminRolePeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a QbcPos or Criteria object.
+     * Performs an INSERT on the database, given a AdminRole or Criteria object.
      *
-     * @param      mixed $values Criteria or QbcPos object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or AdminRole object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -540,22 +542,22 @@ abstract class BaseQbcPosPeer
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from QbcPos object
+            $criteria = $values->buildCriteria(); // build Criteria from AdminRole object
         }
 
-        if ($criteria->containsKey(QbcPosPeer::ID) && $criteria->keyContainsValue(QbcPosPeer::ID) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.QbcPosPeer::ID.')');
+        if ($criteria->containsKey(AdminRolePeer::ROLE_ID) && $criteria->keyContainsValue(AdminRolePeer::ROLE_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.AdminRolePeer::ROLE_ID.')');
         }
 
 
         // Set the correct dbName
-        $criteria->setDbName(QbcPosPeer::DATABASE_NAME);
+        $criteria->setDbName(AdminRolePeer::DATABASE_NAME);
 
         try {
             // use transaction because $criteria could contain info
@@ -572,9 +574,9 @@ abstract class BaseQbcPosPeer
     }
 
     /**
-     * Performs an UPDATE on the database, given a QbcPos or Criteria object.
+     * Performs an UPDATE on the database, given a AdminRole or Criteria object.
      *
-     * @param      mixed $values Criteria or QbcPos object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or AdminRole object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -583,35 +585,35 @@ abstract class BaseQbcPosPeer
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
-        $selectCriteria = new Criteria(QbcPosPeer::DATABASE_NAME);
+        $selectCriteria = new Criteria(AdminRolePeer::DATABASE_NAME);
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(QbcPosPeer::ID);
-            $value = $criteria->remove(QbcPosPeer::ID);
+            $comparison = $criteria->getComparison(AdminRolePeer::ROLE_ID);
+            $value = $criteria->remove(AdminRolePeer::ROLE_ID);
             if ($value) {
-                $selectCriteria->add(QbcPosPeer::ID, $value, $comparison);
+                $selectCriteria->add(AdminRolePeer::ROLE_ID, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(QbcPosPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(AdminRolePeer::TABLE_NAME);
             }
 
-        } else { // $values is QbcPos object
+        } else { // $values is AdminRole object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
 
         // set the correct dbName
-        $criteria->setDbName(QbcPosPeer::DATABASE_NAME);
+        $criteria->setDbName(AdminRolePeer::DATABASE_NAME);
 
         return BasePeer::doUpdate($selectCriteria, $criteria, $con);
     }
 
     /**
-     * Deletes all rows from the qbc_pos table.
+     * Deletes all rows from the admin_role table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -620,19 +622,19 @@ abstract class BaseQbcPosPeer
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += BasePeer::doDeleteAll(QbcPosPeer::TABLE_NAME, $con, QbcPosPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(AdminRolePeer::TABLE_NAME, $con, AdminRolePeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            QbcPosPeer::clearInstancePool();
-            QbcPosPeer::clearRelatedInstancePool();
+            AdminRolePeer::clearInstancePool();
+            AdminRolePeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -643,9 +645,9 @@ abstract class BaseQbcPosPeer
     }
 
     /**
-     * Performs a DELETE on the database, given a QbcPos or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a AdminRole or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or QbcPos object or primary key or array of primary keys
+     * @param      mixed $values Criteria or AdminRole object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -656,32 +658,32 @@ abstract class BaseQbcPosPeer
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // invalidate the cache for all objects of this type, since we have no
             // way of knowing (without running a query) what objects should be invalidated
             // from the cache based on this Criteria.
-            QbcPosPeer::clearInstancePool();
+            AdminRolePeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof QbcPos) { // it's a model object
+        } elseif ($values instanceof AdminRole) { // it's a model object
             // invalidate the cache for this single object
-            QbcPosPeer::removeInstanceFromPool($values);
+            AdminRolePeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(QbcPosPeer::DATABASE_NAME);
-            $criteria->add(QbcPosPeer::ID, (array) $values, Criteria::IN);
+            $criteria = new Criteria(AdminRolePeer::DATABASE_NAME);
+            $criteria->add(AdminRolePeer::ROLE_ID, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
-                QbcPosPeer::removeInstanceFromPool($singleval);
+                AdminRolePeer::removeInstanceFromPool($singleval);
             }
         }
 
         // Set the correct dbName
-        $criteria->setDbName(QbcPosPeer::DATABASE_NAME);
+        $criteria->setDbName(AdminRolePeer::DATABASE_NAME);
 
         $affectedRows = 0; // initialize var to track total num of affected rows
 
@@ -691,7 +693,7 @@ abstract class BaseQbcPosPeer
             $con->beginTransaction();
 
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            QbcPosPeer::clearRelatedInstancePool();
+            AdminRolePeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -702,13 +704,13 @@ abstract class BaseQbcPosPeer
     }
 
     /**
-     * Validates all modified columns of given QbcPos object.
+     * Validates all modified columns of given AdminRole object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param QbcPos $obj The object to validate.
+     * @param AdminRole $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -718,8 +720,8 @@ abstract class BaseQbcPosPeer
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(QbcPosPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(QbcPosPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(AdminRolePeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(AdminRolePeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -735,7 +737,7 @@ abstract class BaseQbcPosPeer
 
         }
 
-        return BasePeer::doValidate(QbcPosPeer::DATABASE_NAME, QbcPosPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(AdminRolePeer::DATABASE_NAME, AdminRolePeer::TABLE_NAME, $columns);
     }
 
     /**
@@ -743,23 +745,23 @@ abstract class BaseQbcPosPeer
      *
      * @param int $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return QbcPos
+     * @return AdminRole
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = QbcPosPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = AdminRolePeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(QbcPosPeer::DATABASE_NAME);
-        $criteria->add(QbcPosPeer::ID, $pk);
+        $criteria = new Criteria(AdminRolePeer::DATABASE_NAME);
+        $criteria->add(AdminRolePeer::ROLE_ID, $pk);
 
-        $v = QbcPosPeer::doSelect($criteria, $con);
+        $v = AdminRolePeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -769,31 +771,31 @@ abstract class BaseQbcPosPeer
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return QbcPos[]
+     * @return AdminRole[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(QbcPosPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(AdminRolePeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(QbcPosPeer::DATABASE_NAME);
-            $criteria->add(QbcPosPeer::ID, $pks, Criteria::IN);
-            $objs = QbcPosPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(AdminRolePeer::DATABASE_NAME);
+            $criteria->add(AdminRolePeer::ROLE_ID, $pks, Criteria::IN);
+            $objs = AdminRolePeer::doSelect($criteria, $con);
         }
 
         return $objs;
     }
 
-} // BaseQbcPosPeer
+} // BaseAdminRolePeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseQbcPosPeer::buildTableMap();
+BaseAdminRolePeer::buildTableMap();
 

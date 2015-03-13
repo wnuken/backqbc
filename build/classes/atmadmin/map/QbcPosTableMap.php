@@ -55,6 +55,7 @@ class QbcPosTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('AdminUser', 'AdminUser', RelationMap::ONE_TO_MANY, array('id' => 'pos_id', ), 'SET NULL', null, 'AdminUsers');
     } // buildRelations()
 
 } // QbcPosTableMap
