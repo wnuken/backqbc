@@ -101,7 +101,7 @@ if($_SESSION['k_rol'] == 1){
         $keyw2 = 0;
         $SlaveStatus = array();
         while($row = $querySlaveStatus->fetch_assoc()){
-            $SlaveStatus[$keyw2]['Master_log_File'] = $row['Master_log_File'];
+            $SlaveStatus[$keyw2]['Master_Log_File'] = $row['Master_Log_File'];
             $SlaveStatus[$keyw2]['Slave_IO_Running'] = $row['Slave_IO_Running'];
             $SlaveStatus[$keyw2]['Slave_SQL_Running'] = $row['Slave_SQL_Running']; 
             $SlaveStatus[$keyw2]['Last_Errno'] = $row['Last_Errno'];
@@ -491,7 +491,7 @@ group by dv.PadreId;";
                     </tr>
                     <?php foreach($SlaveStatus as $row): ?>
                     <tr>
-                        <td><?php print $row['Master_log_File']; ?></td>
+                        <td><?php print $row['Master_Log_File']; ?></td>
                         <td><?php print $row['Slave_IO_Running']; ?></td>
                         <td><?php print $row['Slave_SQL_Running']; ?></td>
                         <td><?php print $row['Last_Errno']; ?></td>
