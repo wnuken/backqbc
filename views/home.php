@@ -95,7 +95,7 @@ if($_SESSION['k_rol'] == 1){
             $keyw2++;
         }
 
-        $querySlaveStatus = $mysqliMaster->query("show slave status");
+        $querySlaveStatus = $mysqliSlave->query("show slave status");
         
         
         $keyw2 = 0;
