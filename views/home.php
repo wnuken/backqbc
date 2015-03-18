@@ -293,6 +293,7 @@ group by dv.PadreId;";
                     <li class="list-group-item">
                         <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#detailSlaveStatus"> Detalle</button>
                         Slave Status:
+                        <span class="badge"><?php if(isset($SlaveStatus[0]['Master_Log_File'])) print $SlaveStatus[0]['Master_Log_File']; ?></span>
                         <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_IO_Running'])) print $SlaveStatus[0]['Slave_IO_Running']; ?></span>
                         <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_SQL_Running'])) print $SlaveStatus[0]['Slave_SQL_Running']; ?></span>
                     </li>
