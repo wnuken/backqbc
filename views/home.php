@@ -105,7 +105,7 @@ if($_SESSION['k_rol'] == 1){
             $SlaveStatus[$keyw2]['Slave_IO_Running'] = $row['Slave_IO_Running'];
             $SlaveStatus[$keyw2]['Slave_SQL_Running'] = $row['Slave_SQL_Running']; 
             $SlaveStatus[$keyw2]['Last_Errno'] = $row['Last_Errno'];
-            $keyw1++;
+            $keyw2++;
         }
         
         
@@ -405,8 +405,8 @@ group by dv.PadreId;";
                     <tr>
                         <th>Archivo</th>
                         <th>Posición</th>
-                        <th>Log DB</th>
-                        <th>Log Ignorados</th>
+                        <th>Base de datos</th>
+                        <th>Log</th>
                     </tr>
                     <?php foreach($MasterStatus as $row): ?>
                     <tr>
