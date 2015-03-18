@@ -1,10 +1,8 @@
 
 <?php
-/*
-$mysqli = new mysqli("localhost", "magento", "m4g3nt0CEET", "qa.qbc.com");
-if ($mysqli->connect_errno) {
-    echo "Fallo al contenctar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-}
+
+
+
 
 
 /*$client = new Predis\Client([
@@ -26,6 +24,94 @@ print_r($responses);
 print '</pre>';*/
 
 if($_SESSION['k_rol'] == 1){
+
+    $Setting = new Settings();
+
+    $masterParams = array(
+        'server' => SERVER_DB_QBC_MASTER,
+        'user' => USER_DB_QBC_MASTER,
+        'pass' => PASS_DB_QBC_MASTER,
+        'bd' => DB_QBC_MASTER
+    );
+
+    $mysqliMaster = $Setting->mysqliConection($masterParams);
+
+    $slaveParams = array(
+        'server' => SERVER_DB_QBC_SLAVE,
+        'user' => USER_DB_QBC_SLAVE,
+        'pass' => PASS_DB_QBC_SLAVE,
+        'bd' => DB_QBC_SLAVE
+    );
+
+    $mysqliSlave = $Setting->mysqliConection($slaveParams);
+
+    if($mysqliMaster !== false){
+        $queryProccesMaster = $mysqliMaster->query("show processlist");
+        $numberProcessMaster = $queryProccesMaster->num_rows;
+
+        $keyw1 = 0;
+        $ProcessMaster = array();
+        while($row = $queryProccesMaster->fetch_assoc()){
+            $ProcessMaster[$keyw1]['Id'] = $row['Id'];
+            $ProcessMaster[$keyw1]['User'] = $row['User'];
+            $ProcessMaster[$keyw1]['Host'] = $row['Host']; 
+            $ProcessMaster[$keyw1]['db'] = $row['db'];
+            $ProcessMaster[$keyw1]['Command'] = $row['Command'];
+            $ProcessMaster[$keyw1]['Time'] = $row['Time'];
+            $ProcessMaster[$keyw1]['State'] = $row['State'];
+            $ProcessMaster[$keyw1]['Info'] = $row['Info'];
+            $keyw1++;
+        }
+
+        $queryMasterStatus = $mysqliMaster->query("show master status");
+
+        $keyw1 = 0;
+        $MasterStatus = array();
+        while($row = $queryMasterStatus->fetch_assoc()){
+            $MasterStatus[$keyw1]['File'] = $row['File'];
+            $MasterStatus[$keyw1]['Position'] = $row['Position'];
+            $MasterStatus[$keyw1]['Binlog_Do_DB'] = $row['Binlog_Do_DB']; 
+            $MasterStatus[$keyw1]['Binlog_Ignore_DB'] = $row['Binlog_Ignore_DB'];
+            $keyw1++;
+        }
+
+    }
+
+    if($mysqliSlave !== false){
+        $queryProccesSlave = $mysqliSlave->query("show processlist");
+        $numberProcessSlave = $queryProccesSlave->num_rows;
+
+        $keyw2 = 0;
+        $ProcessSlave = array();
+        while($row = $queryProccesSlave->fetch_assoc()){
+            $ProcessSlave[$keyw2]['Id'] = $row['Id'];
+            $ProcessSlave[$keyw2]['User'] = $row['User'];
+            $ProcessSlave[$keyw2]['Host'] = $row['Host']; 
+            $ProcessSlave[$keyw2]['db'] = $row['db'];
+            $ProcessSlave[$keyw2]['Command'] = $row['Command'];
+            $ProcessSlave[$keyw2]['Time'] = $row['Time'];
+            $ProcessSlave[$keyw2]['State'] = $row['State'];
+            $ProcessSlave[$keyw2]['Info'] = $row['Info'];
+            $keyw2++;
+        }
+
+        $querySlaveStatus = $mysqliMaster->query("show slave status");
+        
+        
+        $keyw2 = 0;
+        $SlaveStatus = array();
+        while($row = $querySlaveStatus->fetch_assoc()){
+            $SlaveStatus[$keyw2]['Master_log_File'] = $row['Master_log_File'];
+            $SlaveStatus[$keyw2]['Slave_IO_Running'] = $row['Slave_IO_Running'];
+            $SlaveStatus[$keyw2]['Slave_SQL_Running'] = $row['Slave_SQL_Running']; 
+            $SlaveStatus[$keyw2]['Last_Errno'] = $row['Last_Errno'];
+            $keyw1++;
+        }
+        
+        
+    }
+
+
 
     $text1 = "set @id_camp = 'CampignID';
 
@@ -150,19 +236,70 @@ dv.Numero in
 and (dv.InterfaceId = 4)
 group by dv.PadreId;";
 
+
+
+
 ?>
 <div class="row">
     <div class="col-md-4">
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Servidor Base de datos</h3>
+                <h3 class="panel-title">Servidor Base de datos Master</h3>
             </div>
             <div class="panel-body">
-                <?php 
-    //print $mysqli->host_info . '<br />';
-    print 'MySQL Server';
-                ?>
+                <ul class="list-group">
+                    <?php if($mysqliMaster !== false){ ?>
+                    <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', $mysqliMaster->server_info); ?></li>
+                    <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliMaster->client_info); ?></li>
+                    <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliMaster)); ?></li>
+                    <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliMaster->sqlstate); ?></li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#detailProcessMaster"> Detalle</button>
+                        Cantidad de procesos actuales:
+                        <span class="badge"><?php print($numberProcessMaster); ?></span>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#detailMasterStatus"> Detalle</button>
+                        Master Status:
+                        <span class="badge">File: <?php if(isset($MasterStatus[0]['File'])) print $MasterStatus[0]['File']; ?></span>
+                    </li>
+                    <?php }else{ ?>
+                    <li class="list-group-item"><?php print('No se puede obtener información del servidor'); ?></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>    
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Servidor Base de datos Slave</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <?php if($mysqliMaster !== false){ ?>
+                    <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', $mysqliMaster->server_info); ?></li>
+                    <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliMaster->client_info); ?></li>
+                    <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliMaster)); ?></li>
+                    <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliMaster->sqlstate); ?></li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#detailProcessSlave"> Detalle</button>
+                        Cantidad de procesos actuales:
+                        <span class="badge"><?php print($numberProcessSlave); ?></span>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#detailSlaveStatus"> Detalle</button>
+                        Slave Status:
+                        <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_IO_Running'])) print $SlaveStatus[0]['Slave_IO_Running']; ?></span>
+                        <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_SQL_Running'])) print $SlaveStatus[0]['Slave_SQL_Running']; ?></span>
+                    </li>
+                    <?php }else{ ?>
+                    <li class="list-group-item"><?php print('No se puede obtener información del servidor'); ?></li>
+                    <?php } ?>
+                </ul>
             </div>
         </div>    
     </div>
@@ -211,7 +348,170 @@ group by dv.PadreId;";
         </div>   
     </div>
 </div>
+
+<?php if($mysqliMaster !== false): ?>
+<div class="modal fade" id="detailProcessMaster" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Lista de Procesos</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped js-options-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Host</th>
+                        <th>Base de datos</th>
+                        <th>Comando</th>
+                        <th>Tiempo</th>
+                        <th>Estado</th>
+                        <th>Info</th>
+                    </tr>
+
+                    <?php foreach($ProcessMaster as $row): ?>
+                    <tr>
+                        <td><?php print $row['Id']; ?></td>
+                        <td><?php print $row['User']; ?></td>
+                        <td><?php print $row['Host']; ?></td>
+                        <td><?php print $row['db']; ?></td>
+                        <td><?php print $row['Command']; ?></td>
+                        <td><?php print $row['Time']; ?></td>
+                        <td><?php print $row['State']; ?></td>
+                        <td><?php print $row['Info']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailMasterStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Master Status</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped js-options-table">
+                    <tr>
+                        <th>Archivo</th>
+                        <th>Posición</th>
+                        <th>Log DB</th>
+                        <th>Log Ignorados</th>
+                    </tr>
+                    <?php foreach($MasterStatus as $row): ?>
+                    <tr>
+                        <td><?php print $row['File']; ?></td>
+                        <td><?php print $row['Position']; ?></td>
+                        <td><?php print $row['Binlog_Do_DB']; ?></td>
+                        <td><?php print $row['Binlog_Ignore_DB']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<?php endif; ?>
+
+<?php if($mysqliSlave !== false): ?>
+<div class="modal fade" id="detailProcessSlave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Lista de Procesos</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped js-options-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Host</th>
+                        <th>Base de datos</th>
+                        <th>Comando</th>
+                        <th>Tiempo</th>
+                        <th>Estado</th>
+                        <th>Info</th>
+                    </tr>
+
+                    <?php foreach($ProcessSlave as $row): ?>
+                    <tr>
+                        <td><?php print $row['Id']; ?></td>
+                        <td><?php print $row['User']; ?></td>
+                        <td><?php print $row['Host']; ?></td>
+                        <td><?php print $row['db']; ?></td>
+                        <td><?php print $row['Command']; ?></td>
+                        <td><?php print $row['Time']; ?></td>
+                        <td><?php print $row['State']; ?></td>
+                        <td><?php print $row['Info']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailSlaveStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Master Status</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped js-options-table">
+                    <tr>
+                        <th>Archivo</th>
+                        <th>IO Running</th>
+                        <th>SQL Running</th>
+                        <th>Ultimo Error</th>
+                    </tr>
+                    <?php foreach($SlaveStatus as $row): ?>
+                    <tr>
+                        <td><?php print $row['Master_log_File']; ?></td>
+                        <td><?php print $row['Slave_IO_Running']; ?></td>
+                        <td><?php print $row['Slave_SQL_Running']; ?></td>
+                        <td><?php print $row['Last_Errno']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+
 <?php 
+    $mysqliMaster->close();
+    $mysqliSlave->close();
 }else{  
     require_once('./views/newsloe.php'); 
 } 
