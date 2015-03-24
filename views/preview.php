@@ -1,7 +1,10 @@
 <?php 
 
 // $contentJson = file_get_contents('http://qa.quebuenacompra.com/atmadmin/loe/loeproducts.json');
-$contentJson = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "loe/loeproducts.json");
+
+$backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
+
+$contentJson = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
 
 $content = json_decode($contentJson,true);
 
@@ -57,7 +60,7 @@ function changeAcutes($params){
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
                                         </td>
                                     </tr>
-                                    <tr style="height: 45px;">
+                                    <tr style="height: 40px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $upper['url'] ?>" target="_blank" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;">
@@ -119,7 +122,7 @@ function changeAcutes($params){
                         </tr>
                         </tbody></table>            <!-- fin ofertas -->
 
-                    <?php }else{ ?>
+                    <?php }else if($upper['type'] == '1'){ ?>
 
                     <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
@@ -130,7 +133,7 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
-                                    <tr style="height: 45px;">
+                                    <tr style="height: 40px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $upper['url']; ?>" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
@@ -244,6 +247,54 @@ function changeAcutes($params){
                         </tbody></table>            <!-- fin ofertas -->
 
 
+                    <?php }else if($upper['type'] == '2'){ ?>
+                    
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                        <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
+                        <tr>
+                            <td width="300">
+                                <!-- oferta-->
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
+                                    <tr>
+                                        <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
+                                    </tr>
+                                    <tr style="height: 40px;">
+                                        <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
+                                            <a href="<?php print $upper['url']; ?>" 
+                                               style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
+                                                <span style="font-size:16px;"><?php print changeAcutes($upper['title']); ?></span>
+
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f9f9f9" height="8">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="270" align="auto" margin="10" padding="10" bgcolor="#f9f9f9">
+                                            <a style="text-decoration: none; text-align: center" target="blank" href="<?php print $upper['url']; ?>"> 
+                                                <p style="margin: 0; padding: 0px; text-align: center;">
+                                                    <img width="270" height="401" 
+                                                         style="margin: auto; border: 1px solid #b7b7b7; text-align: center; " 
+                                                         title="IMG oferta LOE" alt="IMG oferta LOE" src="<?php print $upper['image']; ?>">
+                                                </p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f9f9f9">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
+                                    </tr>
+                                    </tbody></table>
+                                <!--fin  oferta -->
+                            </td>
+                        </tr>
+                        </tbody></table>            <!-- fin ofertas -->
+                    
                     <?php } ?>
 
                     <?php endforeach; ?>
@@ -273,7 +324,7 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
-                                    <tr style="height: 45px;">
+                                    <tr style="height: 40px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $lower['url']; ?>" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
@@ -386,7 +437,7 @@ function changeAcutes($params){
                         </tr>
                         </tbody></table>            <!-- fin ofertas -->
 
-                    <?php }else{ ?>
+                    <?php }else if($lower['type'] == '0'){ ?>
 
 
                     <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
@@ -399,7 +450,7 @@ function changeAcutes($params){
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
                                         </td>
                                     </tr>
-                                    <tr style="height: 45px;">
+                                    <tr style="height: 40px;">
                                         <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
                                             <a href="<?php print $lower['url'] ?>" target="_blank" 
                                                style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;">
@@ -462,6 +513,54 @@ function changeAcutes($params){
                         </tbody></table>   
 
 
+                    <?php }else if($lower['type'] == '2'){ ?>
+                    
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                        <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
+                        <tr>
+                            <td width="300">
+                                <!-- oferta-->
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
+                                    <tr>
+                                        <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
+                                    </tr>
+                                    <tr style="height: 40px;">
+                                        <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
+                                            <a href="<?php print $upper['url']; ?>" 
+                                               style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1791da; font-weight:bold; text-decoration:none;" target="_blank">
+                                                <span style="font-size:16px;"><?php print changeAcutes($upper['title']); ?></span>
+
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f9f9f9" height="8">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="270" align="auto" margin="10" padding="10" bgcolor="#f9f9f9">
+                                            <a style="text-decoration: none; text-align: center" target="blank" href="<?php print $upper['url']; ?>"> 
+                                                <p style="margin: 0; padding: 0px; text-align: center;">
+                                                    <img width="270" height="401" 
+                                                         style="margin: auto; border: 1px solid #b7b7b7; text-align: center; " 
+                                                         title="IMG oferta LOE" alt="IMG oferta LOE" src="<?php print $upper['image']; ?>">
+                                                </p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#f9f9f9">
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
+                                    </tr>
+                                    </tbody></table>
+                                <!--fin  oferta -->
+                            </td>
+                        </tr>
+                        </tbody></table>            <!-- fin ofertas -->
+                    
                     <?php } ?>
 
 

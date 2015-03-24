@@ -45,23 +45,25 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-briefcase"></i> Pago Aliado <span class="caret"></span>
+                        <i class="glyphicon glyphicon-briefcase"></i> Procesos Aliados <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
+                        <li class="dropdown-header">Pagos a aliados</li>
                         <li><a href="./aliados-revision"><i class="glyphicon glyphicon-list"></i> Revisión de campaña</a></li>
                         <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-briefcase"></i> Enviar petición</a></li>
                         <li><a href="./deletepay"><i class="glyphicon glyphicon-trash"></i> Elimiar petición</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Cierre ofertas</li
+                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-folder-close"></i> Enviar Cierre </a></li>
+                        <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-folder-close"></i> Cierre Oferta <span class="caret"></span>
+                        <i class="glyphicon glyphicon-folder-close"></i> Otros <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-folder-close"></i> Enviar Cierre </a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Procesos alternos</li>
-                        <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
+                        <li><a href="./newsletter"><i class="glyphicon glyphicon-folder-close"></i> Newsletter </a></li>
                     </ul>
                 </li>
                 <!--li class="dropdown">
@@ -117,14 +119,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                 </li>
             </ul>
 
-            <div class="col-md-4" >
-                <div class="progress" id="progress" style="display:none;">
-                    <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                        <span class="sr-only">Complete...</span>
-                    </div>
-                </div>
-                <div id="response" style="display:none;"></div>
-            </div>
+            
 
 
         </div><!--/.nav-collapse -->

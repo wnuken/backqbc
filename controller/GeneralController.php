@@ -1287,22 +1287,12 @@ class General {
     }
 
     public function & ListClosure(&$params){
-        try{
-            $BaseQbcSciClosureQuery = BaseQbcSciClosureQuery::create()->find();
-            if(empty($BaseQbcSciClosureQuery)){
-                $result = '<h3>No existen la campañas: </3>' . $GroupdealsId;
-                return $result;
-            }
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
-
+        $Querys = new Querys();
+        $paramClousure['id'] = 0;
+        $BaseQbcSciClosureQuery = $Querys->QbcSciClosureQueryByStatus($paramClousure);
         foreach($BaseQbcSciClosureQuery as $key => $Closure){
-            if($Closure->getStatus() == 0)
-                $ids[] = $Closure->getCampaignId();
+            $ids[] = $Closure->getCampaignId();
         }
-
         $result = array_unique($ids);
         return $result;
     }
@@ -1321,13 +1311,11 @@ class General {
     }
 
     public function & newsloe(&$params){
-    
- 
-        $jsonfile = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/loeproducts.json");
-        
+
+        $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
+        $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
         $dataInfo = json_decode($jsonfile, true);
 
-       
         if($params['type'] == 0){
             $dataArray = array(
                 'type' => $params['type'],
@@ -1335,7 +1323,6 @@ class General {
                 'image' => $params['image'],
                 'url' => $params['url']
             );
-
             if(!empty($params['retaila'])){
                 $dataArray['sites']['0'] = array(
                     'name' => $params['retaila'],
@@ -1344,7 +1331,6 @@ class General {
                     'active' => '1'
                 );
             }
-
             if(!empty($params['retailb'])){
                 $dataArray['sites']['1'] = array(
                     'name' => $params['retailb'],
@@ -1353,7 +1339,6 @@ class General {
                     'active' => '0'
                 );
             }
-
             if(!empty($params['retailc'])){
                 $dataArray['sites']['2'] = array(
                     'name' => $params['retailc'],
@@ -1362,7 +1347,6 @@ class General {
                     'active' => '0'
                 );
             }
-
             if(!empty($params['retaild'])){
                 $dataArray['sites']['3'] = array(
                     'name' => $params['retaild'],
@@ -1371,37 +1355,20 @@ class General {
                     'active' => '0'
                 );
             }
-
             if($params['position'] == 1){
                 $dataInfo['dataInfo']['upper']['0'] = $dataArray;
             }
-
             if($params['position'] == 2){
                 $dataInfo['dataInfo']['upper']['1'] = $dataArray;
             }
-
             if($params['position'] == 3){
                 $dataInfo['dataInfo']['lower']['0'] = $dataArray;
             }
-
             if($params['position'] == 4){
                 $dataInfo['dataInfo']['lower']['1'] = $dataArray;
             }
-
-
-            // print "<pre>"; var_dump($dataInfo); print "</pre>"; die();
-
-
-
-
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
-
-
-
-        }else{
-
-
-
+        }else if($params['type'] == 1){
             $dataArray = array(
                 'type' => $params['type'],
                 'title' => $params['title'],
@@ -1411,55 +1378,55 @@ class General {
                 'retail' => $params['retail'],
                 'value' => $params['value']
             );
-
             if($params['position'] == 1){
                 $dataInfo['dataInfo']['upper']['0'] = $dataArray;
             }
-
             if($params['position'] == 2){
                 $dataInfo['dataInfo']['upper']['1'] = $dataArray;
             }
-
             if($params['position'] == 3){
                 $dataInfo['dataInfo']['lower']['0'] = $dataArray;
             }
-
             if($params['position'] == 4){
                 $dataInfo['dataInfo']['lower']['1'] = $dataArray;
             }
-
-
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
-
-
+        }else if($params['type'] == 2){
+            $dataArray = array(
+                'type' => $params['type'],
+                'title' => $params['title'],
+                'image' => $params['image'],
+                'url' => $params['url'],
+            );
+            if($params['position'] == 1){
+                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
+            }
+            if($params['position'] == 2){
+                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
+            }
+            if($params['position'] == 3){
+                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
+            }
+            if($params['position'] == 4){
+                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
+            }
+            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }
-
+        
         $jsonDataInfo = json_encode($dataInfo);
-
-
         $dirname = dirname(__FILE__);
-
         $path = trim($dirname, 'controller');
-
         $file = fopen($path . "/loe/loeproducts.json", "w");
-
         fwrite($file, $jsonDataInfo . PHP_EOL);
-
         fclose($file);
-        
-        
+
         $fileSave = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/");
-        
         $Querys = new Querys();
-        
+
         $paramsBanner['name'] = 'NewsletterLOE';
-        
         $Banner = $Querys->EnterpriseBannerByName($paramsBanner);
-        
         $paramsBannerContent['id'] = $Banner->getBannerId();
-        
         $BannerContent = $Querys->EnterpriseBannerContentById($paramsBannerContent);
-        
         $BannerContent->setBannerContent($fileSave);
         $BannerContent->save();
 

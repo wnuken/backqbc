@@ -9,9 +9,9 @@ $productChange.on('change', function(){
     var position = $content.attr('ofer-position');
     console.log(position);
 
-    var box1 = '<div class="col-md-4"><div class="form-group"><label>Retailer</label><input type="text" class="form-control" id="retaila" name="retaila" placeholder="Retailer"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><label>Valor</label><input type="text" class="form-control" id="valuea" name="valuea" placeholder="Valor"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><label>URL</label><input type="text" class="form-control" id="urla" name="urla" placeholder="URL"></div></div>'+
+    var box1 = '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retaila" name="retaila" placeholder="Retailer"></div></div>'+
+        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valuea" name="valuea" placeholder="Valor"></div></div>'+
+        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urla" name="urla" placeholder="URL"></div></div>'+
         '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retailb" name="retailb" placeholder="Retailer"></div></div>'+
         '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valueb" name="valueb" placeholder="Valor"></div></div>'+
         '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urlb" name="urlb" placeholder="URL"></div></div>'+
@@ -39,8 +39,10 @@ $productChange.on('change', function(){
 
     if(value == 0){
         $('div#information_box', $content).html(box1);
-    }else{
+    }else if(value == 1){
         $('div#information_box', $content).html(box2);
+    }else if(value == 2){
+        $('div#information_box', $content).html('');
     }
 });
 
@@ -60,7 +62,7 @@ $preview.on('click', function(){
             $('div#previewloe').fadeOut( "fast");
             $('div#previewloe').html(response);           
             $('div#previewloe').fadeIn(3000, function() {
-                
+
             });
         },
         error: function() {
@@ -70,3 +72,10 @@ $preview.on('click', function(){
     });
 
 });
+
+
+/*$('#previewNews').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
+    $that = $(this);
+    var url = $that.attr('data-url');
+    $that.find('iframe').attr('src',url);
+})*/

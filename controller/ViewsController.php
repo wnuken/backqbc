@@ -151,5 +151,9 @@ class Views {
         print '<pre>'; print_r($result); print '</pre>';
     }
     
+    static public function newsletter(){
+        include './views/newsloe.php';
+    }
+    
     
 }

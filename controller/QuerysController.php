@@ -299,8 +299,11 @@ class Querys {
         try{           
             $result = AdminUserQuery::create()->findOneByUsername($params['user']);
             if(empty($result)){
-                $result = $this->error['NO_FOUND'] . json_encode($params['user']);
-                $this->ErrorMessage($result);
+                $result = array(
+                    'message' => $this->error['NO_FOUND'] . json_encode($params['user']),
+                    'status' => false
+                );
+                return $result;
             }
         }catch (Exception $e){
             $result = $this->exception . $e->getMessage(). "\n";
@@ -323,7 +326,17 @@ class Querys {
         return $result;
     }
     
-    
-    
-
+    public function QbcSciClosureQueryByStatus($params){
+        try{           
+            $result = QbcSciClosureQuery::create()->findByStatus($params['id']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
 }

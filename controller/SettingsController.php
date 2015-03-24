@@ -37,17 +37,23 @@ class Settings {
     public function & loginRolValidate($params){
         $Querys = new Querys();
         $userValues = $Querys->AdminUserByUsername($params);
-        $passBd = $userValues->getPassword();
-        $salt = explode(':', $passBd);
-        $pass = $params['pass'];
-        $passGen = hash('sha256',$salt[1]. $pass);
-        if($salt[0] == $passGen){
-            $result['validate'] = true;
-            $paramsRoleId['id'] = $userValues->getUserId();
-            $RoleQuery = $Querys->AdminRoleQueryByUserId($paramsRoleId);
-            $result['rol'] = $RoleQuery->getParentId();
-        }else{
+
+        if(is_array($userValues) && $userValues['status'] === false){
             $result['validate'] = false;
+            $result['rol'] = false;
+        }else{
+            $passBd = $userValues->getPassword();
+            $salt = explode(':', $passBd);
+            $pass = $params['pass'];
+            $passGen = hash('sha256',$salt[1]. $pass);
+            if($salt[0] == $passGen){
+                $result['validate'] = true;
+                $paramsRoleId['id'] = $userValues->getUserId();
+                $RoleQuery = $Querys->AdminRoleQueryByUserId($paramsRoleId);
+                $result['rol'] = $RoleQuery->getParentId();
+            }else{
+                $result['validate'] = false;
+            }
         }
         return $result;
     }
