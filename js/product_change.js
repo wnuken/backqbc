@@ -74,8 +74,8 @@ $preview.on('click', function(){
 });
 
 
-/*$('#previewNews').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
+$('#previewNews').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
     $that = $(this);
     var url = $that.attr('data-url');
     $that.find('iframe').attr('src',url);
-})*/
+})

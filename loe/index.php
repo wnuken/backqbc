@@ -42,11 +42,11 @@ function changeAcutes($params){
 
                     <?php if($upper['type'] == '0'){ ?>
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14">
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
@@ -116,12 +116,12 @@ function changeAcutes($params){
 
                     <?php }else if($upper['type'] == '1'){ ?>
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
@@ -154,7 +154,9 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#f9f9f9">
                                             <table cellspacing="0" cellpadding="0" border="0" width="300">
-                                                <tbody><tr>
+                                                <tbody>
+                                                    <tr style="height: 20px;"></tr>
+                                                    <tr>
                                                     <td width="300" height="93" vertical-align="top" ;="">
                                                         <table cellspacing="0" cellpadding="0" border="0" width="300px" height="93px" style="margin-top:0px; margin-left:0px"><tbody>
                                                             <tr>
@@ -218,6 +220,7 @@ function changeAcutes($params){
                                                             </tbody></table>
                                                     </td>
                                                     </tr>
+                                                    <tr style="height: 20px;"></tr>
                                                     <tr>
                                                         <td width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                                                             <a target="blank" href="<?php print $upper['url']; ?>">
@@ -229,24 +232,27 @@ function changeAcutes($params){
                                                 </tbody></table>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
-                                    </tr>
+
                                     </tbody></table>
                                 <!--fin  oferta -->
                             </td>
                         </tr>
+
+                        <tr>
+                            <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
+                        </tr>
+
                         </tbody></table>            <!-- fin ofertas -->
 
 
                     <?php }else if($upper['type'] == '2'){ ?>
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
@@ -314,12 +320,12 @@ function changeAcutes($params){
 
                     <?php if($lower['type'] == '1'){ ?>
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>
@@ -352,7 +358,9 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#f9f9f9">
                                             <table cellspacing="0" cellpadding="0" border="0" width="300">
-                                                <tbody><tr>
+                                                <tbody>
+                                                    <tr style="height: 20px;"></tr>
+                                                    <tr>
                                                     <td width="300" height="93" vertical-align="top" ;="">
                                                         <table cellspacing="0" cellpadding="0" border="0" width="300px" height="93px" style="margin-top:0px; margin-left:0px"><tbody>
                                                             <tr>
@@ -416,6 +424,7 @@ function changeAcutes($params){
                                                             </tbody></table>
                                                     </td>
                                                     </tr>
+                                                    <tr style="height: 20px;"></tr>
                                                     <tr>
                                                         <td width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                                                             <a target="blank" href="<?php print $lower['url']; ?>">
@@ -427,23 +436,26 @@ function changeAcutes($params){
                                                 </tbody></table>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
-                                    </tr>
+
                                     </tbody></table>
                                 <!--fin  oferta -->
                             </td>
                         </tr>
+
+                        <tr>
+                            <td bgcolor="#ebebeb" valign="top" height="14"><!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"--></td>
+                        </tr>
+
                         </tbody></table>            <!-- fin ofertas -->
 
                     <?php }else if($lower['type'] == '0'){ ?>
 
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14">
                                             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->
@@ -514,12 +526,12 @@ function changeAcutes($params){
 
                     <?php }else if($lower['type'] == '2'){ ?>
 
-                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="490" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
                         <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
                         <tr>
                             <td width="300">
                                 <!-- oferta-->
-                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" height="491" align="left"><tbody>
+                                <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                                     <tr>
                                         <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
                                     </tr>

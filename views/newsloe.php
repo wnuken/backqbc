@@ -436,7 +436,7 @@ else if($content['dataInfo']['lower'][1]['type'] == 2){
         <h4 class="modal-title" id="myModalLabel">Preview</h4>
       </div>
       <div class="modal-body">
-        <iframe src="<?php print $urlPreview; ?>"  height="600" width="99.6%" style="zoom:0.60" frameborder="0"></iframe>
+        <iframe src=""  height="600" width="99.6%" style="zoom:0.60" frameborder="0"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

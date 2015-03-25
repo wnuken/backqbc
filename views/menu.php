@@ -53,17 +53,17 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                         <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-briefcase"></i> Enviar petición</a></li>
                         <li><a href="./deletepay"><i class="glyphicon glyphicon-trash"></i> Elimiar petición</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Cierre ofertas</li
+                        <li class="dropdown-header">Cierre ofertas</li>
                         <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-folder-close"></i> Enviar Cierre </a></li>
                         <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <i class="glyphicon glyphicon-folder-close"></i> Otros <span class="caret"></span>
+                        <i class="glyphicon glyphicon-list-alt"></i> Otros <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="./newsletter"><i class="glyphicon glyphicon-folder-close"></i> Newsletter </a></li>
+                        <li><a href="./newsletter"><i class="glyphicon glyphicon-envelope"></i> Newsletter </a></li>
                     </ul>
                 </li>
                 <!--li class="dropdown">
@@ -106,7 +106,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="menunav">
-                <li class="active"><a href="./"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
+                <li class="active"><a href="./"><i class="glyphicon glyphicon-envelope"></i> Dashboard</a></li>
                 <li class="dropdown" style="float:rigth;">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php print $user; ?> <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
