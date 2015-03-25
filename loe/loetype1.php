@@ -37,7 +37,9 @@
                     <td bgcolor="#f9f9f9">
                         <table cellspacing="0" cellpadding="0" border="0" width="300">
                             <tbody>
-                                <tr style="height: 20px;"></tr>
+                                <tr>
+                                    <td bgcolor="#f9f9f9" height="20">&nbsp;</td>
+                                </tr>
                                 <tr>
                                     <td width="300" height="93" vertical-align="top" ;="">
                                         <table cellspacing="0" cellpadding="0" border="0" width="300px" height="93px" style="margin-top:0px; margin-left:0px"><tbody>
@@ -102,7 +104,9 @@
                                             </tbody></table>
                                     </td>
                                 </tr>
-                                <tr style="height: 20px;"></tr>
+                                <tr>
+                                    <td bgcolor="#f9f9f9" height="20">&nbsp;</td>
+                                </tr>
                                 <tr>
                                     <td width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                                         <a target="blank" href="<?php print $module['url']; ?>">
