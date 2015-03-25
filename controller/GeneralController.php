@@ -1312,8 +1312,9 @@ class General {
 
     public function & newsloe(&$params){
 
-        $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
-        $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
+         $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
+        // $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
+        $jsonfile = file_get_contents('./loe/loeproducts.json', FILE_USE_INCLUDE_PATH);
         $dataInfo = json_decode($jsonfile, true);
 
         if($params['type'] == 0){
@@ -1420,7 +1421,8 @@ class General {
         fwrite($file, $jsonDataInfo . PHP_EOL);
         fclose($file);
 
-        $fileSave = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/");
+        // $fileSave = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/");
+        $fileSave =  file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/");
         $Querys = new Querys();
 
         $paramsBanner['name'] = 'NewsletterLOE';
