@@ -46,9 +46,10 @@
                                             <tr>
                                                 <td width="100" height="93" style="vertical-align: top;">
                                                     <table cellspacing="0" cellpadding="0" border="0" width="100px" height="93px" 
-                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;  background-image: url('http://quebuenacompra.com/backqbc/loe/images/fondopercenttype1.jpg');"><tbody>
+                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;"
+														   background="http://quebuenacompra.com/backqbc/loe/images/fondopercenttype1.jpg"><tbody>
                                                         <tr>
-                                                            <td height="20">&nbsp;</td>
+                                                            <td height="26">&nbsp;</td>
                                                         </tr>
                                                         <tr style="vertical-align: top">
                                                             <td width="100" height="67" style="text-align: right;">
