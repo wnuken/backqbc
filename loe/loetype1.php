@@ -44,17 +44,14 @@
                                     <td width="300" height="93" vertical-align="top" ;="">
                                         <table cellspacing="0" cellpadding="0" border="0" width="300px" height="93px" style="margin-top:0px; margin-left:0px"><tbody>
                                             <tr>
-                                                <td width="100" height="93" style="vertical-align: top;" ;="">
-                                                    <table cellspacing="0" cellpadding="0" border="0" width="100px" height="83px" ;="" 
-                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
+                                                <td width="100" height="93" style="vertical-align: top;">
+                                                    <table cellspacing="0" cellpadding="0" border="0" width="100px" height="93px" 
+                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;  background-image: url('http://quebuenacompra.com/backqbc/loe/images/fondopercenttype1.jpg');"><tbody>
                                                         <tr>
-                                                            <td align="left" style="width: 100px; height: 26px">
-                                                                <img style="margin-top: 0; display: block;" alt="loe" 
-                                                                     src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_03.jpg">
-                                                            </td>
+                                                            <td height="20">&nbsp;</td>
                                                         </tr>
                                                         <tr style="vertical-align: top">
-                                                            <td style="width: 100px; height: 67px; background-color: #b9cb16; text-align: right;">
+                                                            <td width="100" height="67" style="text-align: right;">
                                                                 <span style="font-size: 40px ;font-family: sans-serif, Arial, Helvetica Neue; color: #fff;">
                                                                     <?php print $module['percent']; ?>
                                                                 </span>
