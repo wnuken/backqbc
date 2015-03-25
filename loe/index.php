@@ -81,7 +81,11 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#f9f9f9">
                                             <table cellspacing="0" cellpadding="0" border="0" width="300" height="182"><tbody>
-                                                <?php foreach($upper['sites'] as $sites): ?>
+                                                <?php 
+                                                    $type1cont = 0;
+                                                    foreach($upper['sites'] as $sites):
+                                                        $type1cont++;
+                                                ?>
                                                 <tr height="45">
                                                     <td bgcolor="<?php ($sites['active'] == 1)?print '#edf1b0': print '#ffffff'; ?>" width="150" 
                                                         style="border-top: 1px solid #efefef;text-align: center;" ;=""> 
@@ -99,7 +103,12 @@ function changeAcutes($params){
                                                         </span> 
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; ?>
+                                                <?php 
+                                                    endforeach;
+                                                    if($type1cont < 4){
+                                                        print "<tr></tr>";
+                                                    }
+                                                ?>
                                                 </tbody></table>
                                         </td>
                                     </tr>
@@ -490,7 +499,12 @@ function changeAcutes($params){
                                     <tr>
                                         <td bgcolor="#f9f9f9">
                                             <table cellspacing="0" cellpadding="0" border="0" width="300" height="182"><tbody>
-                                                <?php foreach($lower['sites'] as $sites): ?>
+                                                <?php 
+                                                    $type1cont = 0;
+                                                    foreach($lower['sites'] as $sites):
+                                                        $type1cont++;
+                                                ?>
+                                                
                                                 <tr height="45">
                                                     <td bgcolor="<?php ($sites['active'] == 1)?print '#edf1b0': print '#ffffff'; ?>" width="150" 
                                                         style="border-top: 1px solid #efefef;text-align: center;" ;=""> 
@@ -508,7 +522,12 @@ function changeAcutes($params){
                                                         </span> 
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; ?>
+                                                <?php 
+                                                    endforeach;
+                                                    if($type1cont < 4){
+                                                        print "<tr></tr>";
+                                                    }
+                                                ?>
                                                 </tbody></table>
                                         </td>
                                     </tr>
