@@ -41,79 +41,79 @@
                                     <td bgcolor="#f9f9f9" height="20">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="300" height="93" vertical-align="top" ;="">
-                                        <table cellspacing="0" cellpadding="0" border="0" width="300px" height="93px" style="margin-top:0px; margin-left:0px"><tbody>
+                                    <td width="100" height="93" vertical-align="top">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100px" height="93px" 
+                                               style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
                                             <tr>
-                                                <td width="100" height="93" style="vertical-align: top;">
-                                                    <table cellspacing="0" cellpadding="0" border="0" width="100px" height="93px" 
-                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;"
-														   background="http://quebuenacompra.com/backqbc/loe/images/fondopercenttype1.jpg"><tbody>
-                                                        <tr>
-                                                            <td height="26">&nbsp;</td>
-                                                        </tr>
-                                                        <tr style="vertical-align: top">
-                                                            <td width="100" height="67" style="text-align: right;">
-                                                                <span style="font-size: 40px ;font-family: sans-serif, Arial, Helvetica Neue; color: #fff;">
-                                                                    <?php print $module['percent']; ?>
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody></table>
-                                                </td>		
-                                                <td width="34" style="vertical-align: top">
-                                                    <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="34" 
-                                                           style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
-                                                        <tr style="vertical-align: baseline;">
-                                                            <td height="93" align="left" style="width: 34px; height: 93px">
-                                                                <img alt="loe" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_04.jpg"></td>
-                                                        </tr>
-                                                        </tbody></table>
+                                                <td align="left" height="26" bgcolor="#B9CB16">
+                                                    <img style="margin-top: 0; display: block; width: 100px; height: 26px;" alt="loe" 
+                                                         src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_03.jpg">
                                                 </td>
-                                                <td width="166" style="vertical-align: top;" ;="">
-                                                    <table cellspacing="0" cellpadding="0" border="0" width="166" height="93" style=" margin-top:0px; margin-left:0px;"><tbody>
-                                                        <tr>
-                                                            <td width="150" align="center" style="width: 166px; height: 48px;">
-                                                                <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070; width: 136px">
-                                                                    <a style="text-decoration: none; width: 166px; color: #000;" target="blank" href="<?php print $module['url']; ?>">
-                                                                        <?php print changeAcutes($module['retail']); ?>
-                                                                    </a>
-                                                                </span>
-                                                            </td>
-                                                            <td width="5" align="center" style="width: 5px; height: 48px; background-color: #f7f7f3;">
-                                                                <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;"></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="166" align="center" style="width: 166px; height: 45px; background-color: #edf1b0;">
-                                                                <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;">
-                                                                    <a style="text-decoration: none; width: 166px;color: #000;" target="blank" href="<?php print $module['url']; ?>">
-                                                                        <?php print $module['value']; ?>
-                                                                    </a>
-                                                                </span>
-                                                            </td>
-                                                            <td width="5" align="center" style="width: 5px; height: 45px; background-color: #edf1b0;">
-                                                                <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;">
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody></table>
+                                            </tr>
+                                            <tr style="vertical-align: top">
+                                                <td width="100" height="67" bgcolor="#B9CB16" style="text-align: right;">
+                                                    <span style="font-size: 40px ;font-family: sans-serif, Arial, Helvetica Neue; color: #fff;">
+                                                        <?php print $module['percent']; ?>
+                                                    </span>
                                                 </td>
                                             </tr>
                                             </tbody></table>
+                                    </td>
+                                    <td width="34" height="93" vertical-align="top">
+                                        <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="34" 
+                                               style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
+                                            <tr style="vertical-align: baseline;">
+                                                <td height="93" align="left" style="width: 34px; height: 93px">
+                                                    <img alt="loe" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_04.jpg"></td>
+                                            </tr>
+                                            </tbody></table>
+                                    </td>
+                                    <td width="122" height="93" vertical-align="top">
+
+                                        <table cellspacing="0" cellpadding="0" border="0" width="166" height="93" style=" margin-top:0px; margin-left:0px;"><tbody>
+                                            <tr>
+                                                <td width="150" align="center" style="width: 166px; height: 48px;">
+                                                    <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070; width: 136px">
+                                                        <a style="text-decoration: none; width: 166px; color: #000;" target="blank" href="<?php print $module['url']; ?>">
+                                                            <?php print changeAcutes($module['retail']); ?>
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td width="5" align="center" style="width: 5px; height: 48px; background-color: #f7f7f3;">
+                                                    <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="166" align="center" style="width: 166px; height: 45px; background-color: #edf1b0;">
+                                                    <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;">
+                                                        <a style="text-decoration: none; width: 166px;color: #000;" target="blank" href="<?php print $module['url']; ?>">
+                                                            <?php print $module['value']; ?>
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td width="5" align="center" style="width: 5px; height: 45px; background-color: #edf1b0;">
+                                                    <span style=" font-family: sans-serif, arial, Helvetica Nueve; font-size: 18px; color: #707070;">
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            </tbody></table>
+
+
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <td bgcolor="#f9f9f9" height="20">&nbsp;</td>
                                 </tr>
-                                <tr>
-                                    <td width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
-                                        <a target="blank" href="<?php print $module['url']; ?>">
-                                            <img style=" margin-top: 5px;" alt="btn ver entiendas" 
-                                                 src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
-                                        </a>
-                                    </td>
-                                </tr>
                             </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#f9f9f9" width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
+                        <a target="blank" href="<?php print $module['url']; ?>">
+                            <img style=" margin-top: 5px;" alt="btn ver entiendas" 
+                                 src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
+                        </a>
                     </td>
                 </tr>
 

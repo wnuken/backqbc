@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td bgcolor="#f9f9f9">
-                        <table cellspacing="0" cellpadding="0" border="0" width="300" height="182"><tbody>
+                        <table cellspacing="0" cellpadding="0" border="0" width="300" height="180"><tbody>
                             <?php 
     $type1cont = 0;
 foreach($module['sites'] as $sites):
@@ -61,8 +61,13 @@ $type1cont++;
                             </tr>
                             <?php 
 endforeach;
-if($type1cont < 4){ ?>
-                            <tr>
+if($type1cont < 4){
+    if($type1cont == 1) $heightblank = 135;
+    if($type1cont == 2) $heightblank = 90;
+    if($type1cont == 3) $heightblank = 45;
+
+                            ?>
+                            <tr height="<?php print $heightblank; ?>">
                                 <td style="border-top: 1px solid #efefef;text-align: center;" ;="" bgcolor="#ffffff" width="150"> 
                                     <span style="font-family: Arial,Helvetica,sans-serif; font-size: 16px; padding-left: 15px;"> 
                                         <a style="text-decoration: none; color:#000;" target="_blank" href="#">
