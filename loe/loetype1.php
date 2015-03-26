@@ -62,9 +62,11 @@
                                     <td width="34" height="93" vertical-align="top" style="table-layout:fixed; margin-top:0px; margin-left:0px;">
                                         <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="34" 
                                                style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
-                                            <tr style="vertical-align: baseline;">
+                                            <tr>
                                                 <td height="93" align="left" style="width: 34px; height: 93px">
-                                                    <img alt="loe" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_04.jpg"></td>
+                                                    <img style="margin-top: 0; display: block; width: 34px; height: 93px;" alt="loe"
+                                                         src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_04.jpg">
+                                                </td>
                                             </tr>
                                             </tbody></table>
                                     </td>
