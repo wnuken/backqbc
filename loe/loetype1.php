@@ -41,13 +41,13 @@
                                     <td bgcolor="#f9f9f9" height="20">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td width="100" height="93" vertical-align="top">
+                                    <td width="100" height="93" vertical-align="top" style="table-layout:fixed; margin-top:0px; margin-left:0px;">
                                         <table cellspacing="0" cellpadding="0" border="0" width="100px" height="93px" 
                                                style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
                                             <tr>
                                                 <td align="left" height="26" bgcolor="#B9CB16">
                                                     <img style="margin-top: 0; display: block; width: 100px; height: 26px;" alt="loe" 
-                                                         src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_03.jpg">
+                                                         src="http://quebuenacompra.com/backqbc/loe/images/News_pauta_03.jpg">
                                                 </td>
                                             </tr>
                                             <tr style="vertical-align: top">
@@ -59,7 +59,7 @@
                                             </tr>
                                             </tbody></table>
                                     </td>
-                                    <td width="34" height="93" vertical-align="top">
+                                    <td width="34" height="93" vertical-align="top" style="table-layout:fixed; margin-top:0px; margin-left:0px;">
                                         <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" width="34" 
                                                style="table-layout:fixed; margin-top:0px; margin-left:0px;"><tbody>
                                             <tr style="vertical-align: baseline;">
@@ -68,7 +68,7 @@
                                             </tr>
                                             </tbody></table>
                                     </td>
-                                    <td width="122" height="93" vertical-align="top">
+                                    <td width="122" height="93" vertical-align="top" style="table-layout:fixed; margin-top:0px; margin-left:0px;">
 
                                         <table cellspacing="0" cellpadding="0" border="0" width="166" height="93" style=" margin-top:0px; margin-left:0px;"><tbody>
                                             <tr>

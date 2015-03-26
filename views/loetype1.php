@@ -39,7 +39,7 @@
                                     <table ;="" style="table-layout:fixed; margin-top:0px; margin-left:0px;" height="83px" border="0" cellpadding="0" cellspacing="0" width="100px"><tbody>
                                         <tr>
                                             <td style="width: 100px; height: 26px" align="left">
-                                                <img style="margin-top: 0; display: block;" alt="loe" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/News_pauta_03.jpg">
+                                                <img style="margin-top: 0; display: block;" alt="loe" src="http://quebuenacompra.com/backqbc/loe/images/News_pauta_03.jpg">
                                             </td>
                                         </tr>
                                         <tr style="vertical-align: top">
