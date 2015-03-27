@@ -1312,7 +1312,7 @@ class General {
 
     public function & newsloe(&$params){
 
-         $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
+        $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
         // $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
         $jsonfile = file_get_contents('./loe/loeproducts.json', FILE_USE_INCLUDE_PATH);
         $dataInfo = json_decode($jsonfile, true);
@@ -1324,38 +1324,38 @@ class General {
                 'image' => $params['image'],
                 'url' => $params['url']
             );
-            if(!empty($params['retaila'])){
+           // if(!empty($params['retaila'])){
                 $dataArray['sites']['0'] = array(
                     'name' => $params['retaila'],
                     'value' => $params['valuea'],
                     'url' => $params['urla'],
                     'active' => '1'
                 );
-            }
-            if(!empty($params['retailb'])){
+          //  }
+          //  if(!empty($params['retailb'])){
                 $dataArray['sites']['1'] = array(
                     'name' => $params['retailb'],
                     'value' => $params['valueb'],
                     'url' => $params['urlb'],
                     'active' => '0'
                 );
-            }
-            if(!empty($params['retailc'])){
+          //  }
+           // if(!empty($params['retailc'])){
                 $dataArray['sites']['2'] = array(
                     'name' => $params['retailc'],
                     'value' => $params['valuec'],
                     'url' => $params['urlc'],
                     'active' => '0'
                 );
-            }
-            if(!empty($params['retaild'])){
+           // }
+           // if(!empty($params['retaild'])){
                 $dataArray['sites']['3'] = array(
                     'name' => $params['retaild'],
                     'value' => $params['valued'],
                     'url' => $params['urld'],
                     'active' => '0'
                 );
-            }
+           // }
             if($params['position'] == 1){
                 $dataInfo['dataInfo']['upper']['0'] = $dataArray;
             }
@@ -1377,7 +1377,8 @@ class General {
                 'url' => $params['url'],
                 'percent' => $params['percent'],
                 'retail' => $params['retail'],
-                'value' => $params['value']
+                'value' => $params['value'],
+                'image1' => 'http://' . $_SERVER["HTTP_HOST"] . $backpath . 'loe/images/type1image' . $params['position'] . '.png'
             );
             if($params['position'] == 1){
                 $dataInfo['dataInfo']['upper']['0'] = $dataArray;
@@ -1413,7 +1414,7 @@ class General {
             }
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }
-        
+
         $jsonDataInfo = json_encode($dataInfo);
         $dirname = dirname(__FILE__);
         $path = trim($dirname, 'controller');
@@ -1432,6 +1433,22 @@ class General {
         $BannerContent->setBannerContent($fileSave);
         $BannerContent->save();
 
+        return $result;
+    }
+
+    public function & saveImageBlock(&$params){
+        
+        $dirname = dirname(__FILE__);
+        $path = trim($dirname, 'controller');
+
+        $filteredData=substr($params['data'], strpos($params['data'], ",")+1);
+        $unencodedData=base64_decode($filteredData);
+        $fp = fopen($path . '/loe/images/type1image' . $params['position'] . '.png', 'wb' );
+        fwrite( $fp, $unencodedData);
+        fclose( $fp );
+        
+        $result = 'OK se generó la imagen correctamente';
+        
         return $result;
     }
 

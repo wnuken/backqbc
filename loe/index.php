@@ -19,7 +19,7 @@ function changeAcutes($params){
         </td>
         <td bgcolor="#ffffff" width="10px"></td>
     </tr>
-    <tr bgcolor="#ffffff" height="90px">
+    <tr bgcolor="#ffffff" height="90px" id="logopromo">
         <td bgcolor="#1791da" width="10px"></td>
         <td bgcolor="#1791da" width="auto" height="60px" align="center" colspan="2" style="background-color: #1791da">
             <a target="blank" href="<?php print $content['dataInfo']['urlPromo']; ?>">

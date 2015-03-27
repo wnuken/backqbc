@@ -37,11 +37,25 @@ $productChange.on('change', function(){
         '</div>'+
         '</div>';
 
+
+    var typepreview1 = '';
+
+    var url = '/';
+
     if(value == 0){
         $('div#information_box', $content).html(box1);
+        $.post('./views/newsletter/loetype0.php', { url: url }, function(data) {
+            $('div#previewpos' + position).html(data);
+        });
     }else if(value == 1){
         $('div#information_box', $content).html(box2);
+        $.post('./views/newsletter/loetype1.php', { url: url }, function(data) {
+            $('div#previewpos' + position).html(data);
+        });
     }else if(value == 2){
+        $.post('./views/newsletter/loetype2.php', { url: url }, function(data) {
+            $('div#previewpos' + position).html(data);
+        });
         $('div#information_box', $content).html('');
     }
 });
@@ -78,4 +92,116 @@ $('#previewNews').on('shown.bs.modal',function(){      //correct here use 'shown
     $that = $(this);
     var url = $that.attr('data-url');
     $that.find('iframe').attr('src',url);
-})
+});
+
+$.fn.UpdateElement = function(){
+    var $that = $(this);
+    var params = $that.serializeArray();
+
+    console.log(params);
+
+    if(params[0].value == 0){
+        var title = params[1].value;
+        var url = params[2].value;
+        var image = params[3].value;
+        var retaila = params[4].value;
+        var valuea = params[5].value;
+        var urla = params[6].value;
+        var retailb = params[7].value;
+        var valueb = params[8].value;
+        var urlb = params[9].value;
+        var retailc = params[10].value;
+        var valuec = params[11].value;
+        var urlc = params[12].value;
+        var retaild = params[13].value;
+        var valued = params[14].value;
+        var urld = params[15].value;
+        var position = params[16].value;
+
+        $blockpreview = $('div#previewpos' + position);
+
+        $('#type0title', $blockpreview).html(title);
+        $('a#type0url', $blockpreview).attr('href',url);
+        $('img#type0image', $blockpreview).attr('src',image);
+
+        $('a#type0retailer1', $blockpreview).html(retaila);
+        $('a#type0value1', $blockpreview).html(valuea);
+        $('a#type0value1', $blockpreview).attr('href',urla);
+        $('a#type0retailer1', $blockpreview).attr('href',urla);
+
+        $('a#type0retailer2', $blockpreview).html(retailb);
+        $('a#type0value2', $blockpreview).html(valueb);
+        $('a#type0value2', $blockpreview).attr('href',urlb);
+        $('a#type0retailer2', $blockpreview).attr('href',urlb);
+
+        $('a#type0retailer3', $blockpreview).html(retailc);
+        $('a#type0value3', $blockpreview).html(valuec);
+        $('a#type0value3', $blockpreview).attr('href',urlc);
+        $('a#type0retailer3', $blockpreview).attr('href',urlc);
+
+        $('a#type0retailer4', $blockpreview).html(retaild);
+        $('a#type0value4', $blockpreview).html(valued);
+        $('a#type0value4', $blockpreview).attr('href',urld);
+        $('a#type0retailer4', $blockpreview).attr('href',urld);
+
+
+    }
+
+    if(params[0].value == 1){
+
+        var title = params[1].value;
+        var url = params[2].value;
+        var image = params[3].value;
+        var percent = params[4].value;
+        var retailer = params[5].value;
+        var value = params[6].value;
+        var position = params[7].value;
+
+        var canvas = document.getElementById("mycanvas");
+        var ctx = canvas.getContext("2d");
+        var imgreal = document.getElementById("scream");
+        ctx.drawImage(imgreal,0,0);
+        ctx.textAlign = 'center';
+        ctx.font = "40px Arial";
+        ctx.fillStyle = 'white';
+        ctx.fillText(percent,60,63);
+
+        ctx.font = "20px Arial";
+        ctx.fillStyle = 'black';
+
+        ctx.fillText(retailer,210,30);
+        ctx.fillText(value,210,80);
+
+        var img = canvas.toDataURL("image/png");
+
+        $blockpreview = $('div#previewpos' + position);
+
+        $('#type1title', $blockpreview).html(title);
+        $('a#type1url', $blockpreview).attr('href',url);
+        $('img#type1image1', $blockpreview).attr('src',image);
+        $('img#type1image2', $blockpreview).attr('src',img);
+
+        $().saveImageBlock({
+            'path':'saveimageblock',
+            'data':img,
+            'position':position
+        });
+
+    }
+
+    if(params[0].value == 2){
+
+        var title = params[1].value;
+        var url = params[2].value;
+        var image = params[3].value;
+        var position = params[4].value;
+        
+        $blockpreview = $('div#previewpos' + position);
+
+        $('#type2title', $blockpreview).html(title);
+        $('a#type2url', $blockpreview).attr('href',url);
+        $('img#type1image', $blockpreview).attr('src',image);
+        
+        
+    }
+};

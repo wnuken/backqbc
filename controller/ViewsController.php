@@ -77,7 +77,7 @@ class Views {
         $currentPage = trim($result->haveToPaginate());
         include './views/trypay.php';
     }
-    
+
     static public function enviarpago(){
         include './views/sendpay.php';
     }
@@ -135,25 +135,30 @@ class Views {
     static public function pancartasext(){
         include './views/pancartasext.php';
     }
-    
+
     static public function pancartacons(){
         $General = new General();
         $result = $General->pancartaCons($_REQUEST);
-        
+
         var_dump($result);
         // include './views/pancartacons.php';
     }
-    
+
     static public function newsloe(){
         $General = new General();
         $result = $General->newsloe($_REQUEST);
         // include './views/resultnewsloe.php';
         print '<pre>'; print_r($result); print '</pre>';
     }
-    
+
     static public function newsletter(){
         include './views/newsloe.php';
     }
-    
-    
+
+    static public function saveimageblock(){
+        $General = new General();
+        $result = $General->saveImageBlock($_REQUEST);
+        var_dump($result);
+    }
+
 }

@@ -50,7 +50,7 @@ $.fn.getFuntions = function(path){
         }
     });
 
-}
+};
 
 $.fn.getLists = function(params){
     var $that = $(this);
@@ -78,7 +78,29 @@ $.fn.getLists = function(params){
         }
     });
 
-}
+};
+
+
+
+$.fn.saveImageBlock = function(params){
+    // $that = $(this);
+    $.ajax({
+        type: "POST",
+        url: params.path,
+        dataType: 'html',
+        data: params,
+        async: true,
+        success: function(response) {
+            console.log(response);
+        },
+        error: function() {
+            var message = "Rayos parece que no puedo traer datos";
+            $('div#response').html(message);
+            $('div#loader').css({'display':'none'});
+        }
+    });
+
+};
 
 function progresbar(){
     var invar = $bar.attr('aria-valuenow');
@@ -107,6 +129,11 @@ $(submitButton).on('click', function(e){
     $('div#response').html('');
     $('div#response').css({'display':'none'});
     $form.getFuntions({'class':className});
+
+    if($that.attr('data-news') == '1'){
+        $form.UpdateElement();
+    }
+
     myVar = setInterval(progresbar, 100);
 });
 

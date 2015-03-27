@@ -10,7 +10,7 @@
 <!-- AngularJS -->
 <script src="js/angularjs-min-1.2.js"></script>
 <!-- Internal -->
-<script src="js/back-qbc-menu.js"></script>
+<script src="js/back-qbc.js"></script>
 <!-- Internal -->
 <script src="js/paginer.js"></script>
 <script src="js/product_change.js"></script>

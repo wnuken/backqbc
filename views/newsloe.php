@@ -24,10 +24,21 @@ if($contentJson !== false){
                 </div>
                 <div id="collapseNews" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#previewNews">
-                                Preview...
-                            </button>
+                        <div class="col-md-4">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#previewNews">
+                                    Preview...
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="progress" id="progress" style="display:none;">
+                                <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" 
+                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">Complete...</span>
+                                </div>
+                            </div>
+                            <div id="response" style="display:none;"></div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +93,7 @@ else if($content['dataInfo']['upper'][0]['type'] == 1){
                                     </div>
                                     <input type="hidden" id="position" name="position" value="1">
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
+                                        <button class="btn btn-danger" id="submit" type="submit" data-news="1">Guardar</button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -99,7 +110,7 @@ else if($content['dataInfo']['upper'][0]['type'] == 1){
                     </a>
                 </div>
                 <div id="collapseOnePreview" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body" style="min-height: 531px;">
+                    <div class="panel-body" style="min-height: 531px;" id="previewpos1">
 
                         <?php
 if($content['dataInfo']['upper'][0]['type'] == 0){
@@ -115,17 +126,6 @@ else if($content['dataInfo']['upper'][0]['type'] == 2){
     include 'loetype2.php';
 }
                         ?>
-
-
-                        <div>
-                            <div class="progress" id="progress" style="display:none;">
-                                <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">Complete...</span>
-                                </div>
-                            </div>
-                            <div id="response" style="display:none;"></div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@ else if($content['dataInfo']['upper'][1]['type'] == 1){
                                     </div>
                                     <input type="hidden" id="position" name="position" value="2">
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
+                                        <button class="btn btn-danger" id="submit" type="submit" data-news="1">Guardar</button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -197,7 +197,7 @@ else if($content['dataInfo']['upper'][1]['type'] == 1){
                     </a>
                 </div>
                 <div id="collapseTwoPreview" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body" style="min-height: 531px;">
+                    <div class="panel-body" style="min-height: 531px;" id="previewpos2">
 
                         <?php
 if($content['dataInfo']['upper'][1]['type'] == 0){
@@ -213,17 +213,6 @@ else if($content['dataInfo']['upper'][1]['type'] == 2){
     include 'loetype2.php';
 }
                         ?>
-
-
-                        <div>
-                            <div class="progress" id="progress" style="display:none;">
-                                <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">Complete...</span>
-                                </div>
-                            </div>
-                            <div id="response" style="display:none;"></div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -278,7 +267,7 @@ else if($content['dataInfo']['lower'][0]['type'] == 1){
                                     </div>
                                     <input type="hidden" id="position" name="position" value="3">
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
+                                        <button class="btn btn-danger" id="submit" type="submit" data-news="1">Guardar</button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -295,7 +284,7 @@ else if($content['dataInfo']['lower'][0]['type'] == 1){
                     </a>
                 </div>
                 <div id="collapseThreePreview" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body" style="min-height: 531px;">
+                    <div class="panel-body" style="min-height: 531px;" id="previewpos3">
 
                         <?php
 if($content['dataInfo']['lower'][0]['type'] == 0){
@@ -311,17 +300,6 @@ else if($content['dataInfo']['lower'][0]['type'] == 2){
     include 'loetype2.php';
 }
                         ?>
-
-
-                        <div>
-                            <div class="progress" id="progress" style="display:none;">
-                                <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">Complete...</span>
-                                </div>
-                            </div>
-                            <div id="response" style="display:none;"></div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -376,7 +354,7 @@ else if($content['dataInfo']['lower'][1]['type'] == 1){
                                     </div>
                                     <input type="hidden" id="position" name="position" value="4">
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-danger" id="submit" type="submit">Guardar</button>
+                                        <button class="btn btn-danger" id="submit" type="submit" data-news="1">Guardar</button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -393,7 +371,7 @@ else if($content['dataInfo']['lower'][1]['type'] == 1){
                     </a>
                 </div>
                 <div id="collapseFourPreview" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body" style="min-height: 531px;">
+                    <div class="panel-body" style="min-height: 531px;" id="previewpos4">
 
                         <?php
 if($content['dataInfo']['lower'][1]['type'] == 0){
@@ -409,17 +387,6 @@ else if($content['dataInfo']['lower'][1]['type'] == 2){
     include 'loetype2.php';
 }
                         ?>
-
-
-                        <div>
-                            <div class="progress" id="progress" style="display:none;">
-                                <div id="progress_bar" class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                    <span class="sr-only">Complete...</span>
-                                </div>
-                            </div>
-                            <div id="response" style="display:none;"></div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -429,37 +396,24 @@ else if($content['dataInfo']['lower'][1]['type'] == 2){
 </div>
 
 <div class="modal fade" id="previewNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-url="<?php print $urlPreview; ?>">
-  <div class="modal-dialog" style="width:710px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Preview</h4>
-      </div>
-      <div class="modal-body">
-        <iframe src=""  height="600" width="99.6%" style="zoom:0.60" frameborder="0"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog" style="width:710px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Preview</h4>
+            </div>
+            <div class="modal-body">
+                <iframe src=""  height="600" width="99.6%" style="zoom:0.60" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!--div class="row">
-<div class="container">
-<div class="col-md-12">
-<div class="panel panel-default">
-<div class="panel-heading">
-<div class="btn-group pull-right">
-<button class="btn btn-primary" id="previewloe" type="submit" style="margin-top: -8px;" data-url="<?php print $urlPreview; ?>">Actualizar</button>
-</div>
-<h3 class="panel-title">Preview </h3>                
-</div>
-<div class="panel-body" id="previewloe">
-<?php // include 'preview.php'
-?>
-</div>
-</div>   
-</div>
-</div>
-</div-->
+<canvas id="mycanvas" width="300" height="93" style="border:1px solid #000000; background: #ccc; display:none;"></canvas>
+
+<img id="scream" src="http://qa.quebuenacompra.com/atmadmin/loe/images/fondotype1.jpg" alt="The Scream" width="300" height="93" style="display:none;">
+
+
