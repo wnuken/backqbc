@@ -157,6 +157,12 @@ $.fn.UpdateElement = function(){
         var value = params[6].value;
         var position = params[7].value;
 
+        $blockpreview = $('div#previewpos' + position);
+        $('#type1title', $blockpreview).html(title);
+        $('a#type1url', $blockpreview).attr('href',url);
+        $('img#type1image1', $blockpreview).attr('src',image);
+        $('img#type1image2', $blockpreview).attr('src','./loe/images/type1image' + position + '.png');
+
         var canvas = document.getElementById("mycanvas");
         var ctx = canvas.getContext("2d");
         var imgreal = document.getElementById("scream");
@@ -173,20 +179,12 @@ $.fn.UpdateElement = function(){
         ctx.fillText(value,210,80);
 
         var img = canvas.toDataURL("image/png");
-
-        $blockpreview = $('div#previewpos' + position);
-
-        $('#type1title', $blockpreview).html(title);
-        $('a#type1url', $blockpreview).attr('href',url);
-        $('img#type1image1', $blockpreview).attr('src',image);
-        $('img#type1image2', $blockpreview).attr('src',img);
-
+ 
         $().saveImageBlock({
             'path':'saveimageblock',
             'data':img,
             'position':position
         });
-
     }
 
     if(params[0].value == 2){
@@ -195,13 +193,13 @@ $.fn.UpdateElement = function(){
         var url = params[2].value;
         var image = params[3].value;
         var position = params[4].value;
-        
+
         $blockpreview = $('div#previewpos' + position);
 
         $('#type2title', $blockpreview).html(title);
         $('a#type2url', $blockpreview).attr('href',url);
         $('img#type1image', $blockpreview).attr('src',image);
-        
-        
+
+
     }
 };
