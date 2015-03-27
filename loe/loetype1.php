@@ -36,7 +36,7 @@
                 <tr>
                     <td width="300" height="93" vertical-align="top" style="table-layout:fixed; margin-top:0px; margin-left:0px;">
                         <a id="type1url" target="blank" href="<?php print $module['url']; ?>">
-                            <img id="type1image2" alt="IMG LOE" src="<?php print $module['image1']; ?>"> 
+                            <img width="300" height="93" id="type1image2" alt="IMG LOE" src="<?php print $module['image1']; ?>"> 
                         </a>
                     </td>
                 </tr>
@@ -44,7 +44,7 @@
                     <td bgcolor="#f9f9f9" height="30">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td bgcolor="#f9f9f9" width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
+                    <td bgcolor="#f9f9f9" width="300" height="37" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                         <a id="type1url" target="blank" href="<?php print $module['url']; ?>">
                             <img style=" margin-top: 5px;" alt="btn ver entiendas" 
                                  src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 

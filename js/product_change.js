@@ -37,9 +37,6 @@ $productChange.on('change', function(){
         '</div>'+
         '</div>';
 
-
-    var typepreview1 = '';
-
     var url = '/';
 
     if(value == 0){
@@ -98,25 +95,23 @@ $.fn.UpdateElement = function(){
     var $that = $(this);
     var params = $that.serializeArray();
 
-    console.log(params);
-
     if(params[0].value == 0){
-        var title = params[1].value;
-        var url = params[2].value;
-        var image = params[3].value;
-        var retaila = params[4].value;
-        var valuea = params[5].value;
-        var urla = params[6].value;
-        var retailb = params[7].value;
-        var valueb = params[8].value;
-        var urlb = params[9].value;
-        var retailc = params[10].value;
-        var valuec = params[11].value;
-        var urlc = params[12].value;
-        var retaild = params[13].value;
-        var valued = params[14].value;
-        var urld = params[15].value;
-        var position = params[16].value;
+        var title = params[2].value;
+        var url = params[3].value;
+        var image = params[4].value;
+        var retaila = params[5].value;
+        var valuea = params[6].value;
+        var urla = params[7].value;
+        var retailb = params[8].value;
+        var valueb = params[9].value;
+        var urlb = params[10].value;
+        var retailc = params[11].value;
+        var valuec = params[12].value;
+        var urlc = params[13].value;
+        var retaild = params[14].value;
+        var valued = params[15].value;
+        var urld = params[16].value;
+        var position = params[17].value;
 
         $blockpreview = $('div#previewpos' + position);
 
@@ -143,25 +138,17 @@ $.fn.UpdateElement = function(){
         $('a#type0value4', $blockpreview).html(valued);
         $('a#type0value4', $blockpreview).attr('href',urld);
         $('a#type0retailer4', $blockpreview).attr('href',urld);
-
-
     }
 
     if(params[0].value == 1){
 
-        var title = params[1].value;
-        var url = params[2].value;
-        var image = params[3].value;
-        var percent = params[4].value;
-        var retailer = params[5].value;
-        var value = params[6].value;
-        var position = params[7].value;
-
-        $blockpreview = $('div#previewpos' + position);
-        $('#type1title', $blockpreview).html(title);
-        $('a#type1url', $blockpreview).attr('href',url);
-        $('img#type1image1', $blockpreview).attr('src',image);
-        $('img#type1image2', $blockpreview).attr('src','./loe/images/type1image' + position + '.png');
+        var title = params[2].value;
+        var url = params[3].value;
+        var image = params[4].value;
+        var percent = params[5].value;
+        var retailer = params[6].value;
+        var value = params[7].value;
+        var position = params[8].value;
 
         var canvas = document.getElementById("mycanvas");
         var ctx = canvas.getContext("2d");
@@ -179,7 +166,14 @@ $.fn.UpdateElement = function(){
         ctx.fillText(value,210,80);
 
         var img = canvas.toDataURL("image/png");
- 
+
+        $blockpreview = $('div#previewpos' + position);
+
+        $('#type1title', $blockpreview).html(title);
+        $('a#type1url', $blockpreview).attr('href',url);
+        $('img#type1image1', $blockpreview).attr('src',image);
+        $('img#type1image2', $blockpreview).attr('src',img);
+
         $().saveImageBlock({
             'path':'saveimageblock',
             'data':img,
@@ -189,17 +183,17 @@ $.fn.UpdateElement = function(){
 
     if(params[0].value == 2){
 
-        var title = params[1].value;
-        var url = params[2].value;
-        var image = params[3].value;
-        var position = params[4].value;
-
+        var title = params[2].value;
+        var url = params[3].value;
+        var image = params[4].value;
+        var position = params[5].value;
+        
         $blockpreview = $('div#previewpos' + position);
 
         $('#type2title', $blockpreview).html(title);
         $('a#type2url', $blockpreview).attr('href',url);
         $('img#type1image', $blockpreview).attr('src',image);
-
-
+        
+        
     }
 };

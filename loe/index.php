@@ -40,11 +40,11 @@ function changeAcutes($params){
                     <?php 
 foreach($content['dataInfo']['upper'] as $key => $module): 
 //$module = $upper;
-if($module['type'] == '0'){ 
+if($module['type'] == '0' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype0.php';
-}else if($module['type'] == '1'){ 
+}else if($module['type'] == '1' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype1.php';
-}else if($module['type'] == '2'){ 
+}else if($module['type'] == '2' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype2.php';
 }
 endforeach;
@@ -63,11 +63,11 @@ endforeach;
                     <?php 
 foreach($content['dataInfo']['lower'] as $key => $module): 
 //$module = $upper;
-if($module['type'] == '0'){ 
+if($module['type'] == '0' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype0.php';
-}else if($module['type'] == '1'){ 
+}else if($module['type'] == '1' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype1.php';
-}else if($module['type'] == '2'){ 
+}else if($module['type'] == '2' && (isset($module['active']) && $module['active'] == '1')){ 
     include 'loetype2.php';
 }
 endforeach;

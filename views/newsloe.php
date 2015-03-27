@@ -59,13 +59,29 @@ if($contentJson !== false){
                                     <div class="form-group">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][0]['type'] == 0)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1a" autocomplete="off" <?php ($content['dataInfo']['upper'][0]['type'] == 0)? print 'checked': print ''; ?> value="0" class="product_change"> Multiprecio
+                                                <input type="radio" name="type" id="type1a" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][0]['type'] == 0)? print 'checked': print ''; ?> 
+                                                       value="0" class="product_change"> Multiprecio
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][0]['type'] == 1)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1b" autocomplete="off" <?php ($content['dataInfo']['upper'][0]['type'] == 1)? print 'checked': print ''; ?> value="1" class="product_change"> Descuento
+                                                <input type="radio" name="type" id="type1b" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][0]['type'] == 1)? print 'checked': print ''; ?> 
+                                                       value="1" class="product_change"> Descuento
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][0]['type'] == 2)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1c" autocomplete="off" <?php ($content['dataInfo']['upper'][0]['type'] == 2)? print 'checked': print ''; ?> value="2" class="product_change"> Imágen
+                                                <input type="radio" name="type" id="type1c" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][0]['type'] == 2)? print 'checked': print ''; ?> 
+                                                       value="2" class="product_change"> Imágen
+                                            </label>
+                                        </div>
+                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                            <label class="btn btn-primary active" for="title">
+                                                <input type="radio" class="form-control" id="active1" name="active" autocomplete="off" checked value="1">
+                                                Activa
+                                            </label>
+                                            <label class="btn btn-primary" for="title">
+                                                <input type="radio" class="form-control" id="active2" name="active" autocomplete="off" value="0">
+                                                Inactiva
                                             </label>
                                         </div>
                                     </div>
@@ -146,13 +162,29 @@ else if($content['dataInfo']['upper'][0]['type'] == 2){
                                     <div class="form-group">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][1]['type'] == 0)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1a" autocomplete="off" <?php ($content['dataInfo']['upper'][1]['type'] == 0)? print 'checked': print ''; ?> value="0" class="product_change"> Multiprecio
+                                                <input type="radio" name="type" id="type1a" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][1]['type'] == 0)? print 'checked': print ''; ?> 
+                                                       value="0" class="product_change"> Multiprecio
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][1]['type'] == 1)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1b" autocomplete="off" <?php ($content['dataInfo']['upper'][1]['type'] == 1)? print 'checked': print ''; ?> value="1" class="product_change"> Descuento
+                                                <input type="radio" name="type" id="type1b" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][1]['type'] == 1)? print 'checked': print ''; ?> 
+                                                       value="1" class="product_change"> Descuento
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['upper'][1]['type'] == 2)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1c" autocomplete="off" <?php ($content['dataInfo']['upper'][1]['type'] == 2)? print 'checked': print ''; ?> value="2" class="product_change"> Imágen
+                                                <input type="radio" name="type" id="type1c" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['upper'][1]['type'] == 2)? print 'checked': print ''; ?> 
+                                                       value="2" class="product_change"> Imágen
+                                            </label>
+                                        </div>
+                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                            <label class="btn btn-primary active" for="title">
+                                                <input type="radio" class="form-control" id="active1" name="active" autocomplete="off" checked value="1">
+                                                Activa
+                                            </label>
+                                            <label class="btn btn-primary" for="title">
+                                                <input type="radio" class="form-control" id="active2" name="active" autocomplete="off" value="0">
+                                                Inactiva
                                             </label>
                                         </div>
                                     </div>
@@ -233,13 +265,29 @@ else if($content['dataInfo']['upper'][1]['type'] == 2){
                                     <div class="form-group">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][0]['type'] == 0)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1a" autocomplete="off" <?php ($content['dataInfo']['lower'][0]['type'] == 0)? print 'checked': print ''; ?> value="0" class="product_change"> Multiprecio
+                                                <input type="radio" name="type" id="type1a" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][0]['type'] == 0)? print 'checked': print ''; ?> 
+                                                       value="0" class="product_change"> Multiprecio
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][0]['type'] == 1)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1b" autocomplete="off" <?php ($content['dataInfo']['lower'][0]['type'] == 1)? print 'checked': print ''; ?> value="1" class="product_change"> Descuento
+                                                <input type="radio" name="type" id="type1b" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][0]['type'] == 1)? print 'checked': print ''; ?> 
+                                                       value="1" class="product_change"> Descuento
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][0]['type'] == 2)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1c" autocomplete="off" <?php ($content['dataInfo']['lower'][0]['type'] == 2)? print 'checked': print ''; ?> value="2" class="product_change"> Imágen
+                                                <input type="radio" name="type" id="type1c" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][0]['type'] == 2)? print 'checked': print ''; ?> 
+                                                       value="2" class="product_change"> Imágen
+                                            </label>
+                                        </div>
+                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                            <label class="btn btn-primary active" for="title">
+                                                <input type="radio" class="form-control" id="active1" name="active" autocomplete="off" checked value="1">
+                                                Activa
+                                            </label>
+                                            <label class="btn btn-primary" for="title">
+                                                <input type="radio" class="form-control" id="active2" name="active" autocomplete="off" value="0">
+                                                Inactiva
                                             </label>
                                         </div>
                                     </div>
@@ -320,13 +368,29 @@ else if($content['dataInfo']['lower'][0]['type'] == 2){
                                     <div class="form-group">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][1]['type'] == 0)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1a" autocomplete="off" <?php ($content['dataInfo']['lower'][1]['type'] == 0)? print 'checked': print ''; ?> value="0" class="product_change"> Multiprecio
+                                                <input type="radio" name="type" id="type1a" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][1]['type'] == 0)? print 'checked': print ''; ?> 
+                                                       value="0" class="product_change"> Multiprecio
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][1]['type'] == 1)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1b" autocomplete="off" <?php ($content['dataInfo']['lower'][1]['type'] == 1)? print 'checked': print ''; ?> value="1" class="product_change"> Descuento
+                                                <input type="radio" name="type" id="type1b" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][1]['type'] == 1)? print 'checked': print ''; ?> 
+                                                       value="1" class="product_change"> Descuento
                                             </label>
                                             <label class="btn btn-primary <?php ($content['dataInfo']['lower'][1]['type'] == 2)? print 'active': print ''; ?>">
-                                                <input type="radio" name="type" id="type1c" autocomplete="off" <?php ($content['dataInfo']['lower'][1]['type'] == 2)? print 'checked': print ''; ?> value="2" class="product_change"> Imágen
+                                                <input type="radio" name="type" id="type1c" autocomplete="off" 
+                                                       <?php ($content['dataInfo']['lower'][1]['type'] == 2)? print 'checked': print ''; ?> 
+                                                       value="2" class="product_change"> Imágen
+                                            </label>
+                                        </div>
+                                        <div class="btn-group pull-right" data-toggle="buttons">
+                                            <label class="btn btn-primary active" for="title">
+                                                <input type="radio" class="form-control" id="active1" name="active" autocomplete="off" checked value="1">
+                                                Activa
+                                            </label>
+                                            <label class="btn btn-primary" for="title">
+                                                <input type="radio" class="form-control" id="active2" name="active" autocomplete="off" value="0">
+                                                Inactiva
                                             </label>
                                         </div>
                                     </div>

@@ -1322,7 +1322,8 @@ class General {
                 'type' => $params['type'],
                 'title' => $params['title'],
                 'image' => $params['image'],
-                'url' => $params['url']
+                'url' => $params['url'],
+                'active' => $params['active']
             );
            // if(!empty($params['retaila'])){
                 $dataArray['sites']['0'] = array(
@@ -1378,6 +1379,7 @@ class General {
                 'percent' => $params['percent'],
                 'retail' => $params['retail'],
                 'value' => $params['value'],
+                'active' => $params['active'],
                 'image1' => 'http://' . $_SERVER["HTTP_HOST"] . $backpath . 'loe/images/type1image' . $params['position'] . '.png'
             );
             if($params['position'] == 1){
@@ -1399,6 +1401,7 @@ class General {
                 'title' => $params['title'],
                 'image' => $params['image'],
                 'url' => $params['url'],
+                'active' => $params['active']
             );
             if($params['position'] == 1){
                 $dataInfo['dataInfo']['upper']['0'] = $dataArray;
