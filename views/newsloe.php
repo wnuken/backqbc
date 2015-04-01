@@ -478,6 +478,6 @@ else if($content['dataInfo']['lower'][1]['type'] == 2){
 
 <canvas id="mycanvas" width="300" height="93" style="border:1px solid #000000; background: #ccc; display:none;"></canvas>
 
-<img id="scream" src="http://qa.quebuenacompra.com/atmadmin/loe/images/fondotype1.jpg" alt="The Scream" width="300" height="93" style="display:none;">
+<img id="scream" src="./loe/images/fondotype1.jpg" alt="The Scream" width="300" height="93" style="display:none;">
 
 
