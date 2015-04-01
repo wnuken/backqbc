@@ -164,9 +164,13 @@ $.fn.UpdateElement = function(){
 
         ctx.fillText(retailer,210,30);
         ctx.fillText(value,210,80);
-
-        var img = canvas.toDataURL("data:image/png");
-
+        
+        var imageD = new Image()
+        // var img = canvas.toDataURL("data:image/png");
+        imageD.src = canvas.toDataURL("data:image/png");
+        
+        var img = imageD.src;
+        
         $blockpreview = $('div#previewpos' + position);
 
         $('#type1title', $blockpreview).html(title);
