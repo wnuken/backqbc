@@ -264,6 +264,14 @@ $.fn.UpdateElement = function(){
         $('a#type2url', $blockpreview).attr('href',url);
         $('img#type1image', $blockpreview).attr('src',image);
         $('img#imagearrow', $blockpreview).attr('src',imgArrow);
+        
+        
+        $().saveImageBlock({
+            'path':'saveimageblock',
+            'imgarrow':imgArrow,
+            'namearrow':valbton
+        });
+        
 
 
     }

@@ -1386,9 +1386,9 @@ class General {
             ksort($dataInfo['dataInfo']['products']);
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }else if($params['type'] == 2){
-            
+
             $nameArrow = $this->cleanString($params['valbton']);
-            
+
             $dataArray = array(
                 'type' => $params['type'],
                 'title' => $params['title'],
@@ -1428,21 +1428,24 @@ class General {
         $dirname = dirname(__FILE__);
         $path = trim($dirname, 'controller');
 
-        $imgScream = substr($params['imgscream'], strpos($params['imgscream'], ",")+1);
-        $unencodedImgScream = base64_decode($imgScream);
-        $fpImgScream = fopen($path . '/loe/images/type1image-' . $params['position'] ."-" .$params['fecha']. '.png', 'wb' );
-        fwrite($fpImgScream, $unencodedImgScream);
-        fclose($fpImgScream);
+        if(isset($params['imgscream'])){
+            $imgScream = substr($params['imgscream'], strpos($params['imgscream'], ",")+1);
+            $unencodedImgScream = base64_decode($imgScream);
+            $fpImgScream = fopen($path . '/loe/images/type1image-' . $params['position'] ."-" .$params['fecha']. '.png', 'wb' );
+            fwrite($fpImgScream, $unencodedImgScream);
+            fclose($fpImgScream);
+        }
 
-        $imgArrow = substr($params['imgarrow'], strpos($params['imgarrow'], ",")+1);
-        $unencodedImgArrow = base64_decode($imgArrow);
+        if(isset($params['imgarrow'])){
+            $imgArrow = substr($params['imgarrow'], strpos($params['imgarrow'], ",")+1);
+            $unencodedImgArrow = base64_decode($imgArrow);
 
-        $nameArrow = $this->cleanString($params['namearrow']);
+            $nameArrow = $this->cleanString($params['namearrow']);
 
-        $fpImgArrow = fopen($path . '/loe/images/flecha-' . $nameArrow . '.png', 'wb' );
-        fwrite($fpImgArrow, $unencodedImgArrow);
-        fclose($fpImgArrow);
-
+            $fpImgArrow = fopen($path . '/loe/images/flecha-' . $nameArrow . '.png', 'wb' );
+            fwrite($fpImgArrow, $unencodedImgArrow);
+            fclose($fpImgArrow);
+        }
         $result = 'OK se generó la imagen correctamente';
 
         return $result;
