@@ -1,9 +1,7 @@
 <?php
-$today = date('Y-m-d');
-
-$contentJson = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "json/loeproducts-$today.json");
+$contentJson = file_get_contents('./loe/json/loeproducts-' . $result['date'] . '.json', FILE_USE_INCLUDE_PATH);
 if($contentJson === false)
-    $contentJson = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . "json/loeproducts.json");
+    $contentJson = file_get_contents('./loe/json/loeproducts.json', FILE_USE_INCLUDE_PATH);
 
 $content = json_decode($contentJson,true);
 function changeAcutes($params){
@@ -46,17 +44,17 @@ if(isset($content['dataInfo']['products'])){
     foreach($content['dataInfo']['products'] as $key => $module){
         //$module = $upper;
         if($module['type'] == '0' && (isset($module['active']) && $module['active'] == '1')){ 
-            include 'loetype0.php';
+            include 'loetype0preview.php';
         }else if($module['type'] == '1' && (isset($module['active']) && $module['active'] == '1')){ 
-            include 'loetype1.php';
+            include 'loetype1preview.php';
         }else if($module['type'] == '2' && (isset($module['active']) && $module['active'] == '1')){ 
-            include 'loetype2.php';
+            include 'loetype2preview.php';
         }
     }
 }
                     ?>
                     </td></tr>
-                </tbody></table><!-- /.destacado-->
+                </tbody></table>
         </td>
         <td bgcolor="#1791DA" width="10">&nbsp;</td>
     </tr>

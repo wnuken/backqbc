@@ -160,5 +160,9 @@ class Views {
         $result = $General->saveImageBlock($_REQUEST);
         var_dump($result);
     }
-
+    
+    static public function loePreview(){
+        $result = $_REQUEST;        
+        include './views/newsletter/previewloe.php';            
+    }
 }

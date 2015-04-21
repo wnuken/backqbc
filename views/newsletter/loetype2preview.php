@@ -1,11 +1,9 @@
 <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="492" align="<?php ($key%2 != '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
-    <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
     <tr>
         <td width="300">
-            <!-- oferta-->
             <table cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2" width="300" align="left"><tbody>
                 <tr>
-                    <td bgcolor="#F9F9F9" valign="bottom" height="14"><!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"--></td>
+                    <td bgcolor="#F9F9F9" valign="bottom" height="14"></td>
                 </tr>
                 <tr style="height: 40px;">
                     <td bgcolor="#f9f9f9" valign="top" height="30" style="padding: 0px 6px;">
@@ -42,13 +40,14 @@
 
                     </td>
                 </tr>
-                </tbody></table>
-            <!--fin  oferta -->
+                <tr>
+                    <td bgcolor="#ebebeb" valign="top" height="14">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </td>
     </tr>
-    <tr>
-        <td bgcolor="#ebebeb" valign="top" height="14">
-            <!--img width="300" height="14" alt="border-bootom" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-botoom.jpg"-->
-        </td>
-    </tr>
-    </tbody></table>            <!-- fin ofertas -->
+
+    </tbody>
+</table>

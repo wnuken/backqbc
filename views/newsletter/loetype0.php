@@ -1,4 +1,4 @@
-<table align="left" width="300" bgcolor="#f2f2f2" border="0" cellpadding="0" cellspacing="0"><tbody>
+<table align="left" width="300" bgcolor="#f2f2f2" border="0" height="492" cellpadding="0" cellspacing="0"><tbody>
     <tr>
         <td height="14" valign="bottom" bgcolor="#F9F9F9">
             <!--img width="300" height="14" alt="border-top" src="http://informacion.quebuenacompra.com/xml/mailqbc/images/border-top.jpg"-->

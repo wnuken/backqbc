@@ -1,68 +1,52 @@
 var $productChange = $('input.product_change');
-
 var $preview = $('button#previewloe');
+var $blockpreview = $('div#blockpreview');
+var $cantOfer  = $('select#contofertas');
+var $oferselect = $('ul#oferselect');
+
+
+$.fn.getPreview = function(params){
+    var $that = $(this);
+    $('div#loader').css({'display':'block'});
+    $.ajax({
+        type: "POST",
+        url: params.class,
+        dataType: 'html',
+        data: params,
+        async: true,
+        success: function(response) {
+            $('div#loe-preview', $that).html(response);
+        },
+        error: function() {
+            var message = "Rayos parece que no puedo traer datos";
+            $('div#response').html(message);
+            $('div#loader').css({'display':'none'});
+        }
+    });
+
+};
 
 $productChange.on('change', function(){
     var $that = $(this);
     var value = $that.val();
     var $content = $that.closest('.formpositions');
-    var position = $content.attr('ofer-position');
-    console.log(position);
-
-    var box1 = '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retaila" name="retaila" placeholder="Retailer"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valuea" name="valuea" placeholder="Valor"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urla" name="urla" placeholder="URL"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retailb" name="retailb" placeholder="Retailer"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valueb" name="valueb" placeholder="Valor"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urlb" name="urlb" placeholder="URL"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retailc" name="retailc" placeholder="Retailer"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valuec" name="valuec" placeholder="Valor"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urlc" name="urlc" placeholder="URL"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="retaild" name="retaild" placeholder="Retailer"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="valued" name="valued" placeholder="Valor"></div></div>'+
-        '<div class="col-md-4"><div class="form-group"><input type="text" class="form-control" id="urld" name="urld" placeholder="URL"></div></div>';
-
-    var box2 = '<div class="col-md-4">'+
-        '<div class="form-group">'+
-        '<label>Porcentaje</label><input type="text" class="form-control" id="percent" name="percent" placeholder="Porcentaje">'+
-        '</div></div>'+
-        '<div class="col-md-4">'+
-        '<div class="form-group">'+
-        '<label>Retailer</label><input type="text" class="form-control" id="retail" name="retail" placeholder="Retailer">'+
-        '</div>'+
-        '</div>'+
-        '<div class="col-md-4">'+
-        '<div class="form-group">'+
-        '<label>Valor</label><input type="text" class="form-control" id="value" name="value" placeholder="Valor">'+
-        '</div>'+
-        '</div>';
-
-    var url = '/';
-
     if(value == 0){
-        $('div#information_box', $content).html(box1);
-        $.post('./views/newsletter/loetype0.php', { url: url }, function(data) {
-            $('div#previewpos' + position).html(data);
-        });
+        $('div#information_box', $content).postUrl('./views/newsletter/formbox1.php');
+        $blockpreview.postUrl('./views/newsletter/loetype' + value + '.php');
     }else if(value == 1){
-        $('div#information_box', $content).html(box2);
-        $.post('./views/newsletter/loetype1.php', { url: url }, function(data) {
-            $('div#previewpos' + position).html(data);
-        });
+        $('div#information_box', $content).postUrl('./views/newsletter/formbox2.php');
+        $blockpreview.postUrl('./views/newsletter/loetype' + value + '.php');
     }else if(value == 2){
-        $.post('./views/newsletter/loetype2.php', { url: url }, function(data) {
-            $('div#previewpos' + position).html(data);
-        });
         $('div#information_box', $content).html('');
+        $blockpreview.postUrl('./views/newsletter/loetype' + value + '.php');
     }
 });
 
 $preview.on('click', function(){
-
     var params = {};
     var $that = $(this);
     var url = $that.attr('data-url');
-
+    console.log(url);
     $.ajax({
         type: "POST",
         url: url,
@@ -85,11 +69,69 @@ $preview.on('click', function(){
 });
 
 
-$('#previewNews').on('shown.bs.modal',function(){      //correct here use 'shown.bs.modal' event which comes in bootstrap3
+$('div#previewNews').on('shown.bs.modal',function(){
     $that = $(this);
-    var url = $that.attr('data-url');
-    $that.find('iframe').attr('src',url);
+    var $datePicker = $('div#datepicker');
+    var datePreview = $('input#date', $datePicker).val();
+    var path = 'loe-preview';
+    var params = {class: path, date:datePreview};
+    $that.getPreview(params);
+
 });
+
+$cantOfer.on('change', function(){
+    var $that = $(this);
+    var cant = $that.val();
+    var url = '/';
+    console.log(cant);
+    $.post('./views/newsletter/numberofer.php?cant=' + cant, { url: url }, function(data) {
+        $('div#ofercant').html(data);
+        $oferselect = $('ul#oferselect');
+    });
+});
+
+/*$('div#datepicker input').on('change', function(){
+    var $that = $(this);
+    var date = $that.val();
+    $('form#newsloe1 input[name="fecha"]').attr('value', date);
+});*/
+
+function oferselect(data){
+    var ProductDate = $('div#datepicker input').val();
+    var $formNewsloe1 = $('form#newsloe1');
+    $('li', $oferselect).removeClass('active');
+    $('li#li' + data, $oferselect).addClass('active');
+    $('h3#ofertitle span').html(data);
+    $formNewsloe1.fadeOut( "slow", function(){
+        var $that = $(this);
+        $blockpreview.postUrl('./views/newsletter/loetype0.php');
+        $('div#information_box', $that).postUrl('./views/newsletter/formbox1.php');
+        var $label1 = $('input#type1a', $that).closest('label');
+        $label1.addClass('active');
+        var $label2 = $('input#type1b', $that).closest('label');
+        $label2.removeClass('active');
+        var $label3 = $('input#type1c', $that).closest('label');
+        $label3.removeClass('active');
+    });
+
+    $formNewsloe1.fadeIn("slow", function(){
+        var $that = $(this);
+        $that.reset();
+    });
+
+    $('input#position', $formNewsloe1).val(data);
+    $('input#fecha', $formNewsloe1).val(ProductDate);
+
+}
+
+$.fn.postUrl = function(params){
+    var $that = $(this);
+    var url = "/";
+    $.post(params, { url: url }, function(data) {
+        $that.html(data);
+    });
+};
+
 
 $.fn.UpdateElement = function(){
     var $that = $(this);
@@ -112,8 +154,6 @@ $.fn.UpdateElement = function(){
         var valued = params[15].value;
         var urld = params[16].value;
         var position = params[17].value;
-
-        $blockpreview = $('div#previewpos' + position);
 
         $('#type0title', $blockpreview).html(title);
         $('a#type0url', $blockpreview).attr('href',url);
@@ -148,40 +188,53 @@ $.fn.UpdateElement = function(){
         var percent = params[5].value;
         var retailer = params[6].value;
         var value = params[7].value;
-        var position = params[8].value;
+        var valbton = params[8].value;
+        var position = params[9].value;
+        var fecha = params[10].value;
 
-        var canvas = document.getElementById("mycanvas");
-        var ctx = canvas.getContext("2d");
+        var canvasScream = document.getElementById("canvasscream");
+        var ctxScream = canvasScream.getContext("2d");
         var imgreal = document.getElementById("scream");
-        ctx.drawImage(imgreal,0,0);
-        ctx.textAlign = 'center';
-        ctx.font = "40px Arial";
-        ctx.fillStyle = 'white';
-        ctx.fillText(percent,60,63);
+        ctxScream.drawImage(imgreal,0,0);
+        ctxScream.textAlign = 'center';
+        ctxScream.font = "40px Arial";
+        ctxScream.fillStyle = 'white';
+        ctxScream.fillText(percent,60,63);
 
-        ctx.font = "20px Arial";
-        ctx.fillStyle = 'black';
+        ctxScream.font = "20px Arial";
+        ctxScream.fillStyle = 'black';
 
-        ctx.fillText(retailer,210,30);
-        ctx.fillText(value,210,80);
-        
-        var imageD = new Image()
-        // var img = canvas.toDataURL("data:image/png");
-        imageD.src = canvas.toDataURL("data:image/png");
-        
-        var img = imageD.src;
-        
-        $blockpreview = $('div#previewpos' + position);
+        ctxScream.fillText(retailer,210,30);
+        ctxScream.fillText(value,210,80);
+
+        var imgScream = canvasScream.toDataURL("image/png");
 
         $('#type1title', $blockpreview).html(title);
         $('a#type1url', $blockpreview).attr('href',url);
         $('img#type1image1', $blockpreview).attr('src',image);
-        $('img#type1image2', $blockpreview).attr('src',img);
+        $('img#type1image2', $blockpreview).attr('src',imgScream);
+
+        var canvasArrow = document.getElementById("canvasarrow");
+        var ctxArrow = canvasArrow.getContext("2d");
+        var imageArrow = document.getElementById("imagearrow");
+        var textArrow = "El texto va aqui";
+        ctxArrow.drawImage(imageArrow,0,0);
+        ctxArrow.textAlign = 'center';
+        ctxArrow.font = "Bold 16px Arial";
+        ctxArrow.fillStyle = 'white';
+        ctxArrow.fillText(valbton,70,23);
+
+        var imgArrow = canvasArrow.toDataURL("image/png");
+
+        $('img#imagearrow', $blockpreview).attr('src',imgArrow);
 
         $().saveImageBlock({
             'path':'saveimageblock',
-            'data':img,
-            'position':position
+            'imgscream':imgScream,
+            'position':position,
+            'fecha':fecha,
+            'imgarrow':imgArrow,
+            'namearrow':valbton
         });
     }
 
@@ -191,13 +244,13 @@ $.fn.UpdateElement = function(){
         var url = params[3].value;
         var image = params[4].value;
         var position = params[5].value;
-        
-        $blockpreview = $('div#previewpos' + position);
 
         $('#type2title', $blockpreview).html(title);
         $('a#type2url', $blockpreview).attr('href',url);
         $('img#type1image', $blockpreview).attr('src',image);
-        
-        
+
+
     }
+
+
 };

@@ -80,8 +80,6 @@ $.fn.getLists = function(params){
 
 };
 
-
-
 $.fn.saveImageBlock = function(params){
     // $that = $(this);
     $.ajax({
@@ -101,6 +99,12 @@ $.fn.saveImageBlock = function(params){
     });
 
 };
+
+
+// Resetar formularios
+$.fn.reset = function () {
+    $(this).each (function() { this.reset(); });
+}
 
 function progresbar(){
     var invar = $bar.attr('aria-valuenow');
@@ -174,6 +178,23 @@ $.each($('textarea'), function(){
     });
     // }
 });
+
+
+$('div#datepicker').datepicker({
+    language: "es",
+    autoclose: true,
+    todayHighlight: true,
+    format: "yyyy-mm-dd",
+    todayBtn: "linked"
+}).on('changeDate', function(e){
+    var $that = $('div#datepicker input');
+    var date = $that.val();
+    console.log(date);
+    var $formnewsloe1 = $('form#newsloe1');
+    $('input#fecha', $formnewsloe1).val(date);
+
+});
+
 
 
 

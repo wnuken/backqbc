@@ -44,8 +44,8 @@
                 <tr>
                     <td bgcolor="#f9f9f9" width="300px" height="37px" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                         <a id="type1url" target="blank" href="#">
-                            <img style=" margin-top: 5px;" alt="btn ver entiendas" 
-                                 src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
+                            <img id="imagearrow" style=" margin-top: 5px;" alt="btn ver entiendas" 
+                                 src="./loe/images/fondoflecha.jpg"> 
                         </a>
                     </td>
                 </tr>

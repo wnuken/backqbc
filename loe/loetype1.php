@@ -1,4 +1,4 @@
-<table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="492" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+<table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="492" align="<?php ($key%2 != '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
     <!--<table style="margin-bottom:10px;" width="300" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="#f9f9f9">-->
     <tr>
         <td width="300">
@@ -47,7 +47,7 @@
                     <td bgcolor="#f9f9f9" width="300" height="37" align="center" cellpadding="0" cellspacing="0" border="0" ;=""> 
                         <a id="type1url" target="blank" href="<?php print $module['url']; ?>">
                             <img style=" margin-top: 5px;" alt="btn ver entiendas" 
-                                 src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
+                                 src="<?php print $module['image2']; ?>"> 
                         </a>
                     </td>
                 </tr>

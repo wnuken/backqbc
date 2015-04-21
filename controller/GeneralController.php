@@ -1314,8 +1314,20 @@ class General {
 
         $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
         // $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
-        $jsonfile = file_get_contents('./loe/loeproducts.json', FILE_USE_INCLUDE_PATH);
+
+        $jsonfile = file_get_contents('./loe/json/loeproducts-' . $params['fecha'] . '.json', FILE_USE_INCLUDE_PATH);
+
+        if($jsonfile === false){
+            $jsonfile = file_get_contents('./loe/json/loeproducts.json', FILE_USE_INCLUDE_PATH);
+        }
+
         $dataInfo = json_decode($jsonfile, true);
+
+        if(empty($params['fecha'])){
+            $params['fecha'] = date('Y-m-d');
+        }/*else{
+            $params['fecha'] = date('Y-m-d', strtotime($params['fecha']));
+        }*/
 
         if($params['type'] == 0){
             $dataArray = array(
@@ -1323,54 +1335,41 @@ class General {
                 'title' => $params['title'],
                 'image' => $params['image'],
                 'url' => $params['url'],
-                'active' => $params['active']
+                'active' => $params['active'],
+                'sites' => array(
+                    '0' => array(
+                        'name' => $params['retaila'],
+                        'value' => $params['valuea'],
+                        'url' => $params['urla'],
+                        'active' => '1'
+                    ),
+                    '1' => array(
+                        'name' => $params['retailb'],
+                        'value' => $params['valueb'],
+                        'url' => $params['urlb'],
+                        'active' => '0'
+                    ),
+                    '2' => array(
+                        'name' => $params['retailc'],
+                        'value' => $params['valuec'],
+                        'url' => $params['urlc'],
+                        'active' => '0'
+                    ),
+                    '3' => array(
+                        'name' => $params['retaild'],
+                        'value' => $params['valued'],
+                        'url' => $params['urld'],
+                        'active' => '0'
+                    )
+                )
             );
-           // if(!empty($params['retaila'])){
-                $dataArray['sites']['0'] = array(
-                    'name' => $params['retaila'],
-                    'value' => $params['valuea'],
-                    'url' => $params['urla'],
-                    'active' => '1'
-                );
-          //  }
-          //  if(!empty($params['retailb'])){
-                $dataArray['sites']['1'] = array(
-                    'name' => $params['retailb'],
-                    'value' => $params['valueb'],
-                    'url' => $params['urlb'],
-                    'active' => '0'
-                );
-          //  }
-           // if(!empty($params['retailc'])){
-                $dataArray['sites']['2'] = array(
-                    'name' => $params['retailc'],
-                    'value' => $params['valuec'],
-                    'url' => $params['urlc'],
-                    'active' => '0'
-                );
-           // }
-           // if(!empty($params['retaild'])){
-                $dataArray['sites']['3'] = array(
-                    'name' => $params['retaild'],
-                    'value' => $params['valued'],
-                    'url' => $params['urld'],
-                    'active' => '0'
-                );
-           // }
-            if($params['position'] == 1){
-                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
-            }
-            if($params['position'] == 2){
-                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
-            }
-            if($params['position'] == 3){
-                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
-            }
-            if($params['position'] == 4){
-                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
-            }
+            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+            ksort($dataInfo['dataInfo']['products']);
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }else if($params['type'] == 1){
+
+            $nameArrow = $this->cleanString($params['valbton']);
+
             $dataArray = array(
                 'type' => $params['type'],
                 'title' => $params['title'],
@@ -1380,20 +1379,11 @@ class General {
                 'retail' => $params['retail'],
                 'value' => $params['value'],
                 'active' => $params['active'],
-                'image1' => 'http://' . $_SERVER["HTTP_HOST"] . $backpath . 'loe/images/type1image' . $params['position'] . '.png'
+                'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/type1image-" . $params['position'] . "-" . $params['fecha'] . ".png",
+                'image2' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
             );
-            if($params['position'] == 1){
-                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
-            }
-            if($params['position'] == 2){
-                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
-            }
-            if($params['position'] == 3){
-                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
-            }
-            if($params['position'] == 4){
-                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
-            }
+            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+            ksort($dataInfo['dataInfo']['products']);
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }else if($params['type'] == 2){
             $dataArray = array(
@@ -1403,25 +1393,15 @@ class General {
                 'url' => $params['url'],
                 'active' => $params['active']
             );
-            if($params['position'] == 1){
-                $dataInfo['dataInfo']['upper']['0'] = $dataArray;
-            }
-            if($params['position'] == 2){
-                $dataInfo['dataInfo']['upper']['1'] = $dataArray;
-            }
-            if($params['position'] == 3){
-                $dataInfo['dataInfo']['lower']['0'] = $dataArray;
-            }
-            if($params['position'] == 4){
-                $dataInfo['dataInfo']['lower']['1'] = $dataArray;
-            }
+            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+            ksort($dataInfo['dataInfo']['products']);
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }
 
         $jsonDataInfo = json_encode($dataInfo);
         $dirname = dirname(__FILE__);
         $path = trim($dirname, 'controller');
-        $file = fopen($path . "/loe/loeproducts.json", "w");
+        $file = fopen($path . "/loe/json/loeproducts-" . $params['fecha'] . ".json", "wb");
         fwrite($file, $jsonDataInfo . PHP_EOL);
         fclose($file);
 
@@ -1440,20 +1420,64 @@ class General {
     }
 
     public function & saveImageBlock(&$params){
-        
+
         $dirname = dirname(__FILE__);
         $path = trim($dirname, 'controller');
 
-        $filteredData=substr($params['data'], strpos($params['data'], ",")+1);
-        $unencodedData=base64_decode($filteredData);
-        $fp = fopen($path . '/loe/images/type1image' . $params['position'] . '.png', 'wb' );
-        fwrite( $fp, $unencodedData);
-        fclose( $fp );
-        
+        $imgScream = substr($params['imgscream'], strpos($params['imgscream'], ",")+1);
+        $unencodedImgScream = base64_decode($imgScream);
+        $fpImgScream = fopen($path . '/loe/images/type1image-' . $params['position'] ."-" .$params['fecha']. '.png', 'wb' );
+        fwrite($fpImgScream, $unencodedImgScream);
+        fclose($fpImgScream);
+
+        $imgArrow = substr($params['imgarrow'], strpos($params['imgarrow'], ",")+1);
+        $unencodedImgArrow = base64_decode($imgArrow);
+
+        $nameArrow = $this->cleanString($params['namearrow']);
+
+        $fpImgArrow = fopen($path . '/loe/images/flecha-' . $nameArrow . '.png', 'wb' );
+        fwrite($fpImgArrow, $unencodedImgArrow);
+        fclose($fpImgArrow);
+
         $result = 'OK se generó la imagen correctamente';
-        
+
         return $result;
     }
 
+    private function cleanString($params){
+
+        $acenString = array(
+            'á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä',
+            'é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë',
+            'í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î',
+            'ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô',
+            'ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü',
+            'ñ', 'Ñ', 'ç', 'Ç'
+        );
+        $noAcenString = array(
+            'a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A',
+            'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E',
+            'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I',
+            'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O',
+            'u', 'u', 'u', 'u', 'U', 'U', 'U', 'U',
+            'n', 'N', 'c', 'C'
+        );
+
+        $spacialchar = array(
+            "\\", "¨", "º", "-", "~","#", "@", "|", "!", "\"","·", "$", "%", "&", "/",
+            "(", ")", "?", "'", "¡","¿", "[", "^", "`", "]","+", "}", "{", "¨", "´",
+            ">", "< ", ";", ",", ":",".", " "
+        );
+
+        $string = trim(strtolower($params));
+        $string = htmlentities($string);
+        $string = preg_replace('/\&(.)[^;]*;/', '', $string);
+        $string = str_replace(' ', '-', $string);
+        $string = str_replace($acenString, $noAcenString, $string);
+        $string = str_replace($spacialchar,'',$string);
+
+
+        return $string;
+    }
 
 }

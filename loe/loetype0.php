@@ -1,4 +1,4 @@
-<table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="492" align="<?php ($key == '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
+<table cellspacing="0" cellpadding="0" border="0" bgcolor="#f9f9f9" width="300" height="492" align="<?php ($key%2 != '0')? print 'left': print 'right' ?>" style="margin-bottom:10px;"><tbody>
     <tr>
         <td width="300">
             <!-- oferta-->

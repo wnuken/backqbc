@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" />
     <!-- CodeMirror -->
     <link rel="stylesheet" href="css/codemirror.css">
     
