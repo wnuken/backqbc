@@ -4,7 +4,7 @@ $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
 $urlPreview = "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe";
 
 // $contentJson = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
-$contentJson = file_get_contents('./loe/loeproducts.json', FILE_USE_INCLUDE_PATH);
+$contentJson = file_get_contents('./loe/json/loeproducts.json', FILE_USE_INCLUDE_PATH);
 
 if($contentJson !== false){
     $content = json_decode($contentJson,true);

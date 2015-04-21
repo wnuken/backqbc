@@ -29,7 +29,9 @@
     </form>
 </div>
 <div class="col-md-8">
-    <h3>Para recargar el Preview antes oprima en Windows => CRTL + R; en Mac => CMD + R</h3>
+    <h3>Para recargar el Preview antes oprima:</h3>
+    <h4>Windows => CRTL + R</h4>
+    <h4>Mac => CMD + R</h4>
     
     <div class="btn-group pull-right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#previewNews">
