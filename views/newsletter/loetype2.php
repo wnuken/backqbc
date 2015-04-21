@@ -26,7 +26,7 @@
     <tr>
         <td cellpadding="0" cellspacing="0" border="0" ;="" align="center" height="37px" width="300px" bgcolor="#f9f9f9"> 
             <a id="type2url" target="blank" href="#">
-                <img style=" margin-top: 5px;" alt="btn ver entiendas" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
+                <img id="imagearrow" style=" margin-top: 5px;" alt="btn ver entiendas" src="./loe/images/fondoflecha.jpg"> 
             </a>
         </td>
     </tr>

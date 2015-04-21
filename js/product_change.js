@@ -37,6 +37,7 @@ $productChange.on('change', function(){
         $('div#information_box', $content).postUrl('./views/newsletter/formbox2.php');
         $blockpreview.postUrl('./views/newsletter/loetype' + value + '.php');
     }else if(value == 2){
+        $('div#information_box', $content).postUrl('./views/newsletter/formbox3.php');
         $('div#information_box', $content).html('');
         $blockpreview.postUrl('./views/newsletter/loetype' + value + '.php');
     }
@@ -243,11 +244,26 @@ $.fn.UpdateElement = function(){
         var title = params[2].value;
         var url = params[3].value;
         var image = params[4].value;
-        var position = params[5].value;
+        var valbton = params[5].value;
+        var position = params[6].value;
+        
+        var canvasArrow = document.getElementById("canvasarrow");
+        var ctxArrow = canvasArrow.getContext("2d");
+        var imageArrow = document.getElementById("imagearrow");
+        var textArrow = "El texto va aqui";
+        ctxArrow.drawImage(imageArrow,0,0);
+        ctxArrow.textAlign = 'center';
+        ctxArrow.font = "Bold 16px Arial";
+        ctxArrow.fillStyle = 'white';
+        ctxArrow.fillText(valbton,70,23);
+
+        var imgArrow = canvasArrow.toDataURL("image/png");
+        
 
         $('#type2title', $blockpreview).html(title);
         $('a#type2url', $blockpreview).attr('href',url);
         $('img#type1image', $blockpreview).attr('src',image);
+        $('img#imagearrow', $blockpreview).attr('src',imgArrow);
 
 
     }

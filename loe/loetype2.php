@@ -33,7 +33,7 @@
                 <tr>
                     <td cellpadding="0" cellspacing="0" border="0" ;="" height="37px" align="center" width="300px" bgcolor="#f9f9f9"> 
                         <a target="blank" href="<?php print $module['url']; ?>">
-                            <img style=" margin-top: 5px;" alt="btn ver entiendas" src="http://informacion.quebuenacompra.com/qbc-design/news-loe/images/Newspautavermas_03.jpg"> 
+                            <img style=" margin-top: 5px;" alt="btn ver entiendas" src="<?php print $module['image1']; ?>"> 
                         </a>
                     </td>
                 </tr>

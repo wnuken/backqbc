@@ -1386,12 +1386,16 @@ class General {
             ksort($dataInfo['dataInfo']['products']);
             $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
         }else if($params['type'] == 2){
+            
+            $nameArrow = $this->cleanString($params['valbton']);
+            
             $dataArray = array(
                 'type' => $params['type'],
                 'title' => $params['title'],
                 'image' => $params['image'],
                 'url' => $params['url'],
-                'active' => $params['active']
+                'active' => $params['active'],
+                'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
             );
             $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
             ksort($dataInfo['dataInfo']['products']);
