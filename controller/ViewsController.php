@@ -163,6 +163,6 @@ class Views {
     
     static public function loePreview(){
         $result = $_REQUEST;        
-        include './views/newsletter/previewloe.php';            
+        include './views/newsletter/previewloe.php';         
     }
 }

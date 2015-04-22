@@ -1,15 +1,20 @@
 <?php
 $today = date('Y-m-d');
 
-$contentJson = file_get_contents('./json/loeproducts-' . $today . '.json', FILE_USE_INCLUDE_PATH);
-if($contentJson === false)
-    $contentJson = file_get_contents('./json/loeproducts.json', FILE_USE_INCLUDE_PATH);
-
-$content = json_decode($contentJson,true);
 function changeAcutes($params){
     $result = htmlentities($params);
     return $result;
 }
+
+
+$contentJson = @file_get_contents('./json/loeproducts-' . $today . '.json', FILE_USE_INCLUDE_PATH);
+if($contentJson === false)
+    $contentJson = @file_get_contents('./json/loeproducts.json', FILE_USE_INCLUDE_PATH);
+
+
+if($contentJson !== false):
+$content = json_decode($contentJson,true);
+
 
 ?>
 <table cellspacing="0" cellpadding="0" border="0" width="640" align="center" style="width: 640px; margin: 0 auto;" class="contenedor body"><tbody>
@@ -92,3 +97,4 @@ if(isset($content['dataInfo']['products'])){
 
     </tbody>
 </table>
+<?php endif; ?>
