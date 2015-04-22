@@ -5,7 +5,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
     $user = $_SESSION["k_username"];
 ?>
 
-<?php if($_SESSION['k_rol'] == 1){ ?>
+<?php if($_SESSION['k_rol'] == 1 || $_SESSION['k_rol'] == 0){ ?>
 <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
