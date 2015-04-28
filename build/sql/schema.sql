@@ -1646,6 +1646,7 @@ CREATE TABLE qbc_sci_manual_close
     value_sap int(11) unsigned DEFAULT 0 NOT NULL,
     doc_sap VARCHAR(50),
     date_sap DATETIME,
+    status int(11) unsigned DEFAULT 0 NOT NULL,
     PRIMARY KEY (id),
     INDEX IDX_CAMPAIGN_ID (campaign_id),
     INDEX IDX_DOC_SAP (doc_sap)

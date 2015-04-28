@@ -43,6 +43,7 @@ class QbcSciManualCloseTableMap extends TableMap
         $this->addColumn('value_sap', 'ValueSap', 'INTEGER', true, 11, 0);
         $this->addColumn('doc_sap', 'DocSap', 'VARCHAR', false, 50, null);
         $this->addColumn('date_sap', 'DateSap', 'TIMESTAMP', false, null, null);
+        $this->addColumn('status', 'Status', 'INTEGER', true, 11, 0);
         // validators
     } // initialize()
 

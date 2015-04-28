@@ -11,12 +11,14 @@
  * @method QbcSciManualCloseQuery orderByValueSap($order = Criteria::ASC) Order by the value_sap column
  * @method QbcSciManualCloseQuery orderByDocSap($order = Criteria::ASC) Order by the doc_sap column
  * @method QbcSciManualCloseQuery orderByDateSap($order = Criteria::ASC) Order by the date_sap column
+ * @method QbcSciManualCloseQuery orderByStatus($order = Criteria::ASC) Order by the status column
  *
  * @method QbcSciManualCloseQuery groupById() Group by the id column
  * @method QbcSciManualCloseQuery groupByCampaignId() Group by the campaign_id column
  * @method QbcSciManualCloseQuery groupByValueSap() Group by the value_sap column
  * @method QbcSciManualCloseQuery groupByDocSap() Group by the doc_sap column
  * @method QbcSciManualCloseQuery groupByDateSap() Group by the date_sap column
+ * @method QbcSciManualCloseQuery groupByStatus() Group by the status column
  *
  * @method QbcSciManualCloseQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method QbcSciManualCloseQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -29,12 +31,14 @@
  * @method QbcSciManualClose findOneByValueSap(int $value_sap) Return the first QbcSciManualClose filtered by the value_sap column
  * @method QbcSciManualClose findOneByDocSap(string $doc_sap) Return the first QbcSciManualClose filtered by the doc_sap column
  * @method QbcSciManualClose findOneByDateSap(string $date_sap) Return the first QbcSciManualClose filtered by the date_sap column
+ * @method QbcSciManualClose findOneByStatus(int $status) Return the first QbcSciManualClose filtered by the status column
  *
  * @method array findById(int $id) Return QbcSciManualClose objects filtered by the id column
  * @method array findByCampaignId(int $campaign_id) Return QbcSciManualClose objects filtered by the campaign_id column
  * @method array findByValueSap(int $value_sap) Return QbcSciManualClose objects filtered by the value_sap column
  * @method array findByDocSap(string $doc_sap) Return QbcSciManualClose objects filtered by the doc_sap column
  * @method array findByDateSap(string $date_sap) Return QbcSciManualClose objects filtered by the date_sap column
+ * @method array findByStatus(int $status) Return QbcSciManualClose objects filtered by the status column
  *
  * @package    propel.generator.atmadmin.om
  */
@@ -142,7 +146,7 @@ abstract class BaseQbcSciManualCloseQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT id, campaign_id, value_sap, doc_sap, date_sap FROM qbc_sci_manual_close WHERE id = :p0';
+        $sql = 'SELECT id, campaign_id, value_sap, doc_sap, date_sap, status FROM qbc_sci_manual_close WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -427,6 +431,48 @@ abstract class BaseQbcSciManualCloseQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(QbcSciManualClosePeer::DATE_SAP, $dateSap, $comparison);
+    }
+
+    /**
+     * Filter the query on the status column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByStatus(1234); // WHERE status = 1234
+     * $query->filterByStatus(array(12, 34)); // WHERE status IN (12, 34)
+     * $query->filterByStatus(array('min' => 12)); // WHERE status >= 12
+     * $query->filterByStatus(array('max' => 12)); // WHERE status <= 12
+     * </code>
+     *
+     * @param     mixed $status The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return QbcSciManualCloseQuery The current query, for fluid interface
+     */
+    public function filterByStatus($status = null, $comparison = null)
+    {
+        if (is_array($status)) {
+            $useMinMax = false;
+            if (isset($status['min'])) {
+                $this->addUsingAlias(QbcSciManualClosePeer::STATUS, $status['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($status['max'])) {
+                $this->addUsingAlias(QbcSciManualClosePeer::STATUS, $status['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(QbcSciManualClosePeer::STATUS, $status, $comparison);
     }
 
     /**

@@ -62,6 +62,13 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
     protected $date_sap;
 
     /**
+     * The value for the status field.
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $status;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -91,6 +98,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
     {
         $this->campaign_id = 0;
         $this->value_sap = 0;
+        $this->status = 0;
     }
 
     /**
@@ -185,6 +193,17 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
 
         return $dt->format($format);
 
+    }
+
+    /**
+     * Get the [status] column value.
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+
+        return $this->status;
     }
 
     /**
@@ -295,6 +314,27 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
     } // setDateSap()
 
     /**
+     * Set the value of [status] column.
+     *
+     * @param  int $v new value
+     * @return QbcSciManualClose The current object (for fluent API support)
+     */
+    public function setStatus($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->status !== $v) {
+            $this->status = $v;
+            $this->modifiedColumns[] = QbcSciManualClosePeer::STATUS;
+        }
+
+
+        return $this;
+    } // setStatus()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -309,6 +349,10 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             }
 
             if ($this->value_sap !== 0) {
+                return false;
+            }
+
+            if ($this->status !== 0) {
                 return false;
             }
 
@@ -339,6 +383,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             $this->value_sap = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
             $this->doc_sap = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
             $this->date_sap = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->status = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -348,7 +393,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = QbcSciManualClosePeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = QbcSciManualClosePeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating QbcSciManualClose object", $e);
@@ -575,6 +620,9 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
         if ($this->isColumnModified(QbcSciManualClosePeer::DATE_SAP)) {
             $modifiedColumns[':p' . $index++]  = 'date_sap';
         }
+        if ($this->isColumnModified(QbcSciManualClosePeer::STATUS)) {
+            $modifiedColumns[':p' . $index++]  = 'status';
+        }
 
         $sql = sprintf(
             'INSERT INTO qbc_sci_manual_close (%s) VALUES (%s)',
@@ -600,6 +648,9 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
                         break;
                     case 'date_sap':
                         $stmt->bindValue($identifier, $this->date_sap, PDO::PARAM_STR);
+                        break;
+                    case 'status':
+                        $stmt->bindValue($identifier, $this->status, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -750,6 +801,9 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             case 4:
                 return $this->getDateSap();
                 break;
+            case 5:
+                return $this->getStatus();
+                break;
             default:
                 return null;
                 break;
@@ -783,6 +837,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             $keys[2] => $this->getValueSap(),
             $keys[3] => $this->getDocSap(),
             $keys[4] => $this->getDateSap(),
+            $keys[5] => $this->getStatus(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -838,6 +893,9 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
             case 4:
                 $this->setDateSap($value);
                 break;
+            case 5:
+                $this->setStatus($value);
+                break;
         } // switch()
     }
 
@@ -867,6 +925,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
         if (array_key_exists($keys[2], $arr)) $this->setValueSap($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setDocSap($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setDateSap($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setStatus($arr[$keys[5]]);
     }
 
     /**
@@ -883,6 +942,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
         if ($this->isColumnModified(QbcSciManualClosePeer::VALUE_SAP)) $criteria->add(QbcSciManualClosePeer::VALUE_SAP, $this->value_sap);
         if ($this->isColumnModified(QbcSciManualClosePeer::DOC_SAP)) $criteria->add(QbcSciManualClosePeer::DOC_SAP, $this->doc_sap);
         if ($this->isColumnModified(QbcSciManualClosePeer::DATE_SAP)) $criteria->add(QbcSciManualClosePeer::DATE_SAP, $this->date_sap);
+        if ($this->isColumnModified(QbcSciManualClosePeer::STATUS)) $criteria->add(QbcSciManualClosePeer::STATUS, $this->status);
 
         return $criteria;
     }
@@ -950,6 +1010,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
         $copyObj->setValueSap($this->getValueSap());
         $copyObj->setDocSap($this->getDocSap());
         $copyObj->setDateSap($this->getDateSap());
+        $copyObj->setStatus($this->getStatus());
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setId(NULL); // this is a auto-increment column, so set to default value
@@ -1006,6 +1067,7 @@ abstract class BaseQbcSciManualClose extends BaseObject implements Persistent
         $this->value_sap = null;
         $this->doc_sap = null;
         $this->date_sap = null;
+        $this->status = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
