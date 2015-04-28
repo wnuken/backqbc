@@ -99,6 +99,9 @@ class Views {
     }
 
     static public function cierreoferta(){
+        $Querys = new Querys();
+        $params['status'] = 0;
+        $result = $Querys->QbcSciManualCloseQueryByCampaigns($params);        
         include './views/cierreoferta.php';
     }
 

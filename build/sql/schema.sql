@@ -1633,5 +1633,23 @@ CREATE TABLE admin_role
     INDEX IDX_ADMIN_ROLE_TREE_LEVEL (tree_level)
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- qbc_sci_manual_close
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS qbc_sci_manual_close;
+
+CREATE TABLE qbc_sci_manual_close
+(
+    id int(11) unsigned NOT NULL AUTO_INCREMENT,
+    campaign_id int(11) unsigned DEFAULT 0 NOT NULL,
+    value_sap int(11) unsigned DEFAULT 0 NOT NULL,
+    doc_sap VARCHAR(50),
+    date_sap DATETIME,
+    PRIMARY KEY (id),
+    INDEX IDX_CAMPAIGN_ID (campaign_id),
+    INDEX IDX_DOC_SAP (doc_sap)
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

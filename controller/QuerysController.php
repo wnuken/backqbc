@@ -339,4 +339,35 @@ class Querys {
         }
         return $result;
     }
+    
+    public function QbcSciManualCloseQueryByCampaignId($params){
+        $where = 'status = ' . $params['status'];
+        try{           
+            $result = QbcSciManualCloseQuery::create()->where($where)->findByCampaignId($params['id']);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+    
+    public function QbcSciManualCloseQueryByCampaigns($params){
+        $where = 'status = ' . $params['status'] . ' group by campaign_id';
+        try{           
+            $result = QbcSciManualCloseQuery::create()->where($where)->find();
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+    
 }

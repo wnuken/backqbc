@@ -508,13 +508,10 @@ class General {
         $GroupdealsParams['id'] = trim($params['campaing_id']);
         $Querys = new Querys();
 
-        //$GroupdealsQuery = $this->GroupdealsQueryById($GroupdealsParams);
-
         $GroupdealsQuery   = $Querys->GroupdealsById($GroupdealsParams);
 
         $MerchantParams['id'] = $GroupdealsQuery->getMerchantId();
 
-        //$GroupdealsMerchantsQuery = $this->GroupdealsMerchantsQueryById($MerchantParams);
         $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($MerchantParams);
 
         $CouponsRedeemed = $this->getCouponsRedeemed($GroupdealsParams);
@@ -1280,10 +1277,69 @@ class General {
 
     }
 
-    // ********* GENERAR CIERRE OFERTA DB **********
+    // ********* GENERAR CIERRE OFERTA COMPESAR **********
 
     public function & ClosureOffer(&$params){
-        return $params;
+
+        $wsResult = array();
+        $peticionDTO = array();
+        $PeticionId = md5(strtotime('now') . $params['campaing_id']);
+        $PeticionId = substr($PeticionId, 0, -8);
+        $totalNeto = 0;
+        $Querys = new Querys();
+        $paramclose['id'] = $params['campaing_id'];
+        $paramclose['status'] = $params['status'];
+        $QbcSciManualCloseQuery = $Querys->QbcSciManualCloseQueryByCampaignId($paramclose);
+        foreach($QbcSciManualCloseQuery as $key => $Closure){
+            $peticionDTO['peticionDTO']['Ventas'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
+            $peticionDTO['peticionDTO']['Ventas'][$key]['Numero'] = $Closure->getDocSap();
+            $peticionDTO['peticionDTO']['Ventas'][$key]['Posicion'] = "000001";
+            $peticionDTO['peticionDTO']['Ventas'][$key]['Valor'] = $Closure->getValueSap();
+            $totalNeto = $totalNeto + $Closure->getValueSap();
+        }
+
+        $GroupdealQuery = $Querys->GroupdealsById($paramclose);
+        $paramsMerchan['id'] = $GroupdealQuery->getMerchantId();
+        $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchan);
+        $peticionDTO['peticionDTO']['Campana']['CampanaId'] = $params['campaing_id'];
+        $peticionDTO['peticionDTO']['Campana']['Detalle'] = utf8_encode($GroupdealQuery->getTitleMidium());
+        $peticionDTO['peticionDTO']['Campana']['Nombre'] = utf8_encode($GroupdealQuery->getTitleShort());
+        $peticionDTO['peticionDTO']['Contexto']['Aplicacion'] = 'CQBC';
+        $peticionDTO['peticionDTO']['Contexto']['PeticionId'] = $PeticionId;
+        $peticionDTO['peticionDTO']['Contexto']['Usuario'] = 'INGQBC';
+
+        $peticionDTO['peticionDTO']['Fecha'] = date("Y-m-d");
+        $peticionDTO['peticionDTO']['NitAliado'] = $GroupdealsMerchantsQuery->getNitNumber();
+        $peticionDTO['peticionDTO']['NombreAliado'] = $GroupdealsMerchantsQuery->getLegalName();
+        $peticionDTO['peticionDTO']['Valor'] = $totalNeto;
+
+        if($params['send'] == 1 && isset($peticionDTO['peticionDTO']['Ventas'][0])){
+            try {
+                $client = new SoapClient($this->webService, $this->options);
+            } catch (Exception $e) {
+                $wsResult['error'] = $this->exception .  $e->getMessage() . "\n";
+            }
+            $webService = $client->CierreOfertas($peticionDTO);
+            $wsResult['wsResult'] = $webService->CierreOfertasResult;
+            foreach($QbcSciManualCloseQuery as $key => $Closure){
+                $Closure->setStatus(1);
+                $Closure->save();
+            }
+            
+            $salesDocuments = json_encode($peticionDTO['peticionDTO']['Ventas']);
+            $OfferClosure = new QbcSciOfferClosure();
+            $OfferClosure->setPetitionId($PeticionId);
+            $OfferClosure->setMerchantId($paramsMerchan['id']);
+            $OfferClosure->setCampaignId($params['campaing_id']);
+            $OfferClosure->setSalesDocuments($salesDocuments);
+            $OfferClosure->setDevolutionDocuments('');
+            $OfferClosure->save();
+            
+        }
+
+        $wsResult['peticionDTO'] = $peticionDTO['peticionDTO'];
+
+        return $wsResult;
     }
 
     public function & ListClosure(&$params){

@@ -1485,5 +1485,23 @@
             <parameter name="Engine" value="InnoDB"/>
         </vendor>
     </table>
+    
+    <table name="qbc_sci_manual_close" phpName="QbcSciManualClose" idMethod="native">
+        <column name="id" phpName="Id" type="INTEGER" size="11" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="campaign_id" phpName="CampaignId" type="INTEGER" size="11" sqlType="int(11) unsigned" required="true" defaultValue="0"/>
+        <column name="value_sap" phpName="ValueSap" type="INTEGER" size="11" sqlType="int(11) unsigned" required="true" defaultValue="0"/>
+        <column name="doc_sap" phpName="DocSap" type="VARCHAR" size="50" required="false"/>
+        <column name="date_sap" phpName="DateSap" type="TIMESTAMP" required="false"/>
+        <column name="status" phpName="Status" type="INTEGER" size="11" sqlType="int(11) unsigned" required="true" defaultValue="0"/>
+        <index name="IDX_CAMPAIGN_ID">
+            <index-column name="campaign_id"/>
+        </index>
+        <index name="IDX_DOC_SAP">
+            <index-column name="doc_sap"/>
+        </index>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
 
 </database>

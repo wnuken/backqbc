@@ -9,11 +9,18 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="exampleInputEmail1">ID Campaña</label>
-                            <input type="text" class="form-control" id="campaing_id" placeholder="Id Campaña">
+                            <select class="selectpicker" name="campaing_id" id="campaing_id">
+                                <?php 
+foreach($result as $ofer){
+    print "<option value='".$ofer->getCampaignId()."'>" .$ofer->getCampaignId() . "</option>";
+}
+                                ?>
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Porcentaje Campaña</label>
-                            <input type="text" class="form-control" id="campaing_tax" placeholder="Porcentaje Campaña" value="16">
+                            <input type="text" class="form-control" id="campaing_tax" name="campaing_tax" placeholder="Porcentaje Campaña" value="16">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Enviar al Mediador</label>
@@ -25,6 +32,7 @@
                             <label class="btn btn-primary">
                                 <input type="radio" name="send" id="send2" autocomplete="off" value="1"> Enviar
                             </label>
+                            <input type="hidden" id="status" name="status" value="0">
                         </div>
                         <div class="btn-group pull-right">
                             <button class="btn btn-danger" id="submit" type="submit">Procesar</button>
