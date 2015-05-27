@@ -1310,7 +1310,7 @@ class General {
 
         $peticionDTO['peticionDTO']['Fecha'] = date("Y-m-d");
         $peticionDTO['peticionDTO']['NitAliado'] = $GroupdealsMerchantsQuery->getNitNumber();
-        $peticionDTO['peticionDTO']['NombreAliado'] = $GroupdealsMerchantsQuery->getLegalName();
+        $peticionDTO['peticionDTO']['NombreAliado'] = utf8_encode($GroupdealsMerchantsQuery->getLegalName());
         $peticionDTO['peticionDTO']['Valor'] = $totalNeto;
 
         if($params['send'] == 1 && isset($peticionDTO['peticionDTO']['Ventas'][0])){
