@@ -69,7 +69,7 @@ print '</pre>';*/
                         <h4>Master</h4>
                         <ul class="list-group">
                             <?php if($mysqliConectionMaster !== false){ ?>
-                            <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', $mysqliConectionMaster->server_info); ?></li>
+                            <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', substr($mysqliConectionMaster->server_info, 0, 6)); ?></li>
                             <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliConectionMaster->client_info); ?></li>
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionMaster)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionMaster->sqlstate); ?></li>
@@ -92,7 +92,7 @@ print '</pre>';*/
                         <h4>Slave</h4>
                         <ul class="list-group">
                             <?php if($mysqliConectionSlave !== false){ ?>
-                            <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', $mysqliConectionSlave->server_info); ?></li>
+                            <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', substr($mysqliConectionSlave->server_info, 0, 6)); ?></li>
                             <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliConectionSlave->client_info); ?></li>
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionSlave)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionSlave->sqlstate); ?></li>
