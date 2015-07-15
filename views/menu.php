@@ -17,26 +17,41 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">Back QBC</a>
+            <a href="#" class="navbar-brand"><img src="./img/logo-qbc.png"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="menunav">
                 <li class="active"><a href="./"><i class="glyphicon glyphicon-th"></i> Dashboard</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
-                        <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span>
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Menu <span class="caret"></span>
                     </a>
                     <ul role="menu" class="dropdown-menu">
+                        <li class="dropdown-header">Ventas</li>
                         <li><a href="./ventas-fallidas"><i class="glyphicon glyphicon-random"></i> Reenviar ventas fallidas</a></li>
                         <li><a href="./ventas-descuento"><i class="glyphicon glyphicon-gift"></i> Ventas con descuento</a></li>
                         <li><a href="./ventas-xml"><i class="glyphicon glyphicon-align-justify"></i> Edición XML</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Otras opciones</li>
-                        <li><a href="./ventas-revertir"><i class="glyphicon glyphicon-resize-small"></i> Revertir Ventas Fallidas</a></li>
                         <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li>
+                        <li><a href="./ventas-revertir"><i class="glyphicon glyphicon-resize-small"></i> Revertir Ventas Fallidas</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Devoluciones</li>
+                        
+                        <li><a href="./devoluciones-xml"><i class="glyphicon glyphicon-align-justify"></i> Edición XML</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Pago Aliado</li>
+                        <li><a href="./aliados-revision"><i class="glyphicon glyphicon-list"></i> Revisión de campaña</a></li>
+                        <li><a href="./aliados-enviarpago"><i class="glyphicon glyphicon-briefcase"></i> Enviar petición</a></li>
+                        <li><a href="./deletepay"><i class="glyphicon glyphicon-trash"></i> Elimiar petición</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Cierre ofertas</li>
+                        <li><a href="./cierre-oferta"><i class="glyphicon glyphicon-folder-close"></i> Enviar Cierre </a></li>
+                        <li><a href="./cierre-compensacion"><i class="glyphicon glyphicon-adjust"></i> Compensación </a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">NewsLetter</li>
+                        <li><a href="./newsletter"><i class="glyphicon glyphicon-envelope"></i> Newsletter </a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <!--li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="./aliados">
                         <i class="glyphicon glyphicon-shopping-cart"></i> Devoluciones <span class="caret"></span>
                     </a>
@@ -67,7 +82,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="./newsletter"><i class="glyphicon glyphicon-envelope"></i> Newsletter </a></li>
                     </ul>
-                </li>
+                </li-->
                 <!--li class="dropdown">
 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 <i class="glyphicon glyphicon-folder-close"></i> Pancartas NewsLetter <span class="caret"></span>
@@ -81,7 +96,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
 </li>
 <li><a href="#contact">Contactos</a></li-->
                 <li class="dropdown" style="float:rigth;">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><?php print $user; ?> <span class="caret"></span></a>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="glyphicon glyphicon-user"></i> <?php print $user; ?> <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li><a href="#">Perfil</a></li>
                         <li><a href="#">Acciones</a></li>

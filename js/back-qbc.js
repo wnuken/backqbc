@@ -189,12 +189,58 @@ $('div#datepicker').datepicker({
 }).on('changeDate', function(e){
     var $that = $('div#datepicker input');
     var date = $that.val();
-    console.log(date);
     var $formnewsloe1 = $('form#newsloe1');
     $('input#fecha', $formnewsloe1).val(date);
 
 });
 
+$('div#getidpetition button').on('click', function(){
+        var $that = $(this);
+        $that.button('loading');
+      $.ajax({
+        type: "POST",
+        url: 'id-peticion',
+        dataType: 'html',
+        data: '',
+        async: true,
+        success: function(response) {
+            $('span#newpetition').html(response);
+            $that.button('reset');
+        },
+        error: function() {
+            var message = "Rayos parece que no puedo traer datos";
+            $('span#newpetition').html(message);
+            $that.button('reset');
+        }
+    });
+});
+
+$('div#datepickerHome').datepicker({
+    language: "es",
+    autoclose: true,
+    todayHighlight: true,
+    format: "yyyy-mm-dd",
+    todayBtn: "linked"
+}).on('changeDate', function(e){
+    var $that = $('div#datepickerHome input');
+    var valueDate = $that.val();
+    var data = {date:valueDate};
+    $.ajax({
+        type: "POST",
+        url: 'total-ventas',
+        dataType: 'html',
+        data: data,
+        async: true,
+        success: function(response) {
+            $('div#sellbydate').html(response);
+        },
+        error: function() {
+            var message = "Rayos parece que no puedo traer datos";
+            $('div#sellbydate').html(message);
+        }
+    });
+
+});
 
 
 

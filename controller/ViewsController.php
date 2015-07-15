@@ -7,7 +7,61 @@
 
 class Views {
     static public function home(){
-        include './views/home.php';
+
+        $Settings = new Settings();
+
+        if($_SESSION["k_rol"] == 1){
+            $paramsMaster  = array(
+                'server' => SERVER_DB_QBC_MASTER,
+                'user' => USER_DB_QBC_MASTER,
+                'password' => PASS_DB_QBC_MASTER,
+                'database' => DB_QBC_MASTER
+                );
+
+            $paramsSlave  = array(
+                'server' => SERVER_DB_QBC_MASTER,
+                'user' => USER_DB_QBC_MASTER,
+                'password' => PASS_DB_QBC_MASTER,
+                'database' => DB_QBC_MASTER
+                );
+
+
+            $mysqliConectionMaster = $Settings->mysqliConection($paramsMaster);
+            $mysqliConectionSlave = $Settings->mysqliConection($paramsSlave);
+
+            $ProcessMaster = $Settings->processList($mysqliConectionMaster);           
+            $ProcessSlave = $Settings->processList($mysqliConectionSlave);
+
+            $MasterStatus = $Settings->showMasterStatus($mysqliConectionMaster);
+            $SlaveStatus = $Settings->showSlaveStatus($mysqliConectionSlave);
+
+            $TotalSell = $Settings->showTotalSell(date('Y-m-d'));
+
+            $idPetition = $Settings->getIdPeticion();
+     
+            include './views/home.php';
+
+            $mysqliConectionMaster->close();
+            $mysqliConectionSlave->close();
+
+        }else{
+            include './views/home-1.php';
+        }
+
+        
+    }
+
+    static public function idPetition(){
+        $Settings = new Settings();
+        $result = $Settings->getIdPeticion();
+        print($result);
+    }
+
+    static public function TotalVentas(){
+        $Settings = new Settings();
+        $params = $_REQUEST['date'];
+        $result = $Settings->showTotalSell($params);
+        print($result);
     }
 
     /*static public function ventas(){
