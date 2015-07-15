@@ -19,10 +19,10 @@ class Views {
                 );
 
             $paramsSlave  = array(
-                'server' => SERVER_DB_QBC_MASTER,
-                'user' => USER_DB_QBC_MASTER,
-                'password' => PASS_DB_QBC_MASTER,
-                'database' => DB_QBC_MASTER
+                'server' => SERVER_DB_QBC_SLAVE,
+                'user' => USER_DB_QBC_SLAVE,
+                'password' => PASS_DB_QBC_SLAVE,
+                'database' => DB_QBC_SLAVE
                 );
 
 
