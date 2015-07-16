@@ -17,7 +17,7 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand navbar-brand-qbc"><img src="./img/logo-qbc.png"></a>
+            <a href="./" class="navbar-brand navbar-brand-qbc"><img src="./img/logo-qbc.png"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav" id="menunav">

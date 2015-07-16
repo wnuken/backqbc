@@ -64,6 +64,10 @@ class Views {
         print($result);
     }
 
+    static public function Sells(){
+        include './views/sells/index.php';
+    }
+
     /*static public function ventas(){
 		include './views/ventas.php';
 	}*/

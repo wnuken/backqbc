@@ -47,7 +47,7 @@ print '</pre>';*/
                 </div>
                 <div class="panel-body">
                     <div id="getidpetition">
-                        <button type="button" class="btn btn-info btn-xs" role="button"  data-loading-text="<i class='glyphicon glyphicon-refresh'></i>">
+                        <button type="button" class="btn btn-qbc btn-xs" role="button"  data-loading-text="<i class='glyphicon glyphicon-refresh'></i>">
                             <i class="glyphicon glyphicon-random"></i>
                         </button>
                         <span id="newpetition"><?php if(isset($idPetition)) print $idPetition; ?></span>
@@ -73,14 +73,14 @@ print '</pre>';*/
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionMaster)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionMaster->sqlstate); ?></li>
                             <li class="list-group-item">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#detailProcessMaster"> Detalle</button>
+                                <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailProcessMaster"> Detalle</button>
                                 Procesos:
                                 <span class="badge"><?php if(isset($ProcessMaster['numberProcess'])) print $ProcessMaster['numberProcess']; ?></span>
                             </li>
                             <li class="list-group-item">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#detailMasterStatus"> Detalle</button>
+                                <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailMasterStatus"> Detalle</button>
                                 Master Status:
-                                <span class="badge">File: <?php if(isset($ProcessMaster[0]['File'])) print $ProcessMaster[0]['File']; ?></span>
+                                <span class="badge">File: <?php if(isset($MasterStatus[0]['File'])) print $MasterStatus[0]['File']; ?></span>
                             </li>
                             <?php }else{ ?>
                             <li class="list-group-item"><?php print('No se puede obtener información del servidor'); ?></li>
@@ -96,12 +96,12 @@ print '</pre>';*/
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionSlave)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionSlave->sqlstate); ?></li>
                             <li class="list-group-item">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#detailProcessSlave"> Detalle</button>
+                                <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailProcessSlave"> Detalle</button>
                                 Procesos:
                                 <span class="badge"><?php if(isset($ProcessSlave['numberProcess'])) print $ProcessSlave['numberProcess']; ?></span>
                             </li>
                             <li class="list-group-item">
-                                <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#detailSlaveStatus"> Detalle</button>
+                                <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailSlaveStatus"> Detalle</button>
                                 Slave Status:
                                 <span class="badge"><?php if(isset($SlaveStatus[0]['Master_Log_File'])) print $SlaveStatus[0]['Master_Log_File']; ?></span>
                                 <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_IO_Running'])) print $SlaveStatus[0]['Slave_IO_Running']; ?></span>
@@ -128,12 +128,12 @@ print '</pre>';*/
                     <input type="text" value="<?php print date('Y-m-d') ?>" class="form-control" id="date" name="date">
 
                     <div class="input-group-btn">
-            <button class="btn btn-info" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
+            <button class="btn btn-qbc" type="button"><i class="glyphicon glyphicon-calendar"></i></button>
             
           </div>
 
 
-                    <!--span class="input-group-addon btn btn-info"><i class="glyphicon glyphicon-th"></i></span-->
+                    <!--span class="input-group-addon btn btn-qbc"><i class="glyphicon glyphicon-th"></i></span-->
                 </div>
                 <div id="sellbydate">
                     <?php 
@@ -195,7 +195,7 @@ print '</pre>';*/
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-qbc" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -228,7 +228,7 @@ print '</pre>';*/
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-qbc" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -276,7 +276,7 @@ print '</pre>';*/
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-qbc" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -309,7 +309,7 @@ print '</pre>';*/
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-qbc" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

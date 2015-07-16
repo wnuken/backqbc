@@ -61,3 +61,26 @@ body {
 .navbar-brand-qbc{
 	margin-top: -7px;
 }
+
+.btn-qbc {
+    background-image: linear-gradient(to bottom, #e62100 0px, #e6452a 100%);
+    background-repeat: repeat-x;
+    background-color: #e62100;
+    border-color: #e62100;
+    color: #fff;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 1px rgba(0, 0, 0, 0.075);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-qbc:hover, .btn-qbc:focus {
+    background-color: #e62100;
+    background-position: 0 -15px;
+}
+
+.btn-qbc:hover, .btn-qbc:focus, .btn-qbc:active, .btn-qbc.active, .open > .dropdown-toggle.btn-qbc {
+    background-color: #e6452a;
+    border-color: #ccc;
+    color: #fff;
+}
+
+
