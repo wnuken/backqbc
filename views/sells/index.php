@@ -7,7 +7,7 @@
 				</div>
 				<div class="panel-body">
 					<ul class="nav menu-qbc">
-						<li><a href="./ventas"><i class="glyphicon glyphicon-log-out"></i> Ventas</a></li>
+						<li class="bg-success"><a href="./ventas"><i class="glyphicon glyphicon-log-out"></i> Ventas</a></li>
 						<li><a href="./devoluciones"><i class="glyphicon glyphicon-log-in"></i> Devoluciones</a></li>
 						<li><a href="./aliados"><i class="glyphicon glyphicon-briefcase"></i> Aliados</a></li>
 						<li><a href="./creditos"><i class="glyphicon glyphicon-edit"></i> Créditos</a></li>

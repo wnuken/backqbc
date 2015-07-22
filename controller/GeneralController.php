@@ -9,7 +9,7 @@ class General {
     var $webService = QBC_SOAP_SERVER;
     var $options = array(
         'cache_wsdl'=> WSDL_CACHE_NONE
-    );
+        );
 
     public function sell($params){
 
@@ -163,326 +163,326 @@ class General {
             /* 
 		* gen: InfoPedido
 		*/
-            $InfoPedido = $xml->createElement('ns1:InfoPedido');
-            $InfoPedido = $xml->appendChild($InfoPedido);
+        $InfoPedido = $xml->createElement('ns1:InfoPedido');
+        $InfoPedido = $xml->appendChild($InfoPedido);
 
             /* 
 		* var: InfoGeneral
 		*/
-            $InfoGeneral = $xml->createElement('ns1:InfoGeneral');
-            $InfoGeneral = $InfoPedido->appendChild($InfoGeneral);
+        $InfoGeneral = $xml->createElement('ns1:InfoGeneral');
+        $InfoGeneral = $InfoPedido->appendChild($InfoGeneral);
 
-            $InfoGeneral->setAttribute("NumeroPedido", $NumeroPedido);
-            $InfoGeneral->setAttribute("CodigoOrden", $NumeroPedido);
-            $InfoGeneral->setAttribute("Canal", "11");
-            $InfoGeneral->setAttribute("FechaPedido", $FechaPedido);
-            $InfoGeneral->setAttribute("EstadoPedido", "1");
-            $InfoGeneral->setAttribute("TipoPedido", $TipoPedido);
-            $InfoGeneral->setAttribute("Observaciones", "IP");
-            $InfoGeneral->setAttribute("Cadena", "1");
-            $InfoGeneral->setAttribute("Extra1", "");
-            $InfoGeneral->setAttribute("Extra2", "");
-            $InfoGeneral->setAttribute("Extra3", "");
+        $InfoGeneral->setAttribute("NumeroPedido", $NumeroPedido);
+        $InfoGeneral->setAttribute("CodigoOrden", $NumeroPedido);
+        $InfoGeneral->setAttribute("Canal", "11");
+        $InfoGeneral->setAttribute("FechaPedido", $FechaPedido);
+        $InfoGeneral->setAttribute("EstadoPedido", "1");
+        $InfoGeneral->setAttribute("TipoPedido", $TipoPedido);
+        $InfoGeneral->setAttribute("Observaciones", "IP");
+        $InfoGeneral->setAttribute("Cadena", "1");
+        $InfoGeneral->setAttribute("Extra1", "");
+        $InfoGeneral->setAttribute("Extra2", "");
+        $InfoGeneral->setAttribute("Extra3", "");
 
             /* 
 		* var: InfoCliente
 		*/
-            $InfoCliente = $xml->createElement('ns1:InfoCliente');
-            $InfoCliente = $InfoPedido->appendChild($InfoCliente);
+        $InfoCliente = $xml->createElement('ns1:InfoCliente');
+        $InfoCliente = $InfoPedido->appendChild($InfoCliente);
 
-            $InfoCliente->setAttribute("Nombres", $Nombres);
-            $InfoCliente->setAttribute("Email", $Email);
-            $InfoCliente->setAttribute("Cedula", $Cedula);
-            $InfoCliente->setAttribute("Sexo", $Sexo);
-            $InfoCliente->setAttribute("Direccion", "dirección de envio, Soacha");
-            $InfoCliente->setAttribute("Telefono", "3114654662");
-            $InfoCliente->setAttribute("Ciudad", "154");
-            $InfoCliente->setAttribute("Barrio", "-1");
-            $InfoCliente->setAttribute("TarjetaPuntos", "");
-            $InfoCliente->setAttribute("TarjetaEmpleado", "");
-            $InfoCliente->setAttribute("TipoCliente", "");
-            $InfoCliente->setAttribute("Extra1", "");
-            $InfoCliente->setAttribute("Extra2", "");
-            $InfoCliente->setAttribute("Extra3", "");
+        $InfoCliente->setAttribute("Nombres", $Nombres);
+        $InfoCliente->setAttribute("Email", $Email);
+        $InfoCliente->setAttribute("Cedula", $Cedula);
+        $InfoCliente->setAttribute("Sexo", $Sexo);
+        $InfoCliente->setAttribute("Direccion", "dirección de envio, Soacha");
+        $InfoCliente->setAttribute("Telefono", "3114654662");
+        $InfoCliente->setAttribute("Ciudad", "154");
+        $InfoCliente->setAttribute("Barrio", "-1");
+        $InfoCliente->setAttribute("TarjetaPuntos", "");
+        $InfoCliente->setAttribute("TarjetaEmpleado", "");
+        $InfoCliente->setAttribute("TipoCliente", "");
+        $InfoCliente->setAttribute("Extra1", "");
+        $InfoCliente->setAttribute("Extra2", "");
+        $InfoCliente->setAttribute("Extra3", "");
 
             /* 
 		* var: InfoContacto
 		*/
-            $InfoContacto = $xml->createElement('ns1:InfoContacto');
-            $InfoContacto = $InfoPedido->appendChild($InfoContacto);
+        $InfoContacto = $xml->createElement('ns1:InfoContacto');
+        $InfoContacto = $InfoPedido->appendChild($InfoContacto);
 
-            $InfoContacto->setAttribute("Login:", $Email);
-            $InfoContacto->setAttribute("Nombre", $Nombres);
-            $InfoContacto->setAttribute("NumeroTelefonico", "3114654662");
-            $InfoContacto->setAttribute("Email", $Email);
-            $InfoContacto->setAttribute("Direccion", "dirección de envio, Soacha");
-            $InfoContacto->setAttribute("Telefono", "3114654662");
-            $InfoContacto->setAttribute("Ciudad", "154");
-            $InfoContacto->setAttribute("Extra1", "");
-            $InfoContacto->setAttribute("Extra2", "");
-            $InfoContacto->setAttribute("Extra3", "");
+        $InfoContacto->setAttribute("Login:", $Email);
+        $InfoContacto->setAttribute("Nombre", $Nombres);
+        $InfoContacto->setAttribute("NumeroTelefonico", "3114654662");
+        $InfoContacto->setAttribute("Email", $Email);
+        $InfoContacto->setAttribute("Direccion", "dirección de envio, Soacha");
+        $InfoContacto->setAttribute("Telefono", "3114654662");
+        $InfoContacto->setAttribute("Ciudad", "154");
+        $InfoContacto->setAttribute("Extra1", "");
+        $InfoContacto->setAttribute("Extra2", "");
+        $InfoContacto->setAttribute("Extra3", "");
 
 
             /* 
 		* var: InfoMediosPago
 		*/
-            $InfoMediosPago = $xml->createElement('ns1:InfoMediosPago');
-            $InfoMediosPago = $InfoPedido->appendChild($InfoMediosPago);
+        $InfoMediosPago = $xml->createElement('ns1:InfoMediosPago');
+        $InfoMediosPago = $InfoPedido->appendChild($InfoMediosPago);
 
-            $InfoMediosPago->setAttribute("TipoMedioPago:", $TipoMedioPago);
-            $InfoMediosPago->setAttribute("NombreMedioPago", $NombreMedioPago);
-            $InfoMediosPago->setAttribute("Banco", $Banco);
-            $InfoMediosPago->setAttribute("Cuotas", "");
-            $InfoMediosPago->setAttribute("NumeroTarjeta", $NumeroTarjeta);
-            $InfoMediosPago->setAttribute("Extra1", "");
-            $InfoMediosPago->setAttribute("Extra2", "");
-            $InfoMediosPago->setAttribute("Extra3", "");
+        $InfoMediosPago->setAttribute("TipoMedioPago:", $TipoMedioPago);
+        $InfoMediosPago->setAttribute("NombreMedioPago", $NombreMedioPago);
+        $InfoMediosPago->setAttribute("Banco", $Banco);
+        $InfoMediosPago->setAttribute("Cuotas", "");
+        $InfoMediosPago->setAttribute("NumeroTarjeta", $NumeroTarjeta);
+        $InfoMediosPago->setAttribute("Extra1", "");
+        $InfoMediosPago->setAttribute("Extra2", "");
+        $InfoMediosPago->setAttribute("Extra3", "");
 
             /* 
 		* var: InfoComprador
 		*/
-            $InfoComprador = $xml->createElement('ns1:InfoComprador');
-            $InfoComprador = $InfoPedido->appendChild($InfoComprador);
+        $InfoComprador = $xml->createElement('ns1:InfoComprador');
+        $InfoComprador = $InfoPedido->appendChild($InfoComprador);
 
-            $InfoComprador->setAttribute("Nombres:", $Nombres);
-            $InfoComprador->setAttribute("Cedula", $Cedula);
-            $InfoComprador->setAttribute("Direccion", "dirección de envio, Soacha");
-            $InfoComprador->setAttribute("Telefono", "3114654662");
-            $InfoComprador->setAttribute("Ciudad", "-1");
-            $InfoComprador->setAttribute("Extra1", "");
-            $InfoComprador->setAttribute("Extra2", "");
-            $InfoComprador->setAttribute("Extra3", "");
+        $InfoComprador->setAttribute("Nombres:", $Nombres);
+        $InfoComprador->setAttribute("Cedula", $Cedula);
+        $InfoComprador->setAttribute("Direccion", "dirección de envio, Soacha");
+        $InfoComprador->setAttribute("Telefono", "3114654662");
+        $InfoComprador->setAttribute("Ciudad", "-1");
+        $InfoComprador->setAttribute("Extra1", "");
+        $InfoComprador->setAttribute("Extra2", "");
+        $InfoComprador->setAttribute("Extra3", "");
 
             /* 
 		* gen: DetallePedido
 		*/
-            $DetallePedido = $xml->createElement('ns1:DetallePedido');
-            $DetallePedido = $xml->appendChild($DetallePedido);
+        $DetallePedido = $xml->createElement('ns1:DetallePedido');
+        $DetallePedido = $xml->appendChild($DetallePedido);
 
             /* 
 		* var: Tienda
 		*/
-            $Tienda = $xml->createElement('ns1:Tienda');
-            $Tienda = $DetallePedido->appendChild($Tienda);
+        $Tienda = $xml->createElement('ns1:Tienda');
+        $Tienda = $DetallePedido->appendChild($Tienda);
 
             /* 
 		* var: InfoProducto
 		*/
-            $InfoProducto = $xml->createElement('ns1:InfoProducto');
-            $InfoProducto = $Tienda->appendChild($InfoProducto);
+        $InfoProducto = $xml->createElement('ns1:InfoProducto');
+        $InfoProducto = $Tienda->appendChild($InfoProducto);
 
-            $InfoProducto->setAttribute("IDProducto", $IDProducto);
-            $InfoProducto->setAttribute("PLU", $PLU);
-            $InfoProducto->setAttribute("Cantidad", "1");
-            $InfoProducto->setAttribute("Nombre", "Audifono stereo maxell boton");
-            $InfoProducto->setAttribute("ValorVenta", "5900");
-            $InfoProducto->setAttribute("DctoProducto", "0");
-            $InfoProducto->setAttribute("Iva", "16");
-            $InfoProducto->setAttribute("Iniciativa", "Tecnología|Audífonos");
-            $InfoProducto->setAttribute("IniciativaSinco", "0");
-            $InfoProducto->setAttribute("Ampliado", "false");
-            $InfoProducto->setAttribute("DctoMedioPago", "0");
-            $InfoProducto->setAttribute("ValorFlete", "0");
-            $InfoProducto->setAttribute("TotalValorVenta", "5900");
-            $InfoProducto->setAttribute("Observaciones", "");
-            $InfoProducto->setAttribute("Presentacion", "UX1");
-            $InfoProducto->setAttribute("Marca", "Maxell");
-            $InfoProducto->setAttribute("SubLinea", "770016000");
-            $InfoProducto->setAttribute("TipoNegociacion", "3");
-            $InfoProducto->setAttribute("EsSuperProducto", "2");
-            $InfoProducto->setAttribute("Despacho", "Estandar");
-            $InfoProducto->setAttribute("Extra1", "");
-            $InfoProducto->setAttribute("Extra2", "");
-            $InfoProducto->setAttribute("Extra3", "");
-            $InfoProducto->setAttribute("Extra4", "");
-            $InfoProducto->setAttribute("Extra5", "");
+        $InfoProducto->setAttribute("IDProducto", $IDProducto);
+        $InfoProducto->setAttribute("PLU", $PLU);
+        $InfoProducto->setAttribute("Cantidad", "1");
+        $InfoProducto->setAttribute("Nombre", "Audifono stereo maxell boton");
+        $InfoProducto->setAttribute("ValorVenta", "5900");
+        $InfoProducto->setAttribute("DctoProducto", "0");
+        $InfoProducto->setAttribute("Iva", "16");
+        $InfoProducto->setAttribute("Iniciativa", "Tecnología|Audífonos");
+        $InfoProducto->setAttribute("IniciativaSinco", "0");
+        $InfoProducto->setAttribute("Ampliado", "false");
+        $InfoProducto->setAttribute("DctoMedioPago", "0");
+        $InfoProducto->setAttribute("ValorFlete", "0");
+        $InfoProducto->setAttribute("TotalValorVenta", "5900");
+        $InfoProducto->setAttribute("Observaciones", "");
+        $InfoProducto->setAttribute("Presentacion", "UX1");
+        $InfoProducto->setAttribute("Marca", "Maxell");
+        $InfoProducto->setAttribute("SubLinea", "770016000");
+        $InfoProducto->setAttribute("TipoNegociacion", "3");
+        $InfoProducto->setAttribute("EsSuperProducto", "2");
+        $InfoProducto->setAttribute("Despacho", "Estandar");
+        $InfoProducto->setAttribute("Extra1", "");
+        $InfoProducto->setAttribute("Extra2", "");
+        $InfoProducto->setAttribute("Extra3", "");
+        $InfoProducto->setAttribute("Extra4", "");
+        $InfoProducto->setAttribute("Extra5", "");
 
             /* 
 		* gen: Totales
 		*/
-            $Totales = $xml->createElement('ns1:Totales');
-            $Totales = $xml->appendChild($Totales);
+        $Totales = $xml->createElement('ns1:Totales');
+        $Totales = $xml->appendChild($Totales);
 
             /* 
 		* var: TotalesSubPedido
 		*/
-            $TotalesSubPedido = $xml->createElement('ns1:TotalesSubPedido');
-            $TotalesSubPedido = $Totales->appendChild($TotalesSubPedido);
+        $TotalesSubPedido = $xml->createElement('ns1:TotalesSubPedido');
+        $TotalesSubPedido = $Totales->appendChild($TotalesSubPedido);
 
-            $TotalesSubPedido->setAttribute("TipoSubPedido", "Tienda");
-            $TotalesSubPedido->setAttribute("TotalDctoMedioPago", "0");
-            $TotalesSubPedido->setAttribute("ValorCompra", "5900");
-            $TotalesSubPedido->setAttribute("TotalCompra", "13900");
-            $TotalesSubPedido->setAttribute("TotalDctoProducto", "0");
-            $TotalesSubPedido->setAttribute("TotalEnvios", "8000");
-            $TotalesSubPedido->setAttribute("ValorCompraInicial", "5900");
-            $TotalesSubPedido->setAttribute("Extra1", "");
-            $TotalesSubPedido->setAttribute("Extra2", "");
-            $TotalesSubPedido->setAttribute("Extra3", "");
+        $TotalesSubPedido->setAttribute("TipoSubPedido", "Tienda");
+        $TotalesSubPedido->setAttribute("TotalDctoMedioPago", "0");
+        $TotalesSubPedido->setAttribute("ValorCompra", "5900");
+        $TotalesSubPedido->setAttribute("TotalCompra", "13900");
+        $TotalesSubPedido->setAttribute("TotalDctoProducto", "0");
+        $TotalesSubPedido->setAttribute("TotalEnvios", "8000");
+        $TotalesSubPedido->setAttribute("ValorCompraInicial", "5900");
+        $TotalesSubPedido->setAttribute("Extra1", "");
+        $TotalesSubPedido->setAttribute("Extra2", "");
+        $TotalesSubPedido->setAttribute("Extra3", "");
 
             /* 
 		* var: TotalesPedido
 		*/
-            $TotalesPedido = $xml->createElement('ns1:TotalesPedido');
-            $TotalesPedido = $Totales->appendChild($TotalesPedido);
+        $TotalesPedido = $xml->createElement('ns1:TotalesPedido');
+        $TotalesPedido = $Totales->appendChild($TotalesPedido);
 
-            $TotalesPedido->setAttribute("ValorCompra", "5900");
-            $TotalesPedido->setAttribute("TotalEnvios", "8000");
-            $TotalesPedido->setAttribute("TotalCompra", "13900");
-            $TotalesPedido->setAttribute("TotalDctoMedioPago", "0");
-            $TotalesPedido->setAttribute("TotalDctoProducto", "0");
-            $TotalesPedido->setAttribute("ValorCompraInicial", "");
-            $TotalesPedido->setAttribute("Extra1", "");
-            $TotalesPedido->setAttribute("Extra2", "");
-            $TotalesPedido->setAttribute("Extra3", "");
+        $TotalesPedido->setAttribute("ValorCompra", "5900");
+        $TotalesPedido->setAttribute("TotalEnvios", "8000");
+        $TotalesPedido->setAttribute("TotalCompra", "13900");
+        $TotalesPedido->setAttribute("TotalDctoMedioPago", "0");
+        $TotalesPedido->setAttribute("TotalDctoProducto", "0");
+        $TotalesPedido->setAttribute("ValorCompraInicial", "");
+        $TotalesPedido->setAttribute("Extra1", "");
+        $TotalesPedido->setAttribute("Extra2", "");
+        $TotalesPedido->setAttribute("Extra3", "");
 
-            $xml->formatOutput = true;
-            $genxml = $xml->saveXML();
-            $genxml = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $genxml);
-            $genxml = htmlentities($genxml);
-            return $genxml;
-
-        }
-
-        return false;
+        $xml->formatOutput = true;
+        $genxml = $xml->saveXML();
+        $genxml = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $genxml);
+        $genxml = htmlentities($genxml);
+        return $genxml;
 
     }
 
-    private function createIdRegister($params){
+    return false;
 
-        try{           
-            $QbcSciSellChangePetition = new QbcSciSellChangePetition();
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+}
 
+private function createIdRegister($params){
 
-
-        try{           
-            $ChangePetitionCount = QbcSciSellChangePetitionQuery::create()->filterByPeticionOld($params['old'])->count();
-        }catch (Exception $e){
-            $error = $this->exception .  $e->getMessage(). "\n";
-            return $error;
-        }
+    try{           
+        $QbcSciSellChangePetition = new QbcSciSellChangePetition();
+    }catch (Exception $e){
+        $error = $this->exception .  $e->getMessage(). "\n";
+        return $error;
+    }
 
 
 
-        if($ChangePetitionCount == 0){
-            try{
-                $QbcSciSellChangePetition->setPeticionOld($params['old']);
-                $QbcSciSellChangePetition->setPeticionNew($params['new']);
-                $QbcSciSellChangePetition->save();
+    try{           
+        $ChangePetitionCount = QbcSciSellChangePetitionQuery::create()->filterByPeticionOld($params['old'])->count();
+    }catch (Exception $e){
+        $error = $this->exception .  $e->getMessage(). "\n";
+        return $error;
+    }
 
-                $QbcSciSellQuery = QbcSciSellQuery::create()->findOneByPetitionId($params['old']);
-                if(!empty($QbcSciSellQuery)){
-                    $QbcSciSellQuery->setPetitionId($params['new']);
-                    $QbcSciSellQuery->save();
-                }
 
-                $QbcSciSellDoc = QbcSciSellDocQuery::create()->findOneByPetitionId($params['old']);
-                if(!empty($QbcSciSellDoc)){
-                    $QbcSciSellDoc->delete();
-                }
 
-                if($QbcSciSellDoc->isDeleted() === true){
-                    $QbcSciSellDocDelete = new QbcSciSellDocDelete();
-                    $QbcSciSellDocDelete->setPetitionId($QbcSciSellDoc->getPetitionId());
-                    $QbcSciSellDocDelete->setState($QbcSciSellDoc->getState());
-                    $QbcSciSellDocDelete->setDetail($QbcSciSellDoc->getDetail());
-                    $QbcSciSellDocDelete->setDocumentId($QbcSciSellDoc->getDocumentId());
-                    $QbcSciSellDocDelete->setDocPosition($QbcSciSellDoc->getDocPosition());
-                    $QbcSciSellDocDelete->setDocValue($QbcSciSellDoc->getDocValue());
-                    $QbcSciSellDocDelete->setDocDate($QbcSciSellDoc->getDocDate());
-                    $QbcSciSellDocDelete->save();
-                }
+    if($ChangePetitionCount == 0){
+        try{
+            $QbcSciSellChangePetition->setPeticionOld($params['old']);
+            $QbcSciSellChangePetition->setPeticionNew($params['new']);
+            $QbcSciSellChangePetition->save();
 
-            }catch(Exception $e){
-                return "Caught exception: ". $e->getMessage();
+            $QbcSciSellQuery = QbcSciSellQuery::create()->findOneByPetitionId($params['old']);
+            if(!empty($QbcSciSellQuery)){
+                $QbcSciSellQuery->setPetitionId($params['new']);
+                $QbcSciSellQuery->save();
             }
-            return true;
-        }
-        return false;	
 
-    }
-
-    public function vfallidas($params){
-        $Querys = new Querys();
-        $SalesFlatOrderQuery = $Querys->SalesFlatOrderByIncrementId($params);
-        $result = array(
-            'status' => 'ok',
-            'message' => 'php ./controller/sell_resend_scmp.php ' . 
-            $SalesFlatOrderQuery->getEntityId() .
-            ' ' . $params['id']
-        );
-        return $result;
-
-    }
-
-    private function getCouponsRedeemed($params){
-        $Querys = new Querys();
-        $CouponHistoryQuery = $Querys->CouponHistoryByCampaignId($params);
-
-        foreach ($CouponHistoryQuery as $key => $History) {
-            $IncrementIds[] = $History->getOrderId();
-            $couponH[$History->getOrderId()][$History->getUnit()] = true;
-        }
-
-        $result = array(
-            'ids' => $IncrementIds, 
-            'coupons' => $couponH
-        );
-        return $result;
-
-    }
-
-    private function getSellRedeemed($params){
-        $Querys = new Querys();
-        $SellsPetitionId = array();
-        $SellOrderId = '';
-        $SellItemId = '';
-        $QbcSciSellQuery = $Querys->QbcSciSellByIncrementId($params['ids']);
-
-        foreach ($QbcSciSellQuery as $key => $Sell) {
-            if($Sell->getProcessed() == 0 && isset($params['coupons'][$Sell->getOrderId()][$Sell->getUnit()])){
-                $SellsPetitionId[] = $Sell->getPetitionId();
-                $SellOrderId = $Sell->getOrderId();
-                $SellItemId = $Sell->getItemId();
+            $QbcSciSellDoc = QbcSciSellDocQuery::create()->findOneByPetitionId($params['old']);
+            if(!empty($QbcSciSellDoc)){
+                $QbcSciSellDoc->delete();
             }
-        }
 
-        $result = array(
-            'petitions' => $SellsPetitionId, 
-            'orderId' => $SellOrderId,
-            'itemId' => $SellItemId
+            if($QbcSciSellDoc->isDeleted() === true){
+                $QbcSciSellDocDelete = new QbcSciSellDocDelete();
+                $QbcSciSellDocDelete->setPetitionId($QbcSciSellDoc->getPetitionId());
+                $QbcSciSellDocDelete->setState($QbcSciSellDoc->getState());
+                $QbcSciSellDocDelete->setDetail($QbcSciSellDoc->getDetail());
+                $QbcSciSellDocDelete->setDocumentId($QbcSciSellDoc->getDocumentId());
+                $QbcSciSellDocDelete->setDocPosition($QbcSciSellDoc->getDocPosition());
+                $QbcSciSellDocDelete->setDocValue($QbcSciSellDoc->getDocValue());
+                $QbcSciSellDocDelete->setDocDate($QbcSciSellDoc->getDocDate());
+                $QbcSciSellDocDelete->save();
+            }
+
+        }catch(Exception $e){
+            return "Caught exception: ". $e->getMessage();
+        }
+        return true;
+    }
+    return false;	
+
+}
+
+public function vfallidas($params){
+    $Querys = new Querys();
+    $SalesFlatOrderQuery = $Querys->SalesFlatOrderByIncrementId($params);
+    $result = array(
+        'status' => 'ok',
+        'message' => 'php ./controller/sell_resend_scmp.php ' . 
+        $SalesFlatOrderQuery->getEntityId() .
+        ' ' . $params['id']
+        );
+    return $result;
+
+}
+
+private function getCouponsRedeemed($params){
+    $Querys = new Querys();
+    $CouponHistoryQuery = $Querys->CouponHistoryByCampaignId($params);
+
+    foreach ($CouponHistoryQuery as $key => $History) {
+        $IncrementIds[] = $History->getOrderId();
+        $couponH[$History->getOrderId()][$History->getUnit()] = true;
+    }
+
+    $result = array(
+        'ids' => $IncrementIds, 
+        'coupons' => $couponH
+        );
+    return $result;
+
+}
+
+private function getSellRedeemed($params){
+    $Querys = new Querys();
+    $SellsPetitionId = array();
+    $SellOrderId = '';
+    $SellItemId = '';
+    $QbcSciSellQuery = $Querys->QbcSciSellByIncrementId($params['ids']);
+
+    foreach ($QbcSciSellQuery as $key => $Sell) {
+        if($Sell->getProcessed() == 0 && isset($params['coupons'][$Sell->getOrderId()][$Sell->getUnit()])){
+            $SellsPetitionId[] = $Sell->getPetitionId();
+            $SellOrderId = $Sell->getOrderId();
+            $SellItemId = $Sell->getItemId();
+        }
+    }
+
+    $result = array(
+        'petitions' => $SellsPetitionId, 
+        'orderId' => $SellOrderId,
+        'itemId' => $SellItemId
         );
 
-        return $result;
+    return $result;
+}
+
+private function getSellDocuments($params){
+    $Querys = new Querys();
+    $result = array();
+    $QbcSciSellDocQuery = $Querys->QbcSciSellDocByPetitionId($params);
+
+    foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
+        $result['SellsDocumentId'][] =  $SellDoc->getDocumentId();
+        $result['SellsDocValue'][] =  $SellDoc->getDocValue();
+        $result['SellsDocPosition'][] =  "00000" . $SellDoc->getDocPosition();
+        $result['SellsDocDate'][] =  $SellDoc->getDocDate();
     }
-
-    private function getSellDocuments($params){
-        $Querys = new Querys();
-        $result = array();
-        $QbcSciSellDocQuery = $Querys->QbcSciSellDocByPetitionId($params);
-
-        foreach ($QbcSciSellDocQuery as $key => $SellDoc) {
-            $result['SellsDocumentId'][] =  $SellDoc->getDocumentId();
-            $result['SellsDocValue'][] =  $SellDoc->getDocValue();
-            $result['SellsDocPosition'][] =  "00000" . $SellDoc->getDocPosition();
-            $result['SellsDocDate'][] =  $SellDoc->getDocDate();
-        }
-        return $result;
-    }
+    return $result;
+}
 
 
-    private function getDevolutions($params, $coupons){
-        $QbcSciDevolutionQuery = QbcSciDevolutionQueryByCampaignId($params);
+private function getDevolutions($params, $coupons){
+    $QbcSciDevolutionQuery = QbcSciDevolutionQueryByCampaignId($params);
 
-        foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
-            $orderDev = explode('-', $Devolution->getCoupon());
-            if($Devolution->getProcessed() == 0 && isset($coupons[$orderDev[0]][$Devolution->getUnit()])){
-                $result['devolutionRedeemed'][] = $Devolution->getPetitionId();
-            }else if($Devolution->getProcessed() == 0){
+    foreach ($QbcSciDevolutionQuery as $key => $Devolution) {
+        $orderDev = explode('-', $Devolution->getCoupon());
+        if($Devolution->getProcessed() == 0 && isset($coupons[$orderDev[0]][$Devolution->getUnit()])){
+            $result['devolutionRedeemed'][] = $Devolution->getPetitionId();
+        }else if($Devolution->getProcessed() == 0){
                 $result['devolutionNoRedeemed'][] = $Devolution->getPetitionId(); // Para incluir las devoluciones no redimidas
             }
         }
@@ -539,7 +539,7 @@ class General {
             'PorcentajeComision' =>  ($GroupdealsQuery->getEtGain() / 100),
             'PorcentajeIVAComision' => ($params['campaing_tax'] / 100),
             'sendSCMP' => $params['send']
-        );
+            );
 
 
 
@@ -583,7 +583,7 @@ class General {
 
         try{           
             $QbcSciDevolutionNoRedemedDocQuery = QbcSciDevolutionDocQuery::create()
-                ->findByPetitionId($DevolutionNoRedemedPetitionId);
+            ->findByPetitionId($DevolutionNoRedemedPetitionId);
             if(!empty($QbcSciDevolutionNoRedemedDocQuery)){
                 foreach ($QbcSciDevolutionNoRedemedDocQuery as $key => $DevolutionNoDoc) {
                     $DevolutionsNoDocumentId[] = $DevolutionNoDoc->getDocumentId();
@@ -720,240 +720,240 @@ class General {
     private function array2XML($data, $rootNodeName = 'PagoAliadoDTO', $xml=NULL){
         if ($xml == null){
             /* $xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName />" */
-            $xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName  xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  />");
-        }
+                $xml = simplexml_load_string("<?xml version='1.0' encoding='utf-8'?><$rootNodeName  xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  />");
+            }
 
-        foreach($data as $key => $value){
-            if (is_numeric($key)){
+            foreach($data as $key => $value){
+                if (is_numeric($key)){
                 // if($rootNodeName == 'PagoAliadoDTO'){
-                $key = "DocumentoContableDTO";
+                    $key = "DocumentoContableDTO";
                 //  }else{
                 //      $key = "nodeId_". (string) $key;
                 //  }
-            }
+                }
 
-            if (is_array($value)){
-                $node = $xml->addChild($key);
-                $this->array2XML($value, $rootNodeName, $node);
-            } else {
-                $value = htmlentities($value);
-                $xml->addChild($key, $value);
-            }
+                if (is_array($value)){
+                    $node = $xml->addChild($key);
+                    $this->array2XML($value, $rootNodeName, $node);
+                } else {
+                    $value = htmlentities($value);
+                    $xml->addChild($key, $value);
+                }
 
-        }
-        $genxml = $xml->asXML();
-        $genxml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $genxml));
+            }
+            $genxml = $xml->asXML();
+            $genxml = trim(str_replace('<?xml version="1.0" encoding="utf-8"?>', '', $genxml));
         //$genxml = htmlentities($genxml);
-        $genxml = html_entity_decode($genxml);
-        return $genxml;
-    }
-
-    public function & sendxmlsell(&$params){
-
-        if(!isset($params['xmltext']) || empty($params['xmltext'])){
-            $result = array(
-                'status' => 'error',
-                'message' => 'VALUE_IS_NULL_OR_EMPTY');
-            return $result;
+            $genxml = html_entity_decode($genxml);
+            return $genxml;
         }
 
-        libxml_use_internal_errors(true);
-        $xml = simplexml_load_string($params['xmltext']);
+        public function & sendxmlsell(&$params){
 
-        if($xml === false){
-            $result = array(
-                'status' => 'error',
-                'message' => 'VALUE_IS_NOT_XML_FILE',
-                'error-list' => libxml_get_errors()
-            );
-            return $result;
-        }
-
-        $idSell = $xml->attributes()->id;
-
-        if(empty($idSell)){
-            $result = array(
-                'status' => 'error',
-                'message' => 'ID_SELL_IS_NULL_OR_EMPTY');
-            return $result;
-        }
-
-        $oldIdPetition = $xml->contexto->attributes()->idPeticion;
-
-        if(empty($oldIdPetition)){
-            $result = array(
-                'status' => 'error',
-                'message' => 'ID_PETITION_IS_NULL_OR_EMPTY');
-            return $result;
-        }
-
-        $seemBaseIdPetition = strtotime('now');
-        $md5IdPetition = md5($seemBaseIdPetition);
-        $newIdPetition = substr($md5IdPetition, 0 ,24);
-
-        $Querys = new Querys();
-
-        $paramsQuery = array(
-            'id' => trim($oldIdPetition),
-            'no_die' => 'true'
-        );
-
-        $QbcSciSellQuery = $Querys->QbcSciSellByPetitionId($paramsQuery);
-
-        $xml->contexto->attributes()->idPeticion = $newIdPetition;
-
-        $xml = $xml->asXML();
-        $xml = trim(str_replace('<?xml version="1.0"?>', '', $xml));
-
-        $paramsSell = array(
-            'idPeticion' => $newIdPetition,
-            'idVenta' => $idSell,
-            'xml' =>  $xml);
-
-        $resultSell = $this->sendSell($paramsSell);
-
-        if($resultSell->Estado == 'aprobado' && is_object($QbcSciSellQuery)){
-            $QbcSciSellQuery->setPetitionId($newIdPetition);
-            $QbcSciSellQuery->save();
-            $result['save'] = 'true';
-            $result['create'] = $oldIdPetition . ' - ' . $newIdPetition;
-            $result['replace'] = 'false';
-        }else if($resultSell->Estado == 'aprobado' && !is_object($QbcSciSellQuery)){
-            $QbcSciSell = new QbcSciSell();
-            $QbcSciSell->setPetitionId($newIdPetition);
-            $QbcSciSell->setOrderId($idSell);
-            //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
-            $QbcSciSell->save();
-            $result['save'] = 'true';
-            $result['create'] = $newIdPetition;
-            $result['replace'] = 'false';
-        }
-
-        $result['resultSell'] = $resultSell;
-
-        return $result;
-
-    }
-
-    ///// *********************** Ventas por valor POL - Descuento **************************** ///
-
-    public function & sendSellDiscount(&$params){
-
-        $Querys = new Querys();
-
-        // Validacion id Pedido
-        if(!isset($params['id']) || empty($params['id'])){
-            $result = array(
-                'status' => 'error',
-                'message' => 'VALUE_IS_NULL_OR_EMPTY');
-            return $result;
-        }
-
-        $CouponMappingQuery = $Querys->CouponMappingByIncrementId($params);
-        $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
-        $paramsItem['id'] = $CouponMappingQuery->getItemId();
-
-        $SalesFlatOrderQuery = $Querys->SalesFlatOrderByEntityId($paramsOrder);
-        $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
-        $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
-
-        $SalesFlatOrderItemQuery = $Querys->SalesFlatOrderItemByItemId($paramsItem);
-        $paramsGroupDeals['id'] = $SalesFlatOrderItemQuery->getProductId(); 
-        $paramsGroupDeals['one'] = 1;
-
-        $GroupdealsQuery = $Querys->GroupdealsByProductId($paramsGroupDeals);
-        $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
-        $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
-
-        $TreasuryTypesQuery = $Querys->TreasuryTypesById($paramsTreasury);
-        $tresauryIva = $TreasuryTypesQuery->getIva();
-
-        $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($params);
-        $totalPay = $PagosOnLineQuery->getValor();
-
-        $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchants);
-
-        $totalPay = round($totalPay, 0);
-        $payToItem = $totalPay;
-        $payToLastItem = 0;
-        if($totalItems > 1){
-            $payToItem = round(($totalPay / $totalItems), 0);
-            $payToLastItem = $totalPay - ($payToItem * ($totalItems - 1));
-        }
-
-        $tasaIva = 0;
-        if($tresauryIva > 0)
-            $tasaIva = $tresauryIva / 100;
-
-        $order = array(
-            'ventaId' => $params['id'],
-            'totalPay' => $totalPay,
-            'totalItems' => $totalItems,
-            'payToItem' => $payToItem,
-            'payToLastItem' => $payToLastItem,
-            'tasaIva' => $tasaIva,
-            'tresauryCode' => $TreasuryTypesQuery->getCode(),
-            'tresauryIva' => $tresauryIva,
-            'tipoMedioPAgo' => $PagosOnLineQuery->getTipoMedioPago(),
-            'numeroTarjeta' => $PagosOnLineQuery->getNumeroVisible(),
-            'medioPago' => $PagosOnLineQuery->getMedioPago(),
-            'autorizacion' => $PagosOnLineQuery->getCodigoAutorizacion(),
-            'cus' => $PagosOnLineQuery->getCus(),
-            'cuotas' => $PagosOnLineQuery->getCuotas(),
-            'productName' => utf8_encode($GroupdealsQuery->getTitleShort()),
-            'idCampaing' => $GroupdealsQuery->getGroupdealsId(),
-            'nit' => $GroupdealsMerchantsQuery->getNitNumber(),
-            'customerIdentification' => $SalesFlatOrderQuery->getCustomerIdentification(),
-            'customerName' => utf8_encode($CustomerName)
-        );
-
-        $pagoItem['valor'] = $totalPay;
-
-        $resultSellArray = array();
-
-        for($i =1; $i<=$totalItems;$i++){
-
-            $totalBruto = $order['payToItem'];
-            if($order['tresauryIva'] > 0)
-                $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
-
-            if($order['payToLastItem'] > 0 && $i == $totalItems){
-                $order['payToItem'] = $order['payToLastItem'];
-                $totalBruto = $order['payToLastItem'];
-                if($order['tresauryIva'] > 0)
-                    $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
+            if(!isset($params['xmltext']) || empty($params['xmltext'])){
+                $result = array(
+                    'status' => 'error',
+                    'message' => 'VALUE_IS_NULL_OR_EMPTY');
+                return $result;
             }
 
-            $pagoItem['valorItem'][] = $order['payToItem'];
-            $pagoItem['payToLastItem'][] = $order['payToLastItem'];
-            // Creación XML
             libxml_use_internal_errors(true);
-            $xml = simplexml_load_file("./views/sell.xml");
+            $xml = simplexml_load_string($params['xmltext']);
 
             if($xml === false){
                 $result = array(
                     'status' => 'error',
                     'message' => 'VALUE_IS_NOT_XML_FILE',
                     'error-list' => libxml_get_errors()
-                );
+                    );
                 return $result;
             }
 
-            $xml->attributes()->id = $order['ventaId'];
-            $xml->attributes()->totalNeto = $order['payToItem'];
-            $xml->attributes()->totalBruto = $totalBruto;
-            $xml->attributes()->tasaImpuesto1 = $order['tasaIva'];
+            $idSell = $xml->attributes()->id;
 
-            $xml->pagos->pago->attributes()->valor = $order['payToItem'];
-            $xml->pagos->pago->attributes()->idVenta = $order['ventaId'];
-            $xml->pagos->pago->attributes()->id = $i;
+            if(empty($idSell)){
+                $result = array(
+                    'status' => 'error',
+                    'message' => 'ID_SELL_IS_NULL_OR_EMPTY');
+                return $result;
+            }
 
-            if($order['tipoMedioPAgo'] == 2){
-                $xml->pagos->pago->attributes()->medio = 3;
+            $oldIdPetition = $xml->contexto->attributes()->idPeticion;
 
-                $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
-                $pagoAtributos->addAttribute("clave", "numeroTarjeta");
-                $pagoAtributos->addAttribute("valor", $order['numeroTarjeta']);
+            if(empty($oldIdPetition)){
+                $result = array(
+                    'status' => 'error',
+                    'message' => 'ID_PETITION_IS_NULL_OR_EMPTY');
+                return $result;
+            }
+
+            $seemBaseIdPetition = strtotime('now');
+            $md5IdPetition = md5($seemBaseIdPetition);
+            $newIdPetition = substr($md5IdPetition, 0 ,24);
+
+            $Querys = new Querys();
+
+            $paramsQuery = array(
+                'id' => trim($oldIdPetition),
+                'no_die' => 'true'
+                );
+
+            $QbcSciSellQuery = $Querys->QbcSciSellByPetitionId($paramsQuery);
+
+            $xml->contexto->attributes()->idPeticion = $newIdPetition;
+
+            $xml = $xml->asXML();
+            $xml = trim(str_replace('<?xml version="1.0"?>', '', $xml));
+
+            $paramsSell = array(
+                'idPeticion' => $newIdPetition,
+                'idVenta' => $idSell,
+                'xml' =>  $xml);
+
+            $resultSell = $this->sendSell($paramsSell);
+
+            if($resultSell->Estado == 'aprobado' && is_object($QbcSciSellQuery)){
+                $QbcSciSellQuery->setPetitionId($newIdPetition);
+                $QbcSciSellQuery->save();
+                $result['save'] = 'true';
+                $result['create'] = $oldIdPetition . ' - ' . $newIdPetition;
+                $result['replace'] = 'false';
+            }else if($resultSell->Estado == 'aprobado' && !is_object($QbcSciSellQuery)){
+                $QbcSciSell = new QbcSciSell();
+                $QbcSciSell->setPetitionId($newIdPetition);
+                $QbcSciSell->setOrderId($idSell);
+            //$QbcSciSell->setCreatedAt(date("Y-m-d H:i:s"));
+                $QbcSciSell->save();
+                $result['save'] = 'true';
+                $result['create'] = $newIdPetition;
+                $result['replace'] = 'false';
+            }
+
+            $result['resultSell'] = $resultSell;
+
+            return $result;
+
+        }
+
+    ///// *********************** Ventas por valor POL - Descuento **************************** ///
+
+        public function & sendSellDiscount(&$params){
+
+            $Querys = new Querys();
+
+        // Validacion id Pedido
+            if(!isset($params['id']) || empty($params['id'])){
+                $result = array(
+                    'status' => 'error',
+                    'message' => 'VALUE_IS_NULL_OR_EMPTY');
+                return $result;
+            }
+
+            $CouponMappingQuery = $Querys->CouponMappingByIncrementId($params);
+            $paramsOrder['id'] = $CouponMappingQuery->getOrderId();
+            $paramsItem['id'] = $CouponMappingQuery->getItemId();
+
+            $SalesFlatOrderQuery = $Querys->SalesFlatOrderByEntityId($paramsOrder);
+            $totalItems = $SalesFlatOrderQuery->getTotalQtyOrdered();
+            $CustomerName = $SalesFlatOrderQuery->getCustomerFirstname() . " " . $SalesFlatOrderQuery->getCustomerLastname();
+
+            $SalesFlatOrderItemQuery = $Querys->SalesFlatOrderItemByItemId($paramsItem);
+            $paramsGroupDeals['id'] = $SalesFlatOrderItemQuery->getProductId(); 
+            $paramsGroupDeals['one'] = 1;
+
+            $GroupdealsQuery = $Querys->GroupdealsByProductId($paramsGroupDeals);
+            $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
+            $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
+
+            $TreasuryTypesQuery = $Querys->TreasuryTypesById($paramsTreasury);
+            $tresauryIva = $TreasuryTypesQuery->getIva();
+
+            $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($params);
+            $totalPay = $PagosOnLineQuery->getValor();
+
+            $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchants);
+
+            $totalPay = round($totalPay, 0);
+            $payToItem = $totalPay;
+            $payToLastItem = 0;
+            if($totalItems > 1){
+                $payToItem = round(($totalPay / $totalItems), 0);
+                $payToLastItem = $totalPay - ($payToItem * ($totalItems - 1));
+            }
+
+            $tasaIva = 0;
+            if($tresauryIva > 0)
+                $tasaIva = $tresauryIva / 100;
+
+            $order = array(
+                'ventaId' => $params['id'],
+                'totalPay' => $totalPay,
+                'totalItems' => $totalItems,
+                'payToItem' => $payToItem,
+                'payToLastItem' => $payToLastItem,
+                'tasaIva' => $tasaIva,
+                'tresauryCode' => $TreasuryTypesQuery->getCode(),
+                'tresauryIva' => $tresauryIva,
+                'tipoMedioPAgo' => $PagosOnLineQuery->getTipoMedioPago(),
+                'numeroTarjeta' => $PagosOnLineQuery->getNumeroVisible(),
+                'medioPago' => $PagosOnLineQuery->getMedioPago(),
+                'autorizacion' => $PagosOnLineQuery->getCodigoAutorizacion(),
+                'cus' => $PagosOnLineQuery->getCus(),
+                'cuotas' => $PagosOnLineQuery->getCuotas(),
+                'productName' => utf8_encode($GroupdealsQuery->getTitleShort()),
+                'idCampaing' => $GroupdealsQuery->getGroupdealsId(),
+                'nit' => $GroupdealsMerchantsQuery->getNitNumber(),
+                'customerIdentification' => $SalesFlatOrderQuery->getCustomerIdentification(),
+                'customerName' => utf8_encode($CustomerName)
+                );
+
+$pagoItem['valor'] = $totalPay;
+
+$resultSellArray = array();
+
+for($i =1; $i<=$totalItems;$i++){
+
+    $totalBruto = $order['payToItem'];
+    if($order['tresauryIva'] > 0)
+        $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
+
+    if($order['payToLastItem'] > 0 && $i == $totalItems){
+        $order['payToItem'] = $order['payToLastItem'];
+        $totalBruto = $order['payToLastItem'];
+        if($order['tresauryIva'] > 0)
+            $totalBruto = round(($order['payToItem'] /(1 + $order['tasaIva'])), 0);
+    }
+
+    $pagoItem['valorItem'][] = $order['payToItem'];
+    $pagoItem['payToLastItem'][] = $order['payToLastItem'];
+            // Creación XML
+    libxml_use_internal_errors(true);
+    $xml = simplexml_load_file("./views/sell.xml");
+
+    if($xml === false){
+        $result = array(
+            'status' => 'error',
+            'message' => 'VALUE_IS_NOT_XML_FILE',
+            'error-list' => libxml_get_errors()
+            );
+        return $result;
+    }
+
+    $xml->attributes()->id = $order['ventaId'];
+    $xml->attributes()->totalNeto = $order['payToItem'];
+    $xml->attributes()->totalBruto = $totalBruto;
+    $xml->attributes()->tasaImpuesto1 = $order['tasaIva'];
+
+    $xml->pagos->pago->attributes()->valor = $order['payToItem'];
+    $xml->pagos->pago->attributes()->idVenta = $order['ventaId'];
+    $xml->pagos->pago->attributes()->id = $i;
+
+    if($order['tipoMedioPAgo'] == 2){
+        $xml->pagos->pago->attributes()->medio = 3;
+
+        $pagoAtributos = $xml->pagos->pago->atributos->addChild('atributo');
+        $pagoAtributos->addAttribute("clave", "numeroTarjeta");
+        $pagoAtributos->addAttribute("valor", $order['numeroTarjeta']);
 
                 if($order['medioPago'] == 11){ // Master
                     $order['franquicia'] = 2;
@@ -1192,7 +1192,7 @@ class General {
                         'Valor' => '0',
                         'sendSCMP' => $sendSCMP
 
-                    );
+                        );
                 }
 
                 $sellValue = explode('.', $Closure->getSellValue());
@@ -1366,21 +1366,193 @@ class General {
         return $result;
     }
 
-    public function & newsloe(&$params){
 
-        $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
-        // $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
 
-        $jsonfile = file_get_contents('./loe/json/loeproducts-' . $params['fecha'] . '.json', FILE_USE_INCLUDE_PATH);
 
-        if($jsonfile === false){
-            $jsonfile = file_get_contents('./loe/json/loeproducts.json', FILE_USE_INCLUDE_PATH);
+
+    public function CreditClose($params){
+
+        $Querys = new Querys();
+        $number = "130008784";
+        $position = "000001";
+        $variable = array();
+        $paramDTO = array();
+        $resulcredits = "";
+        $idcredit = "";
+
+        $result['Contexto']  = array(
+            'Aplicacion' => 'CQBC', 
+            'PeticionId' => substr(md5(strtotime('now')), 0, 24),
+            'Usuario' => 'INGQBC'
+            );
+
+        if(strlen($params['listcredits']) == 9){
+            $params['listcredits'] = '0' . $params['listcredits'];
         }
 
-        $dataInfo = json_decode($jsonfile, true);
+    $CreditDoc = $Querys->QbcSciCreditConstructDocBydocumentIdOne($params['listcredits']);
 
-        if(empty($params['fecha'])){
-            $params['fecha'] = date('Y-m-d');
+        $result['DocumentoContable']['Numero'] = $CreditDoc->getDocumentId();
+        $result['DocumentoContable']['Valor'] = (int)$CreditDoc->getDocValue();
+        $result['DocumentoContable']['Posicion'] = '00000' . $CreditDoc->getDocPosition();
+        $result['DocumentoContable']['Fecha'] = $CreditDoc->getDocDate();
+        $result['ValorCredito'] = (int)$CreditDoc->getDocValue() - $params['saltcredits'];
+  
+        $Credit = $Querys->QbcSciCreditConstructByPetitionIdOne($CreditDoc->getPetitionId());
+
+    $result['TipoCredito'] = $Credit->getRewardType();
+
+    $saveValues['reward_id'] = $Credit->getRewardId();
+    $saveValues['reward_type'] = $Credit->getRewardType();
+    $saveValues['petition_id'] = substr(md5(strtotime('now')), 1, 25);
+    $saveValues['delta'] = $result['ValorCredito'];
+ 
+
+        $paramsSells = explode(',', $params['listsells']);
+
+        $SellsDocs = $Querys->QbcSciSellDocByDocumentId($paramsSells);
+
+        $paramsDates = explode(',', $params['listdates']);
+
+        $keyf = 0;
+        foreach ($SellsDocs as $key => $docs) {
+            if(in_array($docs->getDocDate(), $paramsDates)){
+                $result['Ventas'][$keyf]['Numero'] = $docs->getDocumentId();
+                $result['Ventas'][$keyf]['Valor'] = (int)$docs->getDocValue();
+                $result['Ventas'][$keyf]['Posicion'] = '00000' . $docs->getDocPosition();
+                $result['Ventas'][$keyf]['Fecha'] = $docs->getDocDate();
+                $keyf++;
+            }
+            
+        }
+
+
+
+        $paramDTO['peticionDTO'] = $result;
+    
+    if($params['send'] == 1){
+
+        try {
+                $client = new SoapClient($this->webService, $this->options);
+            } catch (Exception $e) {
+                $result['error'] = $this->exception .  $e->getMessage() . "\n";
+                return $result;
+            }
+            
+            if($params['saltcredits'] == 0){
+                $webService = $client->CreditosAFavorAgotados($paramDTO);
+                $result['wsResult'] = $webService->CreditosAFavorAgotadosResult;
+
+            }else{
+                $webService = $client->CreditosAFavorVencidos($paramDTO);
+                $result['wsResult'] = $webService->CreditosAFavorVencidosResult;
+            }
+
+
+    }else{
+
+    }
+
+    $result['send'] = $params['send'];
+
+    return $result;
+
+    /*
+
+    $valorTotal = $credit->getAcount();
+    $valorConsumido = $credit->getUsed();
+    $creditType = $credit->getType();
+    $idsVentas = json_decode($credit->getRequestIds(), true);
+
+    $responses = DocsVentasQuery::create()->filterByPeticionId($idsVentas)->find();
+
+    foreach ($responses as $key => $response) {
+        $idsResposes[] = $response->getId();
+    }
+
+    try{
+        $client = new SoapClient(QBC_SOAP_SERVER, $this->optionsCache);
+        //$funtion = $client->__getFunctions();
+    }catch (Exception $e) { 
+        $wsResult = 'Caught exception:' .  $e->getMessage() . "\n";
+        return $wsResult;
+    }
+
+    $paramDTO['peticionDTO'] = array(
+        'Contexto' => array(
+            'Aplicacion' => 'QBC',
+            'PeticionId' => $params['id_peticion'],
+            'Usuario' => 'INGQBC'
+                ), 
+        'DocumentoContable' => array(
+            'Fecha' => $params['date'],
+            'Numero' => $params['doc'],
+            'Posicion' => $params['position'],
+            'Valor' => $valorTotal 
+        ),
+        'ValorCredito' => $valorConsumido,
+        'TipoCredito' => $params['type_credit']
+    );
+
+    
+    foreach ($responses as $key => $response) {
+
+
+        $paramDTO['peticionDTO']['Ventas'][$key] =  array(
+            'Fecha' => $response->getFecha(),
+            'Numero' => $response->getNumero(),
+            'Posicion' => $response->getPosicion(),
+            'Valor' => $response->getValor()
+        );
+
+    }
+    
+    //return $paramDTO;
+
+    if($params['cierre'] == 1){
+        $result = $client->CreditosAFavorAgotados($paramDTO);
+        $resulta['result'] = $result->CreditosAFavorAgotadosResult;
+        $idcredit = 4;
+    }else{
+        $paramDTO['peticionDTO']['ValorCredito'] = $valorTotal - $valorConsumido;
+        $result = $client->CreditosAFavorVencidos($paramDTO);
+        $resulta['result'] = $result->CreditosAFavorVencidosResult;
+        $idcredit = 5;
+    }
+
+    $resulta['save'] = "NO";
+    if($resulta['result']->Estado == "aprobado"){
+            $creditsRes = CreditsQuery::create()->filterById($params['credit_id'])->findOne();
+            $creditsRes->setIdCredit($idcredit);
+            $creditsRes->setInfo(json_encode($paramDTO));
+            $resulta['save'] = $creditsRes->save();
+    }
+
+    $resulta['DTO'] = $paramDTO;
+    return $resulta;
+    */
+}
+
+
+
+
+
+
+public function & newsloe(&$params){
+
+    $backpath = trim($_SERVER["DOCUMENT_URI"], 'index.php');
+        // $jsonfile = file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/loeproducts.json");
+
+    $jsonfile = file_get_contents('./loe/json/loeproducts-' . $params['fecha'] . '.json', FILE_USE_INCLUDE_PATH);
+
+    if($jsonfile === false){
+        $jsonfile = file_get_contents('./loe/json/loeproducts.json', FILE_USE_INCLUDE_PATH);
+    }
+
+    $dataInfo = json_decode($jsonfile, true);
+
+    if(empty($params['fecha'])){
+        $params['fecha'] = date('Y-m-d');
         }/*else{
             $params['fecha'] = date('Y-m-d', strtotime($params['fecha']));
         }*/
@@ -1398,149 +1570,149 @@ class General {
                         'value' => $params['valuea'],
                         'url' => $params['urla'],
                         'active' => '1'
-                    ),
+                        ),
                     '1' => array(
                         'name' => $params['retailb'],
                         'value' => $params['valueb'],
                         'url' => $params['urlb'],
                         'active' => '0'
-                    ),
+                        ),
                     '2' => array(
                         'name' => $params['retailc'],
                         'value' => $params['valuec'],
                         'url' => $params['urlc'],
                         'active' => '0'
-                    ),
+                        ),
                     '3' => array(
                         'name' => $params['retaild'],
                         'value' => $params['valued'],
                         'url' => $params['urld'],
                         'active' => '0'
+                        )
                     )
-                )
-            );
-            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
-            ksort($dataInfo['dataInfo']['products']);
-            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
-        }else if($params['type'] == 1){
+);
+$dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+ksort($dataInfo['dataInfo']['products']);
+$result = 'La oferta: ' . $params['position'] . ' fue actualizada';
+}else if($params['type'] == 1){
 
-            $nameArrow = $this->cleanString($params['valbton']);
+    $nameArrow = $this->cleanString($params['valbton']);
 
-            $dataArray = array(
-                'type' => $params['type'],
-                'title' => $params['title'],
-                'image' => $params['image'],
-                'url' => $params['url'],
-                'percent' => $params['percent'],
-                'retail' => $params['retail'],
-                'value' => $params['value'],
-                'active' => $params['active'],
-                'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/type1image-" . $params['position'] . "-" . $params['fecha'] . ".png",
-                'image2' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
-            );
-            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
-            ksort($dataInfo['dataInfo']['products']);
-            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
-        }else if($params['type'] == 2){
+    $dataArray = array(
+        'type' => $params['type'],
+        'title' => $params['title'],
+        'image' => $params['image'],
+        'url' => $params['url'],
+        'percent' => $params['percent'],
+        'retail' => $params['retail'],
+        'value' => $params['value'],
+        'active' => $params['active'],
+        'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/type1image-" . $params['position'] . "-" . $params['fecha'] . ".png",
+        'image2' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
+        );
+    $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+    ksort($dataInfo['dataInfo']['products']);
+    $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
+}else if($params['type'] == 2){
 
-            $nameArrow = $this->cleanString($params['valbton']);
+    $nameArrow = $this->cleanString($params['valbton']);
 
-            $dataArray = array(
-                'type' => $params['type'],
-                'title' => $params['title'],
-                'image' => $params['image'],
-                'url' => $params['url'],
-                'active' => $params['active'],
-                'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
-            );
-            $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
-            ksort($dataInfo['dataInfo']['products']);
-            $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
-        }
+    $dataArray = array(
+        'type' => $params['type'],
+        'title' => $params['title'],
+        'image' => $params['image'],
+        'url' => $params['url'],
+        'active' => $params['active'],
+        'image1' => "http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/images/flecha-" . $nameArrow . ".png"
+        );
+    $dataInfo['dataInfo']['products'][$params['position']] = $dataArray;
+    ksort($dataInfo['dataInfo']['products']);
+    $result = 'La oferta: ' . $params['position'] . ' fue actualizada';
+}
 
-        $jsonDataInfo = json_encode($dataInfo);
-        $dirname = dirname(__FILE__);
-        $path = trim($dirname, 'controller');
-        $file = fopen($path . "/loe/json/loeproducts-" . $params['fecha'] . ".json", "wb");
-        fwrite($file, $jsonDataInfo . PHP_EOL);
-        fclose($file);
+$jsonDataInfo = json_encode($dataInfo);
+$dirname = dirname(__FILE__);
+$path = trim($dirname, 'controller');
+$file = fopen($path . "/loe/json/loeproducts-" . $params['fecha'] . ".json", "wb");
+fwrite($file, $jsonDataInfo . PHP_EOL);
+fclose($file);
 
         // $fileSave = file_get_contents($_SERVER["HTTP_REFERER"] . "loe/");
-        $fileSave =  file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/");
-        $Querys = new Querys();
+$fileSave =  file_get_contents("http://" . $_SERVER["HTTP_HOST"] . $backpath . "loe/");
+$Querys = new Querys();
 
-        $paramsBanner['name'] = 'NewsletterLOE';
-        $Banner = $Querys->EnterpriseBannerByName($paramsBanner);
-        $paramsBannerContent['id'] = $Banner->getBannerId();
-        $BannerContent = $Querys->EnterpriseBannerContentById($paramsBannerContent);
-        $BannerContent->setBannerContent($fileSave);
-        $BannerContent->save();
+$paramsBanner['name'] = 'NewsletterLOE';
+$Banner = $Querys->EnterpriseBannerByName($paramsBanner);
+$paramsBannerContent['id'] = $Banner->getBannerId();
+$BannerContent = $Querys->EnterpriseBannerContentById($paramsBannerContent);
+$BannerContent->setBannerContent($fileSave);
+$BannerContent->save();
 
-        return $result;
+return $result;
+}
+
+public function & saveImageBlock(&$params){
+
+    $dirname = dirname(__FILE__);
+    $path = trim($dirname, 'controller');
+
+    if(isset($params['imgscream'])){
+        $imgScream = substr($params['imgscream'], strpos($params['imgscream'], ",")+1);
+        $unencodedImgScream = base64_decode($imgScream);
+        $fpImgScream = fopen($path . '/loe/images/type1image-' . $params['position'] ."-" .$params['fecha']. '.png', 'wb' );
+        fwrite($fpImgScream, $unencodedImgScream);
+        fclose($fpImgScream);
     }
 
-    public function & saveImageBlock(&$params){
+    if(isset($params['imgarrow'])){
+        $imgArrow = substr($params['imgarrow'], strpos($params['imgarrow'], ",")+1);
+        $unencodedImgArrow = base64_decode($imgArrow);
 
-        $dirname = dirname(__FILE__);
-        $path = trim($dirname, 'controller');
+        $nameArrow = $this->cleanString($params['namearrow']);
 
-        if(isset($params['imgscream'])){
-            $imgScream = substr($params['imgscream'], strpos($params['imgscream'], ",")+1);
-            $unencodedImgScream = base64_decode($imgScream);
-            $fpImgScream = fopen($path . '/loe/images/type1image-' . $params['position'] ."-" .$params['fecha']. '.png', 'wb' );
-            fwrite($fpImgScream, $unencodedImgScream);
-            fclose($fpImgScream);
-        }
-
-        if(isset($params['imgarrow'])){
-            $imgArrow = substr($params['imgarrow'], strpos($params['imgarrow'], ",")+1);
-            $unencodedImgArrow = base64_decode($imgArrow);
-
-            $nameArrow = $this->cleanString($params['namearrow']);
-
-            $fpImgArrow = fopen($path . '/loe/images/flecha-' . $nameArrow . '.png', 'wb' );
-            fwrite($fpImgArrow, $unencodedImgArrow);
-            fclose($fpImgArrow);
-        }
-        $result = 'OK se generó la imagen correctamente';
-
-        return $result;
+        $fpImgArrow = fopen($path . '/loe/images/flecha-' . $nameArrow . '.png', 'wb' );
+        fwrite($fpImgArrow, $unencodedImgArrow);
+        fclose($fpImgArrow);
     }
+    $result = 'OK se generó la imagen correctamente';
 
-    private function cleanString($params){
+    return $result;
+}
 
-        $acenString = array(
-            'á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä',
-            'é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë',
-            'í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î',
-            'ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô',
-            'ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü',
-            'ñ', 'Ñ', 'ç', 'Ç'
+private function cleanString($params){
+
+    $acenString = array(
+        'á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä',
+        'é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë',
+        'í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î',
+        'ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô',
+        'ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü',
+        'ñ', 'Ñ', 'ç', 'Ç'
         );
-        $noAcenString = array(
-            'a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A',
-            'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E',
-            'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I',
-            'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O',
-            'u', 'u', 'u', 'u', 'U', 'U', 'U', 'U',
-            'n', 'N', 'c', 'C'
-        );
-
-        $spacialchar = array(
-            "\\", "¨", "º", "-", "~","#", "@", "|", "!", "\"","·", "$", "%", "&", "/",
-            "(", ")", "?", "'", "¡","¿", "[", "^", "`", "]","+", "}", "{", "¨", "´",
-            ">", "< ", ";", ",", ":",".", " "
+    $noAcenString = array(
+        'a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A',
+        'e', 'e', 'e', 'e', 'E', 'E', 'E', 'E',
+        'i', 'i', 'i', 'i', 'I', 'I', 'I', 'I',
+        'o', 'o', 'o', 'o', 'O', 'O', 'O', 'O',
+        'u', 'u', 'u', 'u', 'U', 'U', 'U', 'U',
+        'n', 'N', 'c', 'C'
         );
 
-        $string = trim(strtolower($params));
-        $string = htmlentities($string);
-        $string = preg_replace('/\&(.)[^;]*;/', '', $string);
-        $string = str_replace(' ', '-', $string);
-        $string = str_replace($acenString, $noAcenString, $string);
-        $string = str_replace($spacialchar,'',$string);
+    $spacialchar = array(
+        "\\", "¨", "º", "-", "~","#", "@", "|", "!", "\"","·", "$", "%", "&", "/",
+        "(", ")", "?", "'", "¡","¿", "[", "^", "`", "]","+", "}", "{", "¨", "´",
+        ">", "< ", ";", ",", ":",".", " "
+        );
+
+    $string = trim(strtolower($params));
+    $string = htmlentities($string);
+    $string = preg_replace('/\&(.)[^;]*;/', '', $string);
+    $string = str_replace(' ', '-', $string);
+    $string = str_replace($acenString, $noAcenString, $string);
+    $string = str_replace($spacialchar,'',$string);
 
 
-        return $string;
-    }
+    return $string;
+}
 
 }

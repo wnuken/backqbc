@@ -68,6 +68,16 @@ class Views {
         include './views/sells/index.php';
     }
 
+    static public function Credits(){
+        include './views/credits/index.php';
+    }
+
+    static public function creditsend(){
+        $General = new General();
+        $result = $General->CreditClose($_REQUEST);
+        include './views/credits/response.php';
+    }
+
     /*static public function ventas(){
 		include './views/ventas.php';
 	}*/
@@ -225,5 +235,5 @@ class Views {
     static public function loePreview(){
         $result = $_REQUEST;        
         include './views/newsletter/previewloe.php';         
-    }    
+    }
 }

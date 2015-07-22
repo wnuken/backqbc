@@ -253,6 +253,21 @@ class Querys {
         return $result;
     }
 
+    public function QbcSciSellDocByDocumentId($params){
+        try{           
+            $result = QbcSciSellDocQuery::create()->findByDocumentId($params);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
+
     public function QbcSciDevolutionByCampaignId($params){
         try{           
             $result = QbcSciDevolutionQuery::create()->findByCampaignId($params['id']);
@@ -266,6 +281,64 @@ class Querys {
         }
         return $result;
     }
+
+    public function QbcSciCreditConstructDocBydocumentId($params){
+        try{           
+            $result = QbcSciCreditConstructDocQuery::create()->findByDocumentId($params);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params['id']);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
+    public function QbcSciCreditConstructDocBydocumentIdOne($params){
+        try{           
+            $result = QbcSciCreditConstructDocQuery::create()->findOneByDocumentId($params);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
+    public function QbcSciCreditConstructByPetitionId($params){
+        try{           
+            $result = QbcSciCreditConstructQuery::create()->findByPetitionId($params);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
+    public function QbcSciCreditConstructByPetitionIdOne($params){
+        try{           
+            $result = QbcSciCreditConstructQuery::create()->findOneByPetitionId($params);
+            if(empty($result)){
+                $result = $this->error['NO_FOUND'] . json_encode($params);
+                $this->ErrorMessage($result);
+            }
+        }catch (Exception $e){
+            $result = $this->exception . $e->getMessage(). "\n";
+            $this->ErrorMessage($result);
+        }
+        return $result;
+    }
+
+    
 
     public function EnterpriseBannerByName($params){
         try{           
