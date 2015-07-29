@@ -1291,20 +1291,24 @@ for($i =1; $i<=$totalItems;$i++){
         $paramclose['status'] = $params['status'];
         $QbcSciManualCloseQuery = $Querys->QbcSciManualCloseQueryByCampaignId($paramclose);
         
+        $keyV = 0;
+        $keyD = 0;
 
         foreach($QbcSciManualCloseQuery as $key => $Closure){
             if($Closure->getType() == 1){
-                $peticionDTO['peticionDTO']['Ventas'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
-                $peticionDTO['peticionDTO']['Ventas'][$key]['Numero'] = $Closure->getDocSap();
-                $peticionDTO['peticionDTO']['Ventas'][$key]['Posicion'] = "000001";
-                $peticionDTO['peticionDTO']['Ventas'][$key]['Valor'] = $Closure->getValueSap();
+                $peticionDTO['peticionDTO']['Ventas'][$keyV]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
+                $peticionDTO['peticionDTO']['Ventas'][$keyV]['Numero'] = $Closure->getDocSap();
+                $peticionDTO['peticionDTO']['Ventas'][$keyV]['Posicion'] = "000001";
+                $peticionDTO['peticionDTO']['Ventas'][$keyV]['Valor'] = $Closure->getValueSap();
                 $totalNeto = $totalNeto + $Closure->getValueSap();
+                $keyV++;
             }else{
-                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
-                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Numero'] = $Closure->getDocSap();
-                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Posicion'] = "000001";
-                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Valor'] = $Closure->getValueSap();
+                $peticionDTO['peticionDTO']['Devoluciones'][$keyD]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
+                $peticionDTO['peticionDTO']['Devoluciones'][$keyD]['Numero'] = $Closure->getDocSap();
+                $peticionDTO['peticionDTO']['Devoluciones'][$keyD]['Posicion'] = "000001";
+                $peticionDTO['peticionDTO']['Devoluciones'][$keyD]['Valor'] = $Closure->getValueSap();
                 $totalNeto = $totalNeto - $Closure->getValueSap();
+                $keyD++;
             }
             
         }
@@ -1329,6 +1333,7 @@ for($i =1; $i<=$totalItems;$i++){
                 $client = new SoapClient($this->webService, $this->options);
             } catch (Exception $e) {
                 $wsResult['error'] = $this->exception .  $e->getMessage() . "\n";
+                return $wsResult;
             }
             $webService = $client->CierreOfertas($peticionDTO);
             $wsResult['wsResult'] = $webService->CierreOfertasResult;
