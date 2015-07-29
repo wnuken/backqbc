@@ -1493,6 +1493,7 @@
         <column name="doc_sap" phpName="DocSap" type="VARCHAR" size="50" required="false"/>
         <column name="date_sap" phpName="DateSap" type="TIMESTAMP" required="false"/>
         <column name="status" phpName="Status" type="INTEGER" size="11" sqlType="int(11) unsigned" required="true" defaultValue="0"/>
+        <column name="type" phpName="Type" type="INTEGER" size="11" sqlType="int(11) unsigned" required="true" defaultValue="0"/>
         <index name="IDX_CAMPAIGN_ID">
             <index-column name="campaign_id"/>
         </index>

@@ -1,20 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Menu</h3>
-				</div>
-				<div class="panel-body">
-					<ul class="nav menu-qbc">
-						<li class="bg-success"><a href="./ventas"><i class="glyphicon glyphicon-log-out"></i> Ventas</a></li>
-						<li><a href="./devoluciones"><i class="glyphicon glyphicon-log-in"></i> Devoluciones</a></li>
-						<li><a href="./aliados"><i class="glyphicon glyphicon-briefcase"></i> Aliados</a></li>
-						<li><a href="./creditos"><i class="glyphicon glyphicon-edit"></i> Créditos</a></li>
-						<li><a href="./newsletter"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
-					</ul>
-				</div> <!-- panel-body -->
-			</div> <!-- panel -->
+			<?php include './views/menus/lateral-menu.php'; ?>
 			
 		</div> <!-- col-md-3 -->
 		<div class="col-md-9">

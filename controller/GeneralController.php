@@ -1290,12 +1290,23 @@ for($i =1; $i<=$totalItems;$i++){
         $paramclose['id'] = $params['campaing_id'];
         $paramclose['status'] = $params['status'];
         $QbcSciManualCloseQuery = $Querys->QbcSciManualCloseQueryByCampaignId($paramclose);
+        
+
         foreach($QbcSciManualCloseQuery as $key => $Closure){
-            $peticionDTO['peticionDTO']['Ventas'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
-            $peticionDTO['peticionDTO']['Ventas'][$key]['Numero'] = $Closure->getDocSap();
-            $peticionDTO['peticionDTO']['Ventas'][$key]['Posicion'] = "000001";
-            $peticionDTO['peticionDTO']['Ventas'][$key]['Valor'] = $Closure->getValueSap();
-            $totalNeto = $totalNeto + $Closure->getValueSap();
+            if($Closure->getType() == 1){
+                $peticionDTO['peticionDTO']['Ventas'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
+                $peticionDTO['peticionDTO']['Ventas'][$key]['Numero'] = $Closure->getDocSap();
+                $peticionDTO['peticionDTO']['Ventas'][$key]['Posicion'] = "000001";
+                $peticionDTO['peticionDTO']['Ventas'][$key]['Valor'] = $Closure->getValueSap();
+                $totalNeto = $totalNeto + $Closure->getValueSap();
+            }else{
+                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
+                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Numero'] = $Closure->getDocSap();
+                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Posicion'] = "000001";
+                $peticionDTO['peticionDTO']['Devoluciones'][$key]['Valor'] = $Closure->getValueSap();
+                $totalNeto = $totalNeto - $Closure->getValueSap();
+            }
+            
         }
 
         $GroupdealQuery = $Querys->GroupdealsById($paramclose);

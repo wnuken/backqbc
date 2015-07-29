@@ -24,13 +24,13 @@ abstract class BaseQbcSciManualClosePeer
     const TM_CLASS = 'QbcSciManualCloseTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 6;
+    const NUM_COLUMNS = 7;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 6;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /** the column name for the id field */
     const ID = 'qbc_sci_manual_close.id';
@@ -49,6 +49,9 @@ abstract class BaseQbcSciManualClosePeer
 
     /** the column name for the status field */
     const STATUS = 'qbc_sci_manual_close.status';
+
+    /** the column name for the type field */
+    const TYPE = 'qbc_sci_manual_close.type';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -69,12 +72,12 @@ abstract class BaseQbcSciManualClosePeer
      * e.g. QbcSciManualClosePeer::$fieldNames[QbcSciManualClosePeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'CampaignId', 'ValueSap', 'DocSap', 'DateSap', 'Status', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'campaignId', 'valueSap', 'docSap', 'dateSap', 'status', ),
-        BasePeer::TYPE_COLNAME => array (QbcSciManualClosePeer::ID, QbcSciManualClosePeer::CAMPAIGN_ID, QbcSciManualClosePeer::VALUE_SAP, QbcSciManualClosePeer::DOC_SAP, QbcSciManualClosePeer::DATE_SAP, QbcSciManualClosePeer::STATUS, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'CAMPAIGN_ID', 'VALUE_SAP', 'DOC_SAP', 'DATE_SAP', 'STATUS', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'campaign_id', 'value_sap', 'doc_sap', 'date_sap', 'status', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'CampaignId', 'ValueSap', 'DocSap', 'DateSap', 'Status', 'Type', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'campaignId', 'valueSap', 'docSap', 'dateSap', 'status', 'type', ),
+        BasePeer::TYPE_COLNAME => array (QbcSciManualClosePeer::ID, QbcSciManualClosePeer::CAMPAIGN_ID, QbcSciManualClosePeer::VALUE_SAP, QbcSciManualClosePeer::DOC_SAP, QbcSciManualClosePeer::DATE_SAP, QbcSciManualClosePeer::STATUS, QbcSciManualClosePeer::TYPE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'CAMPAIGN_ID', 'VALUE_SAP', 'DOC_SAP', 'DATE_SAP', 'STATUS', 'TYPE', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'campaign_id', 'value_sap', 'doc_sap', 'date_sap', 'status', 'type', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -84,12 +87,12 @@ abstract class BaseQbcSciManualClosePeer
      * e.g. QbcSciManualClosePeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'CampaignId' => 1, 'ValueSap' => 2, 'DocSap' => 3, 'DateSap' => 4, 'Status' => 5, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'campaignId' => 1, 'valueSap' => 2, 'docSap' => 3, 'dateSap' => 4, 'status' => 5, ),
-        BasePeer::TYPE_COLNAME => array (QbcSciManualClosePeer::ID => 0, QbcSciManualClosePeer::CAMPAIGN_ID => 1, QbcSciManualClosePeer::VALUE_SAP => 2, QbcSciManualClosePeer::DOC_SAP => 3, QbcSciManualClosePeer::DATE_SAP => 4, QbcSciManualClosePeer::STATUS => 5, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'CAMPAIGN_ID' => 1, 'VALUE_SAP' => 2, 'DOC_SAP' => 3, 'DATE_SAP' => 4, 'STATUS' => 5, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'campaign_id' => 1, 'value_sap' => 2, 'doc_sap' => 3, 'date_sap' => 4, 'status' => 5, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'CampaignId' => 1, 'ValueSap' => 2, 'DocSap' => 3, 'DateSap' => 4, 'Status' => 5, 'Type' => 6, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'campaignId' => 1, 'valueSap' => 2, 'docSap' => 3, 'dateSap' => 4, 'status' => 5, 'type' => 6, ),
+        BasePeer::TYPE_COLNAME => array (QbcSciManualClosePeer::ID => 0, QbcSciManualClosePeer::CAMPAIGN_ID => 1, QbcSciManualClosePeer::VALUE_SAP => 2, QbcSciManualClosePeer::DOC_SAP => 3, QbcSciManualClosePeer::DATE_SAP => 4, QbcSciManualClosePeer::STATUS => 5, QbcSciManualClosePeer::TYPE => 6, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'CAMPAIGN_ID' => 1, 'VALUE_SAP' => 2, 'DOC_SAP' => 3, 'DATE_SAP' => 4, 'STATUS' => 5, 'TYPE' => 6, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'campaign_id' => 1, 'value_sap' => 2, 'doc_sap' => 3, 'date_sap' => 4, 'status' => 5, 'type' => 6, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -169,6 +172,7 @@ abstract class BaseQbcSciManualClosePeer
             $criteria->addSelectColumn(QbcSciManualClosePeer::DOC_SAP);
             $criteria->addSelectColumn(QbcSciManualClosePeer::DATE_SAP);
             $criteria->addSelectColumn(QbcSciManualClosePeer::STATUS);
+            $criteria->addSelectColumn(QbcSciManualClosePeer::TYPE);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.campaign_id');
@@ -176,6 +180,7 @@ abstract class BaseQbcSciManualClosePeer
             $criteria->addSelectColumn($alias . '.doc_sap');
             $criteria->addSelectColumn($alias . '.date_sap');
             $criteria->addSelectColumn($alias . '.status');
+            $criteria->addSelectColumn($alias . '.type');
         }
     }
 

@@ -20,6 +20,8 @@ var currentUrl = window.location.pathname;
 urlSplit =currentUrl.split('/');
 console.log(urlSplit[2]);
 
+$('li#' + urlSplit[2]).addClass('bg-success');
+
 $('li', $menu).removeClass('active');
 
 var myVar = '';

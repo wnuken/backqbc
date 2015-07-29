@@ -78,6 +78,13 @@ class Views {
         include './views/credits/response.php';
     }
 
+    static public function Dealers(){
+        $Querys = new Querys();
+        $params['status'] = 0;
+        $result = $Querys->QbcSciManualCloseQueryByCampaigns($params);
+        include './views/dealers/index.php';
+    }
+
     /*static public function ventas(){
 		include './views/ventas.php';
 	}*/
