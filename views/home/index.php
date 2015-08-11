@@ -169,33 +169,33 @@ print '</pre>';*/
                         <ul class="list-group">
                             <li class="list-group-item">
                             <small>ID:</small>
-                            <span class="badge"><?php print $row['Id']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Id']; ?></span>
                            </li>
 
                            <li class="list-group-item">
                             <small>Host:</small>
-                            <span class="badge"><?php print $row['Host']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Host']; ?></span>
                            </li>
 
                            <li class="list-group-item">
                             <small>DB:</small>
-                            <span class="badge"><?php print $row['db']; ?></span>
+                            <span class="badge max-tam"><?php print $row['db']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Command:</small>
-                            <span class="badge"><?php print $row['Command']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Command']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Time:</small>
-                            <span class="badge"><?php print $row['Time']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Time']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>State:</small>
-                            <span class="badge"><?php print $row['State']; ?></span>
+                            <span class="badge max-tam"><?php print $row['State']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Info:</small>
-                            <span class="badge"><?php print $row['Info']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Info']; ?></span>
                            </li>
 
                         </ul>
@@ -230,19 +230,19 @@ print '</pre>';*/
                                 <ul class="list-group">
                             <li class="list-group-item">
                             <small>File:</small>
-                            <span class="badge"><?php print $row['File']; ?></span>
+                            <span class="badge max-tam"><?php print $row['File']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Position:</small>
-                            <span class="badge"><?php print $row['Position']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Position']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Binlog_Do_DB:</small>
-                            <span class="badge"><?php print $row['Binlog_Do_DB']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Binlog_Do_DB']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Binlog_Ignore_DB:</small>
-                            <span class="badge"><?php print $row['Binlog_Ignore_DB']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Binlog_Ignore_DB']; ?></span>
                            </li>
                            </ul>
 
@@ -283,33 +283,33 @@ print '</pre>';*/
                         <ul class="list-group">
                             <li class="list-group-item">
                             <small>ID:</small>
-                            <span class="badge"><?php print $row['Id']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Id']; ?></span>
                            </li>
 
                            <li class="list-group-item">
                             <small>Host:</small>
-                            <span class="badge"><?php print $row['Host']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Host']; ?></span>
                            </li>
 
                            <li class="list-group-item">
                             <small>DB:</small>
-                            <span class="badge"><?php print $row['db']; ?></span>
+                            <span class="badge max-tam"><?php print $row['db']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Command:</small>
-                            <span class="badge"><?php print $row['Command']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Command']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Time:</small>
-                            <span class="badge"><?php print $row['Time']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Time']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>State:</small>
-                            <span class="badge"><?php print $row['State']; ?></span>
+                            <span class="badge max-tam"><?php print $row['State']; ?></span>
                            </li>
                            <li class="list-group-item hidden-xs">
                             <small>Info:</small>
-                            <span class="badge"><?php print $row['Info']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Info']; ?></span>
                            </li>
 
                         </ul>
@@ -347,19 +347,19 @@ print '</pre>';*/
                                 <ul class="list-group">
                             <li class="list-group-item">
                             <small>Master_Log_File:</small>
-                            <span class="badge"><?php print $row['Master_Log_File']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Master_Log_File']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Slave_IO_Running:</small>
-                            <span class="badge"><?php print $row['Slave_IO_Running']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Slave_IO_Running']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Slave_SQL_Running:</small>
-                            <span class="badge"><?php print $row['Slave_SQL_Running']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Slave_SQL_Running']; ?></span>
                            </li>
                            <li class="list-group-item">
                             <small>Last_Errno:</small>
-                            <span class="badge"><?php print $row['Last_Errno']; ?></span>
+                            <span class="badge max-tam"><?php print $row['Last_Errno']; ?></span>
                            </li>
                            </ul>
 

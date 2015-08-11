@@ -87,4 +87,6 @@ body {
     color: #fff;
 }
 
-
+.max-tam{
+	max-width: 200px;
+}
