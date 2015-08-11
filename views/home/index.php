@@ -25,25 +25,7 @@ print '</pre>';*/
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4 col-md-3 hidden-xs"> <!--  -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Menu</h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="nav menu-qbc">
-                        <li><a href="./ventas"><i class="glyphicon glyphicon-log-out"></i> Ventas</a></li>
-                        <li><a href="./devoluciones"><i class="glyphicon glyphicon-log-in"></i> Devoluciones</a></li>
-                        <li><a href="./aliados"><i class="glyphicon glyphicon-briefcase"></i> Aliados</a></li>
-                        <li><a href="./creditos"><i class="glyphicon glyphicon-edit"></i> Créditos</a></li>
-                        <li><a href="./newsletter"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
-                    </ul>
-                </div>
-            </div>
-
-           
-
-        </div>
+        <?php include './views/menus/lateral-menu.php'; ?>
         <div class="col-sm-8 col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -233,7 +215,7 @@ print '</pre>';*/
     </div>
 
     <div class="modal fade" id="detailMasterStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -244,7 +226,7 @@ print '</pre>';*/
                     <?php 
                         if(($MasterStatus !== false)):
                         foreach($MasterStatus as $row): ?>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <ul class="list-group">
                             <li class="list-group-item">
                             <small>File:</small>
@@ -348,7 +330,7 @@ print '</pre>';*/
     </div>
 
     <div class="modal fade" id="detailSlaveStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 95%;">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -357,11 +339,11 @@ print '</pre>';*/
                 <div class="modal-body">
 
 
-
+                	<div class="row">
                     <?php 
                         if(($SlaveStatus !== false)):
                         foreach($SlaveStatus as $row): ?>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <ul class="list-group">
                             <li class="list-group-item">
                             <small>Master_Log_File:</small>
@@ -384,7 +366,7 @@ print '</pre>';*/
 
                             </div>
                         <?php endforeach; endif; ?>
-
+                        </div>
              
                 </div>
                 <div class="modal-footer">

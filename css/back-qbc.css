@@ -62,6 +62,10 @@ body {
 	margin-top: -7px;
 }
 
+.navbar-qbc .navbar-toggle {
+    background-color: #e62100;
+}
+
 .btn-qbc {
     background-image: linear-gradient(to bottom, #e62100 0px, #e6452a 100%);
     background-repeat: repeat-x;

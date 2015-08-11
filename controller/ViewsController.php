@@ -39,7 +39,7 @@ class Views {
 
             $idPetition = $Settings->getIdPeticion();
      
-            include './views/home.php';
+            include './views/home/index.php';
 
             $mysqliConectionMaster->close();
             $mysqliConectionSlave->close();

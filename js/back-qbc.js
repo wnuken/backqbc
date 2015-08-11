@@ -18,9 +18,10 @@ var editorPay = {};
 
 var currentUrl = window.location.pathname;
 urlSplit =currentUrl.split('/');
-console.log(urlSplit[2]);
 
+if(urlSplit[2] !== ''){
 $('li#' + urlSplit[2]).addClass('bg-success');
+}
 
 $('li', $menu).removeClass('active');
 
@@ -73,7 +74,6 @@ $.fn.getLists = function(params){
             $(submitButton, $that).button('reset');
         },
         error: function() {
-            //console.log('da error');
             var message = "Rayos parece que no puedo traer datos";
             $('div#response').html(message);
             $('div#loader').css({'display':'none'});
@@ -167,7 +167,7 @@ $.each($('textarea'), function(){
     // if(typeof($that) !== 'undefined'){
     var idTextarea = $that.attr('id');
     var textmode = $that.attr('data-mode');
-    console.log(idTextarea);
+
     editorPay = CodeMirror.fromTextArea(document.getElementById(idTextarea), {
         indentWithTabs: true,
         smartIndent: true,
