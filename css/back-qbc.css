@@ -89,4 +89,5 @@ body {
 
 .max-tam{
 	max-width: 200px;
+	overflow: hidden;
 }
