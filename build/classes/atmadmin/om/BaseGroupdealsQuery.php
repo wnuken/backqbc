@@ -55,6 +55,7 @@
  * @method GroupdealsQuery orderByInitStock($order = Criteria::ASC) Order by the init_stock column
  * @method GroupdealsQuery orderByWithPersonalizedCoupons($order = Criteria::ASC) Order by the with_personalized_coupons column
  * @method GroupdealsQuery orderByCodeType($order = Criteria::ASC) Order by the code_type column
+ * @method GroupdealsQuery orderByGeneralNit($order = Criteria::ASC) Order by the general_nit column
  *
  * @method GroupdealsQuery groupByGroupdealsId() Group by the groupdeals_id column
  * @method GroupdealsQuery groupByProductId() Group by the product_id column
@@ -105,6 +106,7 @@
  * @method GroupdealsQuery groupByInitStock() Group by the init_stock column
  * @method GroupdealsQuery groupByWithPersonalizedCoupons() Group by the with_personalized_coupons column
  * @method GroupdealsQuery groupByCodeType() Group by the code_type column
+ * @method GroupdealsQuery groupByGeneralNit() Group by the general_nit column
  *
  * @method GroupdealsQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method GroupdealsQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -165,6 +167,7 @@
  * @method Groupdeals findOneByInitStock(int $init_stock) Return the first Groupdeals filtered by the init_stock column
  * @method Groupdeals findOneByWithPersonalizedCoupons(int $with_personalized_coupons) Return the first Groupdeals filtered by the with_personalized_coupons column
  * @method Groupdeals findOneByCodeType(int $code_type) Return the first Groupdeals filtered by the code_type column
+ * @method Groupdeals findOneByGeneralNit(int $general_nit) Return the first Groupdeals filtered by the general_nit column
  *
  * @method array findByGroupdealsId(int $groupdeals_id) Return Groupdeals objects filtered by the groupdeals_id column
  * @method array findByProductId(int $product_id) Return Groupdeals objects filtered by the product_id column
@@ -215,6 +218,7 @@
  * @method array findByInitStock(int $init_stock) Return Groupdeals objects filtered by the init_stock column
  * @method array findByWithPersonalizedCoupons(int $with_personalized_coupons) Return Groupdeals objects filtered by the with_personalized_coupons column
  * @method array findByCodeType(int $code_type) Return Groupdeals objects filtered by the code_type column
+ * @method array findByGeneralNit(int $general_nit) Return Groupdeals objects filtered by the general_nit column
  *
  * @package    propel.generator.atmadmin.om
  */
@@ -322,7 +326,7 @@ abstract class BaseGroupdealsQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT groupdeals_id, product_id, merchant_id, minimum_qty, maximum_qty, target_met_email, coupon_barcode, coupon_merchant_address, coupon_merchant_contact, coupon_expiration_date, coupon_price, coupon_fine_print, coupon_highlights, coupon_merchant_description, coupon_business_hours, coupon_merchant_logo, coupon_additional_info, position, title_long, title_midium, title_short, beneffits, deal_instructions, conditions, edition_state, publication_state, product_type, expiration_date, tcc, negociation_type, agreement_type, buys_per_user, video_html5, video_flash, reference, payment_id, boost_sales, locations, et_gain, active_date, treasury_type, commercial_name_id, orders_count, active_offer, is_closed, qty_sold, init_stock, with_personalized_coupons, code_type FROM groupdeals WHERE groupdeals_id = :p0';
+        $sql = 'SELECT groupdeals_id, product_id, merchant_id, minimum_qty, maximum_qty, target_met_email, coupon_barcode, coupon_merchant_address, coupon_merchant_contact, coupon_expiration_date, coupon_price, coupon_fine_print, coupon_highlights, coupon_merchant_description, coupon_business_hours, coupon_merchant_logo, coupon_additional_info, position, title_long, title_midium, title_short, beneffits, deal_instructions, conditions, edition_state, publication_state, product_type, expiration_date, tcc, negociation_type, agreement_type, buys_per_user, video_html5, video_flash, reference, payment_id, boost_sales, locations, et_gain, active_date, treasury_type, commercial_name_id, orders_count, active_offer, is_closed, qty_sold, init_stock, with_personalized_coupons, code_type, general_nit FROM groupdeals WHERE groupdeals_id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -2302,6 +2306,48 @@ abstract class BaseGroupdealsQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(GroupdealsPeer::CODE_TYPE, $codeType, $comparison);
+    }
+
+    /**
+     * Filter the query on the general_nit column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByGeneralNit(1234); // WHERE general_nit = 1234
+     * $query->filterByGeneralNit(array(12, 34)); // WHERE general_nit IN (12, 34)
+     * $query->filterByGeneralNit(array('min' => 12)); // WHERE general_nit >= 12
+     * $query->filterByGeneralNit(array('max' => 12)); // WHERE general_nit <= 12
+     * </code>
+     *
+     * @param     mixed $generalNit The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return GroupdealsQuery The current query, for fluid interface
+     */
+    public function filterByGeneralNit($generalNit = null, $comparison = null)
+    {
+        if (is_array($generalNit)) {
+            $useMinMax = false;
+            if (isset($generalNit['min'])) {
+                $this->addUsingAlias(GroupdealsPeer::GENERAL_NIT, $generalNit['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($generalNit['max'])) {
+                $this->addUsingAlias(GroupdealsPeer::GENERAL_NIT, $generalNit['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(GroupdealsPeer::GENERAL_NIT, $generalNit, $comparison);
     }
 
     /**

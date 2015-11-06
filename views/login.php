@@ -20,8 +20,10 @@
                                 <label for="password">Password</label>
                                 <input name="password" type="password" required="" placeholder="Password" class="form-control">
                             </div>
-                            <div class="btn-group pull-right">
-                                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                            <div class="text-center">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-qbc btn-block">Ingresar</button>
+                            </div>
                             </div>
                         </fieldset>
                     </form>

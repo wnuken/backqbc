@@ -1349,6 +1349,7 @@
         <column name="init_stock" phpName="InitStock" type="INTEGER" size="10" required="false" defaultValue="0"/>
         <column name="with_personalized_coupons" phpName="WithPersonalizedCoupons" type="INTEGER" size="5" required="false" defaultValue="0"/>
         <column name="code_type" phpName="CodeType" type="INTEGER" size="5" required="false" defaultValue="0"/>
+        <column name="general_nit" phpName="GeneralNit" type="INTEGER" size="1" required="false" defaultValue="0"/>
         <foreign-key foreignTable="treasury_types" name="fk_treasury_type" onDelete="RESTRICT" onUpdate="RESTRICT">
             <reference local="treasury_type" foreign="id"/>
         </foreign-key>

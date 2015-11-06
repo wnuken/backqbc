@@ -28,10 +28,11 @@ if(isset($_SESSION["k_username"]) && !empty($_SESSION["k_username"]))
                     </a>
                     <ul role="menu" class="dropdown-menu menu-qbc">
                         <li class="dropdown-header"><i class="glyphicon glyphicon-log-out"></i> Ventas</li>
-                        <li><a href="./ventas-fallidas"><i class="glyphicon glyphicon-random"></i> Reenviar ventas fallidas</a></li>
+                        <li id="ventas"><a href="./ventas"><i class="glyphicon glyphicon-log-out"></i> Ventas</a></li>
+                        <!--li><a href="./ventas-fallidas"><i class="glyphicon glyphicon-random"></i> Reenviar ventas fallidas</a></li>
                         <li><a href="./ventas-descuento"><i class="glyphicon glyphicon-gift"></i> Ventas con descuento</a></li>
                         <li><a href="./ventas-xml"><i class="glyphicon glyphicon-align-justify"></i> Edición XML</a></li>
-                        <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li>
+                        <li><a href="./ventas-cambio-id"><i class="glyphicon glyphicon-retweet"></i> Cambiar Ids Ventas</a></li-->
                         <li><a href="./ventas-revertir"><i class="glyphicon glyphicon-resize-small"></i> Revertir Ventas Fallidas</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header"><i class="glyphicon glyphicon-log-in"></i> Devoluciones</li>

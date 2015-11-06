@@ -48,7 +48,7 @@ print '</pre>';*/
                             <li class="list-group-item">
                                 <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailMasterStatus"> Detalle</button>
                                 Master Status:
-                                <span class="badge">File: <?php if(isset($MasterStatus[0]['File'])) print $MasterStatus[0]['File']; ?></span>
+                                <span class="badge"><?php if(isset($MasterStatus[0]['Position'])) print $MasterStatus[0]['Position']; ?></span>
                             </li>
                             <?php }else{ ?>
                             <li class="list-group-item"><?php print('No se puede obtener información del servidor'); ?></li>
@@ -71,7 +71,6 @@ print '</pre>';*/
                             <li class="list-group-item">
                                 <button type="button" class="btn btn-qbc btn-xs" data-toggle="modal" data-target="#detailSlaveStatus"> Detalle</button>
                                 Slave Status:
-                                <span class="badge"><?php if(isset($SlaveStatus[0]['Master_Log_File'])) print $SlaveStatus[0]['Master_Log_File']; ?></span>
                                 <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_IO_Running'])) print $SlaveStatus[0]['Slave_IO_Running']; ?></span>
                                 <span class="badge"><?php if(isset($SlaveStatus[0]['Slave_SQL_Running'])) print $SlaveStatus[0]['Slave_SQL_Running']; ?></span>
                             </li>
@@ -84,9 +83,10 @@ print '</pre>';*/
                 </div>
             </div>    
         </div> <!-- col-md-9 -->
-
-
-        <div class="col-sm-4 col-md-3">
+        </div> <!-- row -->
+        <div class="row">
+        <div class="col-sm-4 col-md-3"></div>
+        <div class="col-sm-4 col-md-5">
             <div class="panel panel-default ">
                 <div class="panel-heading">
                     <h3 class="panel-title">Total Ventas</h3>
@@ -117,7 +117,7 @@ print '</pre>';*/
 
     </div>
 
-    <div class="col-sm-4 col-md-3">
+    <div class="col-sm-4 col-md-4">
         
          <div class="panel panel-default">
                 <div class="panel-heading">
@@ -136,9 +136,9 @@ print '</pre>';*/
             </div>
 
     </div>
+</div>
 
 
-</div> <!-- row -->
 <div class="row">
     <div class="col-md-3">
 

@@ -338,6 +338,13 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
     protected $code_type;
 
     /**
+     * The value for the general_nit field.
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $general_nit;
+
+    /**
      * @var        TreasuryTypes
      */
     protected $aTreasuryTypes;
@@ -384,6 +391,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         $this->init_stock = 0;
         $this->with_personalized_coupons = 0;
         $this->code_type = 0;
+        $this->general_nit = 0;
     }
 
     /**
@@ -991,6 +999,17 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
     {
 
         return $this->code_type;
+    }
+
+    /**
+     * Get the [general_nit] column value.
+     *
+     * @return int
+     */
+    public function getGeneralNit()
+    {
+
+        return $this->general_nit;
     }
 
     /**
@@ -2031,6 +2050,27 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
     } // setCodeType()
 
     /**
+     * Set the value of [general_nit] column.
+     *
+     * @param  int $v new value
+     * @return Groupdeals The current object (for fluent API support)
+     */
+    public function setGeneralNit($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->general_nit !== $v) {
+            $this->general_nit = $v;
+            $this->modifiedColumns[] = GroupdealsPeer::GENERAL_NIT;
+        }
+
+
+        return $this;
+    } // setGeneralNit()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -2093,6 +2133,10 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             }
 
             if ($this->code_type !== 0) {
+                return false;
+            }
+
+            if ($this->general_nit !== 0) {
                 return false;
             }
 
@@ -2167,6 +2211,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             $this->init_stock = ($row[$startcol + 46] !== null) ? (int) $row[$startcol + 46] : null;
             $this->with_personalized_coupons = ($row[$startcol + 47] !== null) ? (int) $row[$startcol + 47] : null;
             $this->code_type = ($row[$startcol + 48] !== null) ? (int) $row[$startcol + 48] : null;
+            $this->general_nit = ($row[$startcol + 49] !== null) ? (int) $row[$startcol + 49] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -2176,7 +2221,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 49; // 49 = GroupdealsPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 50; // 50 = GroupdealsPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Groupdeals object", $e);
@@ -2551,6 +2596,9 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         if ($this->isColumnModified(GroupdealsPeer::CODE_TYPE)) {
             $modifiedColumns[':p' . $index++]  = 'code_type';
         }
+        if ($this->isColumnModified(GroupdealsPeer::GENERAL_NIT)) {
+            $modifiedColumns[':p' . $index++]  = 'general_nit';
+        }
 
         $sql = sprintf(
             'INSERT INTO groupdeals (%s) VALUES (%s)',
@@ -2708,6 +2756,9 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
                         break;
                     case 'code_type':
                         $stmt->bindValue($identifier, $this->code_type, PDO::PARAM_INT);
+                        break;
+                    case 'general_nit':
+                        $stmt->bindValue($identifier, $this->general_nit, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -3002,6 +3053,9 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             case 48:
                 return $this->getCodeType();
                 break;
+            case 49:
+                return $this->getGeneralNit();
+                break;
             default:
                 return null;
                 break;
@@ -3080,6 +3134,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             $keys[46] => $this->getInitStock(),
             $keys[47] => $this->getWithPersonalizedCoupons(),
             $keys[48] => $this->getCodeType(),
+            $keys[49] => $this->getGeneralNit(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -3272,6 +3327,9 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
             case 48:
                 $this->setCodeType($value);
                 break;
+            case 49:
+                $this->setGeneralNit($value);
+                break;
         } // switch()
     }
 
@@ -3345,6 +3403,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         if (array_key_exists($keys[46], $arr)) $this->setInitStock($arr[$keys[46]]);
         if (array_key_exists($keys[47], $arr)) $this->setWithPersonalizedCoupons($arr[$keys[47]]);
         if (array_key_exists($keys[48], $arr)) $this->setCodeType($arr[$keys[48]]);
+        if (array_key_exists($keys[49], $arr)) $this->setGeneralNit($arr[$keys[49]]);
     }
 
     /**
@@ -3405,6 +3464,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         if ($this->isColumnModified(GroupdealsPeer::INIT_STOCK)) $criteria->add(GroupdealsPeer::INIT_STOCK, $this->init_stock);
         if ($this->isColumnModified(GroupdealsPeer::WITH_PERSONALIZED_COUPONS)) $criteria->add(GroupdealsPeer::WITH_PERSONALIZED_COUPONS, $this->with_personalized_coupons);
         if ($this->isColumnModified(GroupdealsPeer::CODE_TYPE)) $criteria->add(GroupdealsPeer::CODE_TYPE, $this->code_type);
+        if ($this->isColumnModified(GroupdealsPeer::GENERAL_NIT)) $criteria->add(GroupdealsPeer::GENERAL_NIT, $this->general_nit);
 
         return $criteria;
     }
@@ -3516,6 +3576,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         $copyObj->setInitStock($this->getInitStock());
         $copyObj->setWithPersonalizedCoupons($this->getWithPersonalizedCoupons());
         $copyObj->setCodeType($this->getCodeType());
+        $copyObj->setGeneralNit($this->getGeneralNit());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -3680,6 +3741,7 @@ abstract class BaseGroupdeals extends BaseObject implements Persistent
         $this->init_stock = null;
         $this->with_personalized_coupons = null;
         $this->code_type = null;
+        $this->general_nit = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

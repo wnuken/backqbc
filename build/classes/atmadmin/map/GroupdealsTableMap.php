@@ -87,6 +87,7 @@ class GroupdealsTableMap extends TableMap
         $this->addColumn('init_stock', 'InitStock', 'INTEGER', false, 10, 0);
         $this->addColumn('with_personalized_coupons', 'WithPersonalizedCoupons', 'INTEGER', false, 5, 0);
         $this->addColumn('code_type', 'CodeType', 'INTEGER', false, 5, 0);
+        $this->addColumn('general_nit', 'GeneralNit', 'INTEGER', false, 1, 0);
         // validators
     } // initialize()
 

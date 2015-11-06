@@ -864,6 +864,7 @@ private function getDevolutions($params, $coupons){
             $GroupdealsQuery = $Querys->GroupdealsByProductId($paramsGroupDeals);
             $paramsTreasury['id'] =  $GroupdealsQuery->getTreasuryType();
             $paramsMerchants['id'] =  $GroupdealsQuery->getMerchantId();
+            $paramsNITGeneral['id'] = $GroupdealsQuery->getGeneralNit();
 
             $TreasuryTypesQuery = $Querys->TreasuryTypesById($paramsTreasury);
             $tresauryIva = $TreasuryTypesQuery->getIva();
@@ -871,7 +872,12 @@ private function getDevolutions($params, $coupons){
             $PagosOnLineQuery = $Querys->PagosonlineByIncrementId($params);
             $totalPay = $PagosOnLineQuery->getValor();
 
+
             $GroupdealsMerchantsQuery = $Querys->GroupdealsMerchantsById($paramsMerchants);
+            $MerchantsNIT = $GroupdealsMerchantsQuery->getNitNumber();
+            if($paramsNITGeneral['id'] == 2){
+                $MerchantsNIT = '900892368';
+            }
 
             $totalPay = round($totalPay, 0);
             $payToItem = $totalPay;
@@ -902,7 +908,8 @@ private function getDevolutions($params, $coupons){
                 'cuotas' => $PagosOnLineQuery->getCuotas(),
                 'productName' => utf8_encode($GroupdealsQuery->getTitleShort()),
                 'idCampaing' => $GroupdealsQuery->getGroupdealsId(),
-                'nit' => $GroupdealsMerchantsQuery->getNitNumber(),
+                'nit' => $MerchantsNIT,
+                'general_nit' => $paramsNITGeneral['id'],
                 'customerIdentification' => $SalesFlatOrderQuery->getCustomerIdentification(),
                 'customerName' => utf8_encode($CustomerName)
                 );
@@ -1301,6 +1308,14 @@ for($i =1; $i<=$totalItems;$i++){
                 $peticionDTO['peticionDTO']['Ventas'][$keyV]['Posicion'] = "000001";
                 $peticionDTO['peticionDTO']['Ventas'][$keyV]['Valor'] = $Closure->getValueSap();
                 $totalNeto = $totalNeto + $Closure->getValueSap();
+
+                /*$ValorCDevolucion = round($totalDev * $params['porcentaje_aliado'], 0);
+                $ValorIVACDevolucion = round(($ValorCDevolucion * $params['tax_aliado']), 0);
+                $ValorCxDEliado = $totalDev - ($ValorCDevolucion + $ValorIVACDevolucion);
+
+                $totalNeto = $totalNeto - $ValorCxDEliado;*/
+
+
                 $keyV++;
             }else{
                 $peticionDTO['peticionDTO']['Devoluciones'][$keyD]['Fecha'] = date("Y-m-d", strtotime($Closure->getDateSap()));
