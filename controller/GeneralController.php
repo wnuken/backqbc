@@ -1284,9 +1284,12 @@ for($i =1; $i<=$totalItems;$i++){
 
     }
 
-    // ********* GENERAR CIERRE OFERTA COMPESAR **********
+   
 
-    public function & ClosureOffer(&$params){
+
+     // ********* GENERAR PAGO  ALIADO OFERTA COMPESAR **********
+
+    public function & PayOffer(&$params){
 
         $wsResult = array();
         $peticionDTO = array();

@@ -51,6 +51,18 @@ class Views {
         
     }
 
+    static public function closuresend(){
+        $Proccess = new Proccess();
+        $result = $Proccess->ClosureOffer($_REQUEST);        
+        include './views/resultcierre.php';
+    }
+
+    static public function paysend(){
+        $Proccess = new Proccess();
+        $result = $Proccess->PayOffer($_REQUEST);        
+        include './views/resultcierre.php';
+    }
+
     static public function idPetition(){
         $Settings = new Settings();
         $result = $Settings->getIdPeticion();
@@ -184,12 +196,6 @@ class Views {
         $General = new General();
         $result = $General->ListClosure($_REQUEST);
         include './views/cierrecompensacion.php';
-    }
-
-    static public function closuresend(){
-        $General = new General();
-        $result = $General->ClosureOffer($_REQUEST);        
-        include './views/resultcierre.php';
     }
 
     static public function conpensationsend(){
