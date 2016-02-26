@@ -37,7 +37,7 @@ print '</pre>';*/
                         <ul class="list-group">
                             <?php if($mysqliConectionMaster !== false){ ?>
                             <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', substr($mysqliConectionMaster->server_info, 0, 6)); ?></li>
-                            <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliConectionMaster->client_info); ?></li>
+                            <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', substr($mysqliConectionMaster->client_info, 0, 6)); ?></li>
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionMaster)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionMaster->sqlstate); ?></li>
                             <li class="list-group-item">
@@ -60,7 +60,7 @@ print '</pre>';*/
                         <ul class="list-group">
                             <?php if($mysqliConectionSlave !== false){ ?>
                             <li class="list-group-item"><?php printf('MySQL Server versión:<span class="badge"> %s</span>', substr($mysqliConectionSlave->server_info, 0, 6)); ?></li>
-                            <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', $mysqliConectionSlave->client_info); ?></li>
+                            <li class="list-group-item"><?php printf('MySQL Client versión:<span class="badge"> %s</span>', substr($mysqliConectionSlave->client_info, 0, 6)); ?></li>
                             <li class="list-group-item"><?php printf('Último error:<span class="badge"> %s</span>', mysqli_error($mysqliConectionSlave)); ?></li>
                             <li class="list-group-item"><?php printf('Estado:<span class="badge"> %s</span>', $mysqliConectionSlave->sqlstate); ?></li>
                             <li class="list-group-item">
