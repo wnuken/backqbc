@@ -43,7 +43,7 @@
 									</label>
 
 								</div>
-								<input type="text" id="status" name="status" value="0">
+								<input type="hidden" id="status" name="status" value="0">
 								<div class="btn-group pull-right">
 									<button class="btn btn-qbc" id="submit" type="submit">Procesar</button>
 								</div>
@@ -83,7 +83,7 @@
 									</label>
 
 								</div>
-								<input type="text" id="status" name="status" value="0">
+								<input type="hidden" id="status" name="status" value="0">
 								<div class="btn-group pull-right">
 									<button class="btn btn-qbc" id="submit" type="submit">Procesar</button>
 								</div>
